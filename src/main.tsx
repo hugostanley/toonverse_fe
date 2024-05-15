@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import LandingPage from "@pages/LandingPage";
+import { LandingPage } from "@pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
