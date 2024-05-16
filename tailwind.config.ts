@@ -1,9 +1,24 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
 
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        retro__dark: "3.5px 3.5px 0px 0px rgba(28, 25, 23, 0.85)",
+        retro__inset: "inset 3.5px 3.5px 0px 0px rgba(28, 25, 23, 0.85)",
+        retro__circle: "2.5px 2px 0px 0px rgba(28, 25, 23, 0.85)",
+      },
+
+      colors: {
+        dark: "#141407",
+        light: "#FDF7E1",
+        blue: "#259EDF",
+        pink: "#F196E5",
+        yellow: "#FFE04A",
+        green: "#47AF3C",
+      },
+    },
   },
   plugins: [],
 } satisfies Config;
