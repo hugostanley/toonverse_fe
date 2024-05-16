@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
-import { LandingPage, UserLoginPage } from '@pages';
+import { LandingPage, UserAccountPage, UserLoginPage } from '@pages';
 
 function App() {
   const router = createBrowserRouter([
@@ -15,6 +15,10 @@ function App() {
     {
       path: 'login',
       element: <UserLoginPage />,
+    },
+    {
+      path: 'account',
+      element: <UserAccountPage />,
     },
 
     // Workforce Side
