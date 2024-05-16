@@ -1,6 +1,18 @@
+@font-face {
+  font-family: "VAG Rounded Next";
+  src: url("../assets/VAG.ttf") format("truetype");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "VAG Rounded Next", sans-serif;
+    @apply tracking-wider text-slate-700;
+  }
+}
 
 
 @layer components {
