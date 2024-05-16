@@ -11,7 +11,7 @@ type UseFetchAuthResponse = {
   data: any | null;
   error: string | null;
   isLoading: boolean;
-  fetchAuth: (url: string, redirect_path: string, options?: FetchOptions, ) => Promise<void>;
+  fetchAuth: (url: string, redirectPath: string, options?: FetchOptions, ) => Promise<void>;
 };
 
 function useFetchAuth(): UseFetchAuthResponse {
@@ -20,7 +20,7 @@ function useFetchAuth(): UseFetchAuthResponse {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  async function fetchAuth(url: string, redirect_path: string, options: FetchOptions = {}) {
+  async function fetchAuth(url: string, redirectPath: string, options: FetchOptions = {}) {
     try {
       setIsLoading(true)
 
@@ -48,7 +48,7 @@ function useFetchAuth(): UseFetchAuthResponse {
       if (response.ok) {
         setLocalStorage('Headers', headersObject);
         setData(data)
-        navigate(redirect_path)
+        navigate(redirectPath)
       } else {
         setError(data.error);
       }
