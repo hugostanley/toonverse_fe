@@ -23,10 +23,10 @@ function LoginForm({ user }: LoginFormProps) {
     }
 
     try {
-      await fetchAuth(LOGIN_URL, '/account', { 
+      await fetchAuth(LOGIN_URL, { 
         method: 'POST', 
         body: requestBody
-      })
+      }, '/account')
     } catch (error) {
       console.error('Login error:', error);
     }

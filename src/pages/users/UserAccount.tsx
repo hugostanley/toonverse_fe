@@ -9,7 +9,7 @@ function UserAccount() {
     e.preventDefault();
 
     try {
-      await fetchData(LOGOUT_URL, '/login', { method: 'DELETE' })
+      await fetchData(LOGOUT_URL, { method: 'DELETE' }, '/login')
       localStorage.removeItem('Headers');
     } catch (error) {
       console.error('Login error:', error);

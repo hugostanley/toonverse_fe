@@ -12,7 +12,7 @@ type UseFetchDataResponse = {
   data: any | null;
   error: string | null;
   isLoading: boolean;
-  fetchData: (url: string, redirectPath?: string, options?: FetchOptions) => Promise<void>;
+  fetchData: (url: string, options?: FetchOptions, redirectPath?: string) => Promise<void>;
 };
 
 function useFetch(): UseFetchDataResponse {
@@ -21,7 +21,7 @@ function useFetch(): UseFetchDataResponse {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  async function fetchData(url: string, redirectPath: string, options: FetchOptions = {}) {
+  async function fetchData(url: string, options: FetchOptions = {},  redirectPath?: string) {
     try {
       setIsLoading(true);
       const headers = getLocalStorage('Headers') || {};
@@ -56,16 +56,20 @@ function useFetch(): UseFetchDataResponse {
         },
       });
 
-      const data = await response.json();
-      console.log('Response data:', data);
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
 
       if (response.ok) {
-        setData(data);
+        setData(responseData);
         if (redirectPath) {
           navigate(redirectPath);
         }
       } else {
-        setError(data.error);
+        if (responseData.errors && responseData.errors.length > 0) {
+          setError(responseData.errors.join('. '));
+        } else {
+          setError('An unexpected error occurred.');
+        }
       }
     } catch (error) {
       setError('An unexpected error occurred. Please try again later.');

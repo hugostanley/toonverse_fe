@@ -26,10 +26,10 @@ function SignupForm({ user }: SignupFormProps) {
     }
 
     try {
-      await fetchAuth(REGISTER_URL, '/account', { 
+      await fetchAuth(REGISTER_URL, { 
         method: 'POST', 
         body: requestBody
-      })
+      }, '/account')
     } catch (error) {
       console.error('Login error:', error);
     }

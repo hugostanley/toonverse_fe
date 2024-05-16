@@ -11,7 +11,7 @@ type UseFetchAuthResponse = {
   data: any | null;
   error: string | null;
   isLoading: boolean;
-  fetchAuth: (url: string, redirectPath: string, options?: FetchOptions, ) => Promise<void>;
+  fetchAuth: (url: string, options?: FetchOptions, redirectPath?: string) => Promise<void>;
 };
 
 function useFetchAuth(): UseFetchAuthResponse {
@@ -20,7 +20,7 @@ function useFetchAuth(): UseFetchAuthResponse {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  async function fetchAuth(url: string, redirectPath: string, options: FetchOptions = {}) {
+  async function fetchAuth(url: string, options: FetchOptions = {}, redirectPath?: string) {
     try {
       setIsLoading(true)
 
@@ -41,16 +41,22 @@ function useFetchAuth(): UseFetchAuthResponse {
 
       const headersObject = Object.fromEntries(response.headers.entries());
 
-      const data = await response.json();
-      console.log('Response data:', data);
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
       console.log('Headers:', headersObject);
 
       if (response.ok) {
         setLocalStorage('Headers', headersObject);
-        setData(data)
-        navigate(redirectPath)
+        setData(responseData)
+        if (redirectPath) {
+          navigate(redirectPath);
+        }
       } else {
-        setError(data.error);
+        if (responseData.errors && responseData.errors.length > 0) {
+          setError(responseData.errors.join('. '));
+        } else {
+          setError('An unexpected error occurred.');
+        }
       }
     } catch (error) {
       setError("An unexpected error occurred. Please try again later.");
