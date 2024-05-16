@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
 import { LandingPage, UserAccountPage, UserLoginPage, UserRegisterPage } from '@pages';
+import { userAccess } from '@utils';
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +24,7 @@ function App() {
     {
       path: 'account',
       element: <UserAccountPage />,
+      loader: userAccess,
     },
 
     // Workforce Side
