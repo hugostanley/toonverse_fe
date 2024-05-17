@@ -39,6 +39,10 @@ function App() {
       element: <UserAccountPage />,
       loader: userAccess,
     },
+    {
+      path: "order",
+      element: <OrderPage />,
+    },
 
     // Workforce Side
     {
