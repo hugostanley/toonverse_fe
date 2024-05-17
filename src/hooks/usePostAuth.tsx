@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiClient } from '@utils';
+import { apiClient, setLocalStorage } from '@utils';
 
 type PostAuthOptions = {
   body?: object;
@@ -30,7 +30,8 @@ function usePostAuth(): UsePostAuthResponse {
       if (response.status >= 200 && response.status < 300) {
         // Save headers
         const headersObject = response.headers;
-        localStorage.setItem('Headers', JSON.stringify(headersObject));
+        setLocalStorage('Headers', headersObject);
+        setLocalStorage('AccountData', responseData);
 
         setData(responseData);
         if (redirectPath) {

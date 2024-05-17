@@ -1,5 +1,6 @@
 // Static Pages
 export { default as LandingPage } from './LandingPage'
+export { default as UnauthorizedPage } from './errors/Unauthorized';
 
 // User Side
 export { default as UserLoginPage } from './users/auth/Login'

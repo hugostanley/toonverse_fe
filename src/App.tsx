@@ -4,8 +4,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './index.css';
 
-import { LandingPage, UserAccountPage, UserLoginPage, UserRegisterPage, WorkforceDashboard, WorkforceLoginPage } from '@pages';
-import { userAccess } from '@utils';
+import { LandingPage, UnauthorizedPage, UserAccountPage, UserLoginPage, UserRegisterPage, WorkforceDashboard, WorkforceLoginPage } from '@pages';
+import { userAccess, workforceAccess } from '@utils';
 
 function App() {
   const queryClient = new QueryClient();
@@ -13,6 +13,10 @@ function App() {
     {
       path: '/',
       element: <LandingPage />,
+    },
+    {
+      path: '/no-access',
+      element: <UnauthorizedPage />,
     },
 
     // User Side
@@ -38,6 +42,7 @@ function App() {
     {
       path: 'w/dashboard',
       element: <WorkforceDashboard />,
+      loader: workforceAccess,
     },
   ]);
 

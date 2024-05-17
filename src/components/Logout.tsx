@@ -16,6 +16,7 @@ function Logout({ apiUrl, redirectPath, className }: LogoutProps) {
     try {
       await fetchData(apiUrl, { method: 'DELETE' }, redirectPath)
       localStorage.removeItem('Headers');
+      localStorage.removeItem('AccountData');
     } catch (error) {
       console.error('Login error:', error);
     }
