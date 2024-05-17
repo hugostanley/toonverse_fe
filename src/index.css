@@ -1,23 +1,23 @@
 @import '@coreui/coreui/dist/css/coreui.min.css';
-@font-face {
-  font-family: "VAG Rounded Next";
-  src: url("../assets/VAG.ttf") format("truetype");
-}
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html {
-    font-family: "VAG Rounded Next", sans-serif;
-    @apply tracking-wider text-slate-700;
+  html, body {
+    font-family: "Nunito", sans-serif;
+    @apply w-dvw h-dvh tracking-wider text-dark;
+  }
+
+  #root {
+    @apply w-full h-full;
   }
 }
 
-
 @layer components {
-  .border {
+  .br {
     @apply border-2 border-red-500 border-dotted;
   }
 
@@ -25,7 +25,7 @@
     @apply flex flex-col items-start gap-y-2;
   }
 
-  .field__text {
+  .field__text { 
     @apply w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm;
   }
 

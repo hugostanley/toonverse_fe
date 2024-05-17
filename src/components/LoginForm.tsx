@@ -8,10 +8,11 @@ type LoginFormProps = {
   } | null;
   apiUrl: string;
   redirectPath?: string;
-  className?: string;
+  formClassName?: string;
+  btnClassName?: string;
 }
 
-function LoginForm({ user, apiUrl, redirectPath, className }: LoginFormProps) {
+function LoginForm({ user, apiUrl, redirectPath, formClassName, btnClassName }: LoginFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(user?.password || '');
   const { error, isLoading, postAuth } = usePostAuth();
@@ -34,8 +35,8 @@ function LoginForm({ user, apiUrl, redirectPath, className }: LoginFormProps) {
   }
 
   return (
-    <section className='w-1/3 p-4'>
-      <form onSubmit={handleSubmit} className='space-y-4 py-2'>
+    <section className={`${formClassName} p-2`}>
+      <form onSubmit={handleSubmit} className='space-y-4'>
         <div className='field__wrapper'>
           <label>Email</label>
           <input 
@@ -67,7 +68,7 @@ function LoginForm({ user, apiUrl, redirectPath, className }: LoginFormProps) {
         <div className='field__wrapper'>
           <button
             type='submit'
-            className={`${className} btn__primary bg-pink mt-6 font-bold`}
+            className={`${btnClassName} btn__primary bg-pink mt-6 font-bold`}
             disabled={isLoading} 
           >
             {isLoading ? 'Logging in...' : 'Login'}
