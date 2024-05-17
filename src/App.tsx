@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
-import { LandingPage, UserAccountPage, UserLoginPage, UserRegisterPage } from '@pages';
+import { LandingPage, UserAccountPage, UserLoginPage, UserRegisterPage, WorkforceDashboard, WorkforceLoginPage } from '@pages';
 import { userAccess } from '@utils';
 
 function App() {
@@ -28,6 +28,15 @@ function App() {
     },
 
     // Workforce Side
+    {
+      path: 'w/login',
+      element: <WorkforceLoginPage />,
+    },
+    {
+      path: 'w/dashboard',
+      element: <WorkforceDashboard />,
+      loader: userAccess,
+    },
   ]);
 
   return (

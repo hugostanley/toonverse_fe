@@ -1,4 +1,5 @@
-import { UserSignupForm } from '@pages';
+import { SignupForm } from '@components';
+import { REGISTER_URL } from '@utils';
 
 function Register() {
   return (
@@ -7,7 +8,7 @@ function Register() {
         Sign up
       </h1>
 
-      <UserSignupForm />
+      <SignupForm apiUrl={REGISTER_URL} redirectPath='/account' />
     </main>
   )
 }
