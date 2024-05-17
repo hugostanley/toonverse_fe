@@ -14,7 +14,7 @@ function OrderPage() {
           <img
             src="src/assets/cloud.png"
             alt="cloud"
-            className="absolute bottom-3 left-2 min-w-[10%] z-10"
+            className="absolute top-0 left-1 min-w-[10%] z-10"
           />
           <img
             src="src/assets/cloud.png"
@@ -24,7 +24,7 @@ function OrderPage() {
           <img
             src="src/assets/cloud.png"
             alt="cloud"
-            className="absolute top-0 left-48 min-w-[10%] z-10"
+            className="absolute  bottom-3 left-56 min-w-[10%] z-10"
           />
           <img
             src="src/assets/cloud.png"
@@ -38,20 +38,23 @@ function OrderPage() {
           />
 
           <div className="absolute w-[80%] h-[40vh] ">
-            <CCarousel controls>
+            <CCarousel controls transition="crossfade" interval={false}>
+              <CCarouselItem >
+                <div className="flex-center justify-evenly flex-row w-full h-[30vh]">
+                  <div className="bg-white w-[30%] h-[30vh]"></div>
+                  <div className="bg-white w-[30%] h-[30vh]"></div>
+                </div>
+              </CCarouselItem>
               <CCarouselItem>
                 <div className="flex-center justify-evenly flex-row w-full h-[30vh]">
-                  <div className="bg-white w-[30%] h-[30vh]"></div> <div className="bg-white w-[30%] h-[30vh]"></div>
+                  <div className="bg-black w-[30%] h-[30vh]"></div>
+                  <div className="bg-white w-[30%] h-[30vh]"></div>
                 </div>
               </CCarouselItem>
               <CCarouselItem>
-                <div className="flex-center w-[90%] h-[30vh]">
-                  <div className="bg-black w-[30%] h-[30vh]"></div>
-                </div>
-              </CCarouselItem>
-              <CCarouselItem>
-                <div className="flex-center w-[90%] h-[30vh]">
-                  <div className="bg-black w-[30%] h-[30vh]"></div>
+                <div className="flex-center justify-evenly flex-row w-full h-[30vh]">
+                  <div className="bg-green w-[30%] h-[30vh]"></div>
+                  <div className="bg-white w-[30%] h-[30vh]"></div>
                 </div>
               </CCarouselItem>
             </CCarousel>
