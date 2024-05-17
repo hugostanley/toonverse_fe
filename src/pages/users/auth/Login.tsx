@@ -1,4 +1,5 @@
 import { UserLoginForm } from '@pages';
+import { GoogleOauth } from '@components';
 
 function Login() {
   return (
@@ -8,6 +9,7 @@ function Login() {
       </h1>
 
       <UserLoginForm />
+      <GoogleOauth/>
     </section>
   )
 }
