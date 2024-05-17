@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useFetchAuth } from '@hooks';
+import { usePostAuth } from '@hooks';
 
 type LoginFormProps = {
   user?: {
@@ -14,7 +14,7 @@ type LoginFormProps = {
 function LoginForm({ user, apiUrl, redirectPath, className }: LoginFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(user?.password || '');
-  const { error, isLoading, fetchAuth } = useFetchAuth();
+  const { error, isLoading, postAuth } = usePostAuth();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -25,8 +25,7 @@ function LoginForm({ user, apiUrl, redirectPath, className }: LoginFormProps) {
     }
 
     try {
-      await fetchAuth(apiUrl, { 
-        method: 'POST', 
+      await postAuth(apiUrl, { 
         body: requestBody
       }, redirectPath)
     } catch (error) {

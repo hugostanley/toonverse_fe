@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useFetchAuth } from '@hooks';
+import { usePostAuth } from '@hooks';
 
 type SignupFormProps = {
   user?: {
@@ -15,20 +15,18 @@ function SignupForm({ user, apiUrl, redirectPath }: SignupFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(user?.password || '');
   const [passwordConfirmation, setPasswordConfirmation] = useState(user?.password_confirmation || '');
-  const { error, isLoading, fetchAuth } = useFetchAuth();
+  const { error, isLoading, postAuth } = usePostAuth();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const requestBody = {
       email,
-      password,
-      passwordConfirmation
+      password
     }
 
     try {
-      await fetchAuth(apiUrl, { 
-        method: 'POST', 
+      await postAuth(apiUrl, { 
         body: requestBody
       }, redirectPath)
     } catch (error) {
@@ -85,7 +83,7 @@ function SignupForm({ user, apiUrl, redirectPath }: SignupFormProps) {
             className='btn__primary bg-pink mt-6 font-bold'
             disabled={isLoading} 
           >
-            Register
+            {isLoading ? 'Creating your account' : 'Create Account'}
           </button>
         </div>
       </form>
