@@ -3,6 +3,7 @@
   font-family: "VAG Rounded Next";
   src: url("../assets/VAG.ttf") format("truetype");
 }
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -10,8 +11,8 @@
 
 @layer base {
   html {
-    font-family: "VAG Rounded Next", sans-serif;
-    @apply tracking-wider text-slate-700;
+    font-family: "Nunito", sans-serif;
+    @apply tracking-wider font-black;
   }
 }
 
