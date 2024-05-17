@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getLocalStorage, apiClient } from '@utils';
+import { apiClient } from '@utils';
 
 type FetchOptions = AxiosRequestConfig;
 
@@ -21,7 +21,6 @@ function useFetch(): UseFetchDataResponse {
   async function fetchData(url: string, options: FetchOptions = {}, redirectPath?: string) {
     try {
       setIsLoading(true);
-      const headers = getLocalStorage('Headers') || {};
 
       const axiosConfig: AxiosRequestConfig = {
         ...options,
@@ -29,12 +28,6 @@ function useFetch(): UseFetchDataResponse {
         url: url,
         data: options.data ? JSON.stringify(options.data) : undefined,
         headers: {
-          'Content-Type': 'application/json',
-          'access-token': headers['access-token'],
-          'client': headers['client'],
-          'uid': headers['uid'],
-          'expiry': headers['expiry'],
-          'authorization': headers['authorization'],
           ...options.headers,
         },
       };
