@@ -1,16 +1,32 @@
 // import React from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { CCarousel, CCarouselItem, CImage } from "@coreui/react";
+import { CCarousel, CCarouselItem } from "@coreui/react";
 
 function OrderPage() {
   return (
     <>
       <div className="min-w-full max-w-full h-fit border-2 border-black bg-yellow">
-        <div className="full-size text-[20rem] flex-center relative">
-          Sample Pictures
+        <div className="full-size text-[10rem] flex-center relative">
+          <div className="absolute w-full h-screen block">
+            <CCarousel controls indicators dark>
+              <CCarouselItem>
+                <div className="w-full h-screen flex-center">
+                  <div className="w-[90%] h-[90vh] bg-blue">image 1</div>
+                </div>
+              </CCarouselItem>
+              <CCarouselItem>
+              <div className="w-full h-screen flex-center">
+                  <div className="w-[90%] h-[90vh] bg-blue">image 2</div>
+                </div>
+              </CCarouselItem>
+              <CCarouselItem>
+              <div className="w-full h-screen flex-center">
+                  <div className="w-[90%] h-[90vh] bg-blue">image 3</div>
+                </div>
+              </CCarouselItem>
+            </CCarousel>
+          </div>
         </div>
-        <div className="w-full h-[50vh] border-2 border-black flex-center text-[20rem] bg-blue relative">
+        <div className="w-full h-[50vh] border-2 border-black flex-center text-[5rem] bg-blue relative">
           <img
             src="src/assets/cloud.png"
             alt="cloud"
@@ -34,27 +50,27 @@ function OrderPage() {
           <img
             src="src/assets/cloud.png"
             alt="cloud"
-            className="absolute top-3 right-1/3 min-w-[10%] z-10"
+            className="absolute top-3 right-1/3 min-w-[10%] z-0"
           />
 
           <div className="absolute w-[80%] h-[40vh] ">
-            <CCarousel controls transition="crossfade" interval={false}>
-              <CCarouselItem >
+            <CCarousel controls interval={false}>
+              <CCarouselItem>
                 <div className="flex-center justify-evenly flex-row w-full h-[30vh]">
-                  <div className="bg-white w-[30%] h-[30vh]"></div>
-                  <div className="bg-white w-[30%] h-[30vh]"></div>
+                  <div className="bg-white w-[30%] h-[30vh]">image 1</div>
+                  <div className="bg-white w-[30%] h-[30vh]">image 2</div>
                 </div>
               </CCarouselItem>
               <CCarouselItem>
                 <div className="flex-center justify-evenly flex-row w-full h-[30vh]">
-                  <div className="bg-black w-[30%] h-[30vh]"></div>
-                  <div className="bg-white w-[30%] h-[30vh]"></div>
+                  <div className="bg-white w-[30%] h-[30vh]">image 3</div>
+                  <div className="bg-white w-[30%] h-[30vh]">image 4</div>
                 </div>
               </CCarouselItem>
               <CCarouselItem>
                 <div className="flex-center justify-evenly flex-row w-full h-[30vh]">
-                  <div className="bg-green w-[30%] h-[30vh]"></div>
-                  <div className="bg-white w-[30%] h-[30vh]"></div>
+                  <div className="bg-white w-[30%] h-[30vh]">image 5</div>
+                  <div className="bg-white w-[30%] h-[30vh]">image 6</div>
                 </div>
               </CCarouselItem>
             </CCarousel>

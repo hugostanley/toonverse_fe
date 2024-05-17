@@ -34,7 +34,7 @@
   }
 
   .full-size{
-    @apply min-w-full max-w-full min-h-screen max-h-screen 
+    @apply min-w-full max-w-full min-h-screen max-h-screen
   }
 
   .flex-center{
