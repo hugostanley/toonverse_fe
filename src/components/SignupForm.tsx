@@ -1,18 +1,21 @@
 import { FormEvent, useState } from 'react';
-import { useFetchAuth } from '@hooks';
-import { LOGIN_URL } from '@utils';
+import { usePostAuth } from '@hooks';
 
-type LoginFormProps = {
+type SignupFormProps = {
   user?: {
     email: string;
     password: string;
+    password_confirmation: string;
   } | null;
+  apiUrl: string;
+  redirectPath?: string;
 }
 
-function LoginForm({ user }: LoginFormProps) {
+function SignupForm({ user, apiUrl, redirectPath }: SignupFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(user?.password || '');
-  const { error, isLoading, fetchAuth } = useFetchAuth();
+  const [passwordConfirmation, setPasswordConfirmation] = useState(user?.password_confirmation || '');
+  const { error, isLoading, postAuth } = usePostAuth();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,10 +26,9 @@ function LoginForm({ user }: LoginFormProps) {
     }
 
     try {
-      await fetchAuth(LOGIN_URL, { 
-        method: 'POST', 
+      await postAuth(apiUrl, { 
         body: requestBody
-      }, '/account')
+      }, redirectPath)
     } catch (error) {
       console.error('Login error:', error);
     }
@@ -59,6 +61,18 @@ function LoginForm({ user }: LoginFormProps) {
           />
         </div>
 
+        <div className='field__wrapper'>
+          <label>Confirm Password</label>
+          <input 
+            type="password"
+            name='password_confirmation'
+            value={passwordConfirmation} 
+            placeholder="******"
+            onChange={(e) => setPasswordConfirmation(e.target.value)} 
+            className='field__text'
+          />
+        </div>
+
         {error && 
           <p className="text-red-500">{error}</p>
         }
@@ -69,7 +83,7 @@ function LoginForm({ user }: LoginFormProps) {
             className='btn__primary bg-pink mt-6 font-bold'
             disabled={isLoading} 
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? 'Creating your account' : 'Create Account'}
           </button>
         </div>
       </form>
@@ -77,4 +91,4 @@ function LoginForm({ user }: LoginFormProps) {
   )
 }
 
-export default LoginForm;
+export default SignupForm

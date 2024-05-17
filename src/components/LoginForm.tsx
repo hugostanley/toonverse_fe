@@ -1,35 +1,33 @@
 import { FormEvent, useState } from 'react';
-import { useFetchAuth } from '@hooks';
-import { REGISTER_URL } from '@utils';
+import { usePostAuth } from '@hooks';
 
-type SignupFormProps = {
+type LoginFormProps = {
   user?: {
     email: string;
     password: string;
-    password_confirmation: string;
   } | null;
+  apiUrl: string;
+  redirectPath?: string;
+  className?: string;
 }
 
-function SignupForm({ user }: SignupFormProps) {
+function LoginForm({ user, apiUrl, redirectPath, className }: LoginFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(user?.password || '');
-  const [passwordConfirmation, setPasswordConfirmation] = useState(user?.password_confirmation || '');
-  const { error, isLoading, fetchAuth } = useFetchAuth();
+  const { error, isLoading, postAuth } = usePostAuth();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const requestBody = {
       email,
-      password,
-      passwordConfirmation
+      password
     }
 
     try {
-      await fetchAuth(REGISTER_URL, { 
-        method: 'POST', 
+      await postAuth(apiUrl, { 
         body: requestBody
-      }, '/account')
+      }, redirectPath)
     } catch (error) {
       console.error('Login error:', error);
     }
@@ -62,18 +60,6 @@ function SignupForm({ user }: SignupFormProps) {
           />
         </div>
 
-        <div className='field__wrapper'>
-          <label>Confirm Password</label>
-          <input 
-            type="password"
-            name='password_confirmation'
-            value={passwordConfirmation} 
-            placeholder="******"
-            onChange={(e) => setPasswordConfirmation(e.target.value)} 
-            className='field__text'
-          />
-        </div>
-
         {error && 
           <p className="text-red-500">{error}</p>
         }
@@ -81,10 +67,10 @@ function SignupForm({ user }: SignupFormProps) {
         <div className='field__wrapper'>
           <button
             type='submit'
-            className='btn__primary bg-pink mt-6 font-bold'
+            className={`${className} btn__primary bg-pink mt-6 font-bold`}
             disabled={isLoading} 
           >
-            Register
+            {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </div>
       </form>
@@ -92,4 +78,4 @@ function SignupForm({ user }: SignupFormProps) {
   )
 }
 
-export default SignupForm
+export default LoginForm

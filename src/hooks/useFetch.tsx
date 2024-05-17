@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getLocalStorage } from '@utils';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { apiClient } from '@utils';
 
-type FetchOptions = {
-  method?: string;
-  headers?: object;
-  body?: object;
-};
+type FetchOptions = AxiosRequestConfig;
 
 type UseFetchDataResponse = {
   data: any | null;
@@ -21,50 +18,34 @@ function useFetch(): UseFetchDataResponse {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  async function fetchData(url: string, options: FetchOptions = {},  redirectPath?: string) {
+  async function fetchData(url: string, options: FetchOptions = {}, redirectPath?: string) {
     try {
       setIsLoading(true);
-      const headers = getLocalStorage('Headers') || {};
 
-      // log req data
-      console.log('Request data:', {
-        method: options.method,
-        body: JSON.stringify(options.body),
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': headers['access-token'],
-          'client': headers['client'],
-          'uid': headers['uid'],
-          'expiry': headers['expiry'],
-          'authorization': headers['authorization'],
-        },
-      });
-
-      const response = await fetch(url, {
+      const axiosConfig: AxiosRequestConfig = {
         ...options,
         method: options.method || 'GET',
-        body: JSON.stringify(options.body),
+        url: url,
+        data: options.data ? JSON.stringify(options.data) : undefined,
         headers: {
-          'Content-Type': 'application/json',
-          'access-token': headers['access-token'],
-          'client': headers['client'],
-          'uid': headers['uid'],
-          'expiry': headers['expiry'],
-          'authorization': headers['authorization'],
           ...options.headers,
         },
-      });
+      };
 
-      const responseData = await response.json();
-      console.log('Response data:', responseData);
+      console.log('Request data:', axiosConfig);
 
-      if (response.ok) {
-        setData(responseData);
+      const response: AxiosResponse = await apiClient(axiosConfig);
+
+      console.log('Response data:', response.data);
+
+      if (response.status === 200) {
+        setData(response.data);
         if (redirectPath) {
           navigate(redirectPath);
         }
+        return response.data;
       } else {
+        const responseData = response.data;
         if (responseData.errors && responseData.errors.length > 0) {
           setError(responseData.errors.join('. '));
         } else {
@@ -79,7 +60,7 @@ function useFetch(): UseFetchDataResponse {
     }
   }
 
-  return { data, error, isLoading, fetchData };
+  return { data, error, isLoading, fetchData }
 }
 
-export default useFetch;
+export default useFetch
