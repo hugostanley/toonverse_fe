@@ -43,6 +43,7 @@ function useFetch(): UseFetchDataResponse {
         if (redirectPath) {
           navigate(redirectPath);
         }
+        return response.data;
       } else {
         const responseData = response.data;
         if (responseData.errors && responseData.errors.length > 0) {

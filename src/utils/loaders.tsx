@@ -4,7 +4,8 @@ import { getLocalStorage } from '@utils';
 // to access user pages only when logged in as user
 export function userAccess() {
   const { 'access-token': accessToken, uid, client, expiry, authorization } = getLocalStorage('Headers') || {};
-  const { role } = getLocalStorage('AccountData') || undefined;
+  const { data } = getLocalStorage('AccountData');
+  const { role, id, email } = data;
 
   if(!accessToken && !uid && !client && !expiry && !authorization) {
     return redirect("/login")
@@ -14,13 +15,13 @@ export function userAccess() {
     return redirect("/no-access");
   }
 
-  return { accessToken, uid, client, expiry, authorization }
+  return { accessToken, uid, client, expiry, authorization, id, email, role }
 }
 
 // workforce restricted pages
 export function workforceAccess() {
   const { 'access-token': accessToken, uid, client, expiry, authorization } = getLocalStorage('Headers') || {};
-  const { role } = getLocalStorage('AccountData') || undefined;
+  const { role, id } = getLocalStorage('AccountData');
 
   if(!accessToken && !uid && !client && !expiry && !authorization) {
     return redirect("/login")
@@ -30,13 +31,13 @@ export function workforceAccess() {
     return redirect("/no-access");
   }
 
-  return { accessToken, uid, client, expiry, authorization }
+  return { accessToken, uid, client, expiry, authorization, role, id }
 }
 
 // admin-restricted pages
 export function adminAccess() {
   const { 'access-token': accessToken, uid, client, expiry, authorization } = getLocalStorage('Headers') || {};
-  const { role } = getLocalStorage('AccountData') || undefined;
+  const { role, id } = getLocalStorage('AccountData');
 
   if(!accessToken && !uid && !client && !expiry && !authorization) {
     return redirect("/login")
@@ -46,13 +47,13 @@ export function adminAccess() {
     return redirect("/no-access");
   }
 
-  return { accessToken, uid, client, expiry, authorization }
+  return { accessToken, uid, client, expiry, authorization, role, id }
 }
 
 // artist-restricted pages
 export function artistAccess() {
   const { 'access-token': accessToken, uid, client, expiry, authorization } = getLocalStorage('Headers') || {};
-  const { role } = getLocalStorage('AccountData') || undefined;
+  const { role, id } = getLocalStorage('AccountData');
 
   if(!accessToken && !uid && !client && !expiry && !authorization) {
     return redirect("/login")
@@ -62,5 +63,5 @@ export function artistAccess() {
     return redirect("/no-access");
   }
 
-  return { accessToken, uid, client, expiry, authorization }
+  return { accessToken, uid, client, expiry, authorization, role, id }
 }
