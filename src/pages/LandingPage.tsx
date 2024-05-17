@@ -19,7 +19,7 @@ function LandingPage() {
             </div>
             {/* nav links */}
             <div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
-              <ul className="flex font-semibold justify-between">
+              <ul className="flex justify-between">
                 {/* Active Link: text-indigo-500, Inactive Link: hover:text-indigo-500 */}
                 <li className="md:px-4 md:py-2 hover:text-pink">
                   <a href="#">Home</a>
