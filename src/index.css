@@ -1,6 +1,19 @@
+@import '@coreui/coreui/dist/css/coreui.min.css';
+@font-face {
+  font-family: "VAG Rounded Next";
+  src: url("../assets/VAG.ttf") format("truetype");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "VAG Rounded Next", sans-serif;
+    @apply tracking-wider text-slate-700;
+  }
+}
 
 
 @layer components {
@@ -18,5 +31,13 @@
 
   .btn__primary {
     @apply w-full grid place-items-center border-2 rounded-lg px-6 py-2 border-zinc-900 shadow-retro__dark uppercase tracking-wider focus:shadow-retro__circle focus:translate-y-1;
+  }
+
+  .full-size{
+    @apply min-w-full max-w-full min-h-screen max-h-screen 
+  }
+
+  .flex-center{
+    @apply flex items-center justify-center text-center
   }
 }

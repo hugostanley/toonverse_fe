@@ -4,14 +4,20 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './index.css';
 
-import { LandingPage, UnauthorizedPage, UserAccountPage, UserLoginPage, UserRegisterPage, WorkforceDashboard, WorkforceLoginPage } from '@pages';
+import {
+  LandingPage,
+  OrderPage,
+  UnauthorizedPage, UserAccountPage,
+  UserLoginPage,
+  UserRegisterPage, WorkforceDashboard, WorkforceLoginPage,
+} from "@pages";
 import { userAccess, workforceAccess } from '@utils';
 
 function App() {
   const queryClient = new QueryClient();
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <LandingPage />,
     },
     {
@@ -21,19 +27,22 @@ function App() {
 
     // User Side
     {
-      path: 'login',
+      path: "login",
       element: <UserLoginPage />,
     },
     {
-      path: 'register',
+      path: "register",
       element: <UserRegisterPage />,
     },
     {
-      path: 'account',
+      path: "account",
       element: <UserAccountPage />,
       loader: userAccess,
     },
-
+    {
+      path: "order",
+      element: <OrderPage />,
+    },
     // Workforce Side
     {
       path: 'w/login',
@@ -53,8 +62,7 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </React.StrictMode>
-  )
+  );
 }
 
-export default App
-
+export default App;
