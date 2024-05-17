@@ -1,30 +1,39 @@
-import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
 
-import { LandingPage, UserAccountPage, UserLoginPage, UserRegisterPage } from '@pages';
+import {
+  LandingPage,
+  OrderPage,
+  UserAccountPage,
+  UserLoginPage,
+  UserRegisterPage,
+} from "@pages";
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <LandingPage />,
     },
 
     // User Side
     {
-      path: 'login',
+      path: "login",
       element: <UserLoginPage />,
     },
     {
-      path: 'register',
+      path: "register",
       element: <UserRegisterPage />,
     },
     {
-      path: 'account',
+      path: "account",
       element: <UserAccountPage />,
     },
-
+    {
+      path: "order",
+      element: <OrderPage />,
+    },
     // Workforce Side
   ]);
 
@@ -32,8 +41,7 @@ function App() {
     <React.StrictMode>
       <RouterProvider router={router} />
     </React.StrictMode>
-  )
+  );
 }
 
-export default App
-
+export default App;
