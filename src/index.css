@@ -27,7 +27,7 @@
   }
 
   .field__wrapper {
-    @apply flex flex-col items-start gap-y-2;
+    @apply flex flex-col items-start gap-y-2 font-bold;
   }
 
   .field__text { 
@@ -35,7 +35,7 @@
   }
 
   .btn__primary {
-    @apply w-full grid place-items-center border-2 rounded-lg px-6 py-2 border-zinc-900 shadow-retro__dark uppercase tracking-wider focus:shadow-retro__circle focus:translate-y-1;
+    @apply w-full grid place-items-center border-2 rounded-lg px-6 py-2 border-zinc-900 shadow-retro__dark uppercase tracking-wider focus:shadow-retro__circle focus:translate-y-1 font-bold hover:opacity-70;
   }
 
   .full-size{

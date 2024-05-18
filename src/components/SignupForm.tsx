@@ -9,9 +9,11 @@ type SignupFormProps = {
   } | null;
   apiUrl: string;
   redirectPath?: string;
+  formClassName?: string;
+  btnClassName?: string;
 }
 
-function SignupForm({ user, apiUrl, redirectPath }: SignupFormProps) {
+function SignupForm({ user, apiUrl, redirectPath, formClassName, btnClassName }: SignupFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(user?.password || '');
   const [passwordConfirmation, setPasswordConfirmation] = useState(user?.password_confirmation || '');
@@ -35,7 +37,7 @@ function SignupForm({ user, apiUrl, redirectPath }: SignupFormProps) {
   }
 
   return (
-    <section className='w-1/3 p-4'>
+    <section className={formClassName}>
       <form onSubmit={handleSubmit} className='space-y-4 py-2'>
         <div className='field__wrapper'>
           <label>Email</label>
@@ -80,7 +82,7 @@ function SignupForm({ user, apiUrl, redirectPath }: SignupFormProps) {
         <div className='field__wrapper'>
           <button
             type='submit'
-            className='btn__primary bg-pink mt-6 font-bold'
+            className={`${btnClassName} btn__primary`}
             disabled={isLoading} 
           >
             {isLoading ? 'Creating your account' : 'Create Account'}

@@ -35,7 +35,7 @@ function LoginForm({ user, apiUrl, redirectPath, formClassName, btnClassName }: 
   }
 
   return (
-    <section className={`${formClassName} p-2`}>
+    <section className={formClassName}>
       <form onSubmit={handleSubmit} className='space-y-4'>
         <div className='field__wrapper'>
           <label>Email</label>
@@ -65,10 +65,10 @@ function LoginForm({ user, apiUrl, redirectPath, formClassName, btnClassName }: 
           <p className="text-red-500">{error}</p>
         }
 
-        <div className='field__wrapper'>
+        <div className='field__wrapper py-4'>
           <button
             type='submit'
-            className={`${btnClassName} btn__primary mt-6 font-bold`}
+            className={`${btnClassName} btn__primary`}
             disabled={isLoading} 
           >
             {isLoading ? 'Logging in...' : 'Login'}
