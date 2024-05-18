@@ -3,7 +3,7 @@ import { CCarousel, CCarouselItem } from "@coreui/react";
 import { Navbar } from "@components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import { bobsSample } from "@assets";
+import { bobsBg, bobsSample } from "@assets";
 
 function OrderPage() {
   const buttons = Array.from({ length: 10 }, (_, index) => index + 1);
@@ -12,11 +12,15 @@ function OrderPage() {
       <div className="min-w-full max-w-full h-fit border-2 border-black bg-yellow">
         <Navbar />
         <div className="full-size text-[10rem] flex-center relative">
-          <div className="absolute w-full h-screen block">
+        <img src='src/assets/flower_neub.png' alt="flower"  className="absolute middle right-[6rem]  -rotate-45"/>
+        <img src='src/assets/flower_neub.png' alt="flower"  className="absolute top-[8rem] left-[0.5rem] -rotate-45"/>
+        <img src='src/assets/doodle_neub.png' alt="flower"  className="absolute top-[25rem] left-[0.5rem] -rotate-45"/>
+        <img src='src/assets/doodle_neub.png' alt="flower"  className="absolute bottom-[8rem] right-[0.5rem] rotate-5"/>
+          <div className="absolute w-full h-screen">
             <CCarousel controls indicators>
               {bobsSample.map((sample, index)=>(<CCarouselItem>
                 <div className="w-full h-screen flex-center">
-                    <img src={sample} alt={`sample${index}`} key={index} className="w-[70%] h-[90vh] border-[0.5rem] border-black"/>
+                    <img src={sample} alt={`sample${index + 1}`} key={index} className="w-[70%] h-[90vh] border-[0.5rem] border-black"/>
                 </div>
               </CCarouselItem>))}
             </CCarousel>
@@ -54,24 +58,14 @@ function OrderPage() {
 
           <div className="absolute -bottom-8 w-[80%] h-[40vh] ">
             <CCarousel controls interval={false}>
-              <CCarouselItem>
+              {bobsBg.map((bg, index)=>(
+                <CCarouselItem>
                 <div className="flex-center justify-evenly flex-row w-full h-[30vh]">
-                  <div className="bg-white w-[30%] h-[30vh]">image 1</div>
-                  <div className="bg-white w-[30%] h-[30vh]">image 2</div>
+                  <img src={bg} alt={`bg${index}`}  key={index}className="bg-white w-[30%] h-[30vh] border-4 border-white"/>
                 </div>
               </CCarouselItem>
-              <CCarouselItem>
-                <div className="flex-center justify-evenly flex-row w-full h-[30vh]">
-                  <div className="bg-white w-[30%] h-[30vh]">image 3</div>
-                  <div className="bg-white w-[30%] h-[30vh]">image 4</div>
-                </div>
-              </CCarouselItem>
-              <CCarouselItem>
-                <div className="flex-center justify-evenly flex-row w-full h-[30vh]">
-                  <div className="bg-white w-[30%] h-[30vh]">image 5</div>
-                  <div className="bg-white w-[30%] h-[30vh]">image 6</div>
-                </div>
-              </CCarouselItem>
+              ))}
+              
             </CCarousel>
           </div>
         </div>

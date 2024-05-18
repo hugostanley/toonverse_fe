@@ -3,3 +3,4 @@
 // <img src={img.react_logo} alt='' />
 
 export { bobsSample } from './SampleWorks'
+export { bobsBg } from './Background'
