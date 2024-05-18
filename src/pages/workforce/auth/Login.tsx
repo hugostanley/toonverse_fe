@@ -28,15 +28,11 @@ function Login() {
               <small>workforce</small>
             </Link>
             
-            <h1 className='text-3xl tracking-widest font-black px-2'>
+            <h1 className='text-5xl tracking-widest font-black px-2'>
               Sign in
             </h1>
 
-            <div className='br w-full h-16 p-2'>
-              OmniAuth Block
-            </div>
-
-            <LoginForm apiUrl={W_LOGIN_URL} redirectPath='/w/dashboard' formClassName='w-full pb-4' btnClassName='bg-pink' />
+            <LoginForm apiUrl={W_LOGIN_URL} redirectPath='/w/dashboard' formClassName='w-full py-4' btnColor='pink' />
           </div>
         </div>        
       </section>

@@ -24,7 +24,7 @@ function Register() {
 
         <span className='w-full text-center text-sm font-bold'>or</span>
 
-        <SignupForm apiUrl={REGISTER_URL} redirectPath='/account' btnClassName='mt-4 bg-pink'/>
+        <SignupForm apiUrl={REGISTER_URL} redirectPath='/account' btnColor='pink'/>
 
         <Link to='/login' className='px-2 font-bold hover:underline hover:underline-offset-4 hover:font-extrabold'>
           <small>
@@ -54,7 +54,7 @@ function Register() {
       <img
         src="/src/assets/smiley_neub.png"
         alt="Logo"
-        className="absolute bottom-20 right-[12%] -rotate-12 h-36 aspect-square z-20"
+        className="absolute top-1/4 left-[20%] -rotate-12 h-1/4 aspect-square z-20"
       />
 
       <img
@@ -81,11 +81,16 @@ function Register() {
         className="absolute top-4 right-1/4 -rotate-12 w-24 z-10"
       />
 
+      <img
+        src="/src/assets/flower_neub.png"
+        alt="Logo"
+        className="fixed bottom-[10%] right-[10%] h-16 aspect-square z-20"
+      />
 
       <img
         src="/src/assets/hero-bg.png"
         alt="Logo"
-        className="fixed bottom-[12%] w-full z-10"
+        className="fixed bottom-[20%] right-0 w-[60%] z-10"
       /> 
 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className='fixed top-0 left-0 z-0 rotate-180'><path fill="#ffed97" fillOpacity="1" d="M0,192L80,192C160,192,320,192,480,208C640,224,800,256,960,240C1120,224,1280,160,1360,128L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
