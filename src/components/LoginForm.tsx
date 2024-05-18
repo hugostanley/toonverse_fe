@@ -68,7 +68,7 @@ function LoginForm({ user, apiUrl, redirectPath, formClassName, btnClassName }: 
         <div className='field__wrapper'>
           <button
             type='submit'
-            className={`${btnClassName} btn__primary bg-pink mt-6 font-bold`}
+            className={`${btnClassName} btn__primary mt-6 font-bold`}
             disabled={isLoading} 
           >
             {isLoading ? 'Logging in...' : 'Login'}
