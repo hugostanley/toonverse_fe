@@ -1,6 +1,11 @@
 @import '@coreui/coreui/dist/css/coreui.min.css';
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
+@font-face {
+  font-family: "VAG Rounded Next";
+  src: url("../assets/VAG.ttf") format("truetype");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -34,7 +39,7 @@
   }
 
   .full-size{
-    @apply min-w-full max-w-full min-h-screen max-h-screen 
+    @apply min-w-full max-w-full min-h-screen max-h-screen
   }
 
   .flex-center{
