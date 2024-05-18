@@ -3,6 +3,7 @@ import { CCarousel, CCarouselItem } from "@coreui/react";
 import { Navbar } from "@components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { bobsSample } from "@assets";
 
 function OrderPage() {
   const buttons = Array.from({ length: 10 }, (_, index) => index + 1);
@@ -13,21 +14,11 @@ function OrderPage() {
         <div className="full-size text-[10rem] flex-center relative">
           <div className="absolute w-full h-screen block">
             <CCarousel controls indicators>
-              <CCarouselItem>
+              {bobsSample.map((sample, index)=>(<CCarouselItem>
                 <div className="w-full h-screen flex-center">
-                  <div className="w-[90%] h-[90vh] bg-blue">image 1</div>
+                    <img src={sample} alt={`sample${index}`} key={index} className="w-[70%] h-[90vh] border-[0.5rem] border-black"/>
                 </div>
-              </CCarouselItem>
-              <CCarouselItem>
-                <div className="w-full h-screen flex-center">
-                  <div className="w-[90%] h-[90vh] bg-blue">image 2</div>
-                </div>
-              </CCarouselItem>
-              <CCarouselItem>
-                <div className="w-full h-screen flex-center">
-                  <div className="w-[90%] h-[90vh] bg-blue">image 3</div>
-                </div>
-              </CCarouselItem>
+              </CCarouselItem>))}
             </CCarousel>
           </div>
         </div>
