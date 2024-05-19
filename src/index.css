@@ -13,7 +13,7 @@
 @layer base {
   html, body {
     font-family: "Nunito", sans-serif;
-    @apply w-full h-dvh tracking-wider text-dark;
+    @apply w-full h-dvh tracking-wider text-dark ;
   }
 
   #root {
@@ -45,4 +45,5 @@
   .flex-center{
     @apply flex items-center justify-center text-center
   }
+ 
 }

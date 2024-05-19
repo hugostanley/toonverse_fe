@@ -1,5 +1,6 @@
 // import React from "react";
 import { Navbar } from "@components";
+import { Link } from "react-router-dom";
 
 
 
@@ -85,11 +86,8 @@ function LandingPage() {
           </h3>
           <h3 className="text-2xl">
             100% online and without extra shipping or import costs
-          </h3>import Navbar from '../components/Navbar';
-
-          <button className="text-dark shadow-retro__dark bg-pink font-medium rounded-xl px-5 py-2.5 mt-8 text-center border-dark border-2 w-[10rem]">
-            GET STARTED
-          </button>
+          </h3>
+          <a href="#styles"  className="text-dark shadow-retro__dark bg-pink font-medium rounded-xl px-5 py-2.5 mt-8 text-center border-dark border-2 w-[10rem]"> GET STARTED </a>
         </div>
       </div>
       <div
@@ -98,7 +96,7 @@ function LandingPage() {
       >
         <h1 className="text-6xl text-center">STYLES</h1>
         <div className="flex flex-row justify-center">
-          <div className="px-4 py-8">
+          <Link to="order/rick_and_morty" className="px-4 py-8">
             <div className="w-[20rem] rounded-2xl bg-light px-6 py-4 border-2 border-dark">
               <div className="flex justify-center items-center">
                 <img
@@ -110,8 +108,8 @@ function LandingPage() {
             </div>
             <h1 className="text-lg">Rick and Morty Custom Portrait</h1>
             <h1 className="text-red-600">$Free.99</h1>
-          </div>
-          <div className="px-4 py-8">
+          </Link>
+          <Link to="order/bobs_burger" className="px-4 py-8">
             <div className="w-[20rem] rounded-2xl bg-light px-6 py-4 border-2 border-dark">
               <div className="flex justify-center items-center">
                 <img
@@ -123,8 +121,8 @@ function LandingPage() {
             </div>
             <h1 className="text-lg">Bob's Burger Custom Portait</h1>
             <h1 className="text-red-600">$Free.99</h1>
-          </div>
-          <div className="px-4 py-8">
+          </Link>
+          <Link to="order/vector" className="px-4 py-8">
             <div className="w-[20rem] rounded-2xl bg-light px-6 py-4 border-2 border-dark">
               <div className="flex justify-center items-center">
                 <img
@@ -136,7 +134,7 @@ function LandingPage() {
             </div>
             <h1 className="text-lg">Vexel Art Custom Portrait</h1>
             <h1 className="text-red-600">$Free.99</h1>
-          </div>
+          </Link>
         </div>
       </div>
       <div className="bg-green h-screen border-b-2 border-dark" id="faqs">

@@ -40,8 +40,9 @@ function App() {
       loader: userAccess,
     },
     {
-      path: "order",
+      path: "order/:params",
       element: <OrderPage />,
+      loader: userAccess,
     },
 
     // Workforce Side

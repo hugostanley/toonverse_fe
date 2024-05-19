@@ -1,6 +1,8 @@
 // import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+
 
 function Navbar() {
   return (
@@ -20,7 +22,7 @@ function Navbar() {
           <ul className="flex font-semibold justify-between">
             {/* Active Link: text-indigo-500, Inactive Link: hover:text-indigo-500 */}
             <li className="md:px-4 md:py-2 hover:text-pink">
-              <a href="#">Home</a>
+              <a href="#"><Link to="/">Home</Link></a>
             </li>
             <li className="md:px-4 md:py-2 hover:text-pink">
               <a href="#styles">Catalog</a>

@@ -17,3 +17,7 @@ export const W_LOGOUT_URL = `${BASE_URL}/w_auth/sign_out`;
 // Artist Profile CRUD endpoints
 export const ALL_ARTISTS = '/api/v1/artist_profiles' // GET
 export const ARTIST_PROFILE = (id: number) =>  `/api/v1/artist_profiles/${id}` // GET | PATCH | PUT | DELETE
+
+// Item CRUD endpoints
+export const ALL_ITEMS = '/items' //GET | POST
+export const ITEM = (id: number) => `/items/${id}` // GET | PATCH | PUT | DELETE
