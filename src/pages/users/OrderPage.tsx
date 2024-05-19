@@ -1,4 +1,3 @@
-
 import { CCarousel, CCarouselItem } from "@coreui/react";
 import { Navbar } from "@components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,22 +13,22 @@ function OrderPage() {
         <Navbar />
         <div className="full-size text-[3rem] flex-center relative">
           <img
-            src="src/assets/flower_neub.png"
+            src="/src/assets/flower_neub.png"
             alt="flower"
             className="absolute middle right-[6rem]  -rotate-45"
           />
           <img
-            src="src/assets/flower_neub.png"
+            src="/src/assets/flower_neub.png"
             alt="flower"
             className="absolute top-[8rem] left-[0.5rem] -rotate-45"
           />
           <img
-            src="src/assets/doodle_neub.png"
+            src="/src/assets/doodle_neub.png"
             alt="flower"
             className="absolute top-[25rem] left-[0.5rem] -rotate-45"
           />
           <img
-            src="src/assets/doodle_neub.png"
+            src="/src/assets/doodle_neub.png"
             alt="flower"
             className="absolute bottom-[8rem] right-[0.5rem] rotate-5"
           />
@@ -55,27 +54,27 @@ function OrderPage() {
             Step 1: Select Background
           </h1>
           <img
-            src="src/assets/cloud.png"
+            src="/src/assets/cloud.png"
             alt="cloud"
             className="absolute top-0 left-1 min-w-[10%] z-10"
           />
           <img
-            src="src/assets/cloud.png"
+            src="/src/assets/cloud.png"
             alt="cloud"
             className="absolute top-3 right-2 min-w-[10%] z-10"
           />
           <img
-            src="src/assets/cloud.png"
+            src="/src/assets/cloud.png"
             alt="cloud"
             className="absolute  bottom-3 left-56 min-w-[10%] z-0"
           />
           <img
-            src="src/assets/cloud.png"
+            src="/src/assets/cloud.png"
             alt="cloud"
             className="absolute -bottom-5 right-96 min-w-[10%] z-10"
           />
           <img
-            src="src/assets/cloud.png"
+            src="/src/assets/cloud.png"
             alt="cloud"
             className="absolute top-3 right-1/3 min-w-[10%] z-0"
           />
@@ -116,21 +115,21 @@ function OrderPage() {
             <div className="w-full h-[50vh] flex-center justify-evenly">
               <div className="w-[30%] h-[35vh] flex-center flex-row">
               <img
-                  src="src/assets/full-size.png"
+                  src="/src/assets/full-size.png"
                   alt="full-size"
                   className="w-[50%] h-[30vh]"
                 />
                 <h1 className="flex flex-wrap text-[2rem] font-bold text-green"> FULL BODY</h1>
               </div>
               <div className="w-[30%] h-[35vh] flex-center flex-col"> <img
-                  src="src/assets/hero-bg.png"
+                  src="/src/assets/hero-bg.png"
                   alt="half-body"
                   className="w-full h-[30vh]"
                 />
                 <h1 className="flex flex-wrap text-[2rem] font-bold text-green">HALF BODY</h1></div>
               <div className="w-[30%] h-[35vh] flex-center flex-row">
                 <img
-                  src="src/assets/bob_head.png"
+                  src="/src/assets/bob_head.png"
                   alt="shoulders_up"
                   className="w-[50%] h-[35vh]"
                 />
@@ -139,7 +138,7 @@ function OrderPage() {
             </div>
           </div>
           <img
-            src="src/assets/divider.png"
+            src="/src/assets/divider.png"
             alt="divider"
             className="w-full max-h-screen absolute top-0 z-0"
           />

@@ -12,7 +12,7 @@ function Navbar() {
         {/* logo */}
         <div className="text-indigo-500 md:order-1">
           <img
-            src="src/assets/temp-logo.png"
+            src="/src/assets/temp-logo.png"
             alt="Logo"
             className="h-10 rounded-full"
           />

@@ -1,10 +1,13 @@
 // import React from "react";
 import { Navbar } from "@components";
 import { Link } from "react-router-dom";
+import { getLocalStorage } from '@utils';
 
 
 
 function LandingPage() {
+
+  const authorize = getLocalStorage('Headers')
   return (
     <>
       {/* navigation */}
@@ -87,7 +90,8 @@ function LandingPage() {
           <h3 className="text-2xl">
             100% online and without extra shipping or import costs
           </h3>
-          <a href="#styles"  className="text-dark shadow-retro__dark bg-pink font-medium rounded-xl px-5 py-2.5 mt-8 text-center border-dark border-2 w-[10rem]"> GET STARTED </a>
+          {authorize ? ( <a href="#styles"  className="text-dark shadow-retro__dark bg-pink font-medium rounded-xl px-5 py-2.5 mt-8 text-center border-dark border-2 w-[10rem]"> GET STARTED </a>) : (<Link to="login"  className="text-dark shadow-retro__dark bg-pink font-medium rounded-xl px-5 py-2.5 mt-8 text-center border-dark border-2 w-[10rem]"> GET STARTED </Link>)}
+         
         </div>
       </div>
       <div
