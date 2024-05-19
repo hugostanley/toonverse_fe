@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { usePostAuth } from '@hooks';
+import { CFormInput } from '@coreui/react';
 
 type SignupFormProps = {
   user?: {
@@ -9,9 +10,11 @@ type SignupFormProps = {
   } | null;
   apiUrl: string;
   redirectPath?: string;
+  formClassName?: string;
+  btnColor?: string;
 }
 
-function SignupForm({ user, apiUrl, redirectPath }: SignupFormProps) {
+function SignupForm({ user, apiUrl, redirectPath, formClassName, btnColor }: SignupFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(user?.password || '');
   const [passwordConfirmation, setPasswordConfirmation] = useState(user?.password_confirmation || '');
@@ -35,52 +38,53 @@ function SignupForm({ user, apiUrl, redirectPath }: SignupFormProps) {
   }
 
   return (
-    <section className='w-1/3 p-4'>
+    <section className={formClassName}>
       <form onSubmit={handleSubmit} className='space-y-4 py-2'>
-        <div className='field__wrapper'>
-          <label>Email</label>
-          <input 
-            type="email" 
-            value={email} 
-            placeholder="email@email.com"
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
-            className='field__text'
-          />
-        </div>
+        <CFormInput 
+          type="email" 
+          id="floatingInput" 
+          floatingClassName="mb-3" 
+          floatingLabel="Email" 
+          placeholder="name@example.com" 
+          name='email'
+          value={email} 
+          required
+          onChange={(e) => setEmail(e.target.value)}         
+          className={` border-2 border-dark focus:border-none focus:ring-4 focus:ring-${btnColor}`}
+        />
 
-        <div className='field__wrapper'>
-          <label>Password</label>
-          <input 
-            type="password"
-            name='password'
-            value={password} 
-            placeholder="******"
-            onChange={(e) => setPassword(e.target.value)} 
-            className='field__text'
-          />
-        </div>
+        <CFormInput 
+          type="password" 
+          id="floatingPassword" 
+          floatingLabel="Password" 
+          placeholder="Password" 
+          name='password'
+          value={password} 
+          required
+          onChange={(e) => setPassword(e.target.value)} 
+          className={` border-2 border-dark focus:border-none focus:ring-4 focus:ring-${btnColor}`}
+        />
 
-        <div className='field__wrapper'>
-          <label>Confirm Password</label>
-          <input 
-            type="password"
-            name='password_confirmation'
-            value={passwordConfirmation} 
-            placeholder="******"
-            onChange={(e) => setPasswordConfirmation(e.target.value)} 
-            className='field__text'
-          />
-        </div>
+        <CFormInput 
+          type="password" 
+          id="floatingPasswordConfirmation" 
+          floatingLabel="Confirm Password" 
+          placeholder="Confirm Password" 
+          name='password_confirmation'
+          value={passwordConfirmation} 
+          required
+          onChange={(e) => setPasswordConfirmation(e.target.value)} 
+          className={` border-2 border-dark focus:border-none focus:ring-4 focus:ring-${btnColor}`}
+        />
 
         {error && 
           <p className="text-red-500">{error}</p>
         }
 
-        <div className='field__wrapper'>
+        <div className='field__wrapper py-4'>
           <button
             type='submit'
-            className='btn__primary bg-pink mt-6 font-bold'
+            className={`bg-${btnColor} btn__primary`}
             disabled={isLoading} 
           >
             {isLoading ? 'Creating your account' : 'Create Account'}

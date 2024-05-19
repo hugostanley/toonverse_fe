@@ -12,7 +12,7 @@ export default {
 
       colors: {
         dark: "#141407",
-        light: "#FDF7E1",
+        ivory: "#FDF7E1",
         blue: "#259EDF",
         pink: "#F196E5",
         yellow: "#FFE04A",
