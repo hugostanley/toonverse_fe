@@ -6,6 +6,7 @@ import './index.css';
 
 import {
   LandingPage,
+  OrderFormTest,
   OrderPage,
   UnauthorizedPage, UserAccountPage,
   UserLoginPage,
@@ -42,6 +43,11 @@ function App() {
     {
       path: "order/:params",
       element: <OrderPage />,
+      loader: userAccess,
+    },   
+    {
+      path: "testpage",
+      element: <OrderFormTest />,
       loader: userAccess,
     },
 

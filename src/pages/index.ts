@@ -4,6 +4,7 @@ export { default as UnauthorizedPage } from './errors/Unauthorized';
 
 //Dynamic Pages
 export { default as OrderPage } from './users/OrderPage'
+export { default as OrderFormTest } from './users/OrderFormTest'
 
 // User Side
 export { default as UserLoginPage } from './users/auth/Login'
