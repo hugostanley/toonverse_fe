@@ -3,8 +3,10 @@ import { getLocalStorage } from '@utils';
 
 export const apiClient = axios.create({
   baseURL: 'http://localhost:3000',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
   },
 });
 

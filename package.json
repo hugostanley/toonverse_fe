@@ -10,13 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<<<< Temporary merge branch 1
     "@coreui/coreui": "^5.0.1",
     "@coreui/react": "^5.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@react-oauth/google": "^0.12.1",
     "@tanstack/react-query": "^5.36.2",
     "@tanstack/react-query-devtools": "^5.36.2",
     "axios": "^1.6.8",

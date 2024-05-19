@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './index.css';
 
@@ -15,6 +16,7 @@ import { userAccess, workforceAccess } from '@utils';
 
 function App() {
   const queryClient = new QueryClient();
+  const googleClient = '134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com';
   const router = createBrowserRouter([
     {
       path: "/",
@@ -58,12 +60,14 @@ function App() {
 
   return (
     <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+      <GoogleOAuthProvider clientId={googleClient}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </GoogleOAuthProvider>
     </React.StrictMode>
-  );
+  )
 }
 
 export default App;
