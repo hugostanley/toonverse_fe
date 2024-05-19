@@ -19,5 +19,5 @@ export const ALL_ARTISTS = '/api/v1/artist_profiles' // GET
 export const ARTIST_PROFILE = (id: number) =>  `/api/v1/artist_profiles/${id}` // GET | PATCH | PUT | DELETE
 
 // Item CRUD endpoints
-export const ALL_ITEMS = '/items' //GET | POST
+export const ALL_ITEMS = `${BASE_URL}/items` //GET | POST
 export const ITEM = (id: number) => `/items/${id}` // GET | PATCH | PUT | DELETE
