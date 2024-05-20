@@ -53,7 +53,6 @@ function EditProfile() {
               type="text" 
               id="firtsName" 
               label="First Name" 
-              defaultValue={firstName}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder='Juan'
@@ -65,7 +64,6 @@ function EditProfile() {
               type="text" 
               id="lastName" 
               label="Last Name" 
-              defaultValue={lastName}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               placeholder='Cruz'
@@ -80,7 +78,6 @@ function EditProfile() {
               type="email" 
               id="inputEmail4" 
               label="Email" 
-              defaultValue={email}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder='email@example.com'
@@ -91,7 +88,6 @@ function EditProfile() {
             <CFormInput 
               id="mobileNumber" 
               label="Mobile Number" 
-              defaultValue={mobileNumber}
               value={mobileNumber}
               onChange={(e) => setMobileNumber(e.target.value)}
               placeholder='+639000000000'
@@ -102,7 +98,6 @@ function EditProfile() {
             <CFormInput 
               id="inputAddress" 
               label="Billing Address" 
-              defaultValue={address}
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="Lot Block Street, Barangay, City, Province, Country, ZIP Code" 
