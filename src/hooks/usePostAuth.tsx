@@ -45,8 +45,10 @@ function usePostAuth(): UsePostAuthResponse {
         }
       }
     } catch (error) {
-      setError("An unexpected error occurred. Please try again later.");
+      const apiErrors = (error as any)?.response.data.errors.full_messages.join('. ')
+      setError(apiErrors || "An unexpected error occurred. Please try again later.");
       console.error("Error:", error);
+      console.log('Error Response Data:', apiErrors);
     } finally {
       setIsLoading(false);
     }

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <div className="fixed w-full top-0 z-50 py-4 px-8">
-    <nav className="bg-light rounded-full border-2 border-dark  w-100 px-8 md:px-auto">
+    <nav className="bg-light rounded-full border-2 border-dark w-100 px-8 md:px-auto">
       <div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
         {/* logo */}
         <div className="text-indigo-500 md:order-1">

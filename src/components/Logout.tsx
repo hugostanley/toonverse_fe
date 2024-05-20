@@ -27,7 +27,7 @@ function Logout({ apiUrl, redirectPath, className }: LogoutProps) {
       <div className='field__wrapper'>
         <button
           type='submit'
-          className={`${className} btn__primary w-1/4 mt-6 font-bold`}
+          className={`${className} btn__primary font-bold`}
           disabled={isLoading} 
         >
           {isLoading ? 'Logging out...' : 'Logout'}
