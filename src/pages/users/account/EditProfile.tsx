@@ -1,24 +1,38 @@
 import { CCol, CForm, CFormInput, CRow } from '@coreui/react';
 import { FormEvent, useState } from 'react';
-import { useQueryData, useUserData } from '@layouts';
-import { apiClient, ALL_USERS } from '@utils';
-import { useMutation } from '@tanstack/react-query';
+import { useUserProfile, useUserData } from '@layouts';
+import { apiClient, ALL_USERS, USER_PROFILE } from '@utils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 function EditProfile() {
   const { userData } = useUserData();
-  const { queryData } = useQueryData(); 
-  const user = Array.isArray(queryData) && queryData.length > 0 ? queryData[0] : null;
+  const { data } = useUserProfile();   
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState(userData?.email || '');
-  const [firstName, setFirstName] = useState(user?.firstName || '');
-  const [lastName, setLastName] = useState(user?.lastName || '');
-  const [mobileNumber, setMobileNumber] = useState(user?.mobileNumber || '');
-  const [address, setAddress] = useState(user?.billingAddress || '');
+  const [firstName, setFirstName] = useState(data?.first_name || '');
+  const [lastName, setLastName] = useState(data?.last_name || '');
+  const [address, setAddress] = useState(data?.billing_address || '');
+  const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (formData: any) => 
-      apiClient.post(ALL_USERS, formData),
+    mutationFn: (formData: any) => {
+      if (data?.id) {
+        return apiClient.patch(USER_PROFILE(data?.id), formData);
+      } else {
+        return apiClient.post(ALL_USERS, formData);
+      }
+    },
     onSuccess: () => {
-      console.log('Mutation successful');
+      // to "update" user profile on account page too
+      queryClient.invalidateQueries(
+        {
+          queryKey: ['currentUserProfile', userData?.id],
+          exact: true,
+          refetchType: 'active',
+        },
+      )
+      navigate('/account');
     }
   });
 
@@ -28,7 +42,6 @@ function EditProfile() {
       first_name: firstName,
       last_name: lastName,
       email,
-      mobile_number: mobileNumber,
       billing_address: address,
     }
     console.log('FORM DATA', requestBody);
@@ -40,6 +53,8 @@ function EditProfile() {
     }
   }
   
+  console.log('@EDIT/ profile id:', data?.id);
+
   return (
     <section className='w-full h-full p-2 px-4 flex flex-col gap-2'>
       <h1 className='w-full px-8 py-4 border-b-2 border-gray-400/60 text-3xl font-bold'>
@@ -84,17 +99,7 @@ function EditProfile() {
               className='field__input' 
             />
           </CCol>
-          <CCol xs>
-            <CFormInput 
-              id="mobileNumber" 
-              label="Mobile Number" 
-              value={mobileNumber}
-              onChange={(e) => setMobileNumber(e.target.value)}
-              placeholder='+639000000000'
-              className='field__input'
-            />
-          </CCol>
-          <CCol xs={6}>
+          <CCol xs={8}>
             <CFormInput 
               id="inputAddress" 
               label="Billing Address" 
