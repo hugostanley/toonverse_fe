@@ -7,13 +7,14 @@ import { useNavigate } from 'react-router-dom';
 
 function EditProfile() {
   const { userData } = useUserData();
-  const { data } = useUserProfile();   
+  const { data, isError, error } = useUserProfile();   
   const navigate = useNavigate();
 
   const [email, setEmail] = useState(userData?.email || '');
   const [firstName, setFirstName] = useState(data?.first_name || '');
   const [lastName, setLastName] = useState(data?.last_name || '');
   const [address, setAddress] = useState(data?.billing_address || '');
+  const [mutationError, setMutationError] = useState<string | null>(null);
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (formData: any) => {
@@ -29,11 +30,15 @@ function EditProfile() {
         {
           queryKey: ['currentUserProfile', userData?.id],
           exact: true,
-          refetchType: 'active',
+          refetchType: 'all',
         },
       )
       navigate('/account');
-    }
+    },
+    // onError: () => {
+    //   setMutationError((error as any).response?.data?.error.join('. ') || 'An unexpected error occurred.');
+    //   console.error('Mutation Error:', (error as any).response.data.error.join('. '));
+    // },
   });
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -49,7 +54,8 @@ function EditProfile() {
     try {
       await mutation.mutateAsync(requestBody);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Axios Error:', (error as any).response.data.error.join('. '));
+      setMutationError((error as any).response.data.error.join('. '));
     }
   }
   
@@ -110,7 +116,12 @@ function EditProfile() {
             />
           </CCol>
         </CRow> 
-    
+
+        {mutationError && 
+          mutationError.split('. ').map((error, idx) => (
+            <small key={idx} className="text-red-500">{error}.</small>
+          ))}
+        
         <div className='field__wrapper py-4'>
           <button
             type='submit'

@@ -24,10 +24,8 @@ type LoaderContext = {
 
 type ProfileContext = {
   data: User | null;
-  error?: {
-    message: string | null;
-  } | null;
   isPending?: boolean;
+  isError?: boolean;
 }
 
 export function useUserData() {
@@ -41,7 +39,7 @@ export function useUserProfile() {
 function UserAccountLayout() {
   const { id , email } = useLoaderData<typeof userAccess>();
   const [userData, setUserData] = useState<LoaderData | null>({ id, email });
-  const { data, isPending, error } = useQuery<User>({
+  const { data, isPending, isError } = useQuery<User>({
     queryKey: ['currentUserProfile', id],
     queryFn: async () => {
       const response = await apiClient.get(ALL_USERS);
@@ -62,7 +60,7 @@ function UserAccountLayout() {
       <div className='h-32'>
         <Navbar />
       </div>      
-      <Outlet context={{ userData, data: data ?? null, error, isPending } satisfies LoaderContext & ProfileContext} />
+      <Outlet context={{ userData, data: data ?? null, isPending, isError } satisfies LoaderContext & ProfileContext} />
       
       <div className='br p-2'>
         <small>Note: Add logout button as dropdown thingy on account icon</small>
