@@ -48,7 +48,7 @@ function LoginForm({ user, apiUrl, redirectPath, formClassName, btnColor }: Logi
           value={email} 
           required
           onChange={(e) => setEmail(e.target.value)}         
-          className={`border-2 border-dark focus:border-none focus:ring-4 focus:ring-${btnColor}`}  
+          className={`field__input focus:ring-${btnColor}`}  
         />
 
         <CFormInput 
@@ -60,7 +60,7 @@ function LoginForm({ user, apiUrl, redirectPath, formClassName, btnColor }: Logi
           value={password} 
           required
           onChange={(e) => setPassword(e.target.value)} 
-          className={`border-2 border-dark focus:border-none focus:ring-4 focus:ring-${btnColor}`}
+          className={`field__input focus:ring-${btnColor}`}
         />
 
 
