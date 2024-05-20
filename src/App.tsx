@@ -59,7 +59,7 @@ function App() {
     },
     {
 
-      path: 'order',
+      path: 'order/:params',
       element: <OrderPage />,
       loader: userAccess,
     },   
