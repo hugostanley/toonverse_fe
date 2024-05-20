@@ -1,13 +1,13 @@
 import { CCol, CForm, CFormInput, CRow } from '@coreui/react';
 import { FormEvent, useState } from 'react';
 import { useUserProfile, useUserData } from '@layouts';
-import { apiClient, ALL_USERS, USER_PROFILE } from '@utils';
+import { apiClient, ALL_USERS } from '@utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 function EditProfile() {
   const { userData } = useUserData();
-  const { data, isError, error } = useUserProfile();   
+  const { data } = useUserProfile();   
   const navigate = useNavigate();
 
   const [email, setEmail] = useState(userData?.email || '');
@@ -18,11 +18,7 @@ function EditProfile() {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (formData: any) => {
-      if (data?.id) {
-        return apiClient.patch(USER_PROFILE(data?.id), formData);
-      } else {
-        return apiClient.post(ALL_USERS, formData);
-      }
+      return apiClient.post(ALL_USERS, formData);
     },
     onSuccess: () => {
       // to "update" user profile on account page too
@@ -34,11 +30,7 @@ function EditProfile() {
         },
       )
       navigate('/account');
-    },
-    // onError: () => {
-    //   setMutationError((error as any).response?.data?.error.join('. ') || 'An unexpected error occurred.');
-    //   console.error('Mutation Error:', (error as any).response.data.error.join('. '));
-    // },
+    }
   });
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {

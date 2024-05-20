@@ -52,7 +52,7 @@ function App() {
           element: <UserAccountPage />,
         },
         {
-          path: ':userId/edit',
+          path: 'edit',
           element: <EditProfilePage />,
         },
       ],
