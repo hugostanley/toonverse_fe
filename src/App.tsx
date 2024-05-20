@@ -10,6 +10,7 @@ import { UserAccountLayout } from '@layouts';
 import {
   EditProfilePage,
   LandingPage,
+  OrderFormTest,
   OrderPage,
   UnauthorizedPage, 
   UserAccountPage,
@@ -57,8 +58,15 @@ function App() {
       ],
     },
     {
+
       path: 'order',
       element: <OrderPage />,
+      loader: userAccess,
+    },   
+    {
+      path: "testpage",
+      element: <OrderFormTest />,
+      loader: userAccess,
     },
 
     // Workforce Side
