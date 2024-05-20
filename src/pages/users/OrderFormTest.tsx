@@ -8,7 +8,6 @@ type Order = {
   background_url: string;
   picture_style: string;
   art_style: string;
-  ref_photo_url: string;
   number_of_heads: number;
   amount: number;
   image: File | null;
@@ -24,7 +23,6 @@ function OrderFormTest() {
     background_url: "",
     picture_style: "",
     art_style: "",
-    ref_photo_url: "",
     number_of_heads: 1,
     amount: 0.99, 
     image: null,
@@ -43,8 +41,12 @@ function OrderFormTest() {
     },
     onSuccess: (data) => {
       console.log("Order created:", data);
-      queryClient.invalidateQueries(["orders"]);
+      // queryClient.invalidateQueries(["orders"]);
     },
+    onError: (error: any) => {
+      // Handle error
+      console.error("Error creating item:", error);
+    }
   });
 
   const handleChange = (name: string, value: string | number | File | null) => {
@@ -60,10 +62,19 @@ function OrderFormTest() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    createOrderMutation.mutate(order);
-    console.log(order);
+    const formDataToSend = new FormData();
+    Object.entries(order).forEach(([key, value]) => {
+      if (value !== null) {
+        if (key === "image") {
+          formDataToSend.append(`item[${key}]`, value as File);
+        } else {
+          formDataToSend.append(`item[${key}]`, String(value));
+        }
+      }
+    });
+    createOrderMutation.mutate(formDataToSend); // Corrected variable name
   };
-
+  
   return (
     <div>
       {createOrderMutation.isError && <p>Error: {JSON.stringify(createOrderMutation.error)}</p>}
@@ -134,16 +145,6 @@ function OrderFormTest() {
           value={0.99}
           checked={order.amount === 0.99}
           onChange={(e) => handleChange(e.target.name, e.target.checked ? 0.99 : 0)}
-        />
-        <h2>Reference Photo URL</h2>
-        <label htmlFor="ref_photo_url">https://i.postimg.cc/MKGJWgTn/heart-portal.png</label>
-        <input
-          type="checkbox"
-          name="ref_photo_url"
-          id="ref_photo_url"
-          value="https://i.postimg.cc/MKGJWgTn/heart-portal.png"
-          checked={order.ref_photo_url === "https://i.postimg.cc/MKGJWgTn/heart-portal.png"}
-          onChange={(e) => handleChange(e.target.name, e.target.checked ? e.target.value : "")}
         />
         <h2>Upload Image</h2>
         <input
