@@ -38,13 +38,15 @@ function OrderFormTest() {
 
 const createOrderMutation = useMutation({
   mutationKey: 'createOrder',
-  mutationFn: async (formDataToSend: FormData) => {
+  mutationFn: async (dataToSend) => {
     try {
       const response = await fetchData(ALL_ITEMS, {
         method: 'POST',
-        data: formDataToSend,
+        data: dataToSend,
       });
-      return response; // Return the response to indicate success
+      console.log(response)
+      return response; 
+      // Return the response to indicate success
     } catch (error) {
       throw new Error(error); // Throw an error to handle failure
     }
@@ -60,20 +62,31 @@ const createOrderMutation = useMutation({
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
-  console.log("Current order:", order); // Log the current order object
-  const formDataToSend = new FormData();
-  Object.entries(order).forEach(([key, value]) => {
-    if (value !== null) {
-      if (key === "image") {
-        const imageBlob = new Blob([value as BlobPart], { type: (value as File).type });
-        formDataToSend.append(`item[${key}]`, imageBlob, (value as File).name);
-      } else {
-        formDataToSend.append(`item[${key}]`, String(value));
-      }
+  // console.log("Current order:", order); // Log the current order object
+  // const formDataToSend = new FormData();
+  // Object.entries(order).forEach(([key, value]) => {
+  //   if (value !== null) {
+  //     if (key === "image") {
+  //       formDataToSend.append(`item[${key}]`, value as File);
+  //     } else {
+  //       formDataToSend.append(`item[${key}]`, String(value));
+  //     }
+  //   }
+  // });
+  // console.log("FormData to send:", formDataToSend);
+
+  const dataToSend = {
+    item: {
+        background_url: order.background_url,
+        picture_style: order.picture_style,
+        art_style: order.art_style,
+        number_of_heads: order.number_of_heads,
+        amount: order.amount,
+        image: order.image as File,
     }
-  });
-  console.log("FormData to send:", formDataToSend); // Log the FormData before mutation
-  createOrderMutation.mutate(formDataToSend);
+};
+console.log(dataToSend.item.image, "IMAGE ITO NA")
+  createOrderMutation.mutate(dataToSend);
 };
 
 
