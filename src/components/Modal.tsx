@@ -1,4 +1,6 @@
 import React, { ReactNode } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 type ModalProps = {
   open: boolean;
@@ -25,7 +27,7 @@ function Modal({ open, onClose, children }: ModalProps) {
             className="absolute top-2 right-2 py-1 px-2 border border-neutral-200 rounded-md text-gray-400 bg-white hover:bg-gray-50hover:text-gray-600"
             onClick={onClose}
           >
-            X
+            <FontAwesomeIcon icon={faX} />
           </button>
           {children}
         </div>
