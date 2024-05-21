@@ -5,10 +5,11 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './index.css';
 
-import { adminAccess, userAccess } from '@utils';
+import { adminAccess, artistAccess, userAccess } from '@utils';
 import { UserAccountLayout } from '@layouts';
 import {
   AdminDashboard,
+  ArtistDashboard,
   EditProfilePage,
   LandingPage,
   OrderPage,
@@ -18,6 +19,7 @@ import {
   UserRegisterPage, 
   WorkforceLoginPage,
 } from '@pages';
+import Invitation from './pages/Invitation';
 
 function App() {
   const queryClient = new QueryClient();
@@ -67,9 +69,18 @@ function App() {
       element: <WorkforceLoginPage />,
     },
     {
+      path: '/w/invitation/accept',
+      element: <Invitation />,
+    },
+    {
       path: 'admin',
       element: <AdminDashboard />,
       loader: adminAccess,
+    },
+    {
+      path: 'w/dashboard',
+      element: <ArtistDashboard />,
+      loader: artistAccess,
     },
   ]);
 

@@ -50,7 +50,7 @@ function usePostAuth(): UsePostAuthResponse {
         }
       }
       setError(errorMessages);
-      console.error("API Error:", error);
+      console.error("API Error:", errorMessages);
     } finally {
       setIsLoading(false);
     }
