@@ -1,19 +1,19 @@
 @import '@coreui/coreui/dist/css/coreui.min.css';
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
-
-@font-face {
-  font-family: "VAG Rounded Next";
-  src: url("../assets/VAG.ttf") format("truetype");
-}
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&family=Varela+Round&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /* @font-face {
+    font-family: "VAG Rounded Next";
+    src: url(/src/assets/VAG.ttf) format("truetype");
+  } */
+
   html, body {
-    font-family: "Nunito", sans-serif;
-    @apply w-dvw h-dvh tracking-wider text-dark;
+    font-family: "Varela Round", sans-serif;
+    @apply w-full h-dvh tracking-wider text-dark;
   }
 
   #root {
@@ -30,8 +30,8 @@
     @apply flex flex-col items-start gap-y-2 font-bold;
   }
 
-  .field__text { 
-    @apply w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm;
+  .field__input { 
+    @apply border-2 border-dark focus:border-none focus:ring-4;
   }
 
   .btn__primary {

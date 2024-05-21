@@ -3,6 +3,7 @@ import { getLocalStorage } from '@utils';
 
 export const apiClient = axios.create({
   baseURL: 'http://localhost:3000',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -22,6 +23,18 @@ apiClient.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+
+apiClient.interceptors.response.use(
+  (response) => {
+    console.log('apiClient Response:', response);
+    return response;
+  },
+  (error) => {
+    console.error('apiClient Error Response:', error.response);
     return Promise.reject(error);
   }
 );
