@@ -125,12 +125,12 @@ function OrderPage() {
           </div>
         </div>
         <div className="w-full h-[40vh] border-2 border-black flex-center">
-         <div className="w-[30%] h-[30vh] border-2 border-black bg-pink rounded-[7rem] flex-center"><FontAwesomeIcon icon={faCartPlus} className="w-full h-[20vh] "/></div>
+        <div className="w-[30%] h-[30vh] border-2 border-black bg-pink rounded-[7rem] flex-center"><FontAwesomeIcon icon={faCartPlus} className="w-full h-[20vh] "/></div>
         </div>
         <div className="w-full h-[50vh] border-2 border-black flex-center bg-black flex-col gap-8">
         <div className="w-[50%] text-[1.5rem] text-white">
           <h1 className="font-extrabold">Disclaimer</h1>
-          <p>We are in no way associated with or authorized by the Fox Broadcasting Company or FXX and neither these entities nor any of its affiliates have licensed or endorsed us.  We are a project run by fans for fans.</p>
+          <p>We are in no way associated with or authorized by the Fox Broadcasting Company or FXX and neither these entities nor any of its affiliates have licensed or endorsed us. We are a project run by fans for fans.</p>
         </div>
         <div>
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">

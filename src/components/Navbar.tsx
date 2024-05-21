@@ -8,7 +8,7 @@ function Navbar() {
     <nav className="bg-light rounded-full border-2 border-dark w-100 px-8 md:px-auto">
       <div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
         {/* logo */}
-        <div className="text-indigo-500 md:order-1">
+        <div className="text-indigo-500">
           <img
             src="/src/assets/temp-logo.png"
             alt="Logo"
@@ -16,7 +16,7 @@ function Navbar() {
           />
         </div>
         {/* nav links */}
-        <div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
+        <div className="text-gray-500 w-full sm:w-auto">
           <ul className="flex font-semibold justify-between">
             {/* Active Link: text-indigo-500, Inactive Link: hover:text-indigo-500 */}
             <li className="md:px-4 md:py-2 hover:text-pink">
@@ -34,7 +34,7 @@ function Navbar() {
           </ul>
         </div>
         {/* icons */}
-        <div className="order-2 text-dark flex gap-3 md:order-3">
+        <div className="flex text-dark gap-3">
           <FontAwesomeIcon icon={faUser} className="h-6" />
           <FontAwesomeIcon icon={faCartShopping} className="h-6" />
         </div>
