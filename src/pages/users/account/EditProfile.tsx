@@ -1,7 +1,7 @@
 import { CCol, CForm, CFormInput, CRow } from '@coreui/react';
 import { FormEvent, useState } from 'react';
 import { useUserProfile, useUserData } from '@layouts';
-import { apiClient, ALL_USERS } from '@utils';
+import { apiClient, ALL_USERS, USER_PROFILE } from '@utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +18,11 @@ function EditProfile() {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (formData: any) => {
-      return apiClient.post(ALL_USERS, formData);
+      if (data?.id) {
+        return apiClient.patch(USER_PROFILE(data?.id), formData);
+      } else {
+        return apiClient.post(ALL_USERS, formData);
+      }
     },
     onSuccess: () => {
       // to "update" user profile on account page too
@@ -50,8 +54,6 @@ function EditProfile() {
       setMutationError((error as any).response.data.error.join('. '));
     }
   }
-  
-  console.log('@EDIT/ profile id:', data?.id);
 
   return (
     <section className='w-full h-full p-2 px-4 flex flex-col gap-2'>
