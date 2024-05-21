@@ -5,9 +5,10 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './index.css';
 
-import { userAccess, workforceAccess } from '@utils';
+import { adminAccess, userAccess } from '@utils';
 import { UserAccountLayout } from '@layouts';
 import {
+  AdminDashboard,
   EditProfilePage,
   LandingPage,
   OrderPage,
@@ -15,7 +16,6 @@ import {
   UserAccountPage,
   UserLoginPage,
   UserRegisterPage, 
-  WorkforceDashboard, 
   WorkforceLoginPage,
 } from '@pages';
 
@@ -67,9 +67,9 @@ function App() {
       element: <WorkforceLoginPage />,
     },
     {
-      path: 'w/dashboard',
-      element: <WorkforceDashboard />,
-      loader: workforceAccess,
+      path: 'admin',
+      element: <AdminDashboard />,
+      loader: adminAccess,
     },
   ]);
 

@@ -3,6 +3,7 @@ import { W_LOGIN_URL } from '@utils';
 import { Link } from 'react-router-dom';
 
 function Login() {
+
   return (
     <main className='relative w-full h-full flex flex-col justify-center items-center bg-ivory overflow-hidden'>
       <div className='absolute -top-[35%] left-0 rotate-12 bg-green/70 w-1/2 aspect-square'></div>
@@ -32,7 +33,7 @@ function Login() {
               Sign in
             </h1>
 
-            <LoginForm apiUrl={W_LOGIN_URL} redirectPath='/w/dashboard' formClassName='w-full py-4' btnColor='pink' />
+            <LoginForm apiUrl={W_LOGIN_URL} formClassName='w-full py-4' btnColor='pink' />
           </div>
         </div>        
       </section>

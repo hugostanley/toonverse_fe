@@ -10,16 +10,15 @@ type UsePostAuthResponse = {
   data: any | null;
   error: string | null;
   isLoading: boolean;
-  postAuth: (url: string, options?: PostAuthOptions, redirectPath?: string) => Promise<void>;
+  postAuth: (url: string, options?: PostAuthOptions, redirectCallback?: (data: any) => void) => Promise<void>;
 };
 
 function usePostAuth(): UsePostAuthResponse {
   const [data, setData] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
 
-  async function postAuth(url: string, options: PostAuthOptions = {}, redirectPath?: string) {
+  async function postAuth(url: string, options: PostAuthOptions = {}, redirectCallback?: (data: any) => void) {
     try {
       setIsLoading(true);
 
@@ -34,21 +33,24 @@ function usePostAuth(): UsePostAuthResponse {
         setLocalStorage('AccountData', responseData);
 
         setData(responseData);
-        if (redirectPath) {
-          navigate(redirectPath);
+        if (redirectCallback) {
+          redirectCallback(responseData);
         }
       } else {
-        if (responseData.errors && responseData.errors.length > 0) {
-          setError(responseData.errors.join('. '));
-        } else {
-          setError('An unexpected error occurred.');
-        }
+        throw new Error('An unexpected error occurred.');
       }
     } catch (error) {
-      const apiErrors = (error as any)?.response.data.errors.full_messages.join('. ')
-      setError(apiErrors || "An unexpected error occurred. Please try again later.");
-      console.error("Error:", error);
-      console.log('Error Response Data:', apiErrors);
+      let errorMessages = '';
+      if ((error as any).response && (error as any).response.data) {
+        const responseData = (error as any).response.data;
+        if (responseData.errors && responseData.errors.full_messages) {
+          errorMessages = responseData.errors.full_messages.join('. ');
+        } else if (responseData.errors && Array.isArray(responseData.errors)) {
+          errorMessages = responseData.errors.join('. ');
+        }
+      }
+      setError(errorMessages);
+      console.error("API Error:", error);
     } finally {
       setIsLoading(false);
     }

@@ -24,7 +24,7 @@ function Login() {
 
         <span className='w-full text-center text-sm font-bold'>or</span>
 
-        <LoginForm apiUrl={LOGIN_URL} redirectPath='/account' btnColor='yellow' />
+        <LoginForm apiUrl={LOGIN_URL} btnColor='yellow' />
 
         <Link to='/register' className='px-2 font-bold hover:underline hover:underline-offset-4 hover:font-extrabold'>
           <small>

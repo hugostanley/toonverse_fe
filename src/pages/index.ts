@@ -13,4 +13,6 @@ export { default as EditProfilePage } from './users/account/EditProfile';
 
 // Workforce Side
 export { default as WorkforceLoginPage } from './workforce/auth/Login';
-export { default as WorkforceDashboard } from './workforce/Dashboard';
+
+// Admin Side
+export { default as AdminDashboard } from './workforce/admin/AdminDashboard';

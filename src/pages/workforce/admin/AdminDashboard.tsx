@@ -1,14 +1,14 @@
 import { LogoutBtn } from '@components';
 import { W_LOGOUT_URL } from '@utils';
 
-function Dashboard() {
+function AdminDashboard() {
   return (
     <section>
-      This is the workforce dashboard.
+      This is the Admin dashboard.
 
       <LogoutBtn apiUrl={W_LOGOUT_URL} redirectPath='/w/login' />
     </section>
   )
 }
 
-export default Dashboard
+export default AdminDashboard
