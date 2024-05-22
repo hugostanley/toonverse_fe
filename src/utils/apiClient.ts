@@ -26,3 +26,15 @@ apiClient.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+
+apiClient.interceptors.response.use(
+  (response) => {
+    console.log('apiClient Response:', response);
+    return response;
+  },
+  (error) => {
+    console.error('apiClient Error Response:', error.response);
+    return Promise.reject(error);
+  }
+);

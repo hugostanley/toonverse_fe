@@ -1,49 +1,51 @@
-import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import './index.css';
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import "./index.css";
 
-import { userAccess, workforceAccess } from '@utils';
-import { UserAccountLayout } from '@layouts';
+import { userAccess, workforceAccess } from "@utils";
+import { UserAccountLayout } from "@layouts";
 import {
+  Checkout,
   EditProfilePage,
   LandingPage,
   OrderFormTest,
   OrderPage,
-  UnauthorizedPage, 
+  UnauthorizedPage,
   UserAccountPage,
   UserLoginPage,
-  UserRegisterPage, 
-  WorkforceDashboard, 
+  UserRegisterPage,
+  WorkforceDashboard,
   WorkforceLoginPage,
-} from '@pages';
+} from "@pages";
 
 function App() {
   const queryClient = new QueryClient();
-  const googleClient = '134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com';
+  const googleClient =
+    "134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com";
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <LandingPage />,
     },
     {
-      path: '/no-access',
+      path: "/no-access",
       element: <UnauthorizedPage />,
     },
 
     // User Side
     {
-      path: 'login',
+      path: "login",
       element: <UserLoginPage />,
     },
     {
-      path: 'register',
+      path: "register",
       element: <UserRegisterPage />,
     },
     {
-      path: 'account',
+      path: "account",
       element: <UserAccountLayout />,
       loader: userAccess,
       children: [
@@ -52,30 +54,33 @@ function App() {
           element: <UserAccountPage />,
         },
         {
-          path: ':userId/edit',
+          path: "edit",
           element: <EditProfilePage />,
         },
       ],
     },
     {
-
-      path: 'order/:params',
+      path: "order/:params",
       element: <OrderPage />,
       loader: userAccess,
-    },   
+    },
     {
       path: "testpage",
       element: <OrderFormTest />,
       loader: userAccess,
     },
+    {
+      path: "checkout",
+      element: <Checkout />,
+    },
 
     // Workforce Side
     {
-      path: 'w/login',
+      path: "w/login",
       element: <WorkforceLoginPage />,
     },
     {
-      path: 'w/dashboard',
+      path: "w/dashboard",
       element: <WorkforceDashboard />,
       loader: workforceAccess,
     },
@@ -90,7 +95,7 @@ function App() {
         </QueryClientProvider>
       </GoogleOAuthProvider>
     </React.StrictMode>
-  )
+  );
 }
 
-export default App
+export default App;
