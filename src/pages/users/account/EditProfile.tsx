@@ -12,8 +12,8 @@ function EditProfile() {
   const { data } = useUserProfile();   
   const navigate = useNavigate();
 
-  console.log('@EDIT USER DATA:', userData);
-  console.log('@EDIT PROFILE DATA:', data);
+  // console.log('@EDIT USER DATA:', userData);
+  // console.log('@EDIT PROFILE DATA:', data);
 
   const [email, setEmail] = useState(userData?.email || '');
   const [firstName, setFirstName] = useState(data?.first_name || '');
@@ -50,7 +50,7 @@ function EditProfile() {
       email,
       billing_address: address,
     }
-    console.log('FORM DATA', requestBody);
+    // console.log('FORM DATA', requestBody);
 
     try {
       await mutation.mutateAsync(requestBody);

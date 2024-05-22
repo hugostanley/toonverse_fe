@@ -1,12 +1,10 @@
-import { LoginForm } from '@components';
-import { W_LOGIN_URL } from '@utils';
 import { Link } from 'react-router-dom';
+import { InvitationForm } from '@pages';
 
-function Login() {
-
+function Invitation() {
   return (
     <main className='relative w-full h-full flex flex-col justify-center items-center bg-ivory overflow-hidden'>
-      <div className='absolute -top-[35%] left-0 rotate-12 bg-green/70 w-1/2 aspect-square'></div>
+      <div className='absolute -top-[35%] left-0 rotate-12 bg-blue/75 w-1/2 aspect-square'></div>
       <div className='absolute bottom-0 right-0 w-full h-5/6 grid place-items-center'>
         <img
           src="/src/assets/noodle_write.png"
@@ -30,15 +28,23 @@ function Login() {
             </Link>
             
             <h1 className='text-5xl tracking-widest font-black px-2'>
-              Sign in
+              Set Password
             </h1>
 
-            <LoginForm apiUrl={W_LOGIN_URL} formClassName='w-full py-4' btnColor='pink' />
+            <InvitationForm formClassName='w-full py-4' btnColor='yellow' />
+
+            <Link to='/w/login' className='px-2 font-bold hover:underline hover:underline-offset-4 hover:font-extrabold'>
+              <small>
+                Already have a account? Log in
+              </small>
+            </Link>
           </div>
         </div>        
       </section>
+
+      
     </main>
   )
 }
 
-export default Login
+export default Invitation

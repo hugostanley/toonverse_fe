@@ -5,23 +5,25 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './index.css';
 
-import { userAccess, workforceAccess } from '@utils';
+import { adminAccess, artistAccess, userAccess } from '@utils';
 import { UserAccountLayout } from '@layouts';
 import {
+  AdminDashboard,
+  ArtistDashboard,
   EditProfilePage,
+  InvitationPage,
   LandingPage,
   OrderPage,
   UnauthorizedPage, 
   UserAccountPage,
   UserLoginPage,
   UserRegisterPage, 
-  WorkforceDashboard, 
   WorkforceLoginPage,
 } from '@pages';
 
 function App() {
   const queryClient = new QueryClient();
-  const googleClient = '134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com';
+  const googleClient = '134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com'; // WIP: feat/oauth
   const router = createBrowserRouter([
     {
       path: '/',
@@ -67,9 +69,18 @@ function App() {
       element: <WorkforceLoginPage />,
     },
     {
+      path: '/w/invitation/accept',
+      element: <InvitationPage />,
+    },
+    {
+      path: 'admin',
+      element: <AdminDashboard />,
+      loader: adminAccess,
+    },
+    {
       path: 'w/dashboard',
-      element: <WorkforceDashboard />,
-      loader: workforceAccess,
+      element: <ArtistDashboard />,
+      loader: artistAccess,
     },
   ]);
 
