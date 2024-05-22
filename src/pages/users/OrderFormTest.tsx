@@ -38,11 +38,11 @@ function OrderFormTest() {
 
 const createOrderMutation = useMutation({
   mutationKey: 'createOrder',
-  mutationFn: async (dataToSend) => {
+  mutationFn: async (formDataToSend) => {
     try {
       const response = await fetchData(ALL_ITEMS, {
         method: 'POST',
-        data: dataToSend,
+        data: formDataToSend,
       });
       console.log(response)
       return response; 
@@ -63,30 +63,30 @@ const createOrderMutation = useMutation({
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   // console.log("Current order:", order); // Log the current order object
-  // const formDataToSend = new FormData();
-  // Object.entries(order).forEach(([key, value]) => {
-  //   if (value !== null) {
-  //     if (key === "image") {
-  //       formDataToSend.append(`item[${key}]`, value as File);
-  //     } else {
-  //       formDataToSend.append(`item[${key}]`, String(value));
-  //     }
-  //   }
-  // });
-  // console.log("FormData to send:", formDataToSend);
-
-  const dataToSend = {
-    item: {
-        background_url: order.background_url,
-        picture_style: order.picture_style,
-        art_style: order.art_style,
-        number_of_heads: order.number_of_heads,
-        amount: order.amount,
-        image: order.image as File,
+  const formDataToSend = new FormData();
+  Object.entries(order).forEach(([key, value]) => {
+    if (value !== null) {
+      if (key === "image") {
+        formDataToSend.append(`item[${key}]`, value as File);
+      } else {
+        formDataToSend.append(`item[${key}]`, String(value));
+      }
     }
-};
-console.log(dataToSend.item.image, "IMAGE ITO NA")
-  createOrderMutation.mutate(dataToSend);
+  });
+  console.log("FormData to send:", formDataToSend);
+
+//   const dataToSend = {
+//     item: {
+//         background_url: order.background_url,
+//         picture_style: order.picture_style,
+//         art_style: order.art_style,
+//         number_of_heads: order.number_of_heads,
+//         amount: order.amount,
+//         image: order.image as File,
+//     }
+// };
+// console.log(dataToSend.item.image, "IMAGE ITO NA")
+  createOrderMutation.mutate(formDataToSend);
 };
 
 
@@ -100,7 +100,7 @@ console.log(dataToSend.item.image, "IMAGE ITO NA")
           <div key={index}>
             <label htmlFor={bg}>{bg}</label>
             <input
-              type="radio"
+            type="radio"
               name="background_url"
               id={bg}
               value={bg}
