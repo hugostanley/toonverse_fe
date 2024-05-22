@@ -22,15 +22,13 @@ const createCheckoutSession = async (checkoutItems: Item[]) => {
         show_line_items: true,
         line_items: checkoutItems.map((item) => ({
           currency: "PHP",
-          amount: parseInt(item.amount.replace(/[^0-9]/g, ""), 10) * 100,
           name: `toonverse-${item.art_style}-${item.id}`,
-          quantity: 1,
         })),
         payment_method_types: ["card", "gcash", "paymaya"],
       },
     },
   };
-  console.log("Payload being sent:", JSON.stringify(payload, null, 2));
+
   try {
     const response = await axios.post(
       "https://api.paymongo.com/v1/checkout_sessions",
@@ -44,22 +42,24 @@ const createCheckoutSession = async (checkoutItems: Item[]) => {
         },
       }
     );
-    console.log(response.data);
+    console.log("Response:", response.data);
     return response.data;
   } catch (error) {
     console.error(
-      "Error creating checkout session:"
-      // error.response?.data || error
+      "Error creating checkout session:",
+      error.response?.data || error
     );
     throw error;
   }
 };
 
 function Checkout() {
+  type MutateFunction = (items: Item[]) => Promise<any>;
+  type IsLoading = boolean;
+
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [checkoutItems, setCheckoutItems] = useState<Item[]>([]);
   const [modalCheckout, setModalCheckout] = useState<boolean>(false);
-
   const {
     mutate: checkout,
     isLoading,
@@ -70,7 +70,7 @@ function Checkout() {
 
   const {
     data: items,
-    isLoading: isPending,
+    isPending,
     isError,
   } = useQuery<Item[]>({
     queryKey: ["allItems"],
@@ -106,6 +106,7 @@ function Checkout() {
     const selected =
       items?.filter((item) => selectedItems.includes(item.id)) || [];
     setCheckoutItems(selected);
+    console.log("Selected items:", selected);
     setModalCheckout(true);
   };
 
@@ -120,7 +121,7 @@ function Checkout() {
   }
 
   return (
-    <>
+    <div>
       <h1 className="font-black">Cart</h1>
       {items?.map((item) => (
         <div key={item.id} className="py-4 flex">
@@ -195,7 +196,7 @@ function Checkout() {
           </div>
         </div>
       </Modal>
-    </>
+    </div>
   );
 }
 
