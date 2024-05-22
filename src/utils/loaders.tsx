@@ -25,7 +25,7 @@ export function workforceAccess() {
   const { role, id, email } = data;
 
   if(!accessToken && !uid && !client && !expiry && !authorization) {
-    return redirect("/login")
+    return redirect("/w/login")
   } 
   
   if (role === undefined) {
@@ -42,7 +42,7 @@ export function adminAccess() {
   const { role, id, email } = data;
 
   if(!accessToken && !uid && !client && !expiry && !authorization) {
-    return redirect("/login")
+    return redirect("/w/login")
   } 
   
   if (role === undefined || role !== 'admin') {
@@ -59,7 +59,7 @@ export function artistAccess() {
   const { role, id, email } = data;
 
   if(!accessToken && !uid && !client && !expiry && !authorization) {
-    return redirect("/login")
+    return redirect("/w/login")
   } 
   
   if (role === undefined || role !== 'artist') {

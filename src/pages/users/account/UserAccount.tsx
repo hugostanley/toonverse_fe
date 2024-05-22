@@ -7,7 +7,7 @@ function UserAccount() {
   const { userData } = useUserData();
   const { data: userProfile, isPending } = useUserProfile();
 
-  console.log('USER:', userProfile)
+  // console.log('USER:', userProfile)
   if (isPending || !userData) {
     return <p>Loading...</p>;
   }

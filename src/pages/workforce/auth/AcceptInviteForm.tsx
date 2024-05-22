@@ -1,7 +1,7 @@
 import { CFormInput } from '@coreui/react';
 import { FormEvent, useState } from 'react';
-import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
-import { W_INVITATION_PATH, apiClient, setLocalStorage } from '@utils';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { W_INVITATION_PATH, apiClient } from '@utils';
 
 type User = {
   email: string;
@@ -40,15 +40,9 @@ function AcceptInviteForm({ user, formClassName = '', btnColor = 'primary' }: In
 
     try {
       const response = await apiClient.put(W_INVITATION_PATH, requestBody);
-      const responseData = response.data;
-      console.log('Response data:', responseData);
 
       if (response.status >= 200 && response.status < 300) {
-        // Save headers
-        const headersObject = response.headers;
-        setLocalStorage('Headers', headersObject);
-        setLocalStorage('AccountData', responseData);
-        navigate('/w/dashboard');
+        navigate('/w/login');
       } else {
         throw new Error('An unexpected error occurred.');
       }
@@ -68,8 +62,8 @@ function AcceptInviteForm({ user, formClassName = '', btnColor = 'primary' }: In
       setLoading(false);
     }
 
-    console.log('Query Params:', invitationToken);
-    console.log('Accept Invite Request Body:', requestBody);
+    // console.log('Query Params:', invitationToken);
+    // console.log('Accept Invite Request Body:', requestBody);
   }
 
   return (
