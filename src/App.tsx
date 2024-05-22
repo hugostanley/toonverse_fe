@@ -11,6 +11,7 @@ import {
   AdminDashboard,
   ArtistDashboard,
   EditProfilePage,
+  InvitationPage,
   LandingPage,
   OrderPage,
   UnauthorizedPage, 
@@ -19,11 +20,10 @@ import {
   UserRegisterPage, 
   WorkforceLoginPage,
 } from '@pages';
-import Invitation from './pages/workforce/auth/Invitation';
 
 function App() {
   const queryClient = new QueryClient();
-  const googleClient = '134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com';
+  const googleClient = '134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com'; // WIP: feat/oauth
   const router = createBrowserRouter([
     {
       path: '/',
@@ -70,7 +70,7 @@ function App() {
     },
     {
       path: '/w/invitation/accept',
-      element: <Invitation />,
+      element: <InvitationPage />,
     },
     {
       path: 'admin',
