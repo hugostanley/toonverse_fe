@@ -19,7 +19,7 @@ import {
   UserRegisterPage, 
   WorkforceLoginPage,
 } from '@pages';
-import Invitation from './pages/Invitation';
+import Invitation from './pages/workforce/auth/Invitation';
 
 function App() {
   const queryClient = new QueryClient();

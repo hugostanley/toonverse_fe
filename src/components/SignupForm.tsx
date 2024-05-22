@@ -26,7 +26,8 @@ function SignupForm({ user, apiUrl, formClassName, btnColor }: SignupFormProps) 
 
     const requestBody = {
       email,
-      password
+      password,
+      password_confirmation: passwordConfirmation
     }
 
     try {
