@@ -45,4 +45,16 @@
   .flex-center{
     @apply flex items-center justify-center text-center
   }
+
+  .icon--boxed {
+    @apply border-2 border-dark p-2 rounded-lg shadow-retro__dark;
+  }
+
+  .icon--rounded {
+    @apply h-1/3 aspect-square border-2 border-dark rounded-full p-4 bg-yellow shadow-retro__circle;
+  }
+
+  .grid-green {
+    @apply rounded-2xl border-4 border-green px-6 py-4 shadow-retro__dark flex items-center gap-4;
+  }
 }

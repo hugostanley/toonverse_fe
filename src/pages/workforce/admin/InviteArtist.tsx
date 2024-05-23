@@ -1,6 +1,5 @@
 import { CFormInput } from '@coreui/react';
 import { FormEvent, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 import { W_INVITATION_PATH, apiClient } from '@utils';
 
 type User = {
@@ -15,16 +14,11 @@ type InviteFormProps = {
   btnColor?: string;
 };
 
-function AcceptInviteForm({ user, formClassName, btnColor }: InviteFormProps) {
-  const [token] = useSearchParams();
-  const invitationToken = token.get('invitation_token') || '';
-  const navigate = useNavigate();
-
-  const [password, setPassword] = useState<string>(user?.password || '');
-  const [passwordConfirmation, setPasswordConfirmation] = useState<string>(user?.password_confirmation || '');
+function InviteArtist({  user, formClassName, btnColor }: InviteFormProps) {
+  const [email, setEmail] = useState(user?.email || '');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
@@ -32,17 +26,16 @@ function AcceptInviteForm({ user, formClassName, btnColor }: InviteFormProps) {
 
     const requestBody = {
       workforce: {
-        invitation_token: invitationToken,
-        password,
-        password_confirmation: passwordConfirmation,
-      },
+        email,
+      }
     };
 
     try {
-      const response = await apiClient.put(W_INVITATION_PATH, requestBody);
+      const response = await apiClient.post(W_INVITATION_PATH, requestBody);
 
       if (response.status >= 200 && response.status < 300) {
-        navigate('/w/login');
+        setEmail('');
+        console.log(`Successfully invited artist: ${email}`)
       } else {
         throw new Error('An unexpected error occurred.');
       }
@@ -62,36 +55,23 @@ function AcceptInviteForm({ user, formClassName, btnColor }: InviteFormProps) {
       setLoading(false);
     }
 
-    // console.log('Query Params:', invitationToken);
-    // console.log('Accept Invite Request Body:', requestBody);
+    console.log('Invite Artist Request Body:', requestBody);
   }
 
   return (
     <section className={formClassName}>
+      <h1 className='w-full py-2 border-b-2 border-ivory/65 flex justify-between text-3xl tracking-widest font-bold text-ivory'>Invite an Artist</h1>
       <form onSubmit={handleSubmit} className="space-y-4 py-2">
         <CFormInput
-          type="password"
-          id="floatingPassword"
-          floatingLabel="Password"
-          placeholder="Password"
-          name="password"
-          value={password}
+          type="email"
+          id="floatingEmail"
+          floatingLabel="Email"
+          placeholder="email@example.com"
+          name="email"
+          value={email}
           required
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           className={`field__input focus:ring-${btnColor}`}
-          disabled={loading}
-        />
-
-        <CFormInput
-          type="password"
-          id="floatingPasswordConfirmation"
-          floatingLabel="Confirm Password"
-          placeholder="Confirm Password"
-          name="password_confirmation"
-          value={passwordConfirmation}
-          required
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-          className={` border-2 border-dark focus:border-none focus:ring-4 focus:ring-${btnColor}`}
           disabled={loading}
         />
 
@@ -99,12 +79,12 @@ function AcceptInviteForm({ user, formClassName, btnColor }: InviteFormProps) {
 
         <div className="field__wrapper py-4">
           <button type="submit" className={`bg-${btnColor} btn__primary`} disabled={loading}>
-            {loading ? 'Creating Account...' : 'Create Account'}
+            {loading ? 'Inviting Artist...' : 'Submit'}
           </button>
         </div>
       </form>
     </section>
-  );
+  )
 }
 
-export default AcceptInviteForm
+export default InviteArtist
