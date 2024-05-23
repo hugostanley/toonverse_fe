@@ -146,7 +146,17 @@ function OrderPage() {
               className="absolute top-3 right-1/3 min-w-[10%] z-0"
             />
             <div className="absolute -bottom-8 w-[80%] h-[40vh] ">
-              <CCarousel controls interval={false}>
+              {/* bug: form submitting when carousels arrow click */}
+              <CCarousel
+                controls
+                interval={false}
+                onClick={(e) => {
+                  const target = e.target as HTMLElement;
+                  if (target.tagName === 'BUTTON' || target.tagName === 'SPAN') {
+                    e.preventDefault();
+                  }
+                }}
+              >
                 {Category?.backgrounds.map((bg, index) => (
                   <CCarouselItem key={index}>
                     <div className="flex-center justify-evenly flex-row w-full h-[30vh] relative">
