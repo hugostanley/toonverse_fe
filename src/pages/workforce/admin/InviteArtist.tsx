@@ -43,8 +43,8 @@ function InviteArtist({  user, formClassName, btnColor }: InviteFormProps) {
       let errorMessages = 'An unexpected error occurred.';
       if ((error as any).response && (error as any).response.data) {
         const responseData = (error as any).response.data;
-        if (responseData.errors && responseData.errors.full_messages) {
-          errorMessages = responseData.errors.full_messages.join('. ');
+        if (responseData.error) {
+          errorMessages = responseData.error;
         } else if (responseData.errors && Array.isArray(responseData.errors)) {
           errorMessages = responseData.errors.join('. ');
         }
@@ -75,7 +75,7 @@ function InviteArtist({  user, formClassName, btnColor }: InviteFormProps) {
           disabled={loading}
         />
 
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-100">{error}</p>}
 
         <div className="field__wrapper py-4">
           <button type="submit" className={`bg-${btnColor} btn__primary`} disabled={loading}>
