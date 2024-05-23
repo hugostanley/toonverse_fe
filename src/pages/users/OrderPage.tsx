@@ -49,7 +49,7 @@ function OrderPage() {
   };
 
   const createOrderMutation = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (order: Order) => {
       try {
         const response = await fetchData(ALL_ITEMS, {
           method: "POST",
@@ -58,7 +58,7 @@ function OrderPage() {
         console.log(response);
         return response;
       } catch (error) {
-        throw new Error(error);
+        throw new Error();
       }
     },
     onSuccess: (data) => {
