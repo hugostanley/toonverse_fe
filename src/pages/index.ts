@@ -16,9 +16,11 @@ export { default as EditProfilePage } from "./users/account/EditProfile";
 export { default as WorkforceLoginPage } from './workforce/auth/Login';
 export { default as InvitationPage } from './workforce/auth/Invitation';
 export { default as InvitationForm } from './workforce/auth/AcceptInviteForm';
+export { default as WorkforceNavbar } from './workforce/WorkforceNavbar';
 
 // Admin Side
 export { default as AdminDashboard } from './workforce/admin/AdminDashboard';
+export { default as InviteArtist } from './workforce/admin/InviteArtist';
 
 // Artist Side
 export { default as ArtistDashboard } from './workforce/artist/ArtistDashboard';

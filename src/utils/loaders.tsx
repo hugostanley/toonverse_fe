@@ -3,7 +3,12 @@ import { getLocalStorage } from '@utils';
 
 // to access user pages only when logged in as user
 export function userAccess() {
-  const { 'access-token': accessToken, uid, client, expiry, authorization } = getLocalStorage('Headers') || {};
+  const headers = getLocalStorage('Headers') || null;
+  if (headers === null) {
+    return redirect("/login")
+  }
+
+  const { 'access-token': accessToken, uid, client, expiry, authorization } = headers;
   const { data } = getLocalStorage('AccountData');
   const { role, id, email } = data;
 
@@ -20,7 +25,12 @@ export function userAccess() {
 
 // workforce restricted pages
 export function workforceAccess() {
-  const { 'access-token': accessToken, uid, client, expiry, authorization } = getLocalStorage('Headers') || {};
+  const headers = getLocalStorage('Headers') || null;
+  if (headers === null) {
+    return redirect("/w/login")
+  }
+
+  const { 'access-token': accessToken, uid, client, expiry, authorization } = headers;
   const { data } = getLocalStorage('AccountData');
   const { role, id, email } = data;
 
@@ -37,7 +47,12 @@ export function workforceAccess() {
 
 // admin-restricted pages
 export function adminAccess() {
-  const { 'access-token': accessToken, uid, client, expiry, authorization } = getLocalStorage('Headers') || {};
+  const headers = getLocalStorage('Headers') || null;
+  if (headers === null) {
+    return redirect("/w/login")
+  }
+
+  const { 'access-token': accessToken, uid, client, expiry, authorization } = headers;
   const { data } = getLocalStorage('AccountData');
   const { role, id, email } = data;
 
@@ -54,7 +69,12 @@ export function adminAccess() {
 
 // artist-restricted pages
 export function artistAccess() {
-  const { 'access-token': accessToken, uid, client, expiry, authorization } = getLocalStorage('Headers') || {};
+  const headers = getLocalStorage('Headers') || null;
+  if (headers === null) {
+    return redirect("/w/login")
+  }
+
+  const { 'access-token': accessToken, uid, client, expiry, authorization } = headers;
   const { data } = getLocalStorage('AccountData');
   const { role, id, email } = data;
 

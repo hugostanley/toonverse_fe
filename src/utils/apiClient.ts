@@ -20,6 +20,7 @@ apiClient.interceptors.request.use(
       config.headers['Authorization'] = headers['authorization'];
       config.headers['uid'] = headers['uid'];
     }
+    console.log('apiClient headers:', headers);
     return config;
   },
   (error) => {
