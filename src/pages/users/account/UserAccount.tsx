@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useUserProfile, useUserData } from '@layouts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { Spinner } from '@components';
 
 function UserAccount() {
   const { userData } = useUserData();
@@ -9,7 +10,7 @@ function UserAccount() {
 
   // console.log('USER:', userProfile)
   if (isPending || !userData) {
-    return <p>Loading...</p>;
+    return <section className='w-full h-full p-2 px-4 flex flex-col gap-2'><Spinner /></section>;
   }
 
   return (

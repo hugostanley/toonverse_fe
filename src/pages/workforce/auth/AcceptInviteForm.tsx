@@ -2,6 +2,7 @@ import { CFormInput } from '@coreui/react';
 import { FormEvent, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { W_INVITATION_PATH, apiClient } from '@utils';
+import { Spinner } from '@components';
 
 type User = {
   email: string;
@@ -15,7 +16,7 @@ type InviteFormProps = {
   btnColor?: string;
 };
 
-function AcceptInviteForm({ user, formClassName = '', btnColor = 'primary' }: InviteFormProps) {
+function AcceptInviteForm({ user, formClassName, btnColor }: InviteFormProps) {
   const [token] = useSearchParams();
   const invitationToken = token.get('invitation_token') || '';
   const navigate = useNavigate();
@@ -99,7 +100,7 @@ function AcceptInviteForm({ user, formClassName = '', btnColor = 'primary' }: In
 
         <div className="field__wrapper py-4">
           <button type="submit" className={`bg-${btnColor} btn__primary`} disabled={loading}>
-            {loading ? 'Creating Account...' : 'Create Account'}
+            {loading ? <Spinner /> : 'Create Account'}
           </button>
         </div>
       </form>

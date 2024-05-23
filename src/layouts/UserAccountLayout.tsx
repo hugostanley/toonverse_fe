@@ -46,8 +46,8 @@ function UserAccountLayout() {
       return Array.isArray(response.data) && response.data.length > 0 ? response.data[0] : null;
     },
   });
-  console.log('USER PROFILE:', data)
 
+  // console.log('USER PROFILE:', data)
   useEffect(() => {
     setUserData({
       id, 

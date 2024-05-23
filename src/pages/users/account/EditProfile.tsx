@@ -1,11 +1,12 @@
 import { CCol, CForm, CFormInput, CRow } from '@coreui/react';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useUserProfile, useUserData } from '@layouts';
 import { apiClient, ALL_USERS, USER_PROFILE } from '@utils';
+import { Spinner } from '@components';
 
 function EditProfile() {
   const { userData } = useUserData();
@@ -132,7 +133,7 @@ function EditProfile() {
             className='btn__primary bg-blue w-1/4 mt-10 text-white'
             disabled={mutation.isPending}
           >
-            {mutation.isPending ? 'Updating...' : 'Update'}
+            {mutation.isPending ? <Spinner /> : 'Update'}
           </button>
         </div>
       </CForm>
