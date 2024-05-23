@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { usePostAuth } from '@hooks';
 import { CFormInput } from '@coreui/react';
 import { useNavigate } from 'react-router-dom';
+import { Spinner } from '@components';
 
 type SignupFormProps = {
   user?: {
@@ -93,7 +94,7 @@ function SignupForm({ user, apiUrl, formClassName, btnColor }: SignupFormProps) 
             className={`bg-${btnColor} btn__primary`}
             disabled={isLoading} 
           >
-            {isLoading ? 'Creating your account' : 'Create Account'}
+            {isLoading ? <Spinner/> : 'Create Account'}
           </button>
         </div>
       </form>

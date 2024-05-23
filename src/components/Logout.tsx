@@ -1,5 +1,6 @@
 import { FormEvent } from 'react';
 import { useFetch } from '@hooks';
+import { Spinner } from '@components';
 
 type LogoutProps = {
   apiUrl: string;
@@ -30,7 +31,7 @@ function Logout({ apiUrl, redirectPath, className }: LogoutProps) {
           className={className}
           disabled={isLoading} 
         >
-          {isLoading ? 'Logging out...' : 'Logout'}
+          {isLoading ? <Spinner /> : 'Logout'}
         </button>
 
         {error && 

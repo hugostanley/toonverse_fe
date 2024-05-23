@@ -11,7 +11,7 @@ function WorkforceNavbar() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <CNavbar className="bg-pink h-[8%] shadow-md">
+    <CNavbar className="bg-pink h-[8%] shadow-md sticky top-0">
     <CContainer fluid>
       <CNavbarBrand>
         <img

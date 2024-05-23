@@ -1,6 +1,7 @@
 import { CFormInput } from '@coreui/react';
 import { FormEvent, useState } from 'react';
 import { W_INVITATION_PATH, apiClient } from '@utils';
+import { Spinner } from '@components';
 
 type User = {
   email: string;
@@ -30,7 +31,7 @@ function InviteArtist({  user, formClassName, btnColor }: InviteFormProps) {
       }
     };
 
-    try {
+    try { 
       const response = await apiClient.post(W_INVITATION_PATH, requestBody);
 
       if (response.status >= 200 && response.status < 300) {
@@ -79,7 +80,7 @@ function InviteArtist({  user, formClassName, btnColor }: InviteFormProps) {
 
         <div className="field__wrapper py-4">
           <button type="submit" className={`bg-${btnColor} btn__primary`} disabled={loading}>
-            {loading ? 'Inviting Artist...' : 'Submit'}
+            {loading ? <Spinner /> : 'Submit'}
           </button>
         </div>
       </form>

@@ -1,7 +1,8 @@
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePostAuth } from '@hooks';
 import { CFormInput } from '@coreui/react';
-import { useNavigate } from 'react-router-dom';
+import { Spinner } from '@components';
 
 type LoginFormProps = {
   user?: {
@@ -84,7 +85,7 @@ function LoginForm({ user, apiUrl, formClassName, btnColor }: LoginFormProps) {
             className={`bg-${btnColor} btn__primary`}
             disabled={isLoading} 
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? <Spinner /> : 'Login'}
           </button>
         </div>
       </form>
