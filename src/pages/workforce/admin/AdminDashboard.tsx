@@ -1,4 +1,4 @@
-import { InviteArtist, WorkforceNavbar } from '@pages';
+import { ArtistsList, InviteArtist, WorkforceNavbar } from '@pages';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faMoneyBillTrendUp, faPenNib } from "@fortawesome/free-solid-svg-icons";
 
@@ -43,9 +43,10 @@ function AdminDashboard() {
             <small>Note: Latest 10 only</small>
           </div>
 
-          <div className="row-span-3 col-start-4 rounded-2xl border-4 border-green px-6 py-4 shadow-md">
+          <div className="row-span-3 col-start-4 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2">
             <h2 className='text-2xl tracking-wider'>Newest Artists</h2>
-            <small>Note: Latest 10 only</small>
+            {/* Note: Latest 10 only*/}
+            <ArtistsList />
           </div>
         </div>
       
