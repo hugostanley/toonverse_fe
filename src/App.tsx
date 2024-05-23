@@ -13,8 +13,8 @@ import {
   EditProfilePage,
   InvitationPage,
   LandingPage,
-  OrderFormTest,
   OrderPage,
+  Checkout,
   UnauthorizedPage,
   UserAccountPage,
   UserLoginPage,
@@ -62,11 +62,6 @@ function App() {
     {
       path: "order/:params",
       element: <OrderPage />,
-      loader: userAccess,
-    },
-    {
-      path: "testpage",
-      element: <OrderFormTest />,
       loader: userAccess,
     },
     {
