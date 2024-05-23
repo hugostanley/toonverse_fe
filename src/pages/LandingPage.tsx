@@ -15,14 +15,14 @@ function LandingPage() {
 
       {/* pages */}
       <div className="relative bg-blue h-screen border-b-2 border-dark">
-        <div className="absolute inset-x-0 top-20 pt-12 text-light text-center">
+        <div className="absolute inset-x-0 top-20 pt-12 text-light text-center font-extrabold">
           <h1 className="text-lg md:text-4xl lg:text-6xl xl:text-10xl">
             THRILL YOUR
           </h1>
           <h1 className="text-lg md:text-4xl lg:text-6xl xl:text-10xl">
             FRIENDS AND FAMILY!
           </h1>
-          <h3 className="text-lg">Create your character online</h3>
+          <h3 className="text-lg font-normal">Create your character online</h3>
         </div>
         <img
           src="src/assets/hero-bg.png"

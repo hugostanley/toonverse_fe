@@ -24,7 +24,7 @@ function Register() {
 
         <span className='w-full text-center text-sm font-bold'>or</span>
 
-        <SignupForm apiUrl={REGISTER_URL} redirectPath='/account/edit' btnColor='pink'/>
+        <SignupForm apiUrl={REGISTER_URL} btnColor='pink'/>
 
         <Link to='/login' className='px-2 font-bold hover:underline hover:underline-offset-4 hover:font-extrabold'>
           <small>
