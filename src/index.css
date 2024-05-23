@@ -1,4 +1,4 @@
-@import '@coreui/coreui/dist/css/coreui.min.css';
+@import "@coreui/coreui/dist/css/coreui.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @font-face {
@@ -11,9 +11,10 @@
 @tailwind utilities;
 
 @layer base {
-  html, body {
+  html,
+  body {
     font-family: "Nunito", sans-serif;
-    @apply w-full h-dvh tracking-wider text-dark ;
+    @apply w-full h-dvh tracking-wider text-dark;
   }
 
   #root {
@@ -30,7 +31,7 @@
     @apply flex flex-col items-start gap-y-2 font-bold;
   }
 
-  .field__input { 
+  .field__input {
     @apply border-2 border-dark focus:border-none focus:ring-4;
   }
 
@@ -38,12 +39,16 @@
     @apply w-full grid place-items-center border-2 rounded-lg px-6 py-2 border-zinc-900 shadow-retro__dark uppercase tracking-wider focus:shadow-retro__circle focus:translate-y-1 font-bold hover:opacity-70;
   }
 
-  .full-size{
-    @apply min-w-full max-w-full min-h-screen max-h-screen
+  .full-size {
+    @apply min-w-full max-w-full min-h-screen max-h-screen;
   }
 
-  .flex-center{
-    @apply flex items-center justify-center text-center
+  .flex-center {
+    @apply flex items-center justify-center text-center;
   }
- 
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
 }

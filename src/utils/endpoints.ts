@@ -21,6 +21,7 @@ export const ARTIST_PROFILE = (id: number) => `/api/v1/artist_profiles/${id}`; /
 // Item CRUD endpoints
 export const ALL_ITEMS = `${BASE_URL}/api/v1/items`; //GET | POST
 export const ITEM = (id: number) => `/api/v1/items/${id}`; // GET | PATCH | PUT | DELETE
+export const DELETE_ITEM = (id: number) => `/api/v1/items/${id}`;
 
 //Payment
 export const PAYMENT = `${BASE_URL}/api/v1/payments`;
