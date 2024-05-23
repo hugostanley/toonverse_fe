@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Modal } from "@components";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { ALL_ITEMS, apiClient, createCheckoutSession } from "@utils";
+import { useFetch } from "@hooks";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { ALL_ITEMS, PAYMENT, apiClient, createCheckoutSession } from "@utils";
 
 interface Item {
   id: number;
@@ -12,14 +13,20 @@ interface Item {
   picture_style: string;
 }
 
+interface PaymentRecordPayload {
+  payment: {
+    checkout_session_id: string;
+    total_amount: number;
+    payment_status: string;
+    item_ids: number[];
+  };
+}
+
 function Checkout() {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [checkoutItems, setCheckoutItems] = useState<Item[]>([]);
   const [modalCheckout, setModalCheckout] = useState<boolean>(false);
-
-  const { mutate: checkoutMutation } = useMutation({
-    mutationFn: createCheckoutSession,
-  });
+  const { fetchData } = useFetch();
 
   const {
     data: items,
@@ -33,15 +40,45 @@ function Checkout() {
     },
   });
 
+  const { mutate: PaymentMutation } = useMutation({
+    mutationFn: async (paymentRecordPayload: PaymentRecordPayload) => {
+      try {
+        const paymentResponse = await fetchData(PAYMENT, {
+          method: "POST",
+          data: paymentRecordPayload,
+        });
+        return paymentResponse;
+      } catch (error) {
+        throw new Error("network response was not okay");
+      }
+    },
+  });
+
   const handleProceed = async () => {
     try {
       const selected =
         items?.filter((item) => selectedItems.includes(item.id)) || [];
       setCheckoutItems(selected);
-      await checkoutMutation(selected);
-      setModalCheckout(false);
+      const response = await createCheckoutSession(selected);
+      console.log("Checkout session response:", response.data);
+
+      const { id, attributes } = response.data;
+      const { payment_intent } = attributes;
+
+      const paymentRecordPayload: PaymentRecordPayload = {
+        payment: {
+          checkout_session_id: id,
+          total_amount: payment_intent.attributes.amount,
+          payment_status: "awaiting_payment_method",
+          item_ids: selectedItems,
+        },
+      };
+
+      PaymentMutation(paymentRecordPayload);
+      const checkoutUrl = response.data.attributes.checkout_url;
+      window.location.href = checkoutUrl;
     } catch (error) {
-      console.error("Error creating checkout session:", error);
+      console.error("Error creating payment record:", error);
     }
   };
 
