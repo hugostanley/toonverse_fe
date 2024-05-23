@@ -23,31 +23,29 @@ function ArtistsList() {
     },
   })
 
-  if (isLoading) {
-    return <section className='w-full h-full p-2 px-4 flex flex-col gap-2'><Spinner /></section>;
-  }
-
   console.log('ALL_ARTISTS:', data);
 
   return (
     <div className='w-full h-full py-2 flex flex-col gap-2'>
-      {data && 
-        data.map((artist) => (
-          <div key={artist.id} className='group flex flex-col gap-1 px-3 py-2 hover:bg-green/25 rounded-xl border-t-2 border-green/45 shadow-sm cursor-pointer'>
-            <h1 className='text-lg tracking-widest group-hover:underline underline-offset-4'>{artist.email}</h1>
-            <div className='font-light flex items-center gap-2'>
-              <small>{`${artist.first_name} ${artist.last_name}`}</small>
-              |
-              <small>{artist.mobile_number}</small>
-              </div>
+      {isLoading ? 
+        <div className='grid place-items-center'><Spinner /> </div> 
+        : data && data.map((artist) => (
+            <div key={artist.id} className='group flex flex-col gap-1 px-3 py-2 rounded-xl border-t-2 border-ivory/75 bg-white/20 shadow-sm cursor-pointer'>
+              <h1 className='tracking-widest group-hover:underline underline-offset-4'>{artist.email}</h1>
+              <div className='font-light flex items-center gap-2'>
+                <small>{`${artist.first_name} ${artist.last_name}`}</small>
+                |
+                <small>{artist.mobile_number}</small>
+                </div>
 
-              {/* TODO: 
-              - create modal to display specific profile and edit profile
-              - only show latest 10 artists (dynamic value ) */}
+                {/* TODO: 
+                - create modal to display specific profile and edit profile
+                - only show latest 10 artists (dynamic value ) */}
 
-          </div>
-        ))
+            </div>
+          ))
       }
+      
     </div>
   )
 }
