@@ -1,70 +1,23 @@
-import axios from "axios";
 import { useState } from "react";
 import { Modal } from "@components";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { ALL_ITEMS, apiClient } from "@utils";
+import { ALL_ITEMS, apiClient, createCheckoutSession } from "@utils";
 
 interface Item {
   id: number;
-  amount: string;
+  amount: number;
   background_url: string;
   art_style: string;
   number_of_heads: number;
   picture_style: string;
 }
 
-const createCheckoutSession = async (checkoutItems: Item[]) => {
-  const payload = {
-    data: {
-      attributes: {
-        send_email_receipt: true,
-        show_description: false,
-        show_line_items: true,
-        line_items: checkoutItems.map((item) => ({
-          currency: "PHP",
-          amount: parseInt(item.amount.replace(/[^0-9]/g, ""), 10) * 100,
-          name: `toonverse-${item.art_style}-${item.id}`,
-          quantity: 1,
-        })),
-        payment_method_types: ["card", "gcash", "paymaya"],
-      },
-    },
-  };
-  console.log("Payload being sent:", JSON.stringify(payload, null, 2));
-  try {
-    const response = await axios.post(
-      "https://api.paymongo.com/v1/checkout_sessions",
-      payload,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization:
-            "Basic c2tfdGVzdF9oaDI4YVdZN0dIU1ZuNnl1Rk5vU0ZUbVQ6UCE1NjI0MTM3ODlBc2E=",
-        },
-      }
-    );
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.error(
-      "Error creating checkout session:"
-      // error.response?.data || error
-    );
-    throw error;
-  }
-};
-
 function Checkout() {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [checkoutItems, setCheckoutItems] = useState<Item[]>([]);
   const [modalCheckout, setModalCheckout] = useState<boolean>(false);
 
-  const {
-    mutate: checkout,
-    isLoading,
-  }: { mutate: MutateFunction; isLoading: IsLoading } = useMutation({
-    mutationKey: "createCheckoutSession",
+  const { mutate: checkoutMutation } = useMutation({
     mutationFn: createCheckoutSession,
   });
 
@@ -85,9 +38,7 @@ function Checkout() {
       const selected =
         items?.filter((item) => selectedItems.includes(item.id)) || [];
       setCheckoutItems(selected);
-
-      const data = await checkout(selected);
-      console.log("Checkout session created:", data);
+      await checkoutMutation(selected);
       setModalCheckout(false);
     } catch (error) {
       console.error("Error creating checkout session:", error);
@@ -188,9 +139,9 @@ function Checkout() {
             <button
               className="border border-neutral-300 rounded-lg py-1.5 px-10 bg-blue hover:bg-pink text-light"
               onClick={handleProceed}
-              disabled={!checkoutItems.length || isLoading}
+              disabled={!checkoutItems.length}
             >
-              {isLoading ? "Processing..." : "Proceed"}
+              Proceed
             </button>
           </div>
         </div>
