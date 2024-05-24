@@ -25,3 +25,5 @@ export { default as ArtistsList } from './workforce/admin/ArtistsList';
 
 // Artist Side
 export { default as ArtistDashboard } from './workforce/artist/ArtistDashboard';
+export {default as ArtistProfileForm} from './workforce/artist/ArtistProfileForm';
+export {default as ArtistProfileInfo} from './workforce/artist/ArtistProfileInfo';
