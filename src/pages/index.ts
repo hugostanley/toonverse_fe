@@ -21,6 +21,7 @@ export { default as WorkforceNavbar } from './workforce/WorkforceNavbar';
 // Admin Side
 export { default as AdminDashboard } from './workforce/admin/AdminDashboard';
 export { default as InviteArtist } from './workforce/admin/InviteArtist';
+export { default as ArtistsList } from './workforce/admin/ArtistsList';
 
 // Artist Side
 export { default as ArtistDashboard } from './workforce/artist/ArtistDashboard';
