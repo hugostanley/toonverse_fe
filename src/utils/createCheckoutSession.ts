@@ -36,7 +36,7 @@ export const createCheckoutSession = async (checkoutItems: Item[]) => {
           "Content-Type": "application/json",
           Accept: "application/json",
           Authorization:
-            "Basic c2tfdGVzdF9oaDI4YVdZN0dIU1ZuNnl1Rk5vU0ZUbVQ6UCE1NjI0MTM3ODlBc2E=",
+            "Basic c2tfdGVzdF9mbVF4V0xoQllld1c5b2YxSFFnRDI5dHA6IEFWSU9OIXRvb252ZXJzZTIwMjQ=",
         },
       }
     );
