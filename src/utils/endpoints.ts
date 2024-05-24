@@ -1,5 +1,5 @@
 // dev env
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://127.0.0.1:3000";
 
 // User
 export const REGISTER_URL = `/auth`;
@@ -20,5 +20,5 @@ export const ALL_ARTISTS = "/api/v1/artist_profiles"; // GET
 export const ARTIST_PROFILE = (id: number) => `/api/v1/artist_profiles/${id}`; // GET | PATCH | PUT | DELETE
 
 // Item CRUD endpoints
-export const ALL_ITEMS = `${BASE_URL}/api/v1/items`; //GET | POST
+export const ALL_ITEMS = "/api/v1/items"; //GET | POST
 export const ITEM = (id: number) => `/api/v1/items/${id}`; // GET | PATCH | PUT | DELETE

@@ -1,47 +1,54 @@
 import { useState } from "react";
 import { CCarousel, CCarouselItem } from "@coreui/react";
 import { Footer, Navbar } from "@components";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { categories } from "@assets";
-import { useFetch } from "@hooks";
 import { useMutation } from "@tanstack/react-query";
-// import { useQueryClient } from "@tanstack/react-query";
-import { ALL_ITEMS } from "@utils";
+import { ALL_ITEMS, apiClientFormData } from "@utils";
 
 type Order = {
   background_url: string;
   picture_style: string;
-  art_style: string;
+  art_style: string | undefined | any;
   number_of_heads: number;
-  amount: number;
+  notes?: string | null;
+  image?: File | null | Blob;
 };
 
 function OrderPage() {
-  const location = useLocation();
-  const parts = location.pathname.split("/");
-  const paramspath = parts[parts.length - 1];
+  const { params: paramspath } = useParams()
   const Category = categories.find(
     (category) => category.category === paramspath
   );
-
-  const { fetchData } = useFetch();
-  // const queryClient = useQueryClient();
 
   const [order, setOrder] = useState<Order>({
     background_url: "",
     picture_style: "",
     art_style: paramspath,
     number_of_heads: 1,
-    amount: 0.99,
+    notes: "",
+    image: null,
   });
 
-  const handleChange = (name: string, value: string | number | File | null) => {
+  const handleChange = (name: string, value: string | number | File | Blob | null) => {
     setOrder((prevOrder) => ({
       ...prevOrder,
       [name]: value,
     }));
+  };
+
+  const convertOrderToFormData = (order: Order) => {
+    const formData = new FormData();
+    formData.append('item[background_url]', order.background_url);
+    formData.append('item[picture_style]', order.picture_style);
+    formData.append('item[art_style]', order.art_style);
+    formData.append('item[number_of_heads]', order.number_of_heads.toString());
+    if (order.notes) formData.append('item[notes]', order.notes);
+    if (order.image) formData.append('item[image]', order.image);
+
+    return formData;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,13 +56,11 @@ function OrderPage() {
     createOrderMutation.mutate(order);
   };
 
-  const createOrderMutation = useMutation({
+  const createOrderMutation: any = useMutation({
     mutationFn: async (order: Order) => {
       try {
-        const response = await fetchData(ALL_ITEMS, {
-          method: "POST",
-          data: order,
-        });
+        const formData = convertOrderToFormData(order);
+        const response = await apiClientFormData.post(ALL_ITEMS, formData);
         console.log(response);
         return response;
       } catch (error) {
@@ -152,7 +157,10 @@ function OrderPage() {
                 interval={false}
                 onClick={(e) => {
                   const target = e.target as HTMLElement;
-                  if (target.tagName === 'BUTTON' || target.tagName === 'SPAN') {
+                  if (
+                    target.tagName === "BUTTON" ||
+                    target.tagName === "SPAN"
+                  ) {
                     e.preventDefault();
                   }
                 }}
@@ -283,7 +291,18 @@ function OrderPage() {
             <div className="w-[50%] h-screen text-white px-2 flex-center flex-col gap-[12.5rem]">
               <h1>Step 4: Upload Your Photo</h1>
               <div className="w-[50%] h-[20vh] border-[0.3rem] border-white rounded-[5rem] text-[3.5rem] flex-center">
-                <h1>Upload Image</h1>
+                <div>
+                  <input
+                    type="file"
+                    name="image"
+                    id=""
+                    onChange={(e) => {
+                      if (e.target.files) {
+                        setOrder({ ...order, image: e.target.files[0] });
+                      }
+                    }}
+                  />
+                </div>
               </div>
             </div>
             <div className="w-[50%] h-screen text-white px-2 flex-center flex-col gap-4">
