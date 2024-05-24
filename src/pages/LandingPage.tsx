@@ -9,7 +9,7 @@ function LandingPage() {
     <>
       <Navbar />
 
-      <div className="relative bg-blue h-screen border-b-2 border-dark">
+      <div className="relative bg-blue h-screen border-b-2 border-dark ">
         <div className="flex justify-center">
           <img
             src="/src/assets/cloud-text.png"
