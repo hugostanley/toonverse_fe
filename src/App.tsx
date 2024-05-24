@@ -55,7 +55,6 @@ function App() {
         },
         {
           path: "edit",
-          path: 'edit',
           element: <EditProfilePage />,
         },
       ],
