@@ -63,16 +63,16 @@ function InviteArtist({  user, formClassName, btnColor }: InviteFormProps) {
     <section className={formClassName}>
       <h1 className='w-full py-2 border-b-2 border-ivory/65 flex justify-between text-3xl tracking-widest font-bold text-ivory'>Invite an Artist</h1>
       <form onSubmit={handleSubmit} className="space-y-4 py-2">
-        <CFormInput
+        <label className='text-ivory tracking-widest font-bold'>Email</label>
+        <input
           type="email"
           id="floatingEmail"
-          floatingLabel="Email"
           placeholder="email@example.com"
           name="email"
           value={email}
           required
           onChange={(e) => setEmail(e.target.value)}
-          className={`field__input focus:ring-${btnColor}`}
+          className={`w-full p-2 rounded-lg shadow-md field__input focus:ring-${btnColor}`}
           disabled={loading}
         />
 

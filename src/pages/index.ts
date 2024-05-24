@@ -16,11 +16,14 @@ export { default as WorkforceLoginPage } from './workforce/auth/Login';
 export { default as InvitationPage } from './workforce/auth/Invitation';
 export { default as InvitationForm } from './workforce/auth/AcceptInviteForm';
 export { default as WorkforceNavbar } from './workforce/WorkforceNavbar';
+export { default as EditArtistProfile } from './workforce/EditArtistProfile';
 
 // Admin Side
 export { default as AdminDashboard } from './workforce/admin/AdminDashboard';
 export { default as InviteArtist } from './workforce/admin/InviteArtist';
 export { default as ArtistsList } from './workforce/admin/ArtistsList';
+export { default as AllArtistsPage } from './workforce/admin/AllArtists';
+export { default as EditArtist } from './workforce/admin/EditArtist';
 
 // Artist Side
 export { default as ArtistDashboard } from './workforce/artist/ArtistDashboard';
