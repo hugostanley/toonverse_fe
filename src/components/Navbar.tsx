@@ -1,47 +1,60 @@
-// import React from 'react'
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { Link, useLocation } from "react-router-dom";
 
-function Navbar() {
-  return (
-    <div className="fixed w-full top-0 z-50 py-4 px-8">
-    <nav className="bg-light rounded-full border-2 border-dark w-100 px-8 md:px-auto">
-      <div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
-        {/* logo */}
-        <div className="text-indigo-500">
-          <img
-            src="/src/assets/temp-logo.png"
-            alt="Logo"
-            className="h-10 rounded-full"
-          />
-        </div>
-        {/* nav links */}
-        <div className="text-gray-500 w-full sm:w-auto">
-          <ul className="flex font-semibold justify-between">
-            {/* Active Link: text-indigo-500, Inactive Link: hover:text-indigo-500 */}
-            <li className="md:px-4 md:py-2 hover:text-pink">
-              <a href="#">Home</a>
-            </li>
-            <li className="md:px-4 md:py-2 hover:text-pink">
-              <a href="#styles">Catalog</a>
-            </li>
-            <li className="md:px-4 md:py-2 hover:text-pink">
-              <a href="#faqs">FAQS</a>
-            </li>
-            <li className="md:px-4 md:py-2 hover:text-pink">
-              <a href="#">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-        {/* icons */}
-        <div className="flex text-dark gap-3">
-          <FontAwesomeIcon icon={faUser} className="h-6" />
-          <FontAwesomeIcon icon={faCartShopping} className="h-6" />
-        </div>
-      </div>
-    </nav>
-  </div>
-  )
+function useScrollToHash() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [hash]);
 }
 
-export default Navbar
+function Navbar() {
+  useScrollToHash();
+  return (
+    <div className="sticky w-full top-0 z-50">
+      <nav className="bg-dark shadow-lg w-100 px-8 md:px-auto">
+        <div className="md:h-16 h-28 mx-auto container flex items-center justify-between flex-wrap">
+          <Link to="/">
+            <img
+              src="/src/assets/temp-logo-white.png"
+              alt="Logo"
+              className="h-8 rounded-full"
+            />
+          </Link>
+          <div className="text-gray-200 w-full md:w-auto">
+            <ul className="flex font-semibold justify-between">
+              <li className="md:px-4 md:py-2 hover:text-pink">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="md:px-4 md:py-2 hover:text-pink">
+                <Link to="/#styles">Catalog</Link>
+              </li>
+              <li className="md:px-4 md:py-2 hover:text-pink">
+                <Link to="/#faqs">FAQS</Link>
+              </li>
+              <li className="md:px-4 md:py-2 hover:text-pink">
+                <Link to="/#contact">Contact Us</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="text-light flex gap-3">
+            <FontAwesomeIcon icon={faUser} className="h-6" />
+            <Link to="/checkout">
+              <FontAwesomeIcon icon={faCartShopping} className="h-6" />
+            </Link>
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+export default Navbar;

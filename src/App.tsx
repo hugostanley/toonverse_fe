@@ -1,51 +1,53 @@
-import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import './index.css';
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import "./index.css";
 
-import { adminAccess, artistAccess, userAccess } from '@utils';
-import { AdminLayout, UserAccountLayout } from '@layouts';
+import { adminAccess, artistAccess, userAccess } from "@utils";
+import { AdminLayout, UserAccountLayout } from "@layouts";
 import {
   AdminDashboard,
   AllArtistsPage,
   ArtistDashboard,
   EditProfilePage,
   InvitationPage,
+  Checkout,
   LandingPage,
   OrderPage,
-  UnauthorizedPage, 
+  UnauthorizedPage,
   UserAccountPage,
   UserLoginPage,
-  UserRegisterPage, 
+  UserRegisterPage,
   WorkforceLoginPage,
-} from '@pages';
+} from "@pages";
 
 function App() {
   const queryClient = new QueryClient();
-  const googleClient = '134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com'; // WIP: feat/oauth
+  const googleClient =
+    "134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com"; // WIP: feat/oauth
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <LandingPage />,
     },
     {
-      path: '/no-access',
+      path: "/no-access",
       element: <UnauthorizedPage />,
     },
 
     // User Side
     {
-      path: 'login',
+      path: "login",
       element: <UserLoginPage />,
     },
     {
-      path: 'register',
+      path: "register",
       element: <UserRegisterPage />,
     },
     {
-      path: 'account',
+      path: "account",
       element: <UserAccountLayout />,
       loader: userAccess,
       children: [
@@ -54,27 +56,31 @@ function App() {
           element: <UserAccountPage />,
         },
         {
-          path: 'edit',
+          path: "edit",
           element: <EditProfilePage />,
         },
       ],
     },
     {
-      path: 'order',
+      path: "order",
       element: <OrderPage />,
+    },
+    {
+      path: "checkout",
+      element: <Checkout />,
     },
 
     // Workforce Side
     {
-      path: 'w/login',
+      path: "w/login",
       element: <WorkforceLoginPage />,
     },
     {
-      path: '/w/invitation/accept',
+      path: "/w/invitation/accept",
       element: <InvitationPage />,
     },
     {
-      path: 'admin',
+      path: "admin",
       element: <AdminLayout />,
       loader: adminAccess,
       children: [
@@ -83,13 +89,13 @@ function App() {
           element: <AdminDashboard />,
         },
         {
-          path: 'artists',
+          path: "artists",
           element: <AllArtistsPage />,
         },
       ],
     },
     {
-      path: 'w/dashboard',
+      path: "w/dashboard",
       element: <ArtistDashboard />,
       loader: artistAccess,
     },
@@ -104,7 +110,7 @@ function App() {
         </QueryClientProvider>
       </GoogleOAuthProvider>
     </React.StrictMode>
-  )
+  );
 }
 
-export default App
+export default App;
