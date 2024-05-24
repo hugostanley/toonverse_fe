@@ -75,7 +75,7 @@
   position: relative;
   left: -32px;
   border-radius: 50%;
-  color: #fdf7e1;
+  color: #141407;
   background: currentColor;
   box-shadow: 32px 0, -32px 0, 64px 0;
 }
@@ -88,7 +88,7 @@
   width: 12px;
   height: 12px;
   border-radius: 10px;
-  background: #259edf;
+  background: #ff3d00;
   animation: move 3s linear infinite alternate;
 }
 

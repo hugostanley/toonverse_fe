@@ -2,16 +2,20 @@ import { CCloseButton, CContainer, CDropdown, CDropdownDivider, CDropdownItem, C
 import { useState } from 'react';
 import { useLoaderData } from 'react-router-typesafe';
 import { LogoutBtn } from '@components';
-import { W_LOGOUT_URL, adminAccess } from '@utils';
+import { W_LOGOUT_URL } from '@utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-function WorkforceNavbar() {
-  const { email } = useLoaderData<typeof adminAccess>();
+type NavProps = {
+  loaderFn: () => any;
+}
+
+function WorkforceNavbar({ loaderFn }: NavProps) {
+  const { email } = useLoaderData<typeof loaderFn>();
   const [visible, setVisible] = useState(false);
 
   return (
-    <CNavbar className="bg-pink h-[8%] shadow-md sticky top-0">
+    <CNavbar className="bg-green h-[8%] shadow-md sticky top-0">
     <CContainer fluid>
       <CNavbarBrand>
         <img
@@ -26,7 +30,7 @@ function WorkforceNavbar() {
         onClick={() => setVisible(!visible)}
         className='bg-yellow border-2 border-dark shadow-md'
       />
-      <COffcanvas id="offcanvasNavbar" placement="end" portal={false} visible={visible} onHide={() => setVisible(false)} className='bg-pink shadow-md'>
+      <COffcanvas id="offcanvasNavbar" placement="end" portal={false} visible={visible} onHide={() => setVisible(false)} className='bg-green shadow-md'>
         <COffcanvasHeader className='flex items-center gap-3 pt-8'>
           <COffcanvasTitle>
             <img
@@ -41,19 +45,19 @@ function WorkforceNavbar() {
           <CNavbarNav className='h-full flex flex-col justify-between'>
             <div className='py-4 flex flex-col gap-3 border-t-4 border-dark/45'>
               <CNavItem>
-                <CNavLink href="/admin">
+                <CNavLink href="/admin" className='text-ivory'>
                   Dashboard
                 </CNavLink>
               </CNavItem>
 
               <CNavItem>
-                <CNavLink href="#">
+                <CNavLink href="/admin/artists" className='text-ivory'>
                   Our Artists
                 </CNavLink>
               </CNavItem>
 
               <CDropdown variant="nav-item" popper={false}>
-                <CDropdownToggle>Orders</CDropdownToggle>
+                <CDropdownToggle className='text-ivory'>Orders</CDropdownToggle>
                 <CDropdownMenu className='bg-ivory'>
                   <CDropdownItem href="#" className='hover:bg-yellow'>Pending</CDropdownItem>
                   <CDropdownItem href="#" className='hover:bg-yellow'>In Progress</CDropdownItem>
@@ -66,7 +70,7 @@ function WorkforceNavbar() {
             <div className='py-4 flex flex-col gap-3 border-t-4 border-dark/45'>
               <CNavItem className='flex gap-3 items-center p-2 cursor-default'>
                 <FontAwesomeIcon icon={faUser} className='h-6 bg-yellow icon--boxed'/>
-                <h1 className='font-semibold tracking-widest text-lg'>{email}</h1>
+                <h1 className='font-semibold tracking-widest text-lg text-ivory'>{email}</h1>
               </CNavItem>
 
               <CNavItem>
