@@ -9,6 +9,7 @@ import { adminAccess, artistAccess, userAccess } from '@utils';
 import { AdminLayout, UserAccountLayout } from '@layouts';
 import {
   AdminDashboard,
+  AllArtistsPage,
   ArtistDashboard,
   EditProfilePage,
   InvitationPage,
@@ -80,6 +81,10 @@ function App() {
         {
           index: true,
           element: <AdminDashboard />,
+        },
+        {
+          path: 'artists',
+          element: <AllArtistsPage />,
         },
       ],
     },

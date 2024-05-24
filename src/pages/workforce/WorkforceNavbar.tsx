@@ -51,7 +51,7 @@ function WorkforceNavbar({ loaderFn }: NavProps) {
               </CNavItem>
 
               <CNavItem>
-                <CNavLink href="#" className='text-ivory'>
+                <CNavLink href="/admin/artists" className='text-ivory'>
                   Our Artists
                 </CNavLink>
               </CNavItem>

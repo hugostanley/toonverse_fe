@@ -10,8 +10,7 @@ function AdminDashboard() {
           <InviteArtist btnColor='yellow' formClassName='flex flex-col gap-4 p-4'/>
           <div className='flex flex-col gap-2 p-4 text-ivory'>
             <h2 className='text-2xl tracking-wider'>Newest Artists</h2>
-            {/* Note: Latest 5 only*/}
-            <ArtistsList />
+            <ArtistsList className='border-t-2 border-ivory/45 border-dotted' />
           </div>
           
         </div>

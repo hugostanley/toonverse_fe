@@ -9,18 +9,18 @@ import { ALL_USERS, LOGOUT_URL, apiClient, userAccess } from '@utils';
 type LoaderData = {
   id: number;
   email: string;
-};
+}
 
 type User = {
   first_name: string;
   last_name: string;
   billing_address: string;
   id: number;
-};
+}
 
 type LoaderContext = { 
   userData: LoaderData | null;
-};
+}
 
 type ProfileContext = {
   data: User | null;
