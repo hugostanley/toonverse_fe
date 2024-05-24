@@ -19,17 +19,11 @@ function LandingPage() {
         </div>
         <div className="flex justify-center">
           {authorize ? (
-            <a
-              href="#styles"
-              className="z-20 absolute top-[30%] shadow-retro__dark bg-pink font-black rounded-xl px-15 py-3 mt-8 text-center border-dark border-2 w-[15rem]"
-            >
+            <a href="#styles" className="z-20 absolute top-[30%] btn__pink">
               GET STARTED
             </a>
           ) : (
-            <Link
-              to="/login"
-              className="z-20 absolute top-[30%] shadow-retro__dark bg-pink font-black rounded-xl px-15 py-3 mt-8 text-center border-dark border-2 w-[15rem]"
-            >
+            <Link to="/login" className="z-20 absolute top-[30%] btn__pink">
               GET STARTED
             </Link>
           )}
@@ -71,7 +65,7 @@ function LandingPage() {
         />
       </div>
       <div className="bg-yellow flex px-20 py-8 items-center h-screen border-b-2 border-dark">
-        <div className="w-[50%] flex font-extrabold">
+        <div className="w-[50%] flex font-black">
           <div className="flex flex-col">
             <div className="w-[20rem] text-center bg-light px-6 rounded-2xl py-4 border-2 border-dark">
               <div className="flex justify-center items-center">
@@ -163,7 +157,7 @@ function LandingPage() {
                 />
               </div>
             </div>
-            <h1 className="text-lg font-extrabold">
+            <h1 className="text-lg font-black">
               Rick and Morty Custom Portrait
             </h1>
             <h1 className="font-black text-xl text-red-600">$Free.99</h1>
@@ -178,9 +172,7 @@ function LandingPage() {
                 />
               </div>
             </div>
-            <h1 className="text-lg font-extrabold">
-              Bob's Burger Custom Portait
-            </h1>
+            <h1 className="text-lg font-black">Bob's Burger Custom Portait</h1>
             <h1 className="font-black text-xl text-red-600">$Free.99</h1>
           </Link>
           <Link to="order/vector" className="px-4 py-8">
@@ -193,9 +185,7 @@ function LandingPage() {
                 />
               </div>
             </div>
-            <h1 className="text-lg font-extrabold">
-              Vexel Art Custom Portrait
-            </h1>
+            <h1 className="text-lg font-black">Vexel Art Custom Portrait</h1>
             <h1 className="font-black text-xl text-red-600">$Free.99</h1>
           </Link>
         </div>
@@ -211,7 +201,7 @@ function LandingPage() {
         <div className="flex gap-4">
           <div className="w-[50vw] px-8 py-8">
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 How long will it take?
               </span>
               <div className="font-bold">
@@ -222,7 +212,7 @@ function LandingPage() {
               </div>
             </div>
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 What if I am not happy with my Happy Tooned portrait?
               </span>
               <div className="font-bold">
@@ -234,7 +224,7 @@ function LandingPage() {
               </div>
             </div>
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 Can you make me a custom background?
               </span>
               <div className="font-bold">
@@ -245,7 +235,7 @@ function LandingPage() {
             </div>
 
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 Do pets count as person?
               </span>
               <div className="font-bold">
@@ -254,7 +244,7 @@ function LandingPage() {
             </div>
 
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 When I order a printed or framed poster, do I also get the
                 digital file?
               </span>
@@ -266,7 +256,7 @@ function LandingPage() {
           </div>
           <div className="w-[50vw] px-8 py-8">
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 If I order a physical print, how long will it take to reach me?
               </span>
               <div className="font-bold">
@@ -277,7 +267,7 @@ function LandingPage() {
             </div>
 
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 {" "}
                 What should be the quality of the photo I upload?
               </span>
@@ -289,7 +279,7 @@ function LandingPage() {
             </div>
 
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 When I want to include more than one character, do I need to
                 have everyone in the same image?
               </span>
@@ -302,7 +292,7 @@ function LandingPage() {
             </div>
 
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 Can you work on a large group portrait?
               </span>
               <div className="font-bold">
@@ -312,7 +302,7 @@ function LandingPage() {
             </div>
 
             <div className="mb-4">
-              <span className="text-lg font-extrabold text-light">
+              <span className="text-lg font-black text-light">
                 Will it cost more to make revisions or changes?
               </span>
               <div className="font-bold">

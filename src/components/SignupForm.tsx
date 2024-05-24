@@ -1,6 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { usePostAuth } from '@hooks';
 import { CFormInput } from '@coreui/react';
+import { useNavigate } from 'react-router-dom';
+import { Spinner } from '@components';
 
 type SignupFormProps = {
   user?: {
@@ -9,31 +11,36 @@ type SignupFormProps = {
     password_confirmation: string;
   } | null;
   apiUrl: string;
-  redirectPath?: string;
   formClassName?: string;
   btnColor?: string;
 }
 
-function SignupForm({ user, apiUrl, redirectPath, formClassName, btnColor }: SignupFormProps) {
+function SignupForm({ user, apiUrl, formClassName, btnColor }: SignupFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(user?.password || '');
   const [passwordConfirmation, setPasswordConfirmation] = useState(user?.password_confirmation || '');
   const { error, isLoading, postAuth } = usePostAuth();
+  const navigate = useNavigate();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const requestBody = {
       email,
-      password
+      password,
+      password_confirmation: passwordConfirmation
     }
 
     try {
       await postAuth(apiUrl, { 
         body: requestBody
-      }, redirectPath)
+      }, (responseData) => {
+        if (responseData && responseData.data.role === undefined) {
+          navigate('/account/edit');
+        }
+      })
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Axios Error:', error);
     }
   }
 
@@ -87,7 +94,7 @@ function SignupForm({ user, apiUrl, redirectPath, formClassName, btnColor }: Sig
             className={`bg-${btnColor} btn__primary`}
             disabled={isLoading} 
           >
-            {isLoading ? 'Creating your account' : 'Create Account'}
+            {isLoading ? <Spinner/> : 'Create Account'}
           </button>
         </div>
       </form>

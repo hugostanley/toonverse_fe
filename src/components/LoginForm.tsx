@@ -1,6 +1,8 @@
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePostAuth } from '@hooks';
 import { CFormInput } from '@coreui/react';
+import { Spinner } from '@components';
 
 type LoginFormProps = {
   user?: {
@@ -8,31 +10,40 @@ type LoginFormProps = {
     password: string;
   } | null;
   apiUrl: string;
-  redirectPath?: string;
   formClassName?: string;
   btnColor?: string;
 }
 
-function LoginForm({ user, apiUrl, redirectPath, formClassName, btnColor }: LoginFormProps) {
+function LoginForm({ user, apiUrl, formClassName, btnColor }: LoginFormProps) {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState(user?.password || '');
   const { error, isLoading, postAuth } = usePostAuth();
+  const navigate = useNavigate();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const requestBody = {
       email,
-      password
+      password,
     }
 
     try {
       await postAuth(apiUrl, { 
         body: requestBody
-      }, redirectPath)
+      }, (responseData) => {
+        if (responseData && responseData.data.role === 'admin') {
+          navigate('/admin');
+        } else if (responseData && responseData.data.role === 'artist') {
+          navigate('/w/dashboard');
+        } else {
+          navigate('/account');
+        }
+      });
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Axios Error:', error);
     }
+    
   }
 
   return (
@@ -74,7 +85,7 @@ function LoginForm({ user, apiUrl, redirectPath, formClassName, btnColor }: Logi
             className={`bg-${btnColor} btn__primary`}
             disabled={isLoading} 
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? <Spinner /> : 'Login'}
           </button>
         </div>
       </form>

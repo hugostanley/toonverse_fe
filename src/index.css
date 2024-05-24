@@ -1,19 +1,19 @@
 @import "@coreui/coreui/dist/css/coreui.min.css";
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
-
-@font-face {
-  font-family: "VAG Rounded Next";
-  src: url("../assets/VAG.ttf") format("truetype");
-}
+@import url("https://fonts.googleapis.com/css2?family=Poetsen+One&family=Varela+Round&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /* @font-face {
+    font-family: "VAG Rounded Next";
+    src: url(/src/assets/VAG.ttf) format("truetype");
+  } */
+
   html,
   body {
-    font-family: "Nunito", sans-serif;
+    font-family: "Varela Round", sans-serif;
     @apply w-full h-dvh tracking-wider text-dark;
   }
 
@@ -47,37 +47,116 @@
     @apply flex items-center justify-center text-center;
   }
 
+  .icon--boxed {
+    @apply border-2 border-dark p-2 rounded-lg shadow-retro__dark;
+  }
+
+  .icon--rounded {
+    @apply h-1/3 aspect-square border-2 border-dark rounded-full p-4 bg-yellow shadow-retro__circle;
+  }
+
+  .grid-green {
+    @apply rounded-2xl border-4 border-green px-6 py-4 shadow-retro__dark flex items-center gap-4;
+  }
+
   .btn__blue {
-    @apply font-bold border bg-blue shadow-retro__dark border-dark py-2 px-12 rounded-lg;
+    @apply font-black border bg-blue shadow-retro__dark border-dark py-2 px-12 rounded-lg;
   }
 
-  .overflow {
-    overflow-x: hidden;
-    overflow-y: auto;
+  .btn__pink {
+    @apply shadow-retro__dark font-black bg-pink rounded-xl py-3 mt-8 text-center border-dark border-2 w-[15rem];
+  }
+}
 
-    &::-webkit-scrollbar {
-      width: 0.3rem;
-      height: 0.3rem;
-    }
+/* SPINNER https://cssloaders.github.io/ */
+.loader {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  left: -32px;
+  border-radius: 50%;
+  color: #fdf7e1;
+  background: currentColor;
+  box-shadow: 32px 0, -32px 0, 64px 0;
+}
 
-    &::-webkit-scrollbar-track {
-      background-color: #f5f5f5;
-      -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
-    }
+.loader::after {
+  content: "";
+  position: absolute;
+  left: -32px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 10px;
+  background: #259edf;
+  animation: move 3s linear infinite alternate;
+}
 
-    &::-webkit-scrollbar-thumb {
-      background-color: #259edf;
-      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    }
-
-    &::-webkit-scrollbar {
-      width: 10px;
-      background-color: #f5f5f5;
-    }
+@keyframes move {
+  0%,
+  5% {
+    left: -32px;
+    width: 12px;
+  }
+  15%,
+  20% {
+    left: -32px;
+    width: 48px;
+  }
+  30%,
+  35% {
+    left: 0px;
+    width: 12px;
+  }
+  45%,
+  50% {
+    left: 0px;
+    width: 48px;
+  }
+  60%,
+  65% {
+    left: 32px;
+    width: 12px;
   }
 
-  .fade-out {
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
+  75%,
+  80% {
+    left: 32px;
+    width: 48px;
   }
+  95%,
+  100% {
+    left: 64px;
+    width: 12px;
+  }
+}
+
+.overflow {
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.3rem;
+    height: 0.3rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #259edf;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+  }
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
 }

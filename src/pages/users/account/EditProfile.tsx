@@ -1,14 +1,20 @@
 import { CCol, CForm, CFormInput, CRow } from '@coreui/react';
 import { FormEvent, useState } from 'react';
-import { useUserProfile, useUserData } from '@layouts';
-import { apiClient, ALL_USERS } from '@utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useUserProfile, useUserData } from '@layouts';
+import { apiClient, ALL_USERS, USER_PROFILE } from '@utils';
+import { Spinner } from '@components';
 
 function EditProfile() {
   const { userData } = useUserData();
   const { data } = useUserProfile();   
   const navigate = useNavigate();
+
+  // console.log('@EDIT USER DATA:', userData);
+  // console.log('@EDIT PROFILE DATA:', data);
 
   const [email, setEmail] = useState(userData?.email || '');
   const [firstName, setFirstName] = useState(data?.first_name || '');
@@ -18,7 +24,11 @@ function EditProfile() {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (formData: any) => {
-      return apiClient.post(ALL_USERS, formData);
+      if (data?.id) {
+        return apiClient.patch(USER_PROFILE(data?.id), formData);
+      } else {
+        return apiClient.post(ALL_USERS, formData);
+      }
     },
     onSuccess: () => {
       // to "update" user profile on account page too
@@ -41,7 +51,7 @@ function EditProfile() {
       email,
       billing_address: address,
     }
-    console.log('FORM DATA', requestBody);
+    // console.log('FORM DATA', requestBody);
 
     try {
       await mutation.mutateAsync(requestBody);
@@ -50,13 +60,16 @@ function EditProfile() {
       setMutationError((error as any).response.data.error.join('. '));
     }
   }
-  
-  console.log('@EDIT/ profile id:', data?.id);
 
   return (
     <section className='w-full h-full p-2 px-4 flex flex-col gap-2'>
-      <h1 className='w-full px-8 py-4 border-b-2 border-gray-400/60 text-3xl font-bold'>
+      <h1 className='w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header'>
         Edit Profile
+        <Link to='/account' className='p-2'>
+          <small className='font-semibold text-sm border-2 rounded-xl p-2 border-dark'>
+            <FontAwesomeIcon icon={faArrowLeft} className='h-1/2' />
+          </small>
+        </Link>
       </h1>
 
       <CForm onSubmit={handleSubmit} className="row g-3 w-5/6 p-8">       
@@ -120,7 +133,7 @@ function EditProfile() {
             className='btn__primary bg-blue w-1/4 mt-10 text-white'
             disabled={mutation.isPending}
           >
-            {mutation.isPending ? 'Updating...' : 'Update'}
+            {mutation.isPending ? <Spinner /> : 'Update'}
           </button>
         </div>
       </CForm>
