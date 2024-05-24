@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './index.css';
 
 import { adminAccess, artistAccess, userAccess } from '@utils';
-import { UserAccountLayout } from '@layouts';
+import { AdminLayout, UserAccountLayout } from '@layouts';
 import {
   AdminDashboard,
   ArtistDashboard,
@@ -74,8 +74,14 @@ function App() {
     },
     {
       path: 'admin',
-      element: <AdminDashboard />,
+      element: <AdminLayout />,
       loader: adminAccess,
+      children: [
+        {
+          index: true,
+          element: <AdminDashboard />,
+        },
+      ],
     },
     {
       path: 'w/dashboard',

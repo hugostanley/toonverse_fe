@@ -2,12 +2,16 @@ import { CCloseButton, CContainer, CDropdown, CDropdownDivider, CDropdownItem, C
 import { useState } from 'react';
 import { useLoaderData } from 'react-router-typesafe';
 import { LogoutBtn } from '@components';
-import { W_LOGOUT_URL, adminAccess } from '@utils';
+import { W_LOGOUT_URL } from '@utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-function WorkforceNavbar() {
-  const { email } = useLoaderData<typeof adminAccess>();
+type NavProps = {
+  loaderFn: () => any;
+}
+
+function WorkforceNavbar({ loaderFn }: NavProps) {
+  const { email } = useLoaderData<typeof loaderFn>();
   const [visible, setVisible] = useState(false);
 
   return (
