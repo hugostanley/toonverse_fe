@@ -2,7 +2,6 @@ import { CButton, CForm, CFormInput, CModalFooter } from '@coreui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FormEvent, useState } from 'react';
 import { ARTIST_PROFILE, apiClient } from '@utils';
-import { useNavigate } from 'react-router-dom';
 
 type Artist = {
   email: string;
@@ -19,9 +18,10 @@ type Artist = {
 
 type EditArtistProps = {
   artist: Artist;
+  setVisible: (visible: boolean) => void
 }
 
-function EditArtistProfile({ artist }: EditArtistProps) {
+function EditArtistProfile({ artist, setVisible }: EditArtistProps) {
   const [email, setEmail] = useState(artist?.email || '');
   const [firstName, setFirstName] = useState(artist?.first_name || '');
   const [lastName, setLastName] = useState(artist?.last_name || '');
@@ -34,17 +34,16 @@ function EditArtistProfile({ artist }: EditArtistProps) {
     mutationFn: (formData: any) => {
       return apiClient.patch(ARTIST_PROFILE(artist?.id), formData);
     },
-    // onSuccess: () => {
-    //   // to "update" user profile on account page too
-    //   queryClient.invalidateQueries(
-    //     {
-    //       queryKey: ['currentUserProfile', userData?.id],
-    //       exact: true,
-    //       refetchType: 'all',
-    //     },
-    //   )
-    //   navigate('/account');
-    // }
+    onSuccess: () => {
+      queryClient.invalidateQueries(
+        {
+          queryKey: ['allArtists'],
+          exact: true,
+          refetchType: 'all',
+        },
+      )
+      setVisible(false);
+    }
   });
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {

@@ -1,6 +1,6 @@
-import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from '@coreui/react';
+import { CButton, CModal, CModalBody, CModalHeader, CModalTitle } from '@coreui/react';
 import { useState } from 'react';
-import EditArtistProfile from '../EditArtistProfile';
+import { EditArtistProfile } from '@pages';
 
 type Artist = {
   email: string;
@@ -36,11 +36,8 @@ function EditArtist({ artist }: EditArtistProps) {
           <CModalTitle id="VerticallyCenteredExample" className='text-2xl pt-2'>Edit Artist Profile</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <EditArtistProfile artist={artist} />
+          <EditArtistProfile artist={artist} setVisible={setVisible} />
         </CModalBody>
-        {/* <CModalFooter>
-          <CButton color='secondary' className='bg-green'>Save changes</CButton>
-        </CModalFooter> */}
       </CModal>
     </>
   )
