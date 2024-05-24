@@ -55,7 +55,6 @@ function App() {
         },
         {
           path: "edit",
-          path: 'edit',
           element: <EditProfilePage />,
         },
       ],
@@ -68,6 +67,7 @@ function App() {
     {
       path: "checkout",
       element: <Checkout />,
+      loader: userAccess,
     },
 
     // Workforce Side

@@ -8,6 +8,7 @@ function Navbar() {
 
   const location = useLocation();
   const landingPath = location.pathname;
+
  
 
   return (
@@ -61,8 +62,8 @@ function Navbar() {
         </div>
         {/* icons */}
         <div className="flex text-dark gap-3">
-          <FontAwesomeIcon icon={faUser} className="h-6" />
-          <FontAwesomeIcon icon={faCartShopping} className="h-6" />
+          <Link to="/account"><FontAwesomeIcon icon={faUser} className="h-6" /></Link>
+          <Link to="/checkout"><FontAwesomeIcon icon={faCartShopping} className="h-6" /></Link>
         </div>
       </div>
     </nav>

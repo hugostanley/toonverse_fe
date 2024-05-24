@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CCarousel, CCarouselItem } from "@coreui/react";
 import { Footer, Navbar } from "@components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { categories } from "@assets";
@@ -15,10 +15,10 @@ type Order = {
   picture_style: string;
   art_style: string;
   number_of_heads: number;
-  amount: number;
 };
 
 function OrderPage() {
+  const navigate = useNavigate();
   const location = useLocation();
   const parts = location.pathname.split("/");
   const paramspath = parts[parts.length - 1];
@@ -33,8 +33,7 @@ function OrderPage() {
     background_url: "",
     picture_style: "",
     art_style: paramspath,
-    number_of_heads: 1,
-    amount: 0.99,
+    number_of_heads: 1
   });
 
   const handleChange = (name: string, value: string | number | File | null) => {
@@ -64,6 +63,7 @@ function OrderPage() {
     },
     onSuccess: (data) => {
       console.log("Order created:", data);
+      navigate("/checkout")
     },
     onError: (error: any) => {
       console.error("Error creating item:", error);
