@@ -1,46 +1,59 @@
 import { useState } from "react";
-import { CButton, CCarousel, CCarouselItem } from "@coreui/react";
+import { CCarousel, CCarouselItem } from "@coreui/react";
 import { Footer, Navbar } from "@components";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { categories } from "@assets";
-import { useFetch } from "@hooks";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ALL_ITEMS } from "@utils";
+import { useMutation } from "@tanstack/react-query";
+import { ALL_ITEMS, apiClientFormData } from "@utils";
+import ErrorToast from "../errors/ErrorToast";
 
 type Order = {
   background_url: string;
   picture_style: string;
-  art_style: string;
+  art_style: string | undefined | any;
   number_of_heads: number;
-  amount: number
+  notes?: string | null;
+  image?: File | null | Blob;
 };
 
 function OrderPage() {
-  const location = useLocation();
-  const parts = location.pathname.split("/");
-  const paramspath = parts[parts.length - 1];
+  const navigate = useNavigate()
+  const { params: paramspath } = useParams();
   const Category = categories.find(
     (category) => category.category === paramspath
   );
-
-  const { fetchData } = useFetch();
-  const queryClient = useQueryClient();
-
+  const [error, setError] = useState<string | any>();
   const [order, setOrder] = useState<Order>({
     background_url: "",
     picture_style: "",
     art_style: paramspath,
     number_of_heads: 1,
-    amount: 0.99
+    notes: "",
+    image: null,
   });
 
-  const handleChange = (name: string, value: string | number | File | null) => {
+  const handleChange = (
+    name: string,
+    value: string | number | File | Blob | null
+  ) => {
     setOrder((prevOrder) => ({
       ...prevOrder,
       [name]: value,
     }));
+  };
+
+  const convertOrderToFormData = (order: Order) => {
+    const formData = new FormData();
+    formData.append("item[background_url]", order.background_url);
+    formData.append("item[picture_style]", order.picture_style);
+    formData.append("item[art_style]", order.art_style);
+    formData.append("item[number_of_heads]", order.number_of_heads.toString());
+    if (order.notes) formData.append("item[notes]", order.notes);
+    if (order.image) formData.append("item[image]", order.image);
+
+    return formData;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,32 +61,46 @@ function OrderPage() {
     createOrderMutation.mutate(order);
   };
 
-  const createOrderMutation = useMutation({
-    mutationFn: async () => {
+  const createOrderMutation: any = useMutation({
+    mutationFn: async (order: Order) => {
       try {
-        const response = await fetchData(ALL_ITEMS, {
-          method: "POST",
-          data: order,
-        });
-        console.log(response);
+        const formData = convertOrderToFormData(order);
+        const response = await apiClientFormData.post(ALL_ITEMS, formData);
+        if(response){
+          navigate("/checkout")
+        }
         return response;
-      } catch (error) {
-        throw new Error(error);
+      } catch (error: any) {
+        if (error.response && error.response.data) {
+          const errorMessages = Object.entries(error.response.data)
+            .map(([field, messages]) => {
+              return `${field.replace(/_/g, " ")} ${(messages as string[]).join(
+                ", "
+              )}`;
+            })
+            .join(", ");
+          setError(errorMessages);
+          throw new Error(errorMessages);
+        }
       }
-    },
-    onSuccess: (data) => {
-      console.log("Order created:", data);
-    },
-    onError: (error: any) => {
-      console.error("Error creating item:", error);
     },
   });
 
   return (
     <>
-      <div className="full-size border-2 border-black bg-yellow">
+      <div className="border-2 border-black bg-yellow">
+        {error ? (
+          <div className="fixed top-32 right-10 w-fit h-fit z-20 uppercase">
+            <ErrorToast msgerror={error} />
+          </div>
+        ) : (
+          null
+        )}
+
+        {/* navbar */}
         <Navbar />
-        <div className="full-size text-[3rem] flex-center relative">
+        {/* sample works */}
+        <div className="w-full h-screen text-[2.5rem] flex-center relative">
           <img
             src="/src/assets/flower_neub.png"
             alt="flower"
@@ -94,11 +121,11 @@ function OrderPage() {
             alt="flower"
             className="absolute bottom-[8rem] right-[0.5rem] rotate-5"
           />
-          <div className="absolute w-full h-screen">
+          <div className="absolute w-full h-[90vh] top-4">
             <CCarousel controls indicators>
               {Category?.sample.map((sample, index) => (
                 <CCarouselItem key={index}>
-                  <div className="w-full h-screen flex-center">
+                  <div className="w-full h-[90vh] flex-center">
                     <img
                       src={sample}
                       alt={`sample${index + 1}`}
@@ -110,9 +137,11 @@ function OrderPage() {
             </CCarousel>
           </div>
         </div>
+        {/* form */}
         <form onSubmit={handleSubmit}>
-          <div className="w-full h-[50vh] border-2 border-black flex-center text-[3rem] bg-blue relative">
-            <h1 className="absolute top-0 z-10 text-white">
+          {/* background_url */}
+          <div className="w-full h-[70vh] border-2 border-black flex-center text-[2.5rem] bg-blue relative">
+            <h1 className="absolute top-4 z-10 text-white font-extrabold">
               Step 1: Select Background
             </h1>
             <img
@@ -140,15 +169,27 @@ function OrderPage() {
               alt="cloud"
               className="absolute top-3 right-1/3 min-w-[10%] z-0"
             />
-            <div className="absolute -bottom-8 w-[80%] h-[40vh] ">
-              <CCarousel controls interval={false}>
+            <div className="absolute top-24 w-[80%] h-[50vh] ">
+              <CCarousel
+                controls
+                interval={false}
+                onClick={(e) => {
+                  const target = e.target as HTMLElement;
+                  if (
+                    target.tagName === "BUTTON" ||
+                    target.tagName === "SPAN"
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
+              >
                 {Category?.backgrounds.map((bg, index) => (
                   <CCarouselItem key={index}>
-                    <div className="flex-center justify-evenly flex-row w-full h-[30vh] relative">
+                    <div className="flex-center justify-evenly flex-row w-full h-[50vh] relative">
                       <img
                         src={bg}
                         alt={`bg${index}`}
-                        className="bg-white w-fit h-[30vh] border-4 border-white"
+                        className="bg-white w-fit h-[50vh] border-4 border-white"
                       />
                       <input
                         type="radio"
@@ -158,7 +199,7 @@ function OrderPage() {
                         onChange={(e) =>
                           handleChange(e.target.name, e.target.value)
                         }
-                        className="size-6 absolute bottom-2"
+                        className="size-6 absolute bottom-4 text-yellow focus:outline-yellow"
                       />
                     </div>
                   </CCarouselItem>
@@ -166,31 +207,46 @@ function OrderPage() {
               </CCarousel>
             </div>
           </div>
-          <div className="full-size text-[3rem] bg-green relative">
+
+          {/* number_of_heads & picture_style */}
+          <div className="full-size text-[2.5rem] bg-green relative">
             <div className="absolute z-10 flex flex-col py-[2rem] px-[5rem] w-full h-[90vh]">
-              <h1 className="text-white">
+              <h1 className="text-white font-extrabold">
                 Step 2: Select Number of People and Pets
               </h1>
               <div className="w-[90%] h-[15vh] flex-center justify-evenly flex-wrap">
                 {Category?.number_of_heads.map((num) => (
-                  <CButton
-                    color="light"
-                    variant="outline"
+                  <button
+                    type="button"
                     key={num}
                     name="number_of_heads"
                     value={num}
                     onClick={() => handleChange("number_of_heads", num)}
-                    className={`border border-white w-[7%] h-[7vh] text-white rounded-lg text-[3rem] flex-center ${
-                      order.number_of_heads === num ? "bg-white text-black" : ""
+                    className={` w-[7%] h-[7vh] text-white rounded-lg text-[2.5rem] flex-center ${
+                      order.number_of_heads === num
+                        ? "border-double border-8 rounded-lg border-yellow"
+                        : "border border-white"
                     }`}
                   >
                     {num}
-                  </CButton>
+                  </button>
                 ))}
               </div>
-              <h1 className="text-white">Step 3: Select Picture Style</h1>
+              <h1 className="text-white font-extrabold">
+                Step 3: Select Picture Style
+              </h1>
               <div className="w-full h-[50vh] flex-center justify-evenly">
-                <div className="w-[30%] h-[35vh] flex-center flex-row relative">
+                <button
+                  type="button"
+                  name="picture_style"
+                  value="full_body"
+                  onClick={() => handleChange("picture_style", "full_body")}
+                  className={`w-[30%] h-[35vh] flex-center flex-row   ${
+                    order.picture_style === "full_body"
+                      ? "border-dashed border-8 rounded-lg border-yellow"
+                      : ""
+                  }`}
+                >
                   <img
                     src="/src/assets/full-size.png"
                     alt="full-body"
@@ -199,18 +255,18 @@ function OrderPage() {
                   <h1 className="flex flex-wrap text-[2rem] font-bold text-green">
                     FULL BODY
                   </h1>
-                  <input
-                    type="radio"
-                    name="picture_style"
-                    value="full_body"
-                    checked={order.picture_style === "full_body"}
-                    onChange={(e) =>
-                      handleChange(e.target.name, e.target.value)
-                    }
-                    className="size-6 absolute bottom-2 left-0"
-                  />
-                </div>
-                <div className="w-[30%] h-[35vh] flex-center flex-col relative">
+                </button>
+                <button
+                  type="button"
+                  name="picture_style"
+                  value="half_body"
+                  onClick={() => handleChange("picture_style", "half_body")}
+                  className={`w-[30%] h-[35vh] flex-center flex-col relative  ${
+                    order.picture_style === "half_body"
+                      ? "border-dashed border-8 rounded-lg border-yellow"
+                      : ""
+                  }`}
+                >
                   <img
                     src="/src/assets/hero-bg.png"
                     alt="half-body"
@@ -219,18 +275,19 @@ function OrderPage() {
                   <h1 className="flex flex-wrap text-[2rem] font-bold text-green">
                     HALF BODY
                   </h1>
-                  <input
-                    type="radio"
-                    name="picture_style"
-                    value="half_body"
-                    checked={order.picture_style === "half_body"}
-                    onChange={(e) =>
-                      handleChange(e.target.name, e.target.value)
-                    }
-                    className="size-6 absolute bottom-2 left-0"
-                  />
-                </div>
-                <div className="w-[30%] h-[35vh] flex-center flex-row relative">
+                </button>
+                <button
+                  type="button"
+                  name="picture_style"
+                  value="shoulders_up"
+                  onClick={() => handleChange("picture_style", "shoulders_up")}
+                  className={`w-[30%] h-[35vh] flex-center flex-row relative 
+                   ${
+                     order.picture_style === "shoulders_up"
+                       ? "border-dashed border-8 rounded-lg border-yellow"
+                       : ""
+                   }`}
+                >
                   <img
                     src="/src/assets/bob_head.png"
                     alt="shoulders_up"
@@ -239,17 +296,7 @@ function OrderPage() {
                   <h1 className="flex flex-wrap text-[2rem] font-bold text-green">
                     SHOULDERS UP
                   </h1>
-                  <input
-                    type="radio"
-                    name="picture_style"
-                    value="shoulders_up"
-                    checked={order.picture_style === "shoulders_up"}
-                    onChange={(e) =>
-                      handleChange(e.target.name, e.target.value)
-                    }
-                    className="size-6 absolute bottom-2 left-0"
-                  />
-                </div>
+                </button>
               </div>
             </div>
             <img
@@ -258,26 +305,46 @@ function OrderPage() {
               className="w-full max-h-screen absolute top-0 z-0"
             />
           </div>
-          <div className="w-full h-screen flex-center text-[3rem] bg-green flex-row flex-wrap">
+
+          {/* upload photo & notes */}
+          <div className="w-full h-screen flex-center text-[2.5rem] bg-green flex-row flex-wrap">
             <div className="w-[50%] h-screen text-white px-2 flex-center flex-col gap-[12.5rem]">
-              <h1>Step 4: Upload Your Photo</h1>
-              <div className="w-[50%] h-[20vh] border-[0.3rem] border-white rounded-[5rem] text-[3.5rem] flex-center">
-                <h1>Upload Image</h1>
+              <h1 className="font-extrabold">Step 4: Upload Your Photo</h1>
+              <div className="w-[50%] h-[20vh] border-[0.3rem] border-white rounded-[5rem] text-[3.5rem] flex-center cursor-pointer px-2 hover:border-dashed">
+                <input
+                  type="file"
+                  name="image"
+                  id="image"
+                  required
+                  className="file:bg-transparent file:text-white file:border-none file:cursor-pointer file:w-full file:h-[20vh] focus:rounded-full focus:outline-white focus:outline-dashed "
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      setOrder({ ...order, image: e.target.files[0] });
+                    }
+                  }}
+                />
               </div>
             </div>
             <div className="w-[50%] h-screen text-white px-2 flex-center flex-col gap-4">
-              <h1>Step 5: Additional Notes on your Order</h1>
+              <h1 className="font-extrabold">
+                Step 5: Additional Notes on your Order
+              </h1>
               <textarea
                 name="notes"
                 id="notes"
-                className="w-[80%] h-[40vh] rounded-2xl text-black text-[1.5rem] p-[1rem]"
+                className="w-[80%] h-[40vh] rounded-2xl text-black text-[1.5rem] p-[1rem] outline-none border-none focus:outline-yellow"
                 onChange={(e) => handleChange(e.target.name, e.target.value)}
+                placeholder="Drawing Notes (Describe Clothing, Background, Face, Pose, Names Etc..)"
               ></textarea>
             </div>
           </div>
+
+          {/* add-to-cart */}
           <div className="w-full h-[40vh] border-2 border-black flex-center">
-            <input type="hidden" value={0.99} name="amount" onChange={(e) => handleChange(e.target.name, e.target.value)}/>
-            <button type="submit" className="w-[30%] h-[30vh] border-2 border-black bg-pink rounded-[7rem] flex-center">
+            <button
+              type="submit"
+              className="w-[30%] h-[30vh] border-2 border-black hover:border-dashed  bg-pink rounded-[7rem] flex-center"
+            >
               <FontAwesomeIcon icon={faCartPlus} className="w-full h-[20vh]" />
             </button>
           </div>
