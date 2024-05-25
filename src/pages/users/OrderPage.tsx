@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { CCarousel, CCarouselItem } from "@coreui/react";
 import { Footer, Navbar } from "@components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { categories } from "@assets";
 import { useMutation } from "@tanstack/react-query";
 import { ALL_ITEMS, apiClientFormData } from "@utils";
+import ErrorToast from "../errors/ErrorToast";
 
 type Order = {
   background_url: string;
@@ -18,11 +19,12 @@ type Order = {
 };
 
 function OrderPage() {
-  const { params: paramspath } = useParams()
+  const navigate = useNavigate()
+  const { params: paramspath } = useParams();
   const Category = categories.find(
     (category) => category.category === paramspath
   );
-
+  const [error, setError] = useState<string | any>();
   const [order, setOrder] = useState<Order>({
     background_url: "",
     picture_style: "",
@@ -32,7 +34,10 @@ function OrderPage() {
     image: null,
   });
 
-  const handleChange = (name: string, value: string | number | File | Blob | null) => {
+  const handleChange = (
+    name: string,
+    value: string | number | File | Blob | null
+  ) => {
     setOrder((prevOrder) => ({
       ...prevOrder,
       [name]: value,
@@ -41,12 +46,12 @@ function OrderPage() {
 
   const convertOrderToFormData = (order: Order) => {
     const formData = new FormData();
-    formData.append('item[background_url]', order.background_url);
-    formData.append('item[picture_style]', order.picture_style);
-    formData.append('item[art_style]', order.art_style);
-    formData.append('item[number_of_heads]', order.number_of_heads.toString());
-    if (order.notes) formData.append('item[notes]', order.notes);
-    if (order.image) formData.append('item[image]', order.image);
+    formData.append("item[background_url]", order.background_url);
+    formData.append("item[picture_style]", order.picture_style);
+    formData.append("item[art_style]", order.art_style);
+    formData.append("item[number_of_heads]", order.number_of_heads.toString());
+    if (order.notes) formData.append("item[notes]", order.notes);
+    if (order.image) formData.append("item[image]", order.image);
 
     return formData;
   };
@@ -61,27 +66,41 @@ function OrderPage() {
       try {
         const formData = convertOrderToFormData(order);
         const response = await apiClientFormData.post(ALL_ITEMS, formData);
-        console.log(response);
+        if(response){
+          navigate("/checkout")
+        }
         return response;
-      } catch (error) {
-        throw new Error();
+      } catch (error: any) {
+        if (error.response && error.response.data) {
+          const errorMessages = Object.entries(error.response.data)
+            .map(([field, messages]) => {
+              return `${field.replace(/_/g, " ")} ${(messages as string[]).join(
+                ", "
+              )}`;
+            })
+            .join(", ");
+          setError(errorMessages);
+          throw new Error(errorMessages);
+        }
       }
-    },
-    onSuccess: (data) => {
-      console.log("Order created:", data);
-    },
-    onError: (error: any) => {
-      console.error("Error creating item:", error);
     },
   });
 
   return (
     <>
       <div className="full-size border-2 border-black bg-yellow">
+        {error ? (
+          <div className="fixed top-32 right-10 w-fit h-fit z-20 uppercase">
+            <ErrorToast msgerror={error} />
+          </div>
+        ) : (
+          ""
+        )}
+
         {/* navbar */}
         <Navbar />
         {/* sample works */}
-        <div className="full-size text-[3rem] flex-center relative">
+        <div className="full-size text-[2.5rem] flex-center relative">
           <img
             src="/src/assets/flower_neub.png"
             alt="flower"
@@ -121,8 +140,8 @@ function OrderPage() {
         {/* form */}
         <form onSubmit={handleSubmit}>
           {/* background_url */}
-          <div className="w-full h-[50vh] border-2 border-black flex-center text-[3rem] bg-blue relative">
-            <h1 className="absolute top-0 z-10 text-white">
+          <div className="w-full h-[50vh] border-2 border-black flex-center text-[2.5rem] bg-blue relative">
+            <h1 className="absolute top-4 z-10 text-white font-extrabold">
               Step 1: Select Background
             </h1>
             <img
@@ -151,7 +170,6 @@ function OrderPage() {
               className="absolute top-3 right-1/3 min-w-[10%] z-0"
             />
             <div className="absolute -bottom-8 w-[80%] h-[40vh] ">
-              {/* bug: form submitting when carousels arrow click */}
               <CCarousel
                 controls
                 interval={false}
@@ -191,9 +209,9 @@ function OrderPage() {
           </div>
 
           {/* number_of_heads & picture_style */}
-          <div className="full-size text-[3rem] bg-green relative">
+          <div className="full-size text-[2.5rem] bg-green relative">
             <div className="absolute z-10 flex flex-col py-[2rem] px-[5rem] w-full h-[90vh]">
-              <h1 className="text-white">
+              <h1 className="text-white font-extrabold">
                 Step 2: Select Number of People and Pets
               </h1>
               <div className="w-[90%] h-[15vh] flex-center justify-evenly flex-wrap">
@@ -204,7 +222,7 @@ function OrderPage() {
                     name="number_of_heads"
                     value={num}
                     onClick={() => handleChange("number_of_heads", num)}
-                    className={` w-[7%] h-[7vh] text-white rounded-lg text-[3rem] flex-center ${
+                    className={` w-[7%] h-[7vh] text-white rounded-lg text-[2.5rem] flex-center ${
                       order.number_of_heads === num
                         ? "border-double border-8 rounded-lg border-yellow"
                         : "border border-white"
@@ -214,7 +232,9 @@ function OrderPage() {
                   </button>
                 ))}
               </div>
-              <h1 className="text-white">Step 3: Select Picture Style</h1>
+              <h1 className="text-white font-extrabold">
+                Step 3: Select Picture Style
+              </h1>
               <div className="w-full h-[50vh] flex-center justify-evenly">
                 <button
                   type="button"
@@ -287,26 +307,28 @@ function OrderPage() {
           </div>
 
           {/* upload photo & notes */}
-          <div className="w-full h-screen flex-center text-[3rem] bg-green flex-row flex-wrap">
+          <div className="w-full h-screen flex-center text-[2.5rem] bg-green flex-row flex-wrap">
             <div className="w-[50%] h-screen text-white px-2 flex-center flex-col gap-[12.5rem]">
-              <h1>Step 4: Upload Your Photo</h1>
-              <div className="w-[50%] h-[20vh] border-[0.3rem] border-white rounded-[5rem] text-[3.5rem] flex-center">
-                <div>
-                  <input
-                    type="file"
-                    name="image"
-                    id=""
-                    onChange={(e) => {
-                      if (e.target.files) {
-                        setOrder({ ...order, image: e.target.files[0] });
-                      }
-                    }}
-                  />
-                </div>
+              <h1 className="font-extrabold">Step 4: Upload Your Photo</h1>
+              <div className="w-[50%] h-[20vh] border-[0.3rem] border-white rounded-[5rem] text-[3.5rem] flex-center cursor-pointer px-2 hover:border-dashed">
+                <input
+                  type="file"
+                  name="image"
+                  id="image"
+                  required
+                  className="file:bg-transparent file:text-white file:border-none file:cursor-pointer file:w-full file:h-[20vh] file:rounded-xl"
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      setOrder({ ...order, image: e.target.files[0] });
+                    }
+                  }}
+                />
               </div>
             </div>
             <div className="w-[50%] h-screen text-white px-2 flex-center flex-col gap-4">
-              <h1>Step 5: Additional Notes on your Order</h1>
+              <h1 className="font-extrabold">
+                Step 5: Additional Notes on your Order
+              </h1>
               <textarea
                 name="notes"
                 id="notes"
@@ -321,7 +343,7 @@ function OrderPage() {
           <div className="w-full h-[40vh] border-2 border-black flex-center">
             <button
               type="submit"
-              className="w-[30%] h-[30vh] border-2 border-black bg-pink rounded-[7rem] flex-center"
+              className="w-[30%] h-[30vh] border-2 border-black hover:border-dashed  bg-pink rounded-[7rem] flex-center"
             >
               <FontAwesomeIcon icon={faCartPlus} className="w-full h-[20vh]" />
             </button>

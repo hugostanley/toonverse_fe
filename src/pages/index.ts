@@ -2,6 +2,9 @@
 export { default as LandingPage } from "./LandingPage";
 export { default as UnauthorizedPage } from "./errors/Unauthorized";
 
+//Toast
+export {default as ErrorToast} from './errors/ErrorToast';
+
 //Dynamic Pages
 export { default as OrderPage } from "./users/OrderPage";
 export { default as Checkout } from "./users/Checkout";
