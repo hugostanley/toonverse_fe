@@ -38,15 +38,15 @@ function App() {
   
     // User Side
     {
-      path: "login", // Add leading slash
+      path: "login", 
       element: <UserLoginPage />,
     },
     {
-      path: "register", // Add leading slash
+      path: "register", 
       element: <UserRegisterPage />,
     },
     {
-      path: "account", // Add leading slash
+      path: "account", 
       element: <UserAccountLayout />,
       loader: userAccess,
       children: [
@@ -55,32 +55,32 @@ function App() {
           element: <UserAccountPage />,
         },
         {
-          path: "edit", // Add leading slash
+          path: "edit", 
           element: <EditProfilePage />,
         },
       ],
     },
     {
-      path: "order/:params", // Add leading slash
+      path: "order/:params", 
       element: <OrderPage />,
       loader: userAccess,
     },
     {
-      path: "checkout", // Add leading slash
+      path: "checkout", 
       element: <Checkout />,
     },
   
     // Workforce Side
     {
-      path: "w/login", // Add leading slash
+      path: "w/login", 
       element: <WorkforceLoginPage />,
     },
     {
-      path: "w/invitation/accept", // Add leading slash
+      path: "w/invitation/accept", 
       element: <InvitationPage />,
     },
     {
-      path: "admin", // Add leading slash
+      path: "admin", 
       element: <AdminLayout />,
       loader: adminAccess,
       children: [
@@ -89,13 +89,13 @@ function App() {
           element: <AdminDashboard />,
         },
         {
-          path: "artists", // Add leading slash
+          path: "artists", 
           element: <AllArtistsPage />,
         },
       ],
     },
     {
-      path: "w/dashboard", // Add leading slash
+      path: "w/dashboard", 
       element: <ArtistDashboard />,
       loader: artistAccess,
     },

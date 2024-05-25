@@ -88,19 +88,19 @@ function OrderPage() {
 
   return (
     <>
-      <div className="full-size border-2 border-black bg-yellow">
+      <div className="border-2 border-black bg-yellow">
         {error ? (
           <div className="fixed top-32 right-10 w-fit h-fit z-20 uppercase">
             <ErrorToast msgerror={error} />
           </div>
         ) : (
-          ""
+          null
         )}
 
         {/* navbar */}
         <Navbar />
         {/* sample works */}
-        <div className="full-size text-[2.5rem] flex-center relative">
+        <div className="w-full h-screen text-[2.5rem] flex-center relative">
           <img
             src="/src/assets/flower_neub.png"
             alt="flower"
@@ -121,11 +121,11 @@ function OrderPage() {
             alt="flower"
             className="absolute bottom-[8rem] right-[0.5rem] rotate-5"
           />
-          <div className="absolute w-full h-screen">
+          <div className="absolute w-full h-[90vh] top-4">
             <CCarousel controls indicators>
               {Category?.sample.map((sample, index) => (
                 <CCarouselItem key={index}>
-                  <div className="w-full h-screen flex-center">
+                  <div className="w-full h-[90vh] flex-center">
                     <img
                       src={sample}
                       alt={`sample${index + 1}`}
@@ -140,7 +140,7 @@ function OrderPage() {
         {/* form */}
         <form onSubmit={handleSubmit}>
           {/* background_url */}
-          <div className="w-full h-[50vh] border-2 border-black flex-center text-[2.5rem] bg-blue relative">
+          <div className="w-full h-[70vh] border-2 border-black flex-center text-[2.5rem] bg-blue relative">
             <h1 className="absolute top-4 z-10 text-white font-extrabold">
               Step 1: Select Background
             </h1>
@@ -169,7 +169,7 @@ function OrderPage() {
               alt="cloud"
               className="absolute top-3 right-1/3 min-w-[10%] z-0"
             />
-            <div className="absolute -bottom-8 w-[80%] h-[40vh] ">
+            <div className="absolute top-24 w-[80%] h-[50vh] ">
               <CCarousel
                 controls
                 interval={false}
@@ -185,11 +185,11 @@ function OrderPage() {
               >
                 {Category?.backgrounds.map((bg, index) => (
                   <CCarouselItem key={index}>
-                    <div className="flex-center justify-evenly flex-row w-full h-[30vh] relative">
+                    <div className="flex-center justify-evenly flex-row w-full h-[50vh] relative">
                       <img
                         src={bg}
                         alt={`bg${index}`}
-                        className="bg-white w-fit h-[30vh] border-4 border-white"
+                        className="bg-white w-fit h-[50vh] border-4 border-white"
                       />
                       <input
                         type="radio"
@@ -316,7 +316,7 @@ function OrderPage() {
                   name="image"
                   id="image"
                   required
-                  className="file:bg-transparent file:text-white file:border-none file:cursor-pointer file:w-full file:h-[20vh] file:rounded-xl"
+                  className="file:bg-transparent file:text-white file:border-none file:cursor-pointer file:w-full file:h-[20vh] focus:rounded-full focus:outline-white focus:outline-dashed "
                   onChange={(e) => {
                     if (e.target.files) {
                       setOrder({ ...order, image: e.target.files[0] });
