@@ -2,6 +2,10 @@
 
 
 export { default as Modal } from "./Modal";
+export { default as CartItems } from "./checkout/CartItems";
+export { default as CheckoutButton } from "./checkout/CheckoutButton";
+export { default as CheckoutModal } from "./checkout/CheckoutModal";
+
 export {default as GoogleOAuth } from './oauth/GoogleOAuth'
 export { default as Navbar } from './Navbar'
 export { default as LoginForm } from './LoginForm';

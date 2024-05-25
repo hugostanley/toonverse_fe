@@ -5,20 +5,21 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 
-import { adminAccess, artistAccess, userAccess } from '@utils';
-import { UserAccountLayout } from '@layouts';
+import { adminAccess, artistAccess, userAccess } from "@utils";
+import { AdminLayout, UserAccountLayout } from "@layouts";
 import {
   AdminDashboard,
+  AllArtistsPage,
   ArtistDashboard,
   EditProfilePage,
   InvitationPage,
+  Checkout,
   LandingPage,
   OrderPage,
-  Checkout,
   UnauthorizedPage,
   UserAccountPage,
   UserLoginPage,
-  UserRegisterPage, 
+  UserRegisterPage,
   WorkforceLoginPage,
 } from "@pages";
 
@@ -31,21 +32,21 @@ function App() {
       element: <LandingPage />,
     },
     {
-      path: "/no-access",
+      path: "no-access",
       element: <UnauthorizedPage />,
     },
-
+  
     // User Side
     {
-      path: "login",
+      path: "login", // Add leading slash
       element: <UserLoginPage />,
     },
     {
-      path: "register",
+      path: "register", // Add leading slash
       element: <UserRegisterPage />,
     },
     {
-      path: "account",
+      path: "account", // Add leading slash
       element: <UserAccountLayout />,
       loader: userAccess,
       children: [
@@ -54,37 +55,47 @@ function App() {
           element: <UserAccountPage />,
         },
         {
-          path: "edit",
+          path: "edit", // Add leading slash
           element: <EditProfilePage />,
         },
       ],
     },
     {
-      path: "order/:params",
+      path: "order/:params", // Add leading slash
       element: <OrderPage />,
       loader: userAccess,
     },
     {
-      path: "checkout",
+      path: "checkout", // Add leading slash
       element: <Checkout />,
     },
-
+  
     // Workforce Side
     {
-      path: "w/login",
+      path: "w/login", // Add leading slash
       element: <WorkforceLoginPage />,
     },
     {
-      path: '/w/invitation/accept',
+      path: "w/invitation/accept", // Add leading slash
       element: <InvitationPage />,
     },
     {
-      path: 'admin',
-      element: <AdminDashboard />,
+      path: "admin", // Add leading slash
+      element: <AdminLayout />,
       loader: adminAccess,
+      children: [
+        {
+          index: true,
+          element: <AdminDashboard />,
+        },
+        {
+          path: "artists", // Add leading slash
+          element: <AllArtistsPage />,
+        },
+      ],
     },
     {
-      path: 'w/dashboard',
+      path: "w/dashboard", // Add leading slash
       element: <ArtistDashboard />,
       loader: artistAccess,
     },

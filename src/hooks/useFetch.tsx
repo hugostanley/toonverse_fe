@@ -52,20 +52,20 @@ function useFetch(): UseFetchDataResponse {
         }
         return response.data;
       } else {
-        throw new Error('An unexpected error occurred.');
+        throw new Error("An unexpected error occurred.");
       }
     } catch (error) {
-      let errorMessages = '';
+      let errorMessages = "";
       if ((error as any).response && (error as any).response.data) {
         const responseData = (error as any).response.data;
         if (responseData.errors && responseData.errors.full_messages) {
-          errorMessages = responseData.errors.full_messages.join('. ');
+          errorMessages = responseData.errors.full_messages.join(". ");
         } else if (responseData.errors && Array.isArray(responseData.errors)) {
-          errorMessages = responseData.errors.join('. ');
+          errorMessages = responseData.errors.join(". ");
         }
       }
       setError(errorMessages);
-      console.error('API Error:', errorMessages);
+      console.error("API Error:", errorMessages);
     } finally {
       setIsLoading(false);
     }
