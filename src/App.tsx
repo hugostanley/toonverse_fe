@@ -25,7 +25,8 @@ import {
 
 function App() {
   const queryClient = new QueryClient();
-  const googleClient = '134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com'; // WIP: feat/oauth
+  const googleClient =
+    "134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com"; // WIP: feat/oauth
   const router = createBrowserRouter([
     {
       path: "/",
@@ -35,18 +36,18 @@ function App() {
       path: "no-access",
       element: <UnauthorizedPage />,
     },
-  
+
     // User Side
     {
-      path: "login", 
+      path: "login",
       element: <UserLoginPage />,
     },
     {
-      path: "register", 
+      path: "register",
       element: <UserRegisterPage />,
     },
     {
-      path: "account", 
+      path: "account",
       element: <UserAccountLayout />,
       loader: userAccess,
       children: [
@@ -55,32 +56,32 @@ function App() {
           element: <UserAccountPage />,
         },
         {
-          path: "edit", 
+          path: "edit",
           element: <EditProfilePage />,
         },
       ],
     },
     {
-      path: "order/:params", 
+      path: "order/:params",
       element: <OrderPage />,
       loader: userAccess,
     },
     {
-      path: "checkout", 
+      path: "checkout",
       element: <Checkout />,
     },
-  
+
     // Workforce Side
     {
-      path: "w/login", 
+      path: "w/login",
       element: <WorkforceLoginPage />,
     },
     {
-      path: "w/invitation/accept", 
+      path: "w/invitation/accept",
       element: <InvitationPage />,
     },
     {
-      path: "admin", 
+      path: "admin",
       element: <AdminLayout />,
       loader: adminAccess,
       children: [
@@ -89,13 +90,13 @@ function App() {
           element: <AdminDashboard />,
         },
         {
-          path: "artists", 
+          path: "artists",
           element: <AllArtistsPage />,
         },
       ],
     },
     {
-      path: "w/dashboard", 
+      path: "w/dashboard",
       element: <ArtistDashboard />,
       loader: artistAccess,
     },
