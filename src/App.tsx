@@ -5,34 +5,36 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 
-import { adminAccess, artistAccess, userAccess } from '@utils';
-import { UserAccountLayout } from '@layouts';
+import { adminAccess, artistAccess, userAccess } from "@utils";
+import { AdminLayout, UserAccountLayout } from "@layouts";
 import {
   AdminDashboard,
+  AllArtistsPage,
   ArtistDashboard,
   EditProfilePage,
   InvitationPage,
+  Checkout,
   LandingPage,
   OrderPage,
-  Checkout,
   UnauthorizedPage,
   UserAccountPage,
   UserLoginPage,
-  UserRegisterPage, 
+  UserRegisterPage,
   WorkforceLoginPage,
   ArtistProfileForm,
 } from "@pages";
 
 function App() {
   const queryClient = new QueryClient();
-  const googleClient = '134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com'; // WIP: feat/oauth
+  const googleClient =
+    "134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com"; // WIP: feat/oauth
   const router = createBrowserRouter([
     {
       path: "/",
       element: <LandingPage />,
     },
     {
-      path: "/no-access",
+      path: "no-access",
       element: <UnauthorizedPage />,
     },
 
@@ -77,16 +79,26 @@ function App() {
       element: <WorkforceLoginPage />,
     },
     {
-      path: '/w/invitation/accept',
+      path: "w/invitation/accept",
       element: <InvitationPage />,
     },
     {
-      path: 'admin',
-      element: <AdminDashboard />,
+      path: "admin",
+      element: <AdminLayout />,
       loader: adminAccess,
+      children: [
+        {
+          index: true,
+          element: <AdminDashboard />,
+        },
+        {
+          path: "artists",
+          element: <AllArtistsPage />,
+        },
+      ],
     },
     {
-      path: 'w/dashboard',
+      path: "w/dashboard",
       element: <ArtistDashboard />,
       loader: artistAccess,
     },

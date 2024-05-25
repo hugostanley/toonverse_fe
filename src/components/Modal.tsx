@@ -12,7 +12,7 @@ function Modal({ open, onClose, children }: ModalProps) {
   return (
     <>
       <div
-        className={`fixed inset-0 flex justify-center items-center transition-colors ${
+        className={`fixed z-10 inset-0 flex justify-center items-center transition-colors ${
           open ? "visible bg-dark" : "invisible"
         }`}
         onClick={onClose}
