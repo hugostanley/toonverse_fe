@@ -1,10 +1,9 @@
 // Static Pages
-import ArtistProfileForm from './workforce/artist/ArtistProfileForm';
 export { default as LandingPage } from "./LandingPage";
 export { default as UnauthorizedPage } from "./errors/Unauthorized";
 
 //Toast
-export {default as ErrorToast} from './errors/ErrorToast';
+export { default as ErrorToast } from "./errors/ErrorToast";
 
 //Dynamic Pages
 export { default as OrderPage } from "./users/OrderPage";
@@ -32,5 +31,5 @@ export { default as EditArtist } from "./workforce/admin/EditArtist";
 
 // Artist Side
 export { default as ArtistDashboard } from "./workforce/artist/ArtistDashboard";
-export { default as ArtistProfileForm } from "./workforce/artist/ArtistProfileForm";
+export { default as EditBio } from "./workforce/artist/EditBio";
 export { default as ArtistProfileInfo } from "./workforce/artist/ArtistProfileInfo";

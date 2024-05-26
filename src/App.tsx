@@ -21,7 +21,6 @@ import {
   UserLoginPage,
   UserRegisterPage,
   WorkforceLoginPage,
-  ArtistProfileForm,
 } from "@pages";
 
 function App() {
@@ -100,11 +99,6 @@ function App() {
     {
       path: "w/dashboard",
       element: <ArtistDashboard />,
-      loader: artistAccess,
-    },
-    {
-      path: 'w/addinfo',
-      element: <ArtistProfileForm />,
       loader: artistAccess,
     },
   ]);
