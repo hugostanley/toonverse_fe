@@ -1,9 +1,13 @@
 // Static Pages
-export { default as LandingPage } from './LandingPage';
-export { default as UnauthorizedPage } from './errors/Unauthorized';
+export { default as LandingPage } from "./LandingPage";
+export { default as UnauthorizedPage } from "./errors/Unauthorized";
+
+//Toast
+export {default as ErrorToast} from './errors/ErrorToast';
 
 //Dynamic Pages
-export { default as OrderPage } from './OrderPage';
+export { default as OrderPage } from "./users/OrderPage";
+export { default as Checkout } from "./users/Checkout";
 
 // User Side
 export { default as UserLoginPage } from "./users/auth/Login";
@@ -24,6 +28,8 @@ export { default as InviteArtist } from "./workforce/admin/InviteArtist";
 export { default as ArtistsList } from "./workforce/admin/ArtistsList";
 export { default as AllArtistsPage } from "./workforce/admin/AllArtists";
 export { default as EditArtist } from "./workforce/admin/EditArtist";
+export { default as AllClientsPage } from "./workforce/admin/AllClients";
+export { default as AllOrdersPage } from "./workforce/admin/AllOrders";
 
 // Artist Side
 export { default as ArtistDashboard } from "./workforce/artist/ArtistDashboard";

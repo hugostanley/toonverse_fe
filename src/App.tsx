@@ -21,6 +21,8 @@ import {
   UserLoginPage,
   UserRegisterPage,
   WorkforceLoginPage,
+  AllClientsPage,
+  AllOrdersPage,
 } from "@pages";
 
 function App() {
@@ -92,6 +94,14 @@ function App() {
         {
           path: "artists",
           element: <AllArtistsPage />,
+        },
+        {
+          path: "clients",
+          element: <AllClientsPage />,
+        },
+        {
+          path: "orders",
+          element: <AllOrdersPage />,
         },
       ],
     },
