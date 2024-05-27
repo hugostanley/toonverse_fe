@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { LogoutBtn } from "@components";
 import { W_LOGOUT_URL } from "@utils";
 import { faMarker, faIdBadge, faPencil } from "@fortawesome/free-solid-svg-icons";
@@ -22,9 +22,7 @@ type Artist = {
 type ArtistProfileProps = {
   artistData: Artist | null;
 };
-type EditArtistProps = {
-  artist?: Artist; // Making the artist prop optional
-};
+
 function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
   const [visible, setVisible] = useState(false);
   const [editBioVisible, setEditBioVisible] = useState(false);
@@ -69,8 +67,8 @@ function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
             <FontAwesomeIcon icon={faMarker} className="text-[2rem]" />
           </button>
 
-          <div className="w-[45%] h-[30vh] border-4 border-white rounded-full shadow-md shadow-black"></div>
-          <div className=" flex-center flex-col w-full h-[30vh]">
+          <div className="w-[45%] h-[30vh] border-4 border-white rounded-full shadow-md shadow-black bg-transparent"><img src="/src/assets/profile-icon.png" alt="profile-icon" /></div>
+          <div className=" flex-center flex-col w-full h-[15vh]">
             <h1 className="capitalize text-[2.5rem] ">
               {artistData.first_name} {artistData.last_name}
             </h1>
@@ -90,7 +88,11 @@ function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
               )}
             </h1>
           </div>
-          <div className="w-full h-[30vh] flex-center">
+          <div className="w-full h-[45vh] flex-center flex-col justify-evenly">
+            {/* change ito link */}
+            <button className=" w-[30%] h-[5vh] flex-center bg-yellow shadow-md shadow-black rounded-xl">Works</button>
+            <button className=" w-[30%] h-[5vh] flex-center bg-yellow shadow-md shadow-black rounded-xl">Job History</button>
+            <button className=" w-[30%] h-[5vh] flex-center bg-yellow shadow-md shadow-black rounded-xl">Artwork Gallery</button>
             <button className=" w-[30%] h-[5vh] flex-center bg-pink shadow-md shadow-black rounded-xl">
               <LogoutBtn apiUrl={W_LOGOUT_URL} redirectPath="/w/login" />
             </button>
