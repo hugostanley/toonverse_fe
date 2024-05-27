@@ -1,9 +1,9 @@
 // Static Pages
-export { default as LandingPage } from "./LandingPage";
-export { default as UnauthorizedPage } from "./errors/Unauthorized";
+export { default as LandingPage } from './LandingPage';
+export { default as UnauthorizedPage } from './errors/Unauthorized';
 
 //Dynamic Pages
-export { default as OrderPage } from "./OrderPage";
+export { default as OrderPage } from './OrderPage';
 
 // User Side
 export { default as UserLoginPage } from "./users/auth/Login";

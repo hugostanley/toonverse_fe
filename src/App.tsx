@@ -13,6 +13,7 @@ import {
   ArtistDashboard,
   EditProfilePage,
   InvitationPage,
+  Checkout,
   LandingPage,
   OrderPage,
   UnauthorizedPage,
@@ -32,7 +33,7 @@ function App() {
       element: <LandingPage />,
     },
     {
-      path: "/no-access",
+      path: '/no-access',
       element: <UnauthorizedPage />,
     },
 
@@ -61,8 +62,13 @@ function App() {
       ],
     },
     {
-      path: "order",
+      path: "order/:params",
       element: <OrderPage />,
+      loader: userAccess,
+    },
+    {
+      path: "checkout",
+      element: <Checkout />,
     },
 
     // Workforce Side
@@ -71,7 +77,7 @@ function App() {
       element: <WorkforceLoginPage />,
     },
     {
-      path: "/w/invitation/accept",
+      path: '/w/invitation/accept',
       element: <InvitationPage />,
     },
     {
