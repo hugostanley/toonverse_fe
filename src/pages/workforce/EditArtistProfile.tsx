@@ -39,14 +39,18 @@ function EditArtistProfile({ artist, setVisible }: EditArtistProps) {
         queryKey: ["allArtists"],
         exact: true,
         refetchType: "all",
-      });
+      }),
+      queryClient.invalidateQueries({
+        queryKey: ["ArtistProfile"],
+        exact: true,
+        refetchType: "all",
+      }),
       setVisible(false);
     },
   });
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    F;
     const requestBody = {
       first_name: firstName,
       last_name: lastName,
