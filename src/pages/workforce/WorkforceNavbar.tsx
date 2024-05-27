@@ -19,9 +19,9 @@ function WorkforceNavbar({ loaderFn }: NavProps) {
     <CContainer fluid>
       <CNavbarBrand>
         <img
-          src="/src/assets/temp-logo.png"
+          src="/src/assets/temp-logo-white.png"
           alt="Logo"
-          className="h-10 rounded-full"
+          className="h-8 rounded-full"
         />
       </CNavbarBrand>
       <CNavbarToggler
@@ -34,9 +34,9 @@ function WorkforceNavbar({ loaderFn }: NavProps) {
         <COffcanvasHeader className='flex items-center gap-3 pt-8'>
           <COffcanvasTitle>
             <img
-              src="/src/assets/temp-logo.png"
+              src="/src/assets/temp-logo-white.png"
               alt="Logo"
-              className="h-10 rounded-full"
+              className="h-8 rounded-full"
             />
           </COffcanvasTitle>
           <CCloseButton className="text-reset" onClick={() => setVisible(false)} />
@@ -62,11 +62,18 @@ function WorkforceNavbar({ loaderFn }: NavProps) {
                   <CDropdownItem href="#" className='hover:bg-yellow'>Pending</CDropdownItem>
                   <CDropdownItem href="#" className='hover:bg-yellow'>In Progress</CDropdownItem>
                   <CDropdownDivider />
-                  <CDropdownItem href="#" className='hover:bg-yellow'>All Orders</CDropdownItem>
+                  <CDropdownItem href="/admin/orders" className='hover:bg-yellow'>All Orders</CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
+
+              <CNavItem>
+                <CNavLink href="/admin/clients" className='text-ivory'>
+                  Our Clients
+                </CNavLink>
+              </CNavItem>
             </div>
-            
+
+            {/* Navbar Lower Box */}
             <div className='py-4 flex flex-col gap-3 border-t-4 border-dark/45'>
               <CNavItem className='flex gap-3 items-center p-2 cursor-default'>
                 <FontAwesomeIcon icon={faUser} className='h-6 bg-yellow icon--boxed'/>

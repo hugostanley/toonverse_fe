@@ -1,50 +1,41 @@
 import { CButton, CForm, CFormInput, CModalFooter } from "@coreui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FormEvent, useState } from "react";
-import { ARTIST_PROFILE, apiClient } from "@utils";
+import { apiClient, USER_PROFILE } from "@utils";
 
-type Artist = {
+type Client = {
   email: string;
   id: number;
   first_name: string;
   last_name: string;
-  mobile_number: string;
   billing_address: string;
-  total_earnings: number;
   created_at: string;
   updated_at: string;
-  workforce_id: string;
 };
 
-type EditArtistProps = {
-  artist: Artist;
+type EditClientProps = {
+  client: Client;
   setVisible: (visible: boolean) => void;
 };
 
-function EditArtistProfile({ artist, setVisible }: EditArtistProps) {
-  const [email, setEmail] = useState(artist?.email || "");
-  const [firstName, setFirstName] = useState(artist?.first_name || "");
-  const [lastName, setLastName] = useState(artist?.last_name || "");
-  const [address, setAddress] = useState(artist?.billing_address || "");
-  const [mobile, setMobile] = useState(artist?.mobile_number || "");
+function EditClientProfile({ client, setVisible }: EditClientProps) {
+  const [email, setEmail] = useState(client?.email || "");
+  const [firstName, setFirstName] = useState(client?.first_name || "");
+  const [lastName, setLastName] = useState(client?.last_name || "");
+  const [address, setAddress] = useState(client?.billing_address || "");
 
   const [mutationError, setMutationError] = useState<string | null>(null);
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (formData: any) => {
-      return apiClient.patch(ARTIST_PROFILE(artist?.id), formData);
+      return apiClient.patch(USER_PROFILE(client?.id), formData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["allArtists"],
+        queryKey: ["allClients"],
         exact: true,
         refetchType: "all",
-      }),
-      queryClient.invalidateQueries({
-        queryKey: ["ArtistProfile"],
-        exact: true,
-        refetchType: "all",
-      }),
+      });
       setVisible(false);
     },
   });
@@ -56,7 +47,6 @@ function EditArtistProfile({ artist, setVisible }: EditArtistProps) {
       last_name: lastName,
       email,
       billing_address: address,
-      mobile_number: mobile,
     };
 
     try {
@@ -111,16 +101,6 @@ function EditArtistProfile({ artist, setVisible }: EditArtistProps) {
         className="field__input"
       />
 
-      <CFormInput
-        type="text"
-        id="inputMobile"
-        floatingLabel="Mobile Number"
-        value={mobile}
-        onChange={(e) => setMobile(e.target.value)}
-        placeholder="+639123123123"
-        className="field__input"
-      />
-
       {mutationError &&
         mutationError.split(". ").map((error, idx) => (
           <small key={idx} className="text-red-500">
@@ -142,4 +122,4 @@ function EditArtistProfile({ artist, setVisible }: EditArtistProps) {
   );
 }
 
-export default EditArtistProfile;
+export default EditClientProfile
