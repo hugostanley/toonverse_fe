@@ -83,9 +83,10 @@ function ArtistDashboard() {
                   Hello, {artistData?.first_name}!
                 </h1>
               </div>
-              <div className="w-[90%] h-[40vh] rounded-2xl border-4 border-green flex-center">
-                <h1>Total Earnings</h1>
-                <h1>Php {formattedEarnings}</h1>
+              <div className="w-[90%] h-[40vh] rounded-2xl border-4 border-green flex-center relative">
+                <h1 className="absolute top-4 right-8 text-[2.5rem] font-bold">Total Earnings</h1>
+                <h1 className="absolute left-32 text-[3.5rem] font-extrabold">₱ {formattedEarnings}</h1>
+                <h1 className="absolute bottom-16 left-40 text-[1.2rem]">+{formattedEarnings} {artistData.updated_at}</h1>
               </div>
               <div className="w-[90%] h-[40vh] flex-center flex-row justify-evenly">
                 <div className="w-[30%] h-[20vh] border-4 border-green rounded-2xl shadow-md shadow-dark flex-center">
