@@ -24,12 +24,18 @@ export { default as EditArtistProfile } from "./workforce/EditArtistProfile";
 
 // Admin Side
 export { default as AdminDashboard } from "./workforce/admin/AdminDashboard";
+//// Admin Side - Artists
 export { default as InviteArtist } from "./workforce/admin/InviteArtist";
 export { default as ArtistsList } from "./workforce/admin/ArtistsList";
 export { default as AllArtistsPage } from "./workforce/admin/AllArtists";
 export { default as EditArtist } from "./workforce/admin/EditArtist";
+//// Admin Side - Clients
 export { default as AllClientsPage } from "./workforce/admin/AllClients";
+export { default as EditClient } from "./workforce/admin/EditClient";
+export { default as EditClientProfile } from "./workforce/admin/EditClientProfile";
+//// Admin Side - Orders
 export { default as AllOrdersPage } from "./workforce/admin/AllOrders";
+export { default as OrdersTable } from "./workforce/admin/OrdersTable";
 
 // Artist Side
 export { default as ArtistDashboard } from "./workforce/artist/ArtistDashboard";

@@ -1,10 +1,11 @@
-import { ArtistsList, InviteArtist } from "@pages";
+import { ArtistsList, InviteArtist, OrdersTable } from "@pages";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBagShopping,
   faMoneyBillTrendUp,
   faPenNib,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function AdminDashboard() {
   return (
@@ -16,7 +17,10 @@ function AdminDashboard() {
             formClassName='flex flex-col gap-4 p-4'
           />
           <div className='flex flex-col gap-2 p-4 text-ivory'>
-            <h2 className='text-2xl tracking-wider'>Newest Artists</h2>
+            <Link to="artists">
+              <h2 className='text-2xl tracking-wider'>Newest Artists</h2>
+            </Link>
+            
             <ArtistsList className='border-t-2 border-ivory/45 border-dotted' />
           </div>
         </div>
@@ -48,13 +52,11 @@ function AdminDashboard() {
           </div>
         </div>
 
-        <div className='col-span-2 row-span-3 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md'>
+        <div className='col-span-3 row-span-3 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2'>
           <h2 className='text-2xl tracking-wider'>Order History</h2>
-          {/* <small>Note: Latest 10 only</small> */}
-        </div>
-
-        <div className='row-span-3 col-start-4 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2'>
-          <h2 className='text-2xl tracking-wider'>Recent Jobs</h2>
+          <div className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
+            <OrdersTable />
+          </div>
         </div>
       </div>
     </section>
