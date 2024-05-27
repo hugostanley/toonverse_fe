@@ -52,7 +52,7 @@ function AdminDashboard() {
           </div>
         </div>
 
-        <div className='col-span-3 row-span-3 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2'>
+        <div className='col-span-3 row-span-3 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2 overflow-y-auto'>
           <h2 className='text-2xl tracking-wider'>Order History</h2>
           <div className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
             <OrdersTable />
