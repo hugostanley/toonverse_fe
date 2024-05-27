@@ -76,15 +76,15 @@ function OrdersTable() {
                   </CTableDataCell>
 
                   <CTableDataCell className="pt-3">
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col">
                       <small>Art Style: {order.art_style}</small>
                       <small>Background: {order.background_url}</small>
                       <small>Number of Heads: {order.number_of_heads}</small>
                       <small>Picture Style: {order.picture_style}</small>
+                      <small>Notes: {order.notes ? order.notes : "N/A"}</small>
                       <Link to={order.reference_image} className="underline text-blue">
                         <small>Reference Image</small>
                       </Link>
-                      <small>Notes: {order.notes ? order.notes : "N/A"}</small>
                     </div>
                   </CTableDataCell>
 
