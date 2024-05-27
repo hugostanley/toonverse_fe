@@ -67,7 +67,7 @@ function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
             <FontAwesomeIcon icon={faMarker} className="text-[2rem]" />
           </button>
 
-          <div className="w-[45%] h-[30vh] border-4 border-white rounded-full shadow-md shadow-black bg-transparent"><img src="/src/assets/profile-icon.png" alt="profile-icon" /></div>
+          <img src="/src/assets/profile-icon.png" alt="profile-icon" className="w-[45%] h-[30vh] border-4 border-white rounded-full shadow-md shadow-black bg-transparent flex-center "/>
           <div className=" flex-center flex-col w-full h-[15vh]">
             <h1 className="capitalize text-[2.5rem] ">
               {artistData.first_name} {artistData.last_name}

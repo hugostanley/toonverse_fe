@@ -49,7 +49,7 @@ function ArtistDashboard() {
           <div className="loader"></div>
         ) : error ? (
           <div className="error">An error occurred while fetching data.</div>
-        ) : artistData ? ( // Conditionally render based on the presence of data and artistData
+        ) : artistData ? ( 
           <>
             <div
               className={`absolute top-0 ${
@@ -63,18 +63,18 @@ function ArtistDashboard() {
                 className="absolute right-2 top-16 w-[10%] h-[20vh] bg-green rounded-xl flex-center"
                 onClick={() => setVisible(false)}
               >
-                <div className="w-[60%] h-[5vh] rounded-full border-2 border-white">
-                  <img src="/src/assets/profile-icon.png" alt="profile-icon" />
-                </div>
+                
+                  <img src="/src/assets/profile-icon.png" alt="profile-icon" className="w-[60%] h-[5vh] rounded-full border-2 border-white" />
+                
               </button>
             </div>
             <button
               className="absolute -left-4 top-16 w-[5%] h-[20vh] bg-green rounded-xl flex-center shadow-md shadow-black"
               onClick={() => setVisible(true)}
             >
-              <div className="w-[50%] h-[5vh] rounded-full border-2 border-white">
-                <img src="/src/assets/profile-icon.png" alt="profile-icon" />
-              </div>
+           
+                <img src="/src/assets/profile-icon.png" alt="profile-icon" className="w-[50%] h-[5vh] rounded-full border-2 border-white"/>
+         
             </button>
 
             <div className="w-[65%] h-screen flex-center flex-col">
@@ -92,13 +92,14 @@ function ArtistDashboard() {
                   Pending Order
                 </div>
                 <div className="w-[30%] h-[20vh] border-4 border-green rounded-2xl shadow-md shadow-dark flex-center">
-                  Pending Order
+                  Job Done
                 </div>
               </div>
             </div>
             <div className="w-[35%] h-screen flex-center">
-              <div className="w-[95%] h-[90vh] border-4 border-green rounded-2xl">
-                order list
+              <div className="w-[95%] h-[90vh] border-4 border-green rounded-2xl flex-center flex-col">
+                <img src="/src/assets/temp-logo.png" alt="logo" className="w-[70%] "/>
+                <div className="w-full h-[80vh]"></div>
               </div>
             </div>
           </>
