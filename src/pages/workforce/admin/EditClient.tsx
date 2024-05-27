@@ -6,26 +6,23 @@ import {
   CModalTitle,
 } from "@coreui/react";
 import { useState } from "react";
-import { EditArtistProfile } from "@pages";
+import { EditClientProfile } from "@pages";
 
-type Artist = {
+type Client = {
   email: string;
   id: number;
   first_name: string;
   last_name: string;
-  mobile_number: string;
   billing_address: string;
-  total_earnings: number;
   created_at: string;
   updated_at: string;
-  workforce_id: string;
 };
 
-type EditArtistProps = {
-  artist: Artist;
+type EditClientProps = {
+  client: Client;
 };
 
-function EditArtist({ artist }: EditArtistProps) {
+function EditClient({ client }: EditClientProps) {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -46,15 +43,15 @@ function EditArtist({ artist }: EditArtistProps) {
       >
         <CModalHeader>
           <CModalTitle id="VerticallyCenteredExample" className="text-2xl pt-2">
-            Edit Artist Profile
+            Edit Client Profile
           </CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <EditArtistProfile artist={artist} setVisible={setVisible} />
+          <EditClientProfile client={client} setVisible={setVisible} />
         </CModalBody>
       </CModal>
     </>
   );
 }
 
-export default EditArtist;
+export default EditClient

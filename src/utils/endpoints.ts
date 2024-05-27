@@ -24,5 +24,9 @@ export const ALL_ITEMS = `/api/v1/items`; //GET | POST
 export const ITEM = (id: number) => `/api/v1/items/${id}`; // GET | PATCH | PUT | DELETE
 export const DELETE_ITEM = (id: number) => `/api/v1/items/${id}`;
 
-//Payment
+// Payment
 export const PAYMENT = `${BASE_URL}/api/v1/payments`;
+
+// Orders
+export const ALL_ORDERS = '/api/v1/orders'; // GET | POST
+export const ORDER = (id: number) => `/api/v1/orders/${id}`; // GET | PATCH | PUT | DELETE

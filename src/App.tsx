@@ -21,6 +21,8 @@ import {
   UserLoginPage,
   UserRegisterPage,
   WorkforceLoginPage,
+  AllClientsPage,
+  AllOrdersPage,
 } from "@pages";
 
 function App() {
@@ -33,7 +35,7 @@ function App() {
       element: <LandingPage />,
     },
     {
-      path: "no-access",
+      path: '/no-access',
       element: <UnauthorizedPage />,
     },
 
@@ -78,7 +80,7 @@ function App() {
       element: <WorkforceLoginPage />,
     },
     {
-      path: "w/invitation/accept",
+      path: '/w/invitation/accept',
       element: <InvitationPage />,
     },
     {
@@ -93,6 +95,14 @@ function App() {
         {
           path: "artists",
           element: <AllArtistsPage />,
+        },
+        {
+          path: "clients",
+          element: <AllClientsPage />,
+        },
+        {
+          path: "orders",
+          element: <AllOrdersPage />,
         },
       ],
     },
