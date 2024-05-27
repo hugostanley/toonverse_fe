@@ -33,3 +33,4 @@ export { default as EditArtist } from "./workforce/admin/EditArtist";
 export { default as ArtistDashboard } from "./workforce/artist/ArtistDashboard";
 export { default as EditBio } from "./workforce/artist/EditBio";
 export { default as ArtistProfileInfo } from "./workforce/artist/ArtistProfileInfo";
+export {default as NewArtistForm} from './workforce/artist/NewArtistForm';

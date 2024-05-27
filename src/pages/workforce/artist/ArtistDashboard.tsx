@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@utils";
 import { ALL_ARTISTS } from "@utils";
 import ArtistProfileInfo from "./ArtistProfileInfo"; // Import the component
+import NewArtistForm from "./NewArtistForm";
 
 type Artist = {
   email: string;
@@ -34,7 +35,7 @@ function ArtistDashboard() {
     if (data && data.length > 0) {
       setArtistData(data[0]);
     }
-  }, [data, artistData, visible]);
+  }, [data, artistData]);
 
   const formattedEarnings =
     artistData && typeof artistData.total_earnings === "number"
@@ -48,7 +49,7 @@ function ArtistDashboard() {
           <div className="loader"></div>
         ) : error ? (
           <div className="error">An error occurred while fetching data.</div>
-        ) : (
+        ) : artistData ? ( // Conditionally render based on the presence of data and artistData
           <>
             <div
               className={`absolute top-0 ${
@@ -62,14 +63,18 @@ function ArtistDashboard() {
                 className="absolute right-2 top-16 w-[10%] h-[20vh] bg-green rounded-xl flex-center"
                 onClick={() => setVisible(false)}
               >
-                <div className="w-[60%] h-[5vh] rounded-full border-2 border-white"><img src="/src/assets/profile-icon.png" alt="profile-icon" /></div>
+                <div className="w-[60%] h-[5vh] rounded-full border-2 border-white">
+                  <img src="/src/assets/profile-icon.png" alt="profile-icon" />
+                </div>
               </button>
             </div>
             <button
               className="absolute -left-4 top-16 w-[5%] h-[20vh] bg-green rounded-xl flex-center shadow-md shadow-black"
               onClick={() => setVisible(true)}
             >
-              <div className="w-[50%] h-[5vh] rounded-full border-2 border-white"><img src="/src/assets/profile-icon.png" alt="profile-icon" /></div>
+              <div className="w-[50%] h-[5vh] rounded-full border-2 border-white">
+                <img src="/src/assets/profile-icon.png" alt="profile-icon" />
+              </div>
             </button>
 
             <div className="w-[65%] h-screen flex-center flex-col">
@@ -97,6 +102,8 @@ function ArtistDashboard() {
               </div>
             </div>
           </>
+        ) : (
+          <NewArtistForm />
         )}
       </div>
     </main>
