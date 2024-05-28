@@ -7,8 +7,9 @@ import {
   CTableRow,
 } from "@coreui/react";
 import { useQuery } from "@tanstack/react-query";
-import { ALL_JOBS, apiClient, formatCreatedAt } from "@utils";
+import { ALL_JOBS, apiClient, formatCreatedAt, statusColors, baseURL } from "@utils";
 import { Spinner } from "@components";
+import { Link } from "react-router-dom";
 
 type Jobs = {
   id: number;
@@ -18,8 +19,10 @@ type Jobs = {
   commission: string;
   created_at: string;
   updated_at: string;
-  status: string;
+  status: 'queued' | 'in_progress' | 'delivered' | 'completed';
   email: string;
+  latest_artwork?: string | null;
+  latest_artwork_revision?: string | null;
 };
 
 function AllJobs() {
@@ -51,6 +54,7 @@ function AllJobs() {
                 <CTableHeaderCell scope="col">Commission</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Claim Timestamp</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Artwork</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Latest Artwork</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Status</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
@@ -74,12 +78,25 @@ function AllJobs() {
                       {formatCreatedAt(job.claimed_at)}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
-                      <button className="btn__primary bg-orange">
+                      <button className="btn__primary bg-pink">
                         Upload Artwork
                       </button>
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
+                    {job.latest_artwork && (
+                      <Link
+                        to={`${baseURL}${job.latest_artwork}`}
+                        className="text-blue underline"
+                        target="_blank"
+                      >
+                        {`REV ${job.latest_artwork_revision}: Artwork Link`}
+                      </Link>
+                    )}
+                    </CTableDataCell>
+                    <CTableDataCell className="py-3">
+                    <div className={`btn__primary bg-${statusColors[job.status]}`}>
                       {job.status}
+                    </div>
                     </CTableDataCell>
                   </CTableRow>
                 ))}
