@@ -25,9 +25,7 @@ function ArtistsList({ className }: Props) {
       const response = await apiClient.get(ALL_ARTISTS);
       return response.data;
     },
-  });
-
-  // console.log('ALL_ARTISTS:', data);
+  })
 
   return (
     <div className='w-full h-full py-2 flex flex-col gap-1'>
@@ -37,7 +35,7 @@ function ArtistsList({ className }: Props) {
         </div>
       ) : (
         data &&
-        data.map((artist) => (
+        data.slice(0, 4).map((artist) => (
           <div
             key={artist.id}
             className={`group flex flex-col gap-1 px-3 py-3 cursor-default ${className}`}
@@ -47,9 +45,6 @@ function ArtistsList({ className }: Props) {
               <small>{`${artist.first_name} ${artist.last_name}`}</small>|
               <small>{artist.mobile_number}</small>
             </div>
-
-            {/* TODO: 
-                - only show latest 10 artists (dynamic value ) */}
           </div>
         ))
       )}
@@ -57,4 +52,4 @@ function ArtistsList({ className }: Props) {
   );
 }
 
-export default ArtistsList;
+export default ArtistsList
