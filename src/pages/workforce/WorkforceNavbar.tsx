@@ -1,4 +1,4 @@
-import { CCloseButton, CContainer, CDropdown, CDropdownDivider, CDropdownItem, CDropdownMenu, CDropdownToggle, CNavItem, CNavLink, CNavbar, CNavbarBrand, CNavbarNav, CNavbarToggler, COffcanvas, COffcanvasBody, COffcanvasHeader, COffcanvasTitle } from '@coreui/react';
+import { CCloseButton, CContainer, CNavItem, CNavLink, CNavbar, CNavbarBrand, CNavbarNav, CNavbarToggler, COffcanvas, COffcanvasBody, COffcanvasHeader, COffcanvasTitle } from '@coreui/react';
 import { useState } from 'react';
 import { useLoaderData } from 'react-router-typesafe';
 import { LogoutBtn } from '@components';
@@ -18,11 +18,13 @@ function WorkforceNavbar({ loaderFn }: NavProps) {
     <CNavbar className="bg-green h-[8%] shadow-md sticky top-0">
     <CContainer fluid>
       <CNavbarBrand>
-        <img
-          src="/src/assets/temp-logo-white.png"
-          alt="Logo"
-          className="h-8 rounded-full"
-        />
+        <CNavLink  href="/admin" >
+          <img
+            src="/src/assets/temp-logo-white.png"
+            alt="Logo"
+            className="h-8 rounded-full"
+          />
+        </CNavLink>
       </CNavbarBrand>
       <CNavbarToggler
         aria-controls="offcanvasNavbar"
@@ -33,11 +35,13 @@ function WorkforceNavbar({ loaderFn }: NavProps) {
       <COffcanvas id="offcanvasNavbar" placement="end" portal={false} visible={visible} onHide={() => setVisible(false)} className='bg-green shadow-md'>
         <COffcanvasHeader className='flex items-center gap-3 pt-8'>
           <COffcanvasTitle>
-            <img
-              src="/src/assets/temp-logo-white.png"
-              alt="Logo"
-              className="h-8 rounded-full"
-            />
+            <CNavLink  href="/" >
+              <img
+                src="/src/assets/temp-logo-white.png"
+                alt="Logo"
+                className="h-8 rounded-full"
+              />
+            </CNavLink>
           </COffcanvasTitle>
           <CCloseButton className="text-reset" onClick={() => setVisible(false)} />
         </COffcanvasHeader>
@@ -52,23 +56,19 @@ function WorkforceNavbar({ loaderFn }: NavProps) {
 
               <CNavItem>
                 <CNavLink href="/admin/artists" className='text-ivory'>
-                  Our Artists
+                  Artists
                 </CNavLink>
               </CNavItem>
 
-              <CDropdown variant="nav-item" popper={false}>
-                <CDropdownToggle className='text-ivory'>Orders</CDropdownToggle>
-                <CDropdownMenu className='bg-ivory'>
-                  <CDropdownItem href="#" className='hover:bg-yellow'>Pending</CDropdownItem>
-                  <CDropdownItem href="#" className='hover:bg-yellow'>In Progress</CDropdownItem>
-                  <CDropdownDivider />
-                  <CDropdownItem href="/admin/orders" className='hover:bg-yellow'>All Orders</CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
+              <CNavItem>
+                <CNavLink href="/admin/orders" className='text-ivory'>
+                  Orders
+                </CNavLink>
+              </CNavItem>
 
               <CNavItem>
                 <CNavLink href="/admin/clients" className='text-ivory'>
-                  Our Clients
+                  Clients
                 </CNavLink>
               </CNavItem>
             </div>
