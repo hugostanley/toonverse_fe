@@ -80,7 +80,7 @@ function AllArtists() {
                       {artist.billing_address}
                     </CTableDataCell>
                     <CTableDataCell className="pt-3">
-                      {artist.mobile_number}
+                      +63{artist.mobile_number}
                     </CTableDataCell>
                     <CTableDataCell className="pt-3">
                       {artist.total_earnings}
