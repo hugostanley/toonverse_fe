@@ -6,8 +6,10 @@ function AllOrders() {
       <h1 className="w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header">
         Orders
       </h1>
-      <section className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-        <OrdersTable />
+      <section className="w-full max-h-full px-2 overflow-y-auto">
+        <div className="px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
+          <OrdersTable />
+        </div>
       </section>
     </main>
   )

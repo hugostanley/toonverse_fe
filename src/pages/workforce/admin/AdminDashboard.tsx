@@ -68,10 +68,12 @@ function AdminDashboard() {
           </div>
         </div>
 
-        <div className='col-span-4 row-span-4 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2 overflow-y-auto'>
+        <div className='col-span-4 row-span-4 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2'>
           <h2 className='text-2xl tracking-wider font-bold'>All Orders</h2>
-          <div className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-            <OrdersTable />
+          <div className="w-full max-h-full px-2 overflow-y-auto">
+            <div className="px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
+              <OrdersTable />
+            </div>
           </div>
         </div>
       </div>
