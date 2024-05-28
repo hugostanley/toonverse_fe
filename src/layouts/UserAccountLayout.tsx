@@ -3,12 +3,12 @@ import { Outlet, useOutletContext } from 'react-router-dom';
 import { useLoaderData } from 'react-router-typesafe';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { LogoutBtn, Navbar } from '@components';
-import { ALL_USERS, LOGOUT_URL, apiClient, userAccess } from '@utils';
+import { Navbar } from '@components';
+import { ALL_USERS, apiClient, userAccess } from '@utils';
 
 type LoaderData = {
   id: number;
-  email: string;
+  email: string
 }
 
 type User = {
@@ -62,10 +62,7 @@ function UserAccountLayout() {
       </div>      
       <Outlet context={{ userData, data: data ?? null, isPending, isError } satisfies LoaderContext & ProfileContext} />
       
-      <div className='br p-2'>
-        <small>Note: Add logout button as dropdown thingy on account icon</small>
-        <LogoutBtn apiUrl={LOGOUT_URL} redirectPath='/login' className='bg-blue w-1/4' />
-      </div>
+   
     </main>
   )
 }

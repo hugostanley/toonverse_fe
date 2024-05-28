@@ -43,7 +43,7 @@ function ArtistsList({ className }: Props) {
             <h1 className='tracking-widest'>{artist.email}</h1>
             <div className='font-light flex items-center gap-2 opacity-70'>
               <small>{`${artist.first_name} ${artist.last_name}`}</small>|
-              <small>{artist.mobile_number}</small>
+              <small>+63{artist.mobile_number}</small>
             </div>
           </div>
         ))
