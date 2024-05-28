@@ -14,6 +14,7 @@ export { default as UserLoginPage } from "./users/auth/Login";
 export { default as UserRegisterPage } from "./users/auth/Register";
 export { default as UserAccountPage } from "./users/account/UserAccount";
 export { default as EditProfilePage } from "./users/account/EditProfile";
+export { default as UserOrdersTable } from "./users/account/UserOrdersTable";
 
 // Workforce Side
 export { default as WorkforceLoginPage } from "./workforce/auth/Login";
