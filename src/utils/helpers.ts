@@ -5,14 +5,14 @@ export function getLocalStorage(key: string): any | null {
 }
 
 export function setLocalStorage(key: string, value: any): void {
-  localStorage.setItem(key, JSON.stringify(value))
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
 export const formatCreatedAt = (date: string) => new Date(date).toUTCString();
 
 export const statusColors = {
-  queued: 'gray',
-  in_progress: 'orange',
-  delivered: 'blue',
-  completed: 'green',
+  queued: "gray",
+  in_progress: "orange",
+  delivered: "blue",
+  completed: "green",
 };
