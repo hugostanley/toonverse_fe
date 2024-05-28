@@ -1,5 +1,4 @@
 import {
-  CButton,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -9,7 +8,7 @@ import {
 } from "@coreui/react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ALL_ORDERS, apiClient, formatCreatedAt, getLocalStorage } from "@utils";
+import { ALL_ORDERS, apiClient, formatCreatedAt } from "@utils";
 import { Spinner } from "@components";
 import { ClaimOrder } from "@pages";
 
@@ -33,7 +32,6 @@ type Order = {
 };
 
 function OrdersTable() {
-  const { data: currentUserData } = getLocalStorage("AccountData");
   const { data, isLoading } = useQuery<Order[]>({
     queryKey: ["allOrders"],
     queryFn: async () => {
@@ -81,13 +79,13 @@ function OrdersTable() {
                   </CTableDataCell>
 
                   <CTableDataCell className="pt-3">
-                    <div className="flex flex-col">
-                      <span>Art Style: {order.art_style}</span>
-                      <span>Background: {order.background_url}</span>
+                    <div className="flex flex-col gap-1">
+                      <span>Art Style: {order.art_style}</span>                      
                       <span>Number of Heads: {order.number_of_heads}</span>
                       <span>Picture Style: {order.picture_style}</span>
-                      <span>Notes: {order.notes ? order.notes : "N/A"}</span>
-                      <Link to={order.reference_image} target="_blank" className="underline text-blue">
+                      <span>Notes: {order.notes ? order.notes : "N/A"}</span>    
+                      <Link to={order.background_url} target="_blank" className="underline underline-offset-2 text-blue hover:text-green">Background Url</Link>
+                      <Link to={order.reference_image} target="_blank" className="underline underline-offset-2 text-blue hover:text-green">
                         <span>Reference Image</span>
                       </Link>
                     </div>
@@ -113,7 +111,7 @@ function OrdersTable() {
                     {/* TODO: send patch request to individual order endpoint to update order_status fro "queued" to "in_progress" on click of Claim button */}
 
                     {order.order_status === "queued" ? (
-                      <ClaimOrder order={order} role={currentUserData.role}/>
+                      <ClaimOrder order={order} />
                     ) : (
                       order.workforce_id
                     )}
