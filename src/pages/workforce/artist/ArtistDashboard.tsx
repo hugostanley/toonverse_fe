@@ -43,7 +43,7 @@ function ArtistDashboard() {
       : "0.00";
 
   return (
-    <main>
+    <main >
       <div className="full-size flex-center flex-row bg-ivory relative">
         {isLoading ? (
           <div className="loader"></div>
@@ -51,16 +51,17 @@ function ArtistDashboard() {
           <div className="error">An error occurred while fetching data.</div>
         ) : artistData ? ( 
           <>
+          {/* sidebar */}
             <div
               className={`absolute top-0 ${
-                visible ? "-left-4" : "-left-[50rem]"
-              } w-[40%] h-screen transition-all duration-300`}
+                visible ? "right-0" : "hidden"
+              } w-[40%] max-w-[40%] h-screen `}
             >
-              <div className="relative w-[90%] h-screen bg-green rounded-2xl flex-center z-10">
+              <div className="absolute right-0 w-[90%] h-screen bg-green rounded-tl-2xl rounded-bl-2xl flex-center z-10">
                 <ArtistProfileInfo artistData={artistData} />
               </div>
               <button
-                className="absolute right-2 top-16 w-[10%] h-[20vh] bg-green rounded-xl flex-center"
+                className="absolute left-0 top-16 w-[10%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center"
                 onClick={() => setVisible(false)}
               >
                 
@@ -69,7 +70,7 @@ function ArtistDashboard() {
               </button>
             </div>
             <button
-              className="absolute -left-4 top-16 w-[5%] h-[20vh] bg-green rounded-xl flex-center shadow-md shadow-black"
+              className="absolute right-0 top-16 w-[5%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
               onClick={() => setVisible(true)}
             >
            
@@ -77,6 +78,7 @@ function ArtistDashboard() {
          
             </button>
 
+              {/* dashboard */}
             <div className="w-[65%] h-screen flex-center flex-col">
               <div className="w-[90%] h-[20vh] flex-center">
                 <h1 className="text-[3rem] capitalize font-extrabold">
@@ -85,8 +87,8 @@ function ArtistDashboard() {
               </div>
               <div className="w-[90%] h-[40vh] rounded-2xl border-4 border-green flex-center relative">
                 <h1 className="absolute top-4 right-8 text-[2.5rem] font-bold">Total Earnings</h1>
-                <h1 className="absolute left-32 text-[3.5rem] font-extrabold">₱ {formattedEarnings}</h1>
-                <h1 className="absolute bottom-16 left-40 text-[1.2rem]">+{formattedEarnings} {artistData.updated_at}</h1>
+                <h1 className="absolute right-32 text-[3.5rem] font-extrabold">₱ {formattedEarnings}</h1>
+                <h1 className="absolute bottom-16 right-40 text-[1.2rem]">+{formattedEarnings} {artistData.updated_at}</h1>
               </div>
               <div className="w-[90%] h-[40vh] flex-center flex-row justify-evenly">
                 <div className="w-[30%] h-[20vh] border-4 border-green rounded-2xl shadow-md shadow-dark flex-center">

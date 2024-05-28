@@ -29,15 +29,15 @@ function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
 
 
   return (
-    <div className="w-[90%] h-screen text-white font-bold flex-center flex-col relative py-4">
+    <div className="w-full h-screen text-white font-bold flex-center flex-col relative py-4">
       {artistData ? (
         <>
           <div
             className={`absolute ${
-              visible ? "-left-4" : "-left-[50rem]"
-            } top-4 w-full h-[95vh] transition-all duration-300 z-10`}
+              visible ? "right-0" : "hidden"
+            } top-4 w-full h-[95vh] z-10`}
           >
-            <div className="bg-pink w-[90%] h-[95vh] rounded-2xl flex-center flex-col gap-4">
+            <div className="bg-pink w-[90%] h-[95vh] rounded-tl-2xl rounded-bl-2xl flex-center flex-col gap-4 absolute right-0">
               <h1 className="text-[2.5rem]">
                 <FontAwesomeIcon icon={faIdBadge} className="rotate-12" />
                 Personal Details
@@ -54,20 +54,20 @@ function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
               <EditArtist artist={artistData} />
             </div>
             <button
-              className="absolute right-0 top-16 w-[15%] h-[20vh] bg-pink rounded-xl"
+              className="absolute left-0 top-16 w-[15%] h-[20vh] bg-pink rounded-tl-xl rounded-bl-xl"
               onClick={() => setVisible(false)}
             >
               <FontAwesomeIcon icon={faMarker} className="text-[2rem]" />
             </button>
           </div>
           <button
-            className="absolute -left-6 top-20 w-[15%] h-[20vh] bg-pink rounded-xl flex-center shadow-md shadow-black"
+            className="absolute right-0 top-20 w-[15%] h-[20vh] bg-pink rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
             onClick={() => setVisible(true)}
           >
             <FontAwesomeIcon icon={faMarker} className="text-[2rem]" />
           </button>
 
-          <img src="/src/assets/profile-icon.png" alt="profile-icon" className="w-[45%] h-[30vh] border-4 border-white rounded-full shadow-md shadow-black bg-transparent flex-center "/>
+          <img src="/src/assets/profile-icon.png" alt="profile-icon" className="w-[50%] h-[40vh] border-4 border-white rounded-full shadow-md shadow-black bg-transparent flex-center "/>
           <div className=" flex-center flex-col w-full h-[15vh]">
             <h1 className="capitalize text-[2.5rem] ">
               {artistData.first_name} {artistData.last_name}
