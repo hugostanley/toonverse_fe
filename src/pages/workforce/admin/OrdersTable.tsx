@@ -1,5 +1,4 @@
 import {
-  CButton,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -7,17 +6,17 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from "@coreui/react";
-import { useQuery } from "@tanstack/react-query";
-import { ALL_ORDERS, apiClient, formatCreatedAt } from "@utils";
-import { Spinner } from "@components";
 import { Link } from "react-router-dom";
+import { formatCreatedAt } from "@utils";
+import { Spinner } from "@components";
+import { ClaimOrder } from "@pages";
 
 type Order = {
   id: number;
   item_id: number;
   payment_id: number;
   workforce_id: number;
-  amount: number;
+  amount: string;
   order_status: string;
   background_url: string;
   number_of_heads: string;
@@ -25,18 +24,19 @@ type Order = {
   art_style: string;
   notes?: string | null;
   reference_image: string;
+  latest_artwork?: string | null;
+  latest_artwork_revision?: string | null;
   created_at: string;
   updated_at: string;
 };
 
-function OrdersTable() {
-  const { data, isLoading } = useQuery<Order[]>({
-    queryKey: ["allOrders"],
-    queryFn: async () => {
-      const response = await apiClient.get(ALL_ORDERS);
-      return response.data;
-    },
-  });
+type OrdersTableProps = {
+  data: Order[];
+  isLoading: boolean;
+}
+
+
+function OrdersTable({ data, isLoading }: OrdersTableProps) {
   return (
     <>
       {isLoading ? (
@@ -44,7 +44,7 @@ function OrdersTable() {
       ) : (
         <CTable hover>
           <CTableHead>
-            <CTableRow>
+            <CTableRow className="text-sm">
               <CTableHeaderCell scope="col">ID</CTableHeaderCell>
               <CTableHeaderCell scope="col">Item ID</CTableHeaderCell>
               <CTableHeaderCell scope="col">Payment ID</CTableHeaderCell>
@@ -59,7 +59,7 @@ function OrdersTable() {
           <CTableBody className="">
             {data &&
               data.map((order) => (
-                <CTableRow key={order.id} className="">
+                <CTableRow key={order.id} className="text-xs">
                   <CTableHeaderCell
                     scope="row"
                     className="tracking-widest pt-3"
@@ -76,14 +76,14 @@ function OrdersTable() {
                   </CTableDataCell>
 
                   <CTableDataCell className="pt-3">
-                    <div className="flex flex-col">
-                      <small>Art Style: {order.art_style}</small>
-                      <small>Background: {order.background_url}</small>
-                      <small>Number of Heads: {order.number_of_heads}</small>
-                      <small>Picture Style: {order.picture_style}</small>
-                      <small>Notes: {order.notes ? order.notes : "N/A"}</small>
-                      <Link to={order.reference_image} className="underline text-blue">
-                        <small>Reference Image</small>
+                    <div className="flex flex-col gap-1">
+                      <span>Art Style: {order.art_style}</span>                      
+                      <span>Number of Heads: {order.number_of_heads}</span>
+                      <span>Picture Style: {order.picture_style}</span>
+                      <span>Notes: {order.notes ? order.notes : "N/A"}</span>    
+                      <Link to={order.background_url} target="_blank" className="underline underline-offset-2 text-blue hover:text-green">Background Url</Link>
+                      <Link to={order.reference_image} target="_blank" className="underline underline-offset-2 text-blue hover:text-green">
+                        <span>Reference Image</span>
                       </Link>
                     </div>
                   </CTableDataCell>
@@ -97,7 +97,7 @@ function OrdersTable() {
                   </CTableDataCell>
 
                   <CTableDataCell className="pt-3">
-                    {/* artwork url from artwork table */}
+                    <span>{order.latest_artwork_revision}:  {order.latest_artwork}</span>
                   </CTableDataCell>
 
                   <CTableDataCell className="pt-3">
@@ -106,14 +106,9 @@ function OrdersTable() {
 
                   <CTableDataCell className="pt-3">
                     {/* TODO: send patch request to individual order endpoint to update order_status fro "queued" to "in_progress" on click of Claim button */}
+
                     {order.order_status === "queued" ? (
-                      <CButton
-                        type="submit"
-                        color="secondary"
-                        className="bg-green"
-                      >
-                        Claim
-                      </CButton>
+                      <ClaimOrder order={order} />
                     ) : (
                       order.workforce_id
                     )}
@@ -127,4 +122,4 @@ function OrdersTable() {
   );
 }
 
-export default OrdersTable;
+export default OrdersTable
