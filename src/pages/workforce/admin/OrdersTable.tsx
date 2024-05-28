@@ -7,8 +7,7 @@ import {
   CTableRow,
 } from "@coreui/react";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { ALL_ORDERS, apiClient, formatCreatedAt } from "@utils";
+import { formatCreatedAt } from "@utils";
 import { Spinner } from "@components";
 import { ClaimOrder } from "@pages";
 
@@ -17,7 +16,7 @@ type Order = {
   item_id: number;
   payment_id: number;
   workforce_id: number;
-  amount: number;
+  amount: string;
   order_status: string;
   background_url: string;
   number_of_heads: string;
@@ -31,15 +30,13 @@ type Order = {
   updated_at: string;
 };
 
-function OrdersTable() {
-  const { data, isLoading } = useQuery<Order[]>({
-    queryKey: ["allOrders"],
-    queryFn: async () => {
-      const response = await apiClient.get(ALL_ORDERS);
-      return response.data;
-    },
-  })
+type OrdersTableProps = {
+  data: Order[];
+  isLoading: boolean;
+}
 
+
+function OrdersTable({ data, isLoading }: OrdersTableProps) {
   return (
     <>
       {isLoading ? (
