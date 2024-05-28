@@ -36,6 +36,7 @@ export { default as EditClientProfile } from "./workforce/admin/EditClientProfil
 //// Admin Side - Orders
 export { default as AllOrdersPage } from "./workforce/admin/AllOrders";
 export { default as OrdersTable } from "./workforce/admin/OrdersTable";
+export { default as ClaimOrder } from "./workforce/admin/ClaimOrder";
 
 // Artist Side
 export { default as ArtistDashboard } from "./workforce/artist/ArtistDashboard";
