@@ -54,7 +54,7 @@ function UserOrdersTable({ data, isLoading }: OrdersTableProps) {
               <CTableHeaderCell scope="col">Status</CTableHeaderCell>
               <CTableHeaderCell scope="col">Details</CTableHeaderCell>
               <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
-              <CTableHeaderCell scope="col">Created At</CTableHeaderCell>
+              <CTableHeaderCell scope="col">Payment Timestamp</CTableHeaderCell>
               <CTableHeaderCell scope="col"></CTableHeaderCell>
             </CTableRow>
           </CTableHead>
