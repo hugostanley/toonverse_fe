@@ -50,7 +50,7 @@ function UserAccount() {
   }
 
   return (
-    <section className="w-full h-full p-2 px-4 flex gap-2">
+    <section className="w-full h-full p-2 px-4 flex gap-10">
       <div className="w-1/4 flex flex-col gap-3">
         <div className="py-2 border-b-2 border-gray-400/60 flex text-3xl font-bold font-header">
           <h1>Account Information</h1>
@@ -80,7 +80,7 @@ function UserAccount() {
       </div>
       <div className="w-3/4">
         <h1 className="py-2 border-b-2 border-gray-400/60 flex text-3xl font-bold font-header">
-          Orders
+          My Orders
         </h1>
         <div className="py-2">
           <UserOrdersTable data={data ?? []} isLoading={isLoading} />
