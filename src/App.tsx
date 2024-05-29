@@ -23,7 +23,7 @@ import {
   WorkforceLoginPage,
   AllClientsPage,
   AllOrdersPage,
-  ArtistJobs,
+  AllJobsTable,
 } from "@pages";
 
 function App() {
@@ -114,7 +114,7 @@ function App() {
     },
     {
       path: "w/jobs",
-      element: <ArtistJobs />,
+      element: <AllJobsTable />,
       loader: artistAccess,
     },
   ]);
