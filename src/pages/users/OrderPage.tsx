@@ -88,7 +88,7 @@ function OrderPage() {
 
   return (
     <>
-      <div className="border-2 border-black bg-yellow">
+      <div className="border-2 border-black bg-yellow" id="#">
         {error ? (
           <div className="fixed top-32 right-10 w-fit h-fit z-20 uppercase">
             <ErrorToast msgerror={error} />
