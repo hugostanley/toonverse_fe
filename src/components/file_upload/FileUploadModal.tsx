@@ -113,7 +113,7 @@ function FileUploadModal({ modalFileUpload, handleClose, target }: any ) {
             />
           </div>
         )}
-        <div className="flex justify-center items-center gap-4">
+        <div className="flex flex-col justify-center items-center gap-4">
           <button
             className={`btn__primary text-white ${
               file.digital_artwork ? "bg-green" : "bg-grey"
