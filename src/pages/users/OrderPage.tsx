@@ -15,11 +15,11 @@ type Order = {
   art_style: string | undefined | any;
   number_of_heads: number;
   notes?: string | null;
-  image?: File | null | Blob;
+  image?: File | null | Blob | any;
 };
 
 function OrderPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { params: paramspath } = useParams();
   const Category = categories.find(
     (category) => category.category === paramspath
@@ -66,8 +66,8 @@ function OrderPage() {
       try {
         const formData = convertOrderToFormData(order);
         const response = await apiClientFormData.post(ALL_ITEMS, formData);
-        if(response){
-          navigate("/checkout")
+        if (response) {
+          navigate("/checkout");
         }
         return response;
       } catch (error: any) {
@@ -93,9 +93,7 @@ function OrderPage() {
           <div className="fixed top-32 right-10 w-fit h-fit z-20 uppercase">
             <ErrorToast msgerror={error} />
           </div>
-        ) : (
-          null
-        )}
+        ) : null}
 
         {/* navbar */}
         <Navbar />
@@ -310,13 +308,16 @@ function OrderPage() {
           <div className="w-full h-screen flex-center text-[2.5rem] bg-green flex-row flex-wrap">
             <div className="w-[50%] h-screen text-white px-2 flex-center flex-col gap-[12.5rem]">
               <h1 className="font-extrabold">Step 4: Upload Your Photo</h1>
-              <div className="w-[50%] h-[20vh] border-[0.3rem] border-white rounded-[5rem] text-[3.5rem] flex-center cursor-pointer px-2 hover:border-dashed">
+              <div className="w-[50%] h-[20vh] border-[0.3rem] border-white rounded-[5rem] text-[3.5rem] flex-center cursor-pointer px-2 hover:border-dashed relative">
+                <label htmlFor="image">
+                  {order.image !== null ? <h1 className="text-[2rem]">{order.image.name}</h1> : "Choose Image"}
+                </label>
                 <input
                   type="file"
                   name="image"
                   id="image"
                   required
-                  className="file:bg-transparent file:text-white file:border-none file:cursor-pointer file:w-full file:h-[20vh] focus:rounded-full focus:outline-white focus:outline-dashed "
+                  className="absolute w-full  top-0 file:bg-transparent file:text-white file:border-none file:cursor-pointer file:w-full file:h-[20vh] file:opacity-0 focus:rounded-full  focus:outline-white focus:outline-dashed "
                   onChange={(e) => {
                     if (e.target.files) {
                       setOrder({ ...order, image: e.target.files[0] });
