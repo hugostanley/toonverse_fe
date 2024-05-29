@@ -30,3 +30,7 @@ export const PAYMENT = `${BASE_URL}/api/v1/payments`;
 // Orders
 export const ALL_ORDERS = '/api/v1/orders'; // GET | POST
 export const ORDER = (id: number) => `/api/v1/orders/${id}`; // GET | PATCH | PUT | DELETE
+
+// JOBS
+export const ALL_JOBS = '/api/v1/jobs'; // GET
+export const SHOW_JOB = (id: number) => `/api/v1/jobs/${id}`; // GET

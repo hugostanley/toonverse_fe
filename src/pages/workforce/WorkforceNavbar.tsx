@@ -15,7 +15,7 @@ function WorkforceNavbar({ loaderFn }: NavProps) {
   const [visible, setVisible] = useState(false);
 
   return (
-    <CNavbar className="bg-green h-[8%] shadow-md sticky top-0">
+    <CNavbar className="bg-green h-[8%] w-full shadow-md">
     <CContainer fluid>
       <CNavbarBrand>
         <CNavLink  href="/admin" >
