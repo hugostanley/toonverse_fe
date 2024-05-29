@@ -33,7 +33,7 @@ export const ORDER = (id: number) => `/api/v1/orders/${id}`; // GET | PATCH | PU
 
 // Jobs
 export const ALL_JOBS = '/api/v1/jobs'; // GET | POST
-export const JOB = (id: number) => `/api/v1/jobs/${id}`; // GET | PATCH | PUT | DELETE
+export const SHOW_JOB = (id: number) => `/api/v1/jobs/${id}`; // GET | PATCH | PUT | DELETE
 
 // Artworks
 export const ALL_ARTWORKS = '/api/v1/artworks'; // GET | POST

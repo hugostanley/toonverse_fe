@@ -36,8 +36,8 @@ function AllOrders() {
         Orders
       </h1>
       <section className="w-full max-h-full px-2 overflow-y-auto">
-        <div className="px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-          <OrdersTable data={data ?? []} isLoading={isLoading} />
+        <div className="px-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
+          <OrdersTable data={data ?? []} isLoading={isLoading} paginationRowsPerPageArray={[5, 10, 20, 30]}/>
         </div>
       </section>
     </main>
