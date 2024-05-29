@@ -14,6 +14,7 @@ export { default as UserLoginPage } from "./users/auth/Login";
 export { default as UserRegisterPage } from "./users/auth/Register";
 export { default as UserAccountPage } from "./users/account/UserAccount";
 export { default as EditProfilePage } from "./users/account/EditProfile";
+export { default as UserOrdersTable } from "./users/account/UserOrdersTable";
 
 // Workforce Side
 export { default as WorkforceLoginPage } from "./workforce/auth/Login";
@@ -42,4 +43,6 @@ export { default as ClaimOrder } from "./workforce/admin/ClaimOrder";
 export { default as ArtistDashboard } from "./workforce/artist/ArtistDashboard";
 export { default as EditBio } from "./workforce/artist/EditBio";
 export { default as ArtistProfileInfo } from "./workforce/artist/ArtistProfileInfo";
-export {default as NewArtistForm} from './workforce/artist/NewArtistForm';
+export { default as NewArtistForm } from './workforce/artist/NewArtistForm';
+export { default as ArtistJobsTable } from './workforce/artist/ArtistJobsTable';
+export { default as AvailableJobsTable } from './workforce/artist/AvailableJobsTable';

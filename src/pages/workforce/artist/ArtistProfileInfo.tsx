@@ -5,6 +5,7 @@ import { faMarker, faIdBadge, faPencil } from "@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditArtist from "../admin/EditArtist";
 import EditBio from "./EditBio";
+import { Link } from "react-router-dom";
 
 type Artist = {
   email: string;
@@ -67,7 +68,7 @@ function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
             <FontAwesomeIcon icon={faMarker} className="text-[2rem]" />
           </button>
 
-          <img src="/src/assets/profile-icon.png" alt="profile-icon" className="w-[50%] h-[40vh] border-4 border-white rounded-full shadow-md shadow-black bg-transparent flex-center "/>
+          <img src="/src/assets/profile-icon.png" alt="profile-icon" className="w-1/2 border-4 border-white rounded-full shadow-md shadow-black bg-transparent flex-center "/>
           <div className=" flex-center flex-col w-full h-[15vh]">
             <h1 className="capitalize text-[2.5rem] ">
               {artistData.first_name} {artistData.last_name}
@@ -88,12 +89,13 @@ function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
               )}
             </h1>
           </div>
-          <div className="w-full h-[45vh] flex-center flex-col justify-evenly">
+          <div className="w-full h-1/2 flex-center flex-col gap-4">
             {/* change ito link */}
-            <button className=" w-[30%] h-[5vh] flex-center bg-yellow shadow-md shadow-black rounded-xl">Works</button>
-            <button className=" w-[30%] h-[5vh] flex-center bg-yellow shadow-md shadow-black rounded-xl">Job History</button>
-            <button className=" w-[30%] h-[5vh] flex-center bg-yellow shadow-md shadow-black rounded-xl">Artwork Gallery</button>
-            <button className=" w-[30%] h-[5vh] flex-center bg-pink shadow-md shadow-black rounded-xl">
+            {/* <button className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl">Available Job</button> */}
+            <Link to="/w/dashboard" className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl">Dashboard</Link>
+            <Link to="/w/jobs" className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl">My Jobs</Link>
+            {/* <button className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl">Artwork Gallery</button> */}
+            <button className=" w-2/3 h-[5vh] flex-center text-black bg-pink shadow-md shadow-black rounded-xl">
               <LogoutBtn apiUrl={W_LOGOUT_URL} redirectPath="/w/login" />
             </button>
           </div>

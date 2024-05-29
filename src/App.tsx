@@ -23,7 +23,9 @@ import {
   WorkforceLoginPage,
   AllClientsPage,
   AllOrdersPage,
+  ArtistJobsTable,
 } from "@pages";
+import Jobs from "./pages/Jobs";
 
 function App() {
   const queryClient = new QueryClient();
@@ -35,7 +37,7 @@ function App() {
       element: <LandingPage />,
     },
     {
-      path: '/no-access',
+      path: "no-access",
       element: <UnauthorizedPage />,
     },
 
@@ -80,7 +82,7 @@ function App() {
       element: <WorkforceLoginPage />,
     },
     {
-      path: '/w/invitation/accept',
+      path: "w/invitation/accept",
       element: <InvitationPage />,
     },
     {
@@ -109,6 +111,11 @@ function App() {
     {
       path: "w/dashboard",
       element: <ArtistDashboard />,
+      loader: artistAccess,
+    },
+    {
+      path: "w/jobs",
+      element: <ArtistJobsTable />,
       loader: artistAccess,
     },
   ]);

@@ -11,7 +11,7 @@ import {
   faBagShopping,
   faPenNib,
 } from "@fortawesome/free-solid-svg-icons";
-import { OrdersTable } from "@pages";
+import { AvailableJobsTable } from "@pages";
 
 type Artist = {
   email: string;
@@ -90,8 +90,7 @@ function ArtistDashboard() {
       const response = await apiClient.get(ALL_ORDERS);
       return response.data;
     },
-  })
-
+  });
 
   return (
     <main>
@@ -118,7 +117,7 @@ function ArtistDashboard() {
                 <img
                   src="/src/assets/profile-icon.png"
                   alt="profile-icon"
-                  className="w-[60%] h-[5vh] rounded-full border-2 border-white"
+                  className="w-[60%] rounded-full border-2 border-white"
                 />
               </button>
             </div>
@@ -129,7 +128,7 @@ function ArtistDashboard() {
               <img
                 src="/src/assets/profile-icon.png"
                 alt="profile-icon"
-                className="w-[50%] h-[5vh] rounded-full border-2 border-white"
+                className="w-1/2 rounded-full border-2 border-white"
               />
             </button>
 
@@ -143,7 +142,7 @@ function ArtistDashboard() {
                   <h1 className="text-[2rem] font-bold  ">{currentDateTime}</h1>
                   <h1 className="text-[1.3rem]">To-do Revision</h1>
                   <h1 className="font-bold">newest</h1>
-                  <hr  className=" border-1 border-black border-dashed"/>
+                  <hr className=" border-1 border-black border-dashed" />
                   <h1 className="w-full h-[2vh] truncate">
                     Job# : Order Remark this is a link.....
                   </h1>
@@ -161,7 +160,7 @@ function ArtistDashboard() {
                     className="icon--rounded"
                   />
                   <div className="flex flex-col gap-2 items-start">
-                    <h2 className="text-xl tracking-wider">Total Profit</h2>
+                    <h2 className="text-xl tracking-wider">Total Commission</h2>
                     <h1 className="text-3xl tracking-wider font-bold flex gap-2">
                       <FontAwesomeIcon icon={faPesoSign} />
                       {parseFloat(artistData.total_earnings).toFixed(2)}
@@ -188,18 +187,21 @@ function ArtistDashboard() {
                   </div>
                 </div>
               </div>
-              <div className="w-full h-[50vh] flex justify-end pr-40">
-                <div className="w-[70%] col-span-4 row-span-4 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2 overflow-y-auto z-10">
-                <h2 className="text-2xl tracking-wider font-bold text-center">
-                  All Orders
-                </h2>
+              <div className="w-full h-1/2 flex justify-end pr-40">
+                <div className="w-3/4 col-span-4 row-span-4 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2 overflow-y-auto z-10">
+                  <h2 className="text-2xl tracking-wider font-bold">
+                    Available Jobs
+                  </h2>
 
-                <div className="w-full max-h-full pr-2 overflow-y-auto">
-                  <div className="px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-                    <OrdersTable data={orderData ?? []} isLoading={orderLoading} />
+                  <div className="w-full max-h-full pr-2 overflow-y-auto">
+                    <div className="px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
+                      <AvailableJobsTable
+                        data={orderData ?? []}
+                        isLoading={orderLoading}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
               </div>
             </div>
           </>
