@@ -8,9 +8,10 @@ import {
 } from "@coreui/react";
 import { useQuery } from "@tanstack/react-query";
 import { ALL_JOBS, apiClient, formatCreatedAt, statusColors, baseURL } from "@utils";
-import { Spinner } from "@components";
+import { Spinner, FileUploadModal } from "@components";
 import { Link } from "react-router-dom";
 import ArtistSidebar from "../ArtistSidebar";
+import { useState } from "react";
 
 type Jobs = {
   id: number;
@@ -26,7 +27,8 @@ type Jobs = {
   latest_artwork_revision?: string | null;
 };
 
-function AllJobs() {
+function ArtistJobsTable() {
+  const [fileUploadModal, setFileUploadModal] = useState(false);
   const { data, isLoading } = useQuery<Jobs[]>({
     queryKey: ["allJobs"],
     queryFn: async () => {
@@ -80,7 +82,7 @@ function AllJobs() {
                       {formatCreatedAt(job.claimed_at)}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
-                      <button className="btn__primary bg-pink">
+                      <button className="btn__primary bg-pink" onClick={(e) => setFileUploadModal(true)}>
                         Upload Artwork
                       </button>
                     </CTableDataCell>
@@ -88,7 +90,7 @@ function AllJobs() {
                     {job.latest_artwork && (
                       <Link
                         to={`${baseURL}${job.latest_artwork}`}
-                        className="text-blue underline"
+                        className="btn__primary bg-blue text-white"
                         target="_blank"
                       >
                         {`REV ${job.latest_artwork_revision}: Artwork Link`}
@@ -110,4 +112,4 @@ function AllJobs() {
   );
 }
 
-export default AllJobs;
+export default ArtistJobsTable;

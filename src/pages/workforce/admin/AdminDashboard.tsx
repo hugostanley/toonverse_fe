@@ -119,8 +119,8 @@ function AdminDashboard() {
         <div className='col-span-4 row-span-4 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2'>
           <h2 className='text-2xl tracking-wider font-bold'>All Orders</h2>
           <div className="w-full max-h-full pr-2 overflow-y-auto">
-            <div className="px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-              <OrdersTable data={data ?? []} isLoading={isLoading} />
+            <div className="px-3 pt-2 cursor-default bg-white border-green/50 border-2 rounded-2xl">
+              <OrdersTable data={data ?? []} isLoading={isLoading} paginationRowsPerPageArray={[3, 5, 10, 20, 30]} />
             </div>
           </div>
         </div>
