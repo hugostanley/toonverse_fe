@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ALL_JOBS, apiClient, formatCreatedAt, statusColors, baseURL } from "@utils";
 import { Spinner, FileUploadModal } from "@components";
 import { Link } from "react-router-dom";
+import ArtistSidebar from "../ArtistSidebar";
 import { useState } from "react";
 
 type Jobs = {
@@ -37,11 +38,11 @@ function ArtistJobsTable() {
   });
 
   return (
-    <main className="w-full h-full p-4 flex flex-col gap-3 bg-ivory">
-      {/* <FileUploadModal modalFileUpload={fileUploadModal} handleClose/> */}
+    <main className="w-full h-full p-4 flex flex-col gap-3 bg-ivory relative">
       <h1 className="w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header">
         All Jobs
       </h1>
+      <ArtistSidebar/>
 
       {isLoading ? (
         <section className="h-full w-full grid place-items-center">
