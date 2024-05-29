@@ -35,7 +35,7 @@ function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTabl
       name: "ID",
       width: "50px",
       style: {
-        fontWeight: '900',
+        fontWeight: "900",
       },
       selector: (row: Order) => row.id
       
@@ -111,19 +111,13 @@ function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTabl
   const customStyles = {
     headCells: {
       style: {
-        fontSize: '0.85rem',
-        fontWeight: '900',
+        fontSize: "0.85rem",
+        fontWeight: "900",
       },
     },
     rows: {
       style: {
-        fontSize: '0.75rem',
-      },
-      highlightOnHoverStyle: {
-        backgroundColor: 'rgb(230, 244, 244)',
-        borderBottomColor: '#FFFFFF',
-        borderRadius: '25px',
-        outline: 'none',
+        fontSize: "0.75rem",
       },
     },
   };
