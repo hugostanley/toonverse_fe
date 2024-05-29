@@ -22,9 +22,10 @@ type Artist = {
 }
 type ArtistProfileProps = {
   artistData: Artist | null;
+  refetch: any
 };
 
-function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
+function ArtistProfileInfo({ artistData, refetch }: ArtistProfileProps) {
   const [visible, setVisible] = useState(false);
   const [editBioVisible, setEditBioVisible] = useState(false);
 
@@ -85,7 +86,7 @@ function ArtistProfileInfo({ artistData }: ArtistProfileProps) {
                   </button>
                 </>
               ) : (
-                <EditBio artistData={artistData} setBioVisible={setEditBioVisible} />
+                <EditBio artistData={artistData} setBioVisible={setEditBioVisible}  refetch={refetch}/>
               )}
             </h1>
           </div>
