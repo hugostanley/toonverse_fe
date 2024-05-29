@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { apiClient } from "@utils";
+import { ALL_ORDERS, apiClient } from "@utils";
 import { ALL_ARTISTS } from "@utils";
 import ArtistProfileInfo from "./ArtistProfileInfo"; // Import the component
 import NewArtistForm from "./NewArtistForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPesoSign,
+  faMoneyBillTrendUp,
+  faBagShopping,
+  faPenNib,
+} from "@fortawesome/free-solid-svg-icons";
+import { OrdersTable } from "@pages";
 
 type Artist = {
   email: string;
@@ -13,15 +21,54 @@ type Artist = {
   last_name: string;
   mobile_number: string;
   billing_address: string;
-  total_earnings: number;
+  total_earnings: string | any;
   created_at: string;
   updated_at: string;
   workforce_id: string;
 };
 
+type Order = {
+  id: number;
+  item_id: number;
+  payment_id: number;
+  workforce_id: number;
+  amount: string;
+  order_status: string;
+  background_url: string;
+  number_of_heads: string;
+  picture_style: string;
+  art_style: string;
+  notes?: string | null;
+  reference_image: string;
+  latest_artwork?: string | null;
+  latest_artwork_revision?: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 function ArtistDashboard() {
   const [visible, setVisible] = useState(false);
   const [artistData, setArtistData] = useState<Artist | null>(null);
+
+  const [currentDateTime, setCurrentDateTime] = useState("");
+
+  useEffect(() => {
+    const updateDateTime = () => {
+      const options: any = {
+        weekday: "short",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      };
+      const now = new Date().toLocaleString("en-US", options);
+      setCurrentDateTime(now);
+    };
+
+    updateDateTime();
+    const intervalId = setInterval(updateDateTime, 60000); // Update every minute
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["ArtistProfile"],
@@ -37,70 +84,122 @@ function ArtistDashboard() {
     }
   }, [data, artistData]);
 
-  const formattedEarnings =
-    artistData && typeof artistData.total_earnings === "number"
-      ? artistData.total_earnings.toFixed(2)
-      : "0.00";
+  const { data: orderData, isLoading: orderLoading } = useQuery<Order[]>({
+    queryKey: ["allOrders"],
+    queryFn: async () => {
+      const response = await apiClient.get(ALL_ORDERS);
+      return response.data;
+    },
+  })
+
 
   return (
     <main>
-      <div className="full-size flex-center flex-row bg-ivory relative">
+      <div className="full-size flex-row bg-ivory relative">
         {isLoading ? (
           <div className="loader"></div>
         ) : error ? (
           <div className="error">An error occurred while fetching data.</div>
-        ) : artistData ? ( 
+        ) : artistData ? (
           <>
+            {/* sidebar */}
             <div
               className={`absolute top-0 ${
-                visible ? "-left-4" : "-left-[50rem]"
-              } w-[40%] h-screen transition-all duration-300`}
+                visible ? "right-0" : "hidden"
+              } w-[40%] max-w-[40%] h-screen `}
             >
-              <div className="relative w-[90%] h-screen bg-green rounded-2xl flex-center z-10">
+              <div className="absolute right-0 w-[90%] h-screen bg-green rounded-tl-2xl rounded-bl-2xl flex-center z-20">
                 <ArtistProfileInfo artistData={artistData} />
               </div>
               <button
-                className="absolute right-2 top-16 w-[10%] h-[20vh] bg-green rounded-xl flex-center"
+                className="absolute left-0 top-16 w-[10%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center"
                 onClick={() => setVisible(false)}
               >
-                
-                  <img src="/src/assets/profile-icon.png" alt="profile-icon" className="w-[60%] h-[5vh] rounded-full border-2 border-white" />
-                
+                <img
+                  src="/src/assets/profile-icon.png"
+                  alt="profile-icon"
+                  className="w-[60%] h-[5vh] rounded-full border-2 border-white"
+                />
               </button>
             </div>
             <button
-              className="absolute -left-4 top-16 w-[5%] h-[20vh] bg-green rounded-xl flex-center shadow-md shadow-black"
+              className="absolute right-0 top-16 w-[5%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
               onClick={() => setVisible(true)}
             >
-           
-                <img src="/src/assets/profile-icon.png" alt="profile-icon" className="w-[50%] h-[5vh] rounded-full border-2 border-white"/>
-         
+              <img
+                src="/src/assets/profile-icon.png"
+                alt="profile-icon"
+                className="w-[50%] h-[5vh] rounded-full border-2 border-white"
+              />
             </button>
 
-            <div className="w-[65%] h-screen flex-center flex-col">
-              <div className="w-[90%] h-[20vh] flex-center">
-                <h1 className="text-[3rem] capitalize font-extrabold">
-                  Hello, {artistData?.first_name}!
+            {/* dashboard */}
+            <div className=" full-size">
+              <div className="absolute left-0 w-[20%] h-screen bg-yellow flex-center items-start flex-col gap-16 ">
+                <h1 className=" w-[60%] h-[25vh] p-8 capitalize text-[2rem] text-justify flex items-center font-semibold">
+                  Hello, {artistData.first_name}!
                 </h1>
-              </div>
-              <div className="w-[90%] h-[40vh] rounded-2xl border-4 border-green flex-center relative">
-                <h1 className="absolute top-4 right-8 text-[2.5rem] font-bold">Total Earnings</h1>
-                <h1 className="absolute left-32 text-[3.5rem] font-extrabold">₱ {formattedEarnings}</h1>
-                <h1 className="absolute bottom-16 left-40 text-[1.2rem]">+{formattedEarnings} {artistData.updated_at}</h1>
-              </div>
-              <div className="w-[90%] h-[40vh] flex-center flex-row justify-evenly">
-                <div className="w-[30%] h-[20vh] border-4 border-green rounded-2xl shadow-md shadow-dark flex-center">
-                  Pending Order
-                </div>
-                <div className="w-[30%] h-[20vh] border-4 border-green rounded-2xl shadow-md shadow-dark flex-center">
-                  Job Done
+                <div className="w-full h-[50vh] text-left px-8 flex flex-col gap-2">
+                  <h1 className="text-[2rem] font-bold  ">{currentDateTime}</h1>
+                  <h1 className="text-[1.3rem]">To-do Revision</h1>
+                  <h1 className="font-bold">newest</h1>
+                  <hr  className=" border-1 border-black border-dashed"/>
+                  <h1 className="w-full h-[2vh] truncate">
+                    Job# : Order Remark this is a link.....
+                  </h1>
                 </div>
               </div>
-            </div>
-            <div className="w-[35%] h-screen flex-center">
-              <div className="w-[95%] h-[90vh] border-4 border-green rounded-2xl flex-center flex-col">
-                <img src="/src/assets/temp-logo.png" alt="logo" className="w-[70%] "/>
-                <div className="w-full h-[80vh]"></div>
+              <img
+                src="/src/assets/art-pad.png"
+                alt=""
+                className="absolute right-6 bottom-0 opacity-60 "
+              />
+              <div className="w-full h-[40vh] flex-center flex-row gap-24 pl-14">
+                <div className="grid-green w-[22%] h-[20vh] z-10 bg-ivory">
+                  <FontAwesomeIcon
+                    icon={faMoneyBillTrendUp}
+                    className="icon--rounded"
+                  />
+                  <div className="flex flex-col gap-2 items-start">
+                    <h2 className="text-xl tracking-wider">Total Profit</h2>
+                    <h1 className="text-3xl tracking-wider font-bold flex gap-2">
+                      <FontAwesomeIcon icon={faPesoSign} />
+                      {parseFloat(artistData.total_earnings).toFixed(2)}
+                    </h1>
+                  </div>
+                </div>
+
+                <div className="grid-green w-[22%] h-[20vh]">
+                  <FontAwesomeIcon
+                    icon={faBagShopping}
+                    className="icon--rounded"
+                  />
+                  <div className="flex flex-col gap-2 items-start">
+                    <h2 className="text-xl tracking-wider">Pending Orders</h2>
+                    <h1 className="text-3xl tracking-wider font-bold">0</h1>
+                  </div>
+                </div>
+
+                <div className="grid-green w-[22%] h-[20vh]">
+                  <FontAwesomeIcon icon={faPenNib} className="icon--rounded" />
+                  <div className="flex flex-col gap-2 items-start">
+                    <h2 className="text-xl tracking-wider">In Progress</h2>
+                    <h1 className="text-3xl tracking-wider font-bold">0</h1>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full h-[50vh] flex justify-end pr-40">
+                <div className="w-[70%] col-span-4 row-span-4 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2 overflow-y-auto z-10">
+                <h2 className="text-2xl tracking-wider font-bold text-center">
+                  All Orders
+                </h2>
+
+                <div className="w-full max-h-full pr-2 overflow-y-auto">
+                  <div className="px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
+                    <OrdersTable data={orderData ?? []} isLoading={orderLoading} />
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
           </>

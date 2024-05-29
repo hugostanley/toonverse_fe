@@ -1,6 +1,6 @@
 // import React from "react";
 import { Navbar, Footer } from "@components";
-import { Link } from "react-router-dom";
+import { HashLink as Link} from 'react-router-hash-link';
 import { getLocalStorage } from "@utils";
 
 function LandingPage() {
@@ -147,7 +147,7 @@ function LandingPage() {
       >
         <h1 className="text-6xl text-center font-black">STYLES</h1>
         <div className="flex flex-row justify-center">
-          <Link to="order/rick_and_morty" className="px-4 py-8">
+          <Link smooth to="order/rick_and_morty#" className="px-4 py-8">
             <div className="w-[20rem] rounded-2xl bg-light px-6 py-4 border-2 border-dark">
               <div className="flex justify-center items-center">
                 <img
@@ -162,7 +162,7 @@ function LandingPage() {
             </h1>
             <h1 className="font-black text-xl text-red-600">$Free.99</h1>
           </Link>
-          <Link to="order/bobs_burger" className="px-4 py-8">
+          <Link smooth to="order/bobs_burger#" className="px-4 py-8">
             <div className="w-[20rem] rounded-2xl bg-light px-6 py-4 border-2 border-dark">
               <div className="flex justify-center items-center">
                 <img
@@ -175,7 +175,7 @@ function LandingPage() {
             <h1 className="text-lg font-black">Bob's Burger Custom Portait</h1>
             <h1 className="font-black text-xl text-red-600">$Free.99</h1>
           </Link>
-          <Link to="order/vector" className="px-4 py-8">
+          <Link smooth to="order/vector#" className="px-4 py-8">
             <div className="w-[20rem] rounded-2xl bg-light px-6 py-4 border-2 border-dark">
               <div className="flex justify-center items-center">
                 <img
