@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { HashLink as Link} from 'react-router-hash-link';
+
 
 function Navbar() {
   const { hash, pathname } = useLocation();
@@ -51,13 +53,13 @@ function Navbar() {
                     <Link to="/">Home</Link>
                   </li>
                   <li className="md:px-4 md:py-2 hover:text-pink">
-                    <Link to="/">Catalog</Link>
+                    <Link to="/#styles">Catalog</Link>
                   </li>
                   <li className="md:px-4 md:py-2 hover:text-pink">
-                    <Link to="/">FAQS</Link>
+                    <Link to="/#faqs">FAQS</Link>
                   </li>
                   <li className="md:px-4 md:py-2 hover:text-pink">
-                    <Link to="/">Contact Us</Link>
+                    <Link to="/#contact">Contact Us</Link>
                   </li>
                 </>
               )}
