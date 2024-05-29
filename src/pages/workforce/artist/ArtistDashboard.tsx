@@ -70,7 +70,7 @@ function ArtistDashboard() {
     return () => clearInterval(intervalId);
   }, []);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["ArtistProfile"],
     queryFn: async () => {
       const response = await apiClient.get<Artist[]>(ALL_ARTISTS);
@@ -108,7 +108,7 @@ function ArtistDashboard() {
               } w-[40%] max-w-[40%] h-screen `}
             >
               <div className="absolute right-0 w-[90%] h-screen bg-green rounded-tl-2xl rounded-bl-2xl flex-center z-20">
-                <ArtistProfileInfo artistData={artistData} />
+                <ArtistProfileInfo artistData={artistData} refetch={refetch} />
               </div>
               <button
                 className="absolute left-0 top-16 w-[10%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center"

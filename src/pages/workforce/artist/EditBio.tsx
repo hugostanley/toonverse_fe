@@ -22,13 +22,14 @@ type Artist = {
 type ArtistFormProps = {
   artistData: Artist | null;
   setBioVisible: (visible: boolean) => void;
+  refetch: any;
 };
 
 type Bio = {
   bio: string;
 };
 
-function EditBio({ artistData, setBioVisible }: ArtistFormProps) {
+function EditBio({ artistData, setBioVisible, refetch }: ArtistFormProps) {
   const [bio, setBio] = useState<Bio>({
     bio: artistData?.bio || "",
   });
@@ -62,7 +63,8 @@ function EditBio({ artistData, setBioVisible }: ArtistFormProps) {
       }
     },
     onSuccess: () => {
-      setBioVisible(false); // Hide the edit form on successful submission
+      setBioVisible(false);
+      refetch() // Hide the edit form on successful submission
     },
     onError: (error) => {
       console.error("Error submitting artist bio:", error);
