@@ -17,7 +17,7 @@ export default {
         pink: "#F196E5",
         yellow: "#FFE04A",
         green: "#47AF3C",
-        gray: "#BEBEC4",
+        grey: "#BEBEC4",
         orange: "#FFC541",
       },
       fontFamily: {
