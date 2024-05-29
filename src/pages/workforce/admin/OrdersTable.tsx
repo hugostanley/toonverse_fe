@@ -7,7 +7,7 @@ import {
   CTableRow,
 } from "@coreui/react";
 import { Link } from "react-router-dom";
-import { formatCreatedAt } from "@utils";
+import { formatCreatedAt, baseURL } from "@utils";
 import { Spinner } from "@components";
 import { ClaimOrder } from "@pages";
 
@@ -97,7 +97,17 @@ function OrdersTable({ data, isLoading }: OrdersTableProps) {
                   </CTableDataCell>
 
                   <CTableDataCell className="pt-3">
-                    <span>{order.latest_artwork_revision}:  {order.latest_artwork}</span>
+                    {/* <span>{order.latest_artwork_revision}:  {order.latest_artwork}</span> */}
+                    {order.latest_artwork && (
+                      <Link
+                        to={`${baseURL}${order.latest_artwork}`}
+                        className="text-blue underline"
+                        target="_blank"
+                      >
+                        {`REV ${order.latest_artwork_revision}: Artwork Link`}
+                      </Link>
+                    )}
+                  
                   </CTableDataCell>
 
                   <CTableDataCell className="pt-3">
