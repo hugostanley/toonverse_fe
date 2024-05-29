@@ -24,6 +24,7 @@ import {
   AllClientsPage,
   AllOrdersPage,
 } from "@pages";
+import Jobs from "./pages/Jobs";
 
 function App() {
   const queryClient = new QueryClient();
@@ -35,7 +36,7 @@ function App() {
       element: <LandingPage />,
     },
     {
-      path: '/no-access',
+      path: "no-access",
       element: <UnauthorizedPage />,
     },
 
@@ -80,7 +81,7 @@ function App() {
       element: <WorkforceLoginPage />,
     },
     {
-      path: '/w/invitation/accept',
+      path: "w/invitation/accept",
       element: <InvitationPage />,
     },
     {
@@ -104,11 +105,27 @@ function App() {
           path: "orders",
           element: <AllOrdersPage />,
         },
+        {
+          path: "jobs",
+          element: <Jobs />,
+        },
       ],
     },
     {
       path: "w/dashboard",
       element: <ArtistDashboard />,
+      loader: artistAccess,
+    },
+
+    // TEST: ARTIST SIDE ORDER PAGE -- remove later
+    {
+      path: "w/orders",
+      element: <AllOrdersPage />,
+      loader: artistAccess,
+    },
+    {
+      path: "w/jobs",
+      element: <Jobs />,
       loader: artistAccess,
     },
   ]);
