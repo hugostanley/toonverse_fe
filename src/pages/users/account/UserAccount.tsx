@@ -61,22 +61,17 @@ function UserAccount() {
             <FontAwesomeIcon icon={faPenToSquare} className="h-1/2" />
           </Link>
         </div>
-
         <div className="flex flex-col gap-1">
           <h2 className="text-xl font-bold">{`${userProfile?.first_name} ${userProfile?.last_name}`}</h2>
           <span className="text-sm">
             BIlling Address: {userProfile?.billing_address}
           </span>
         </div>
-
-        <small className="flex gap-2 items-center">
-          <FontAwesomeIcon icon={faArrowRightToBracket} />
-          <LogoutBtn
-            apiUrl={LOGOUT_URL}
-            redirectPath="/login"
-            className="btn__primary bg-pink"
-          />
-        </small>
+        <LogoutBtn
+          apiUrl={LOGOUT_URL}
+          redirectPath="/login"
+          className="btn__primary bg-pink"
+        />
       </div>
       <div className="w-3/4">
         <h1 className="py-2 border-b-2 border-gray-400/60 flex text-3xl font-bold font-header">
