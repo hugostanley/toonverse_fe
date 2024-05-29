@@ -55,7 +55,7 @@ function ArtistSidebar() {
           <img
             src="/src/assets/profile-icon.png"
             alt="profile-icon"
-            className="w-[60%] rounded-full border-2 border-white"
+            className="w-1/2"
           />
         </button>
       </div>
@@ -66,7 +66,7 @@ function ArtistSidebar() {
         <img
           src="/src/assets/profile-icon.png"
           alt="profile-icon"
-          className="w-1/2 rounded-full border-2 border-white"
+          className="w-1/2 "
         />
       </button>
     </>
