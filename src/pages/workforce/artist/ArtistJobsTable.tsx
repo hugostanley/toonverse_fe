@@ -8,8 +8,9 @@ import {
 } from "@coreui/react";
 import { useQuery } from "@tanstack/react-query";
 import { ALL_JOBS, apiClient, formatCreatedAt, statusColors, baseURL } from "@utils";
-import { Spinner } from "@components";
+import { Spinner, FileUploadModal } from "@components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 type Jobs = {
   id: number;
@@ -25,7 +26,8 @@ type Jobs = {
   latest_artwork_revision?: string | null;
 };
 
-function AllJobs() {
+function ArtistJobsTable() {
+  const [fileUploadModal, setFileUploadModal] = useState(false);
   const { data, isLoading } = useQuery<Jobs[]>({
     queryKey: ["allJobs"],
     queryFn: async () => {
@@ -36,6 +38,7 @@ function AllJobs() {
 
   return (
     <main className="w-full h-full p-4 flex flex-col gap-3 bg-ivory">
+      {/* <FileUploadModal modalFileUpload={fileUploadModal} handleClose/> */}
       <h1 className="w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header">
         All Jobs
       </h1>
@@ -78,7 +81,7 @@ function AllJobs() {
                       {formatCreatedAt(job.claimed_at)}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
-                      <button className="btn__primary bg-pink">
+                      <button className="btn__primary bg-pink" onClick={(e) => setFileUploadModal(true)}>
                         Upload Artwork
                       </button>
                     </CTableDataCell>
@@ -86,7 +89,7 @@ function AllJobs() {
                     {job.latest_artwork && (
                       <Link
                         to={`${baseURL}${job.latest_artwork}`}
-                        className="text-blue underline"
+                        className="btn__primary bg-blue text-white"
                         target="_blank"
                       >
                         {`REV ${job.latest_artwork_revision}: Artwork Link`}
@@ -108,4 +111,4 @@ function AllJobs() {
   );
 }
 
-export default AllJobs;
+export default ArtistJobsTable;
