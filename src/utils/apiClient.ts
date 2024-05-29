@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getLocalStorage } from "@utils";
 
-const baseURL = 'http://127.0.0.1:3000';
+export const baseURL = 'http://127.0.0.1:3000';
 
 // Create apiClient instance for JSON requests
 export const apiClient = axios.create({
