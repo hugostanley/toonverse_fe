@@ -105,27 +105,11 @@ function App() {
           path: "orders",
           element: <AllOrdersPage />,
         },
-        {
-          path: "jobs",
-          element: <Jobs />,
-        },
       ],
     },
     {
       path: "w/dashboard",
       element: <ArtistDashboard />,
-      loader: artistAccess,
-    },
-
-    // TEST: ARTIST SIDE ORDER PAGE -- remove later
-    {
-      path: "w/orders",
-      element: <AllOrdersPage />,
-      loader: artistAccess,
-    },
-    {
-      path: "w/jobs",
-      element: <Jobs />,
       loader: artistAccess,
     },
   ]);
