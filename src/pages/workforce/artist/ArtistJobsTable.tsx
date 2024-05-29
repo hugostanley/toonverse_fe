@@ -7,7 +7,13 @@ import {
   CTableRow,
 } from "@coreui/react";
 import { useQuery } from "@tanstack/react-query";
-import { ALL_JOBS, apiClient, formatCreatedAt, statusColors, baseURL } from "@utils";
+import {
+  ALL_JOBS,
+  apiClient,
+  formatCreatedAt,
+  statusColors,
+  baseURL,
+} from "@utils";
 import { Spinner, FileUploadModal } from "@components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -20,14 +26,23 @@ type Jobs = {
   commission: string;
   created_at: string;
   updated_at: string;
-  status: 'queued' | 'in_progress' | 'delivered' | 'completed';
+  status: "queued" | "in_progress" | "delivered" | "completed";
   email: string;
   latest_artwork?: string | null;
   latest_artwork_revision?: string | null;
 };
 
+type Target = {
+  job_id: number | null;
+  order_id: number | null;
+}
+
 function ArtistJobsTable() {
   const [fileUploadModal, setFileUploadModal] = useState(false);
+  const [target, setTarget] = useState<Target>({
+    job_id: null,
+    order_id: null
+  });
   const { data, isLoading } = useQuery<Jobs[]>({
     queryKey: ["allJobs"],
     queryFn: async () => {
@@ -38,8 +53,12 @@ function ArtistJobsTable() {
 
   return (
     <main className="w-full h-full p-4 flex flex-col gap-3 bg-ivory">
-      {/* <FileUploadModal modalFileUpload={fileUploadModal} handleClose/> */}
       <h1 className="w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header">
+        <FileUploadModal
+          modalFileUpload={fileUploadModal}
+          handleClose={() => setFileUploadModal(!fileUploadModal)}
+          target={target}
+        />
         All Jobs
       </h1>
 
@@ -75,31 +94,42 @@ function ArtistJobsTable() {
                       {job.order_id}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
-                    ₱ {parseFloat(job.commission).toFixed(2)}
+                      ₱ {parseFloat(job.commission).toFixed(2)}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
                       {formatCreatedAt(job.claimed_at)}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
-                      <button className="btn__primary bg-pink" onClick={(e) => setFileUploadModal(true)}>
+                      <button
+                        className="btn__primary bg-pink"
+                        onClick={(e) => {
+                          setFileUploadModal(true);
+                          setTarget({...target, job_id: job.id, order_id: job.order_id});
+                          console.log(`TARGET ID:${target.job_id} ORDER:${target.order_id}`);
+                        }}
+                      >
                         Upload Artwork
                       </button>
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
-                    {job.latest_artwork && (
-                      <Link
-                        to={`${baseURL}${job.latest_artwork}`}
-                        className="btn__primary bg-blue text-white"
-                        target="_blank"
-                      >
-                        {`REV ${job.latest_artwork_revision}: Artwork Link`}
-                      </Link>
-                    )}
+                      {job.latest_artwork && (
+                        <Link
+                          to={`${baseURL}${job.latest_artwork}`}
+                          className="btn__primary bg-blue text-white text-center"
+                          target="_blank"
+                        >
+                          {`REV ${job.latest_artwork_revision}: Artwork Link`}
+                        </Link>
+                      )}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
-                    <div className={`btn__primary bg-${statusColors[job.status]}`}>
-                      {job.status}
-                    </div>
+                      <div
+                        className={`btn__primary bg-${
+                          statusColors[job.status]
+                        }`}
+                      >
+                        {job.status}
+                      </div>
                     </CTableDataCell>
                   </CTableRow>
                 ))}

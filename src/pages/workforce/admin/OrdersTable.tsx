@@ -1,6 +1,6 @@
 import DataTable from "react-data-table-component";
 import { Spinner } from "@components";
-import { formatCreatedAt } from "@utils";
+import { formatCreatedAt, baseURL } from "@utils";
 import { Link } from "react-router-dom";
 import ClaimOrder from "./ClaimOrder";
 
@@ -81,7 +81,7 @@ function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTabl
       cell: (row: Order) => (
         <div>
           {row.latest_artwork ? 
-            <span className="text-pretty">{row.latest_artwork_revision}: {row.latest_artwork}</span>
+            <Link to={baseURL + row.latest_artwork} className="text-pretty text-blue underline">Rev {row.latest_artwork_revision}: Artwork Link</Link>
             : "N/A"
           }
         </div>
