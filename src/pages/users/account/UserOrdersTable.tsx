@@ -65,6 +65,9 @@ function UserOrdersTable({ data, isLoading }: OrdersTableProps) {
                       {order.id}
                     </CTableHeaderCell>
                     <CTableDataCell className="pt-3">
+                      {/* <div
+                        className="btn__primary bg-grey"
+                      > */}
                       <div
                         className={`btn__primary bg-${
                           statusColors[order.order_status]
@@ -97,7 +100,7 @@ function UserOrdersTable({ data, isLoading }: OrdersTableProps) {
                     </CTableDataCell>
 
                     <CTableDataCell className="pt-3">
-                      {order.amount}
+                    ₱ {parseFloat(order.amount).toFixed(2)}
                     </CTableDataCell>
 
                     <CTableDataCell className="pt-3">
@@ -112,7 +115,7 @@ function UserOrdersTable({ data, isLoading }: OrdersTableProps) {
                             className="btn__primary bg-blue text-white"
                             target="_blank"
                           >
-                            Artwork Link
+                            Artwork
                           </Link>
                         )}
                     </CTableDataCell>

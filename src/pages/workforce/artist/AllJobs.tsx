@@ -72,7 +72,7 @@ function AllJobs() {
                       {job.order_id}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
-                      {job.commission}
+                    ₱ {parseFloat(job.commission).toFixed(2)}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
                       {formatCreatedAt(job.claimed_at)}
