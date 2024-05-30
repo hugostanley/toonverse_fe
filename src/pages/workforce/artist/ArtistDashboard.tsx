@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ALL_ORDERS, apiClient } from "@utils";
-import { ALL_ARTISTS } from "@utils";
 import NewArtistForm from "./NewArtistForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,20 +10,7 @@ import {
   faFileCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { OrdersTable, ArtistJobsTable } from "@pages";
-
-type Artist = {
-  email: string;
-  id: number;
-  bio: string;
-  first_name: string;
-  last_name: string;
-  mobile_number: string;
-  billing_address: string;
-  total_earnings: string | any;
-  created_at: string;
-  updated_at: string;
-  workforce_id: string;
-};
+import { useArtistData } from "@layouts";
 
 type Order = {
   id: number;
@@ -46,44 +32,9 @@ type Order = {
 };
 
 function ArtistDashboard() {
+  const { artistData, isLoading, error } = useArtistData();
   const [showAvailableJobs, setShowAvailableJobs] = useState(true);
   const [showArtistJobs, setShowArtistJobs] = useState(false);
-
-  const [artistData, setArtistData] = useState<Artist | null>(null);
-  const [currentDateTime, setCurrentDateTime] = useState("");
-
-  useEffect(() => {
-    const updateDateTime = () => {
-      const options: any = {
-        weekday: "short",
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-      };
-      const now = new Date().toLocaleString("en-US", options);
-      setCurrentDateTime(now);
-    };
-
-    updateDateTime();
-    const intervalId = setInterval(updateDateTime, 60000); // Update every minute
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["ArtistProfile"],
-    queryFn: async () => {
-      const response = await apiClient.get<Artist[]>(ALL_ARTISTS);
-      return response.data;
-    },
-  });
-
-  useEffect(() => {
-    if (data && data.length > 0) {
-      setArtistData(data[0]);
-    }
-  }, [data, artistData]);
-
   const { data: orderData, isLoading: orderLoading } = useQuery<Order[]>({
     queryKey: ["allOrders"],
     queryFn: async () => {
@@ -103,26 +54,7 @@ function ArtistDashboard() {
           <>
             {/* dashboard */}
             <div className='full-size'>
-              <div className='fixed left-0 w-[20%] h-screen bg-yellow flex-center items-start flex-col gap-16 '>
-                <h1 className=' w-[60%] h-[25vh] p-8 capitalize text-[2rem] text-justify flex items-center font-semibold'>
-                  Hello, {artistData.first_name}!
-                </h1>
-                <div className='w-full h-[50vh] text-left px-8 flex flex-col gap-2'>
-                  <h1 className='text-[2rem] font-bold  '>{currentDateTime}</h1>
-                  <h1 className='text-[1.3rem]'>To-do Revision</h1>
-                  <h1 className='font-bold'>newest</h1>
-                  <hr className=' border-1 border-black border-dashed' />
-                  <h1 className='w-full h-[2vh] truncate'>
-                    Job# : Order Remark this is a link.....
-                  </h1>
-                </div>
-              </div>
-              <img
-                src='/src/assets/art-pad.png'
-                alt=''
-                className='absolute right-6 bottom-0 opacity-60 '
-              />
-              <div className='w-full h-[40vh] flex-center flex-row gap-24 pl-14'>
+              <div className='w-full h-[40vh] flex-center flex-row gap-24 ps-32'>
                 <div className='grid-green w-[22%] h-[20vh] z-10 bg-ivory'>
                   <FontAwesomeIcon
                     icon={faMoneyBillTrendUp}
@@ -156,6 +88,7 @@ function ArtistDashboard() {
                   </div>
                 </div>
               </div>
+
               <div className='w-full h-1/2 flex justify-end pr-40'>
                 <div className='w-3/4 col-span-4 row-span-4 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2 overflow-y-auto z-10'>
                   <div className='flex flex-col gap-2'>
