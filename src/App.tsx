@@ -1,12 +1,12 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 
 import { adminAccess, artistAccess, userAccess } from "@utils";
-import { AdminLayout, UserAccountLayout } from "@layouts";
+import { AdminLayout, ArtistLayout, UserAccountLayout } from "@layouts";
 import {
   AdminDashboard,
   AllArtistsPage,
@@ -21,6 +21,9 @@ import {
   UserLoginPage,
   UserRegisterPage,
   WorkforceLoginPage,
+  AllClientsPage,
+  AllOrdersPage,
+  ArtistJobsPage,
 } from "@pages";
 
 function App() {
@@ -33,7 +36,7 @@ function App() {
       element: <LandingPage />,
     },
     {
-      path: "/no-access",
+      path: "no-access",
       element: <UnauthorizedPage />,
     },
 
@@ -62,12 +65,14 @@ function App() {
       ],
     },
     {
-      path: "order",
+      path: "order/:params",
       element: <OrderPage />,
+      loader: userAccess,
     },
     {
       path: "checkout",
       element: <Checkout />,
+      loader: userAccess,
     },
 
     // Workforce Side
@@ -76,7 +81,7 @@ function App() {
       element: <WorkforceLoginPage />,
     },
     {
-      path: "/w/invitation/accept",
+      path: "w/invitation/accept",
       element: <InvitationPage />,
     },
     {
@@ -92,13 +97,38 @@ function App() {
           path: "artists",
           element: <AllArtistsPage />,
         },
+        {
+          path: "clients",
+          element: <AllClientsPage />,
+        },
+        {
+          path: "orders",
+          element: <AllOrdersPage />,
+        },
       ],
     },
+
     {
-      path: "w/dashboard",
-      element: <ArtistDashboard />,
+      path: "w",
+      element: <ArtistLayout />,
       loader: artistAccess,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="dashboard" />,
+        },
+        {
+          path: "dashboard",
+          element: <ArtistDashboard />,
+        },
+        {
+          path: "jobs",
+          element: <ArtistJobsPage />,
+        },
+      ],
     },
+    
+    
   ]);
 
   return (

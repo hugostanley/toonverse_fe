@@ -17,6 +17,9 @@ export default {
         pink: "#F196E5",
         yellow: "#FFE04A",
         green: "#47AF3C",
+        grey: "#BEBEC4",
+        orange: "#ff3d00",
+        // red: "#F8423F",
       },
       fontFamily: {
         'sans': ['"Varela Round"', ...defaultTheme.fontFamily.sans],
@@ -24,5 +27,7 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 } satisfies Config;

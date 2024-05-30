@@ -1,6 +1,6 @@
 // import React from "react";
 import { Navbar, Footer } from "@components";
-import { Link } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 import { getLocalStorage } from "@utils";
 
 const InfoCard = ({ imgSrc, title, customClass = "" }) => (
@@ -148,19 +148,19 @@ function LandingPage() {
             alt="Logo"
             className="absolute bottom-24 right-[5%] rotate-12 h-45 aspect-square z-20"
           />
-          <Link to="order/rick_and_morty" className="px-4 py-8">
+          <Link smooth to="order/rick_and_morty" className="px-4 py-8">
             <InfoCard
               imgSrc="/src/assets/rickMorty.png"
               title="Rick and Morty Custom Portrait"
             />
           </Link>
-          <Link to="order/bobs_burger" className="px-4 py-8">
+          <Link smooth to="order/bobs_burger" className="px-4 py-8">
             <InfoCard
               imgSrc="/src/assets/bobs.png"
               title="Bob's Burger Custom Portrait"
             />
           </Link>
-          <Link to="order/vector" className="px-4 py-8">
+          <Link smooth to="order/vector" className="px-4 py-8">
             <InfoCard
               imgSrc="/src/assets/vexel.png"
               title="Vexel Art Custom Portrait"
