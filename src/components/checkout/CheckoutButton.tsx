@@ -13,7 +13,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({
 }) => {
   return (
     <div className="fixed h-[5rem] bottom-0 z-10 py-6 px-8 w-full border-dashed flex justify-end gap-4 items-center border-t-4 border-black bg-ivory">
-      <p className="text-red-400">Total Amount: ${totalAmount.toFixed(2)}</p>
+      <p className="text-red-400">Total Amount: ₱{totalAmount.toFixed(2)}</p>
       <button
         onClick={handleCheckout}
         disabled={!isAnyItemSelected}
