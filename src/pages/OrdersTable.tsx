@@ -1,6 +1,6 @@
 import DataTable from "react-data-table-component";
 import { Spinner } from "@components";
-import { formatCreatedAt, getLocalStorage } from "@utils";
+import { BASE_URL, formatCreatedAt, getLocalStorage } from "@utils";
 import { Link } from "react-router-dom";
 import ClaimOrder from "./workforce/admin/ClaimOrder";
 
@@ -97,7 +97,13 @@ function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTabl
       cell: (row: Order) => (
         <div>
           {row.latest_artwork ? 
-            <span className="text-pretty">{row.latest_artwork_revision}: {row.latest_artwork}</span>
+            <Link
+              to={`${BASE_URL}${row.latest_artwork}`}
+              className="hover:underline underline-offset-2 text-blue hover:text-green"
+              target="_blank"
+            >
+              {`REV 0${row.latest_artwork_revision}`}
+            </Link>
             : "N/A"
           }
         </div>

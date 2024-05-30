@@ -3,7 +3,7 @@ import { ArtistSidebar } from "@pages";
 
 function ArtistLayout() {
   return (
-    <main className="">
+    <main className="w-full h-full bg-ivory">
       <ArtistSidebar />
       <Outlet /> 
     </main>
