@@ -3,7 +3,6 @@ import { useUserProfile, useUserData } from "@layouts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenToSquare,
-  faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { Spinner, LogoutBtn } from "@components";
 import { useQuery } from "@tanstack/react-query";
