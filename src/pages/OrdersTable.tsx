@@ -1,8 +1,8 @@
 import DataTable from "react-data-table-component";
 import { Spinner } from "@components";
-import { formatCreatedAt } from "@utils";
+import { formatCreatedAt, getLocalStorage } from "@utils";
 import { Link } from "react-router-dom";
-import ClaimOrder from "./ClaimOrder";
+import ClaimOrder from "./workforce/admin/ClaimOrder";
 
 type Order = {
   id: number;
@@ -30,7 +30,10 @@ type OrdersTableProps = {
 }
 
 function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTableProps) {
-  const columns = [
+  const { data: currentUserData } = getLocalStorage("AccountData");
+  const { role } = currentUserData;
+
+  const adminColumns = [
     {
       name: "ID",
       width: "50px",
@@ -38,7 +41,6 @@ function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTabl
         fontWeight: "900",
       },
       selector: (row: Order) => row.id
-      
     },
     {
       name: "Item ID",
@@ -49,7 +51,21 @@ function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTabl
       name: "Payment ID",
       maxWidth: "120px",
       selector: (row: Order) => row.payment_id
+    }
+  ];
+
+  const artistColumns = [
+    {
+      name: "ID",
+      width: "50px",
+      style: {
+        fontWeight: "900",
+      },
+      selector: (row: Order) => row.id
     },
+  ];
+
+  const commonColumns = [
     {
       name: "Details",
       minWidth: "250px",
@@ -106,7 +122,7 @@ function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTabl
         
       )
     },
-  ]
+  ];
 
   const customStyles = {
     headCells: {
@@ -121,6 +137,8 @@ function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTabl
       },
     },
   };
+
+  const queuedOrders = data.filter((item) => item.order_status === "queued");
   
   return (
     <>
@@ -128,8 +146,8 @@ function OrdersTable({ data, isLoading, paginationRowsPerPageArray }: OrdersTabl
         <Spinner />
       ) : (
         <DataTable
-          columns={columns}
-          data={data}
+          columns={role === "admin" ? [...adminColumns, ...commonColumns] : [...artistColumns, ...commonColumns]}
+          data={role === "artist" ? queuedOrders : data}
           customStyles={customStyles}
           fixedHeader
           pagination 
