@@ -1,15 +1,8 @@
-import {
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
-} from "@coreui/react";
 import { useQuery } from "@tanstack/react-query";
 import { ALL_USERS, apiClient } from "@utils";
 import { EditClient } from "@pages";
 import { Spinner } from "@components";
+import DataTable from "react-data-table-component";
 
 type Client = {
   email: string;
@@ -30,6 +23,63 @@ function AllClients() {
     },
   });
 
+  const customStyles = {
+    headCells: {
+      style: {
+        fontSize: "0.85rem",
+        fontWeight: "900",
+      },
+    },
+    rows: {
+      style: {
+        fontSize: "0.75rem",
+      },
+    },
+  };
+
+  const columns = [
+    {
+      name: "ID",
+      maxWidth: "100px",
+      style: {
+        fontWeight: "900",
+      },
+      sortable: true,
+      selector: (row: Client) => row.id
+    },
+    {
+      name: "Email",
+      style: {
+        fontWeight: "900",
+      },
+      sortable: true,
+      selector: (row: Client) => row.email
+    },
+    {
+      name: "First Name",
+      sortable: true,
+      selector: (row: Client) => row.first_name
+    },
+    {
+      name: "Last Name",
+      sortable: true,
+      selector: (row: Client) => row.last_name
+    },
+    {
+      name: "Billing Address",
+      selector: (row: Client) => row.billing_address
+    },
+    {
+      name: "",
+      width: "150px",
+      cell: (row: Client) => (
+        <div>
+          <EditClient client={row} />
+        </div>
+      )
+    },
+  ]
+
   return (
     <main className="w-full h-[92%] p-4 flex flex-col gap-3">
       <h1 className="w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header">
@@ -42,46 +92,16 @@ function AllClients() {
         </section>
       ) : (
         <section className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-          <CTable hover>
-            <CTableHead>
-              <CTableRow>
-                <CTableHeaderCell scope="col">Profile ID</CTableHeaderCell> 
-                <CTableHeaderCell scope="col">Email</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Last Name</CTableHeaderCell>
-                <CTableHeaderCell scope="col">First Name</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Billing Address</CTableHeaderCell>
-                <CTableHeaderCell scope="col"></CTableHeaderCell>
-              </CTableRow>
-            </CTableHead>
-            <CTableBody className="">
-              {data &&
-                data.map((client) => (
-                  <CTableRow key={client.id} className="">
-                    <CTableHeaderCell
-                      scope="row"
-                      className="tracking-widest pt-3"
-                    >
-                      {client.id}
-                    </CTableHeaderCell>
-                    <CTableDataCell className="pt-3">
-                      {client.email}
-                    </CTableDataCell>
-                    <CTableDataCell className="pt-3">
-                      {client.last_name}
-                    </CTableDataCell>
-                    <CTableDataCell className="pt-3">
-                      {client.first_name}
-                    </CTableDataCell>
-                    <CTableDataCell className="pt-3">
-                      {client.billing_address}
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <EditClient client={client} />
-                    </CTableDataCell>
-                  </CTableRow>
-                ))}
-            </CTableBody>
-          </CTable>
+          <DataTable
+            columns={columns}
+            data={data || []}
+            customStyles={customStyles}
+            fixedHeader
+            pagination 
+            paginationPerPage={10} 
+            paginationRowsPerPageOptions={[10, 20, 30]}
+            defaultSortFieldId={0}
+          />          
         </section>
       )}
       
