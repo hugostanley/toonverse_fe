@@ -23,9 +23,8 @@ import {
   WorkforceLoginPage,
   AllClientsPage,
   AllOrdersPage,
-  ArtistJobsTable,
+  ArtistJobsPage,
 } from "@pages";
-import Jobs from "./pages/Jobs";
 
 function App() {
   const queryClient = new QueryClient();
@@ -124,7 +123,7 @@ function App() {
         },
         {
           path: "jobs",
-          element: <ArtistJobsTable />,
+          element: <ArtistJobsPage />,
         },
       ],
     },

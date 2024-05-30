@@ -18,9 +18,9 @@ function Login() {
           Sign in
         </h1>
 
-        <div className='w-full h-16 p-2 mt-2'>
+        {/* <div className='w-full h-16 p-2 mt-2'>
           <GoogleOAuth />
-        </div>
+        </div> */}
 
         <span className='w-full text-center text-sm font-bold'>or</span>
 
