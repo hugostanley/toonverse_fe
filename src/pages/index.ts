@@ -22,6 +22,7 @@ export { default as InvitationPage } from "./workforce/auth/Invitation";
 export { default as InvitationForm } from "./workforce/auth/AcceptInviteForm";
 export { default as WorkforceNavbar } from "./workforce/WorkforceNavbar";
 export { default as EditArtistProfile } from "./workforce/EditArtistProfile";
+export { default as OrdersTable } from "./OrdersTable";
 
 // Admin Side
 export { default as AdminDashboard } from "./workforce/admin/AdminDashboard";
@@ -36,7 +37,6 @@ export { default as EditClient } from "./workforce/admin/EditClient";
 export { default as EditClientProfile } from "./workforce/admin/EditClientProfile";
 //// Admin Side - Orders
 export { default as AllOrdersPage } from "./workforce/admin/AllOrders";
-export { default as OrdersTable } from "./workforce/admin/OrdersTable";
 export { default as ClaimOrder } from "./workforce/admin/ClaimOrder";
 
 // Artist Side

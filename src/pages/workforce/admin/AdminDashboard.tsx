@@ -120,7 +120,7 @@ function AdminDashboard() {
           <h2 className='text-2xl tracking-wider font-bold'>All Orders</h2>
           <div className="w-full max-h-full pr-2 overflow-y-auto">
             <div className="px-3 pt-2 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-              <OrdersTable data={data ?? []} isLoading={isLoading} paginationRowsPerPageArray={[2, 5, 10]} />
+              <OrdersTable data={data ?? []} isLoading={isLoading} paginationRowsPerPageArray={[3, 5, 10, 20, 30]} />
             </div>
           </div>
         </div>

@@ -2,8 +2,7 @@ import DataTable from "react-data-table-component";
 import { Spinner } from "@components";
 import { formatCreatedAt, getLocalStorage } from "@utils";
 import { Link } from "react-router-dom";
-import ClaimOrder from "./ClaimOrder";
-import { clearLine } from "readline";
+import ClaimOrder from "./workforce/admin/ClaimOrder";
 
 type Order = {
   id: number;

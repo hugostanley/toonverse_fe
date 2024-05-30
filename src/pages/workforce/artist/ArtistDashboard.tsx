@@ -167,7 +167,7 @@ function ArtistDashboard() {
                       <OrdersTable
                         data={orderData ?? []}
                         isLoading={orderLoading}
-                        paginationRowsPerPageArray={[3, 5, 10, 20, 30]}
+                        paginationRowsPerPageArray={[2, 5, 10]}
                       />
                     </div>
                   </div>
