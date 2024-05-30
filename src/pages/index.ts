@@ -46,3 +46,4 @@ export { default as ArtistProfileInfo } from "./workforce/artist/ArtistProfileIn
 export { default as NewArtistForm } from './workforce/artist/NewArtistForm';
 export { default as ArtistJobsTable } from './workforce/artist/ArtistJobsTable';
 export { default as AvailableJobsTable } from './workforce/artist/AvailableJobsTable';
+export { default as ArtistSidebar } from "./workforce/artist/ArtistSidebar";

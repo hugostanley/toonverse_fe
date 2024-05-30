@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ALL_ORDERS, apiClient } from "@utils";
 import { ALL_ARTISTS } from "@utils";
-import ArtistProfileInfo from "./ArtistProfileInfo"; // Import the component
 import NewArtistForm from "./NewArtistForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,7 +10,8 @@ import {
   faBagShopping,
   faPenNib,
 } from "@fortawesome/free-solid-svg-icons";
-import { AvailableJobsTable } from "@pages";
+import { AvailableJobsTable, ArtistSidebar } from "@pages";
+
 
 type Artist = {
   email: string;
@@ -95,46 +95,15 @@ function ArtistDashboard() {
   return (
     <main>
       <div className="full-size flex-row bg-ivory relative">
-        {isLoading ? (
+      {isLoading ? (
           <div className="loader"></div>
         ) : error ? (
           <div className="error">An error occurred while fetching data.</div>
         ) : artistData ? (
           <>
-            {/* sidebar */}
-            <div
-              className={`absolute top-0 ${
-                visible ? "right-0" : "hidden"
-              } w-[40%] max-w-[40%] h-screen `}
-            >
-              <div className="absolute right-0 w-[90%] h-screen bg-green rounded-tl-2xl rounded-bl-2xl flex-center z-20">
-                <ArtistProfileInfo artistData={artistData} refetch={refetch} />
-              </div>
-              <button
-                className="absolute left-0 top-16 w-[10%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center"
-                onClick={() => setVisible(false)}
-              >
-                <img
-                  src="/src/assets/profile-icon.png"
-                  alt="profile-icon"
-                  className="w-[60%] rounded-full border-2 border-white"
-                />
-              </button>
-            </div>
-            <button
-              className="absolute right-0 top-16 w-[5%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
-              onClick={() => setVisible(true)}
-            >
-              <img
-                src="/src/assets/profile-icon.png"
-                alt="profile-icon"
-                className="w-1/2 rounded-full border-2 border-white"
-              />
-            </button>
-
             {/* dashboard */}
-            <div className=" full-size">
-              <div className="absolute left-0 w-[20%] h-screen bg-yellow flex-center items-start flex-col gap-16 ">
+            <div className="full-size">
+              <div className="fixed left-0 w-[20%] h-screen bg-yellow flex-center items-start flex-col gap-16 ">
                 <h1 className=" w-[60%] h-[25vh] p-8 capitalize text-[2rem] text-justify flex items-center font-semibold">
                   Hello, {artistData.first_name}!
                 </h1>
