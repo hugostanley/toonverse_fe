@@ -25,7 +25,6 @@ import {
   AllOrdersPage,
   ArtistJobsTable,
 } from "@pages";
-import Jobs from "./pages/Jobs";
 
 function App() {
   const queryClient = new QueryClient();
