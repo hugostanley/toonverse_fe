@@ -16,8 +16,9 @@ import {
 } from "@utils";
 import { Spinner, FileUploadModal } from "@components";
 import { Link } from "react-router-dom";
-import ArtistSidebar from "../ArtistSidebar";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 type Jobs = {
   id: number;
@@ -53,23 +54,22 @@ function ArtistJobsTable() {
   });
 
   return (
-    <main className="w-full h-full p-4 flex flex-col gap-3 bg-ivory relative">
+    <section className="w-full h-full p-4 flex flex-col gap-3 relative">
       <FileUploadModal
         modalFileUpload={fileUploadModal}
         handleClose={() => setFileUploadModal(!fileUploadModal)}
         target={target}
       />
       <h1 className="w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header">
-        All Jobs
+        My Jobs
       </h1>
-      <ArtistSidebar />
 
       {isLoading ? (
-        <section className="h-full w-full grid place-items-center">
+        <div className="h-full w-full grid place-items-center">
           <Spinner />
-        </section>
+        </div>
       ) : (
-        <section className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
+        <div className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
           <CTable hover>
             <CTableHead>
               <CTableRow>
@@ -77,12 +77,12 @@ function ArtistJobsTable() {
                 <CTableHeaderCell scope="col">Order ID</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Commission</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Claim Timestamp</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Artwork</CTableHeaderCell>
+                <CTableHeaderCell scope="col"></CTableHeaderCell>
                 <CTableHeaderCell scope="col">Latest Artwork</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Status</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
-            <CTableBody className="">
+            <CTableBody className="text-xs">
               {data &&
                 data.map((job) => (
                   <CTableRow key={job.id} className="">
@@ -98,12 +98,12 @@ function ArtistJobsTable() {
                     <CTableDataCell className="py-3">
                       ₱ {parseFloat(job.commission).toFixed(2)}
                     </CTableDataCell>
-                    <CTableDataCell className="py-3">
+                    <CTableDataCell className="py-3 max-w-[180px]">
                       {formatCreatedAt(job.claimed_at)}
                     </CTableDataCell>
-                    <CTableDataCell className="py-3">
+                    <CTableDataCell className="py-3 max-w-[120px]">
                       <button
-                        className="btn__primary bg-pink"
+                        className="btn__primary bg-pink w-fit"
                         onClick={(e) => {
                           setFileUploadModal(true);
                           setTarget({
@@ -116,23 +116,27 @@ function ArtistJobsTable() {
                           );
                         }}
                       >
-                        Upload Artwork
+                        <div className="flex items-center justify-center gap-2">
+                          <FontAwesomeIcon icon={faUpload} />
+                          Upload Artwork
+                        </div>
+                        
                       </button>
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
                       {job.latest_artwork && (
                         <Link
                           to={`${baseURL}${job.latest_artwork}`}
-                          className="btn__primary bg-blue text-white text-center"
+                          className="w-2/3 btn__primary bg-yellow text-center"
                           target="_blank"
                         >
-                          {`REV ${job.latest_artwork_revision}: Artwork Link`}
+                          {`REV 0${job.latest_artwork_revision}`}
                         </Link>
                       )}
                     </CTableDataCell>
                     <CTableDataCell className="py-3">
                       <div
-                        className={`btn__primary bg-${
+                        className={`w-[65%] text-ivory btn__primary bg-${
                           statusColors[job.status]
                         }`}
                       >
@@ -143,9 +147,9 @@ function ArtistJobsTable() {
                 ))}
             </CTableBody>
           </CTable>
-        </section>
+        </div>
       )}
-    </main>
+    </section>
   );
 }
 

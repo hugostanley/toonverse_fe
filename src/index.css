@@ -24,7 +24,7 @@
 
 @layer components {
   .br {
-    @apply border-2 border-red-500 border-dotted;
+    @apply border-2 border-dotted border-red-500;
   }
 
   .field__wrapper {

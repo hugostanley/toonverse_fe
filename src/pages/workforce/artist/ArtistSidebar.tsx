@@ -33,7 +33,7 @@ function ArtistSidebar() {
   useEffect(() => {
     if (data && data.length > 0) {
       setArtistData(
-       data[0],
+      data[0],
         );
     } 
   }, [data, isLoading, error, setArtistData, visible]);
@@ -43,7 +43,7 @@ function ArtistSidebar() {
       <div
         className={`absolute top-0 ${
           visible ? "right-0" : "hidden"
-        } w-[40%] max-w-[40%] h-screen `}
+        } w-[40%] max-w-[40%] h-screen z-20`}
       >
         <div className="absolute right-0 w-[90%] h-screen bg-green rounded-tl-2xl rounded-bl-2xl flex-center z-20">
           <ArtistProfileInfo artistData={artistData} refetch={refetch} />
@@ -60,17 +60,17 @@ function ArtistSidebar() {
         </button>
       </div>
       <button
-        className="absolute right-0 top-16 w-[5%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
+        className="z-10 absolute right-0 top-16 w-[3.5%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
         onClick={() => setVisible(true)}
       >
         <img
           src="/src/assets/profile-icon.png"
           alt="profile-icon"
-          className="w-1/2 "
+          className="w-1/2"
         />
       </button>
     </>
   );
 }
 
-export default ArtistSidebar;
+export default ArtistSidebar

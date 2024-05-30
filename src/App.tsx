@@ -1,12 +1,12 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 
 import { adminAccess, artistAccess, userAccess } from "@utils";
-import { AdminLayout, UserAccountLayout } from "@layouts";
+import { AdminLayout, ArtistLayout, UserAccountLayout } from "@layouts";
 import {
   AdminDashboard,
   AllArtistsPage,
@@ -23,7 +23,7 @@ import {
   WorkforceLoginPage,
   AllClientsPage,
   AllOrdersPage,
-  MyJobsPage,
+  ArtistJobsTable,
 } from "@pages";
 
 function App() {
@@ -107,16 +107,28 @@ function App() {
         },
       ],
     },
+
     {
-      path: "w/dashboard",
-      element: <ArtistDashboard />,
+      path: "w",
+      element: <ArtistLayout />,
       loader: artistAccess,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="dashboard" />,
+        },
+        {
+          path: "dashboard",
+          element: <ArtistDashboard />,
+        },
+        {
+          path: "jobs",
+          element: <ArtistJobsTable />,
+        },
+      ],
     },
-    {
-      path: "w/jobs",
-      element: <MyJobsPage />,
-      loader: artistAccess,
-    },
+    
+    
   ]);
 
   return (

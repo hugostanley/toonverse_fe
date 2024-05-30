@@ -27,9 +27,10 @@ type Artist = {
 type ArtistProfileProps = {
   artistData: Artist | null;
   refetch: any;
+  setVisible: (visible: boolean) => void;
 };
 
-function ArtistProfileInfo({ artistData, refetch }: ArtistProfileProps) {
+function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch }: ArtistProfileProps) {
   const [visible, setVisible] = useState(false);
   const [editBioVisible, setEditBioVisible] = useState(false);
 
@@ -130,12 +131,14 @@ function ArtistProfileInfo({ artistData, refetch }: ArtistProfileProps) {
             <Link
               to="/w/dashboard"
               className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl"
+              onClick={() => setSideBarVisible(false)}
             >
               Dashboard
             </Link>
             <Link
               to="/w/jobs"
               className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl"
+              onClick={() => setSideBarVisible(false)}
             >
               My Jobs
             </Link>
