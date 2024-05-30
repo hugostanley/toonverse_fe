@@ -48,7 +48,6 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
                 <FontAwesomeIcon icon={faIdBadge} className="rotate-12 text-yellow" />
                 Personal Details
               </h1>
-              <img src="" alt="" />
 
               <div className="w-[90%] h-[60vh] flex flex-col text-justify gap-2 ">
                 <div className="text-[1.2rem] h-[8vh] flex justify-between border-b-2 capitalize">
@@ -99,7 +98,7 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
           <img
             src="/src/assets/profile-icon.png"
             alt="profile-icon"
-            className="w-1/2 border-4 border-white rounded-full shadow-md shadow-black bg-transparent flex-center "
+            className="w-1/2  drop-shadow-2xl bg-transparent flex-center "
           />
           <div className=" flex-center flex-col w-full h-[15vh]">
             <h1 className="capitalize text-[2.5rem] ">

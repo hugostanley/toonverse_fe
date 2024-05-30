@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Navbar } from "@components";
+import { Navbar, Spinner } from "@components";
 import { useFetch } from "@hooks";
 import {
   ALL_ITEMS,
@@ -27,6 +27,7 @@ function Checkout() {
   const [modalCheckout, setModalCheckout] = useState<boolean>(false);
   const [itemsBeingRemoved, setItemsBeingRemoved] = useState<number[]>([]);
   const [items, setItems] = useState<Item[] | undefined>([]);
+  const [totalAmount, setTotalAmount] = useState<number>(0);
   const { fetchData } = useFetch();
 
   const { isLoading: isPending, isError } = useQuery<Item[]>({
@@ -85,6 +86,14 @@ function Checkout() {
     setTimeout(async () => {
       try {
         await fetchData(DELETE_ITEM(itemId), { method: "DELETE" });
+
+        const itemToRemove = items?.find((item) => item.id === itemId);
+        if (itemToRemove) {
+          setTotalAmount(
+            (prevTotal) => prevTotal - Number(itemToRemove.amount)
+          );
+        }
+
         setItems((prevItems) =>
           prevItems?.filter((item) => item.id !== itemId)
         );
@@ -107,11 +116,23 @@ function Checkout() {
   };
 
   const handleCheckboxChange = (itemId: number) => {
-    setSelectedItems((prevSelectedItems) =>
-      prevSelectedItems.includes(itemId)
+    setSelectedItems((prevSelectedItems) => {
+      const isSelected = prevSelectedItems.includes(itemId);
+      const updatedSelectedItems = isSelected
         ? prevSelectedItems.filter((id) => id !== itemId)
-        : [...prevSelectedItems, itemId]
-    );
+        : [...prevSelectedItems, itemId];
+
+      const item = items?.find((item) => item.id === itemId);
+      if (item) {
+        const itemAmount = Number(item.amount); // Ensure item amount is treated as a number
+        const updatedTotalAmount = isSelected
+          ? totalAmount - itemAmount
+          : totalAmount + itemAmount;
+        setTotalAmount(updatedTotalAmount);
+      }
+
+      return updatedSelectedItems;
+    });
   };
 
   const handleCheckout = () => {
@@ -124,11 +145,13 @@ function Checkout() {
   const isAnyItemSelected = selectedItems.length > 0;
 
   if (isPending) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (isError) {
-    return <div>Error loading items</div>;
+    return (
+      <div className="flex flex-col items-center">Error loading items</div>
+    );
   }
 
   return (
@@ -144,6 +167,7 @@ function Checkout() {
       <CheckoutButton
         isAnyItemSelected={isAnyItemSelected}
         handleCheckout={handleCheckout}
+        totalAmount={totalAmount}
       />
       <CheckoutModal
         modalCheckout={modalCheckout}

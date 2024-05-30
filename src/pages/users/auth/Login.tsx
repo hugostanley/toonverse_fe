@@ -20,9 +20,9 @@ function Login() {
 
         {/* <div className='w-full h-16 p-2 mt-2'>
           <GoogleOAuth />
-        </div> */}
-
-        <span className='w-full text-center text-sm font-bold'>or</span>
+        </div> 
+        
+        <span className='w-full text-center text-sm font-bold'>or</span> */}
 
         <LoginForm apiUrl={LOGIN_URL} btnColor='yellow' />
 

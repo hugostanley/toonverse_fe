@@ -46,10 +46,10 @@ function ArtistSidebar() {
         } w-[40%] max-w-[40%] h-screen z-20`}
       >
         <div className="absolute right-0 w-[90%] h-screen bg-green rounded-tl-2xl rounded-bl-2xl flex-center z-20">
-          <ArtistProfileInfo artistData={artistData} refetch={refetch} />
+          <ArtistProfileInfo setVisible={setVisible} artistData={artistData} refetch={refetch} />
         </div>
         <button
-          className="absolute left-0 top-16 w-[10%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center"
+          className="absolute left-0 top-16  w-[10%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center"
           onClick={() => setVisible(false)}
         >
           <img

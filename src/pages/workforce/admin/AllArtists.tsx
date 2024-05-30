@@ -1,15 +1,8 @@
-import {
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
-} from "@coreui/react";
 import { useQuery } from "@tanstack/react-query";
 import { ALL_ARTISTS, apiClient } from "@utils";
 import { Spinner } from "@components";
 import { EditArtist } from "@pages";
+import DataTable from "react-data-table-component";
 
 type Artist = {
   email: string;
@@ -33,6 +26,63 @@ function AllArtists() {
     },
   });
 
+  const customStyles = {
+    headCells: {
+      style: {
+        fontSize: "0.85rem",
+        fontWeight: "900",
+      },
+    },
+    rows: {
+      style: {
+        fontSize: "0.75rem",
+      },
+    },
+  };
+
+  const columns = [
+    {
+      name: "ID",
+      maxWidth: "100px",
+      style: {
+        fontWeight: "900",
+      },
+      sortable: true,
+      selector: (row: Artist) => row.id
+    },
+    {
+      name: "Email",
+      style: {
+        fontWeight: "900",
+      },
+      sortable: true,
+      selector: (row: Artist) => row.email
+    },
+    {
+      name: "First Name",
+      sortable: true,
+      selector: (row: Artist) => row.first_name
+    },
+    {
+      name: "Last Name",
+      sortable: true,
+      selector: (row: Artist) => row.last_name
+    },
+    {
+      name: "Billing Address",
+      selector: (row: Artist) => row.billing_address
+    },
+    {
+      name: "",
+      width: "150px",
+      cell: (row: Artist) => (
+        <div className="max-w-[100px]">
+          <EditArtist artist={row} />
+        </div>
+      )
+    },
+  ]
+
   return (
     <main className="w-full h-[92%] p-4 flex flex-col gap-3">
       <h1 className="w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header">
@@ -44,54 +94,16 @@ function AllArtists() {
         </section>
       ) : (
         <section className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-          <CTable hover>
-            <CTableHead>
-              <CTableRow>
-                <CTableHeaderCell scope="col">ID</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Email</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Last Name</CTableHeaderCell>
-                <CTableHeaderCell scope="col">First Name</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Billing Address</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Mobile Number</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Total Earnings</CTableHeaderCell>
-                <CTableHeaderCell scope="col"></CTableHeaderCell>
-              </CTableRow>
-            </CTableHead>
-            <CTableBody className="">
-              {data &&
-                data.map((artist) => (
-                  <CTableRow key={artist.id} className="">
-                    <CTableHeaderCell
-                      scope="row"
-                      className="tracking-widest pt-3"
-                    >
-                      {artist.workforce_id}
-                    </CTableHeaderCell>
-                    <CTableDataCell className="pt-3">
-                      {artist.email}
-                    </CTableDataCell>
-                    <CTableDataCell className="pt-3">
-                      {artist.last_name}
-                    </CTableDataCell>
-                    <CTableDataCell className="pt-3">
-                      {artist.first_name}
-                    </CTableDataCell>
-                    <CTableDataCell className="pt-3">
-                      {artist.billing_address}
-                    </CTableDataCell>
-                    <CTableDataCell className="pt-3">
-                      +63{artist.mobile_number}
-                    </CTableDataCell>
-                    <CTableDataCell className="pt-3">
-                      {artist.total_earnings}
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <EditArtist artist={artist} />
-                    </CTableDataCell>
-                  </CTableRow>
-                ))}
-            </CTableBody>
-          </CTable>
+          <DataTable
+            columns={columns}
+            data={data || []}
+            customStyles={customStyles}
+            fixedHeader
+            pagination 
+            paginationPerPage={10} 
+            paginationRowsPerPageOptions={[10, 20, 30]}
+            defaultSortFieldId={0}
+          />
         </section>
       )}
     </main>
