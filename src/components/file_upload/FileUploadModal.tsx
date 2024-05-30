@@ -63,7 +63,7 @@ function FileUploadModal({ modalFileUpload, handleClose, target }: any ) {
         refetchType: "all",
       }),
         console.log("UPDATED ORDER");
-      navigate("/w/dashboard");
+      navigate("/w/jobs");
     },
   });
 
