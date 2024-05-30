@@ -83,6 +83,11 @@ function FileUploadModal({ modalFileUpload, handleClose, target }: any ) {
     }
   };
 
+  const close = () => {
+    handleClose()
+    setPreviewUrl(null)
+  }
+
   const handleUpload = (e: any) => {
     e.preventDefault();
     mutationUpload.mutate(file);
@@ -94,7 +99,8 @@ function FileUploadModal({ modalFileUpload, handleClose, target }: any ) {
   };
 
   return (
-    <Modal open={modalFileUpload} onClose={handleClose}>
+    <Modal open={modalFileUpload} onClose={
+      close}>
       <div className="flex flex-col gap-4 px-4">
         <h1 className="font-bold text-lg">Upload Artwork</h1>
         <input
