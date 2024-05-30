@@ -68,12 +68,12 @@ function ArtistLayout() {
       {/* YELLOW LEFT SIDE ELEMENT */}
       { artistData && (
         <>
-          <aside className='fixed z-10 left-0 w-[20%] h-screen bg-yellow flex-center items-start flex-col gap-16 max-w-[20%]'>
-            <h1 className='max-w-[80%] h-[25vh] ps-8 capitalize text-[2.5rem] text-justify flex flex-col gap-1 font-semibold justify-center'>
+          <aside className='fixed z-10 left-0 w-[20%] h-screen bg-yellow flex-center items-start flex-col gap-14 max-w-[20%]'>
+            <h1 className='max-w-[80%] h-[20vh] ps-8 capitalize text-[2.5rem] text-justify flex flex-col gap-1 font-semibold justify-center'>
               <p className="text-[2rem] font-normal">Hello,</p>
               <p className="flex gap-1 tracking-widest"><span className="truncate">{artistData?.first_name}</span>!</p>              
             </h1>
-            <div className='w-full h-[50vh] text-left px-8 flex flex-col gap-2'>
+            <div className='w-full  h-[55vh] text-left px-8 flex flex-col gap-2'>
               <h1 className='text-[1.8rem] font-bold'>{currentDateTime}</h1>
               <h1 className='text-[1.3rem]'>To-do Revision</h1>
               <h1 className='font-bold'>newest</h1>
