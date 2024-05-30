@@ -10,7 +10,7 @@ import {
   faBagShopping,
   faPenNib,
 } from "@fortawesome/free-solid-svg-icons";
-import { AvailableJobsTable, ArtistSidebar } from "@pages";
+import { AvailableJobsTable, ArtistSidebar, OrdersTable } from "@pages";
 
 
 type Artist = {
@@ -164,9 +164,10 @@ function ArtistDashboard() {
 
                   <div className="w-full max-h-full pr-2 overflow-y-auto">
                     <div className="px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-                      <AvailableJobsTable
+                      <OrdersTable
                         data={orderData ?? []}
                         isLoading={orderLoading}
+                        paginationRowsPerPageArray={[3, 5, 10, 20, 30]}
                       />
                     </div>
                   </div>
