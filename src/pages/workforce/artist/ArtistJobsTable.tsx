@@ -54,16 +54,13 @@ function ArtistJobsTable() {
   });
 
   return (
-    <section className="w-full h-full p-4 flex flex-col gap-3 relative">
+    <div className="w-full h-full flex flex-col gap-3 relative">
       <FileUploadModal
         modalFileUpload={fileUploadModal}
         handleClose={() => setFileUploadModal(!fileUploadModal)}
         target={target}
       />
-      <h1 className="w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header">
-        My Jobs
-      </h1>
-
+      
       {isLoading ? (
         <div className="h-full w-full grid place-items-center">
           <Spinner />
@@ -104,7 +101,7 @@ function ArtistJobsTable() {
                     <CTableDataCell className="py-3 max-w-[120px]">
                       <button
                         className="btn__primary bg-pink w-fit"
-                        onClick={(e) => {
+                        onClick={() => {
                           setFileUploadModal(true);
                           setTarget({
                             ...target,
@@ -149,7 +146,7 @@ function ArtistJobsTable() {
           </CTable>
         </div>
       )}
-    </section>
+    </div>
   );
 }
 

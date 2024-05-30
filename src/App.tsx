@@ -23,7 +23,7 @@ import {
   WorkforceLoginPage,
   AllClientsPage,
   AllOrdersPage,
-  ArtistJobsTable,
+  ArtistJobsPage,
 } from "@pages";
 
 function App() {
@@ -123,7 +123,7 @@ function App() {
         },
         {
           path: "jobs",
-          element: <ArtistJobsTable />,
+          element: <ArtistJobsPage />,
         },
       ],
     },

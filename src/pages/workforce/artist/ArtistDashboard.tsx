@@ -184,9 +184,9 @@ function ArtistDashboard() {
                         My Jobs
                       </h1>
                     </div>
-
-                    {/* Available Jobs Table */}
+                    
                     <div className='w-full max-h-full pr-2 overflow-y-auto'>
+                      {/* Available Jobs Table */}
                       {showAvailableJobs && (
                         <div className='px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl'>
                           <OrdersTable
@@ -199,9 +199,7 @@ function ArtistDashboard() {
 
                       {/* Artist's Jobs */}
                       {showArtistJobs && (
-                        <div className='px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl'>
-                          <ArtistJobsTable />
-                        </div>
+                        <ArtistJobsTable />                      
                       )}
                     </div>
                   </div>
