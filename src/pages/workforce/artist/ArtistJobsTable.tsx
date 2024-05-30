@@ -36,13 +36,13 @@ type Jobs = {
 type Target = {
   job_id: number | null;
   order_id: number | null;
-}
+};
 
 function ArtistJobsTable() {
   const [fileUploadModal, setFileUploadModal] = useState(false);
   const [target, setTarget] = useState<Target>({
     job_id: null,
-    order_id: null
+    order_id: null,
   });
   const { data, isLoading } = useQuery<Jobs[]>({
     queryKey: ["allJobs"],
@@ -54,15 +54,15 @@ function ArtistJobsTable() {
 
   return (
     <main className="w-full h-full p-4 flex flex-col gap-3 bg-ivory relative">
+      <FileUploadModal
+        modalFileUpload={fileUploadModal}
+        handleClose={() => setFileUploadModal(!fileUploadModal)}
+        target={target}
+      />
       <h1 className="w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header">
-        <FileUploadModal
-          modalFileUpload={fileUploadModal}
-          handleClose={() => setFileUploadModal(!fileUploadModal)}
-          target={target}
-        />
         All Jobs
       </h1>
-      <ArtistSidebar/>
+      <ArtistSidebar />
 
       {isLoading ? (
         <section className="h-full w-full grid place-items-center">
@@ -106,8 +106,14 @@ function ArtistJobsTable() {
                         className="btn__primary bg-pink"
                         onClick={(e) => {
                           setFileUploadModal(true);
-                          setTarget({...target, job_id: job.id, order_id: job.order_id});
-                          console.log(`TARGET ID:${target.job_id} ORDER:${target.order_id}`);
+                          setTarget({
+                            ...target,
+                            job_id: job.id,
+                            order_id: job.order_id,
+                          });
+                          console.log(
+                            `TARGET ID:${target.job_id} ORDER:${target.order_id}`
+                          );
                         }}
                       >
                         Upload Artwork
