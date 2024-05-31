@@ -42,7 +42,8 @@ function ArtistDashboard() {
       return response.data;
     },
   });
-
+  
+  console.log("ARTIST DATA", artistData?.id);
   return (
     <main>
       <div className="full-size flex-row bg-ivory relative">
@@ -79,7 +80,9 @@ function ArtistDashboard() {
                     <h1 className="text-3xl tracking-wider font-bold">
                       {
                         orderData?.filter(
-                          (orders) => orders.order_status === "completed"
+                          (order) =>
+                            order.order_status === "completed" &&
+                            order.workforce_id === parseInt(artistData.workforce_id)
                         ).length
                       }
                     </h1>
@@ -93,7 +96,9 @@ function ArtistDashboard() {
                     <h1 className="text-3xl tracking-wider font-bold">
                       {
                         orderData?.filter(
-                          (orders) => orders.order_status === "in_progress"
+                          (order) =>
+                            order.order_status === "in_progress" &&
+                            order.workforce_id === parseInt(artistData.workforce_id)
                         ).length
                       }
                     </h1>
