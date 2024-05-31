@@ -24,6 +24,7 @@ import {
   AllClientsPage,
   AllOrdersPage,
   ArtistJobsPage,
+  ArtistGallery,
 } from "@pages";
 
 function App() {
@@ -124,6 +125,10 @@ function App() {
         {
           path: "jobs",
           element: <ArtistJobsPage />,
+        },
+        {
+          path: "gallery",
+          element: <ArtistGallery />,
         },
       ],
     },

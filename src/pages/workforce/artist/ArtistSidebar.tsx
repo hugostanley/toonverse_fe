@@ -60,7 +60,7 @@ function ArtistSidebar() {
         </button>
       </div>
       <button
-        className="z-10 absolute right-0 top-16 w-[3.5%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
+        className="z-20 absolute right-0 top-16 w-[3.5%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
         onClick={() => setVisible(true)}
       >
         <img

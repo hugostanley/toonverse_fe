@@ -86,7 +86,7 @@ function ArtistLayout() {
           <img
             src='/src/assets/art-pad.png'
             alt=''
-            className='fixed z-10 right-6 bottom-0 opacity-60'
+            className='fixed right-6 bottom-0 opacity-60'
           />
         </>
       )}

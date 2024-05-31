@@ -30,7 +30,11 @@ type ArtistProfileProps = {
   setVisible: (visible: boolean) => void;
 };
 
-function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch }: ArtistProfileProps) {
+function ArtistProfileInfo({
+  setVisible: setSideBarVisible,
+  artistData,
+  refetch,
+}: ArtistProfileProps) {
   const [visible, setVisible] = useState(false);
   const [editBioVisible, setEditBioVisible] = useState(false);
 
@@ -45,7 +49,10 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
           >
             <div className="bg-black w-[90%] h-[95vh] rounded-tl-2xl rounded-bl-2xl flex-center flex-col gap-4 absolute right-0 z-10  ">
               <h1 className="text-[2.5rem]">
-                <FontAwesomeIcon icon={faIdBadge} className="rotate-12 text-yellow" />
+                <FontAwesomeIcon
+                  icon={faIdBadge}
+                  className="rotate-12 text-yellow"
+                />
                 Personal Details
               </h1>
 
@@ -95,6 +102,7 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
             <FontAwesomeIcon icon={faMarker} className="text-[2rem]" />
           </button>
 
+          {/* inside green sidebar */}
           <img
             src="/src/assets/profile-icon.png"
             alt="profile-icon"
@@ -124,9 +132,8 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
               )}
             </h1>
           </div>
+          {/* sidebar buttons */}
           <div className="w-full h-1/2 flex-center flex-col gap-4">
-            {/* change ito link */}
-            {/* <button className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl">Available Job</button> */}
             <Link
               to="/w/dashboard"
               className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl"
@@ -141,7 +148,13 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
             >
               My Jobs
             </Link>
-            {/* <button className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl">Artwork Gallery</button> */}
+            <Link
+              to="/w/gallery"
+              className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl"
+              onClick={() => setSideBarVisible(false)}
+            >
+              Artwork Gallery
+            </Link>
             <button className=" w-2/3 h-[5vh] flex-center text-black bg-pink shadow-md shadow-black rounded-xl">
               <LogoutBtn apiUrl={W_LOGOUT_URL} redirectPath="/w/login" />
             </button>
