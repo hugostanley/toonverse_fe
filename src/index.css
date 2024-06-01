@@ -66,6 +66,28 @@
   .btn__pink {
     @apply shadow-retro__dark font-black bg-pink rounded-xl py-3 mt-8 text-center border-dark border-2 w-[15rem];
   }
+
+ /* Masonry styles */
+.my-masonry-grid {
+  display: flex;
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 2rem; /* Adjust this value to change the spacing between columns */
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_item {
+  margin-bottom: 2rem; /* Adjust this value to change the spacing between rows */
+}
+
+.my-masonry-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
 }
 
 /* scrollbar */
