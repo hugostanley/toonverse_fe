@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
-import { HashLink as Link} from 'react-router-hash-link';
-
+import { HashLink as Link } from "react-router-hash-link";
 
 function Navbar() {
   const { hash, pathname } = useLocation();
@@ -22,7 +21,7 @@ function Navbar() {
       <nav className="bg-dark shadow-lg w-100 px-8 md:px-auto">
         <div className="md:h-16 h-28 mx-auto container flex items-center justify-between flex-wrap">
           {/* logo */}
-          <Link to="/" >
+          <Link to="/">
             <img
               src="/src/assets/temp-logo-white.png"
               alt="Logo"
@@ -44,7 +43,7 @@ function Navbar() {
                     <a href="#faqs">FAQS</a>
                   </li>
                   <li className="md:px-4 md:py-2 hover:text-pink">
-                    <a href="#contact">Contact Us</a>
+                    <Link to="/contact-us">Contact Us</Link>
                   </li>
                 </>
               ) : (
@@ -59,7 +58,7 @@ function Navbar() {
                     <Link to="/#faqs">FAQS</Link>
                   </li>
                   <li className="md:px-4 md:py-2 hover:text-pink">
-                    <Link to="/#contact">Contact Us</Link>
+                    <Link to="/contact-us">Contact Us</Link>
                   </li>
                 </>
               )}
@@ -67,8 +66,12 @@ function Navbar() {
           </div>
           {/* icons */}
           <div className="text-light flex gap-3">
-          <Link to="/account"><FontAwesomeIcon icon={faUser} className="h-6" /></Link>
-          <Link to="/checkout"><FontAwesomeIcon icon={faCartShopping} className="h-6" /></Link>
+            <Link to="/account">
+              <FontAwesomeIcon icon={faUser} className="h-6" />
+            </Link>
+            <Link to="/checkout">
+              <FontAwesomeIcon icon={faCartShopping} className="h-6" />
+            </Link>
           </div>
         </div>
       </nav>
