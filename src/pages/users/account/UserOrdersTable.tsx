@@ -97,7 +97,7 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
   };
 
   const handleAskForRevision = () => {
-    setShowRevisionTextArea(true);
+    setShowRevisionTextArea((prevState) => !prevState);
   };
 
   const submitRevision = async () => {
