@@ -33,13 +33,13 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
         <hr className="border-t-solid border-1 border-grey" />
         <div className="flex flex-row justify-center gap-4">
           <button
-            className="border border-neutral-300 rounded-lg py-1.5 px-10 bg-blue hover:bg-pink text-light"
+            className="btn__primary text-sm bg-blue text-light"
             onClick={handleClose}
           >
             Close
           </button>
           <button
-            className="border border-neutral-300 rounded-lg py-1.5 px-10 bg-blue hover:bg-pink text-light"
+            className="btn__primary text-sm bg-blue text-light"
             onClick={handleProceed}
             disabled={!checkoutItems.length}
           >

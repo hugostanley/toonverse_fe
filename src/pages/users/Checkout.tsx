@@ -124,7 +124,7 @@ function Checkout() {
 
       const item = items?.find((item) => item.id === itemId);
       if (item) {
-        const itemAmount = Number(item.amount); // Ensure item amount is treated as a number
+        const itemAmount = Number(item.amount);
         const updatedTotalAmount = isSelected
           ? totalAmount - itemAmount
           : totalAmount + itemAmount;
