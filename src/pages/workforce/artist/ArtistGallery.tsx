@@ -1,6 +1,6 @@
 import Masonry from "react-masonry-css";
 import { useQuery } from "@tanstack/react-query";
-import { ALL_ARTWORKS, apiClient } from "@utils";
+import { ALL_ARTWORKS, BASE_URL, apiClient } from "@utils";
 
 function ArtistGallery() {
   const { data, isLoading, error } = useQuery<any>({
@@ -13,18 +13,18 @@ function ArtistGallery() {
   });
 
   const breakpointColumnsObj = {
-    default: 3,
+    default: 4,
     1100: 2,
     700: 1,
   };
 
-  const artworks = data?.artworks || [];
+  const artworks = data || [];
 
   return (
     <>
       <main className="h-screen flex justify-end overflow-hidden">
         <div className="w-[80%] h-full z-10 flex flex-col pb-2">
-          <h1 className="text-[2rem] font-bold text-yellow pl-6 pt-2 border-b-4 border-yellow drop-shadow-md">
+          <h1 className="text-[2rem] font-extrabold text-yellow pl-6 pt-2 border-b-4 border-yellow drop-shadow-lg">
             Artist Gallery
           </h1>
           {isLoading && (
@@ -44,13 +44,13 @@ function ArtistGallery() {
             >
               {artworks.map((artwork: any, artworkIndex: number) => (
                 <div
-                  key={artworkIndex}
+                  key={artwork.id}
                   className="my-masonry-grid_item min-w-full h-fit hover:scale-125"
                 >
                   <img
-                    src={artwork.artwork_url}
+                    src={`${BASE_URL}${artwork.artwork_url}`}
                     className="w-full h-auto rounded-xl shadow-2xl"
-                    alt={`background-${artworkIndex}`}
+                    alt={`artwork-${artworkIndex}`}
                   />
                 </div>
               ))}

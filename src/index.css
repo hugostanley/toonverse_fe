@@ -73,12 +73,12 @@
   width: auto;
 }
 .my-masonry-grid_column {
-  padding-left: 2rem; /* Adjust this value to change the spacing between columns */
+  padding-left: 2rem; 
   background-clip: padding-box;
 }
 
 .my-masonry-grid_item {
-  margin-bottom: 2rem; /* Adjust this value to change the spacing between rows */
+  margin-bottom: 2rem; 
 }
 
 .my-masonry-grid img {
