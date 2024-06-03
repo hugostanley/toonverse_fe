@@ -12,6 +12,7 @@
   "dependencies": {
     "@coreui/coreui": "^5.0.1",
     "@coreui/react": "^5.0.0",
+    "@emailjs/browser": "^4.3.3",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",

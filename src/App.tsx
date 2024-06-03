@@ -1,5 +1,9 @@
 import React from "react";
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -11,6 +15,7 @@ import {
   AdminDashboard,
   AllArtistsPage,
   ArtistDashboard,
+  ContactPage,
   EditProfilePage,
   InvitationPage,
   Checkout,
@@ -39,6 +44,10 @@ function App() {
     {
       path: "no-access",
       element: <UnauthorizedPage />,
+    },
+    {
+      path: "contact-us",
+      element: <ContactPage />,
     },
 
     // User Side
@@ -132,8 +141,6 @@ function App() {
         },
       ],
     },
-    
-    
   ]);
 
   return (
