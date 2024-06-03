@@ -47,3 +47,4 @@ export { default as NewArtistForm } from './workforce/artist/NewArtistForm';
 export { default as ArtistJobsTable } from './workforce/artist/ArtistJobsTable';
 export { default as ArtistJobsPage } from "./workforce/artist/ArtistJobs";
 export { default as ArtistSidebar } from "./workforce/artist/ArtistSidebar";
+export {default as ArtistGallery} from './workforce/artist/ArtistGallery';
