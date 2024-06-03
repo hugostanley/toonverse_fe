@@ -173,7 +173,7 @@ function LandingPage() {
         className="w-full flex flex-col items-center justify-center gap-12 bg-green h-screen border-b-2 border-dark"
         id="faqs"
       >
-        <h1 className="text-6xl text-center font-black text-light">FAQS</h1>
+        <h1 className="text-6xl text-center font-light text-light">FAQS</h1>
         <div className="flex">
           <div className="w-[50vw] px-8">
             {[

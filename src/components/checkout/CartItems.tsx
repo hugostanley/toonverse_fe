@@ -19,8 +19,8 @@ const CartItems: React.FC<CartItemsProps> = ({
   handleDeleteItem,
 }) => {
   return (
-    <div className="relative items-center py-4 flex flex-col overflow max-h-[85%]">
-      <h1 className="p-4 text-4xl font-black">Your Cart</h1>
+    <div className="relative items-center py-4 flex flex-col overflow-y-auto max-h-[85%]">
+      <h1 className="p-4 text-4xl font-black font-header">Your Cart</h1>
       {items.map((item) => (
         <div
           key={item.id}
@@ -36,11 +36,11 @@ const CartItems: React.FC<CartItemsProps> = ({
                 checked={selectedItems.includes(item.id)}
                 onChange={() => handleCheckboxChange(item.id)}
               />
-              <img
+              {/* <img
                 src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                 alt="product-image"
                 className="rounded-lg w-20"
-              />
+              /> */}
               <div className="cursor-default">
                 <p className="font-extrabold">{item.art_style}</p>
                 <p className="font-extrabold">PHP {item.amount}0</p>
