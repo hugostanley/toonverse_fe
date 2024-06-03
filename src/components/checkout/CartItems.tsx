@@ -19,7 +19,7 @@ const CartItems: React.FC<CartItemsProps> = ({
   handleDeleteItem,
 }) => {
   return (
-    <div className="relative items-center py-4 flex flex-col overflow max-h-[85%]">
+    <div className="relative items-center py-4 flex flex-col overflow-y-auto max-h-[85%]">
       <h1 className="p-4 text-4xl font-black font-header">Your Cart</h1>
       {items.map((item) => (
         <div

@@ -35,6 +35,10 @@ type OrdersTableProps = {
   isLoading: boolean;
 };
 
+const paginate = (array: Order[], page_size: number, page_number: number) => {
+  return array.slice((page_number - 1) * page_size, page_number * page_size);
+};
+
 function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
   const [data, setData] = useState(initialData);
   const [modalArtwork, setModalArtwork] = useState(false);
@@ -43,10 +47,17 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
   const [showRevisionTextArea, setShowRevisionTextArea] = useState(false);
   const [revisionText, setRevisionText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(4);
+  const [paginatedData, setPaginatedData] = useState<Order[]>([]);
 
   useEffect(() => {
     setData(initialData);
   }, [initialData]);
+
+  useEffect(() => {
+    setPaginatedData(paginate(data, itemsPerPage, currentPage));
+  }, [data, itemsPerPage, currentPage]);
 
   const openArtworkModal = (url: string, orderId: number) => {
     setArtworkUrl(url);
@@ -135,98 +146,134 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
     }
   };
 
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= Math.ceil(data.length / itemsPerPage)) {
+      setCurrentPage(newPage);
+    }
+  };
+
   return (
     <section>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
-          <CTable hover>
-            <CTableHead>
-              <CTableRow className="text-sm">
-                <CTableHeaderCell scope="col">ID</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Status</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Details</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
-                <CTableHeaderCell scope="col">
-                  Payment Timestamp
-                </CTableHeaderCell>
-                <CTableHeaderCell scope="col"></CTableHeaderCell>
-              </CTableRow>
-            </CTableHead>
-            <CTableBody>
-              {data &&
-                data.map((order) => (
-                  <CTableRow key={order.id} className="text-xs">
-                    <CTableHeaderCell
-                      scope="row"
-                      className="tracking-widest pt-3"
-                    >
-                      {order.id}
-                    </CTableHeaderCell>
-                    <CTableDataCell className="pt-3">
-                      <div
-                        className={`btn__primary bg-${
-                          statusColors[
-                            order.order_status as keyof typeof statusColors
-                          ]
-                        }`}
+        <>
+          <div className="pb-4">
+            <CTable hover>
+              <CTableHead>
+                <CTableRow className="text-sm">
+                  <CTableHeaderCell scope="col">ID</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Status</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Details</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">
+                    Payment Timestamp
+                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="col"></CTableHeaderCell>
+                </CTableRow>
+              </CTableHead>
+              <CTableBody>
+                {paginatedData &&
+                  paginatedData.map((order) => (
+                    <CTableRow key={order.id} className="text-xs">
+                      <CTableHeaderCell
+                        scope="row"
+                        className="tracking-widest pt-3"
                       >
-                        {order.order_status}
-                      </div>
-                    </CTableDataCell>
-                    <CTableDataCell className="pt-3">
-                      <div className="flex flex-col gap-1">
-                        <span>Art Style: {order.art_style}</span>
-                        <span>Number of Heads: {order.number_of_heads}</span>
-                        <span>Picture Style: {order.picture_style}</span>
-                        <span>Notes: {order.notes ? order.notes : "N/A"}</span>
-                        <Link
-                          to={order.background_url}
-                          target="_blank"
-                          className="underline underline-offset-2 text-blue hover:text-green"
+                        {order.id}
+                      </CTableHeaderCell>
+                      <CTableDataCell className="pt-3">
+                        <div
+                          className={`btn__primary bg-${
+                            statusColors[
+                              order.order_status as keyof typeof statusColors
+                            ]
+                          }`}
                         >
-                          Background Url
-                        </Link>
-                        <Link
-                          to={order.reference_image}
-                          target="_blank"
-                          className="underline underline-offset-2 text-blue hover:text-green"
-                        >
-                          <span>Reference Image</span>
-                        </Link>
-                      </div>
-                    </CTableDataCell>
-
-                    <CTableDataCell className="pt-3">
-                      ₱ {parseFloat(order.amount).toFixed(2)}
-                    </CTableDataCell>
-
-                    <CTableDataCell className="pt-3">
-                      {formatCreatedAt(order.created_at)}
-                    </CTableDataCell>
-
-                    <CTableDataCell className="pt-3">
-                      {order.latest_artwork &&
-                        order.order_status === "delivered" && (
-                          <button
-                            className="btn__primary bg-blue text-white"
-                            onClick={() =>
-                              openArtworkModal(
-                                `${baseURL}${order.latest_artwork}`,
-                                order.id
-                              )
-                            }
+                          {order.order_status}
+                        </div>
+                      </CTableDataCell>
+                      <CTableDataCell className="pt-3">
+                        <div className="flex flex-col gap-1">
+                          <span>Art Style: {order.art_style}</span>
+                          <span>Number of Heads: {order.number_of_heads}</span>
+                          <span>Picture Style: {order.picture_style}</span>
+                          <span>
+                            Notes: {order.notes ? order.notes : "N/A"}
+                          </span>
+                          <Link
+                            to={order.background_url}
+                            target="_blank"
+                            className="underline underline-offset-2 text-blue hover:text-green"
                           >
-                            Artwork
-                          </button>
-                        )}
-                    </CTableDataCell>
-                  </CTableRow>
-                ))}
-            </CTableBody>
-          </CTable>
-        </div>
+                            Background Url
+                          </Link>
+                          <Link
+                            to={order.reference_image}
+                            target="_blank"
+                            className="underline underline-offset-2 text-blue hover:text-green"
+                          >
+                            <span>Reference Image</span>
+                          </Link>
+                        </div>
+                      </CTableDataCell>
+
+                      <CTableDataCell className="pt-3">
+                        ₱ {parseFloat(order.amount).toFixed(2)}
+                      </CTableDataCell>
+
+                      <CTableDataCell className="pt-3">
+                        {formatCreatedAt(order.created_at)}
+                      </CTableDataCell>
+
+                      <CTableDataCell className="pt-3">
+                        {order.latest_artwork &&
+                          order.order_status === "delivered" && (
+                            <button
+                              className="btn__primary bg-blue text-white"
+                              onClick={() =>
+                                openArtworkModal(
+                                  `${baseURL}${order.latest_artwork}`,
+                                  order.id
+                                )
+                              }
+                            >
+                              Artwork
+                            </button>
+                          )}
+                      </CTableDataCell>
+                    </CTableRow>
+                  ))}
+              </CTableBody>
+            </CTable>
+            <div className="flex justify-end">
+              <button
+                className={`btn__blue text-sm bg-blue mx-2 ${
+                  currentPage === 1 ? "cursor-not-allowed" : ""
+                }`}
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <button
+                className={`btn__blue text-sm bg-blue mx-2 ${
+                  currentPage === Math.ceil(data.length / itemsPerPage) ||
+                  data.length === 0
+                    ? "cursor-not-allowed"
+                    : ""
+                }`}
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={
+                  currentPage === Math.ceil(data.length / itemsPerPage) ||
+                  data.length === 0
+                }
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </>
       )}
 
       <Modal open={modalArtwork} onClose={() => setModalArtwork(false)}>

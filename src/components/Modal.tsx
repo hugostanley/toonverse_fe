@@ -13,14 +13,14 @@ function Modal({ open, onClose, children }: ModalProps) {
     <>
       <div
         className={`fixed z-10 inset-0 flex justify-center items-center transition-colors ${
-          open ? "visible bg-dark" : "invisible"
+          open ? "visible bg-dark bg-opacity-50" : "invisible"
         }`}
         onClick={onClose}
       >
         <div
-          className={`bg-light rounded-lg shadow p-6 transition-all max-w-md ${
+          className={`bg-light rounded-lg shadow p-6 transition-all max-w-md w-full ${
             open ? "scale-100 opacity-100" : "scale-110 opacity-0"
-          }`}
+          } max-h-screen overflow-hidden`}
           onClick={(e) => e.stopPropagation()}
         >
           <button
