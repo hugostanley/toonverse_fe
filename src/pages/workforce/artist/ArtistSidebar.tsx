@@ -3,6 +3,8 @@ import { ArtistProfileInfo } from "@pages";
 import { useQuery } from "@tanstack/react-query";
 import { ALL_ARTISTS } from "@utils";
 import {  apiClient } from "@utils";
+import { profileIcon } from "@assets";
+
 
 type Artist = {
   email: string;
@@ -53,7 +55,7 @@ function ArtistSidebar() {
           onClick={() => setVisible(false)}
         >
           <img
-            src="/src/assets/profile-icon.png"
+            src={profileIcon}
             alt="profile-icon"
             className="w-1/2"
           />
@@ -64,7 +66,7 @@ function ArtistSidebar() {
         onClick={() => setVisible(true)}
       >
         <img
-          src="/src/assets/profile-icon.png"
+          src={profileIcon}
           alt="profile-icon"
           className="w-1/2"
         />

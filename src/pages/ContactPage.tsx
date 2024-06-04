@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Navbar, Footer } from "@components";
 import emailjs from "@emailjs/browser";
+import { cloud } from "@assets";
 
 function ContactPage() {
   const form = useRef<HTMLFormElement>(null);
@@ -20,7 +21,7 @@ function ContactPage() {
           () => {
             console.log("SUCCESS!");
           },
-          (error) => {
+          (error : any) => {
             console.log("FAILED...", error.text);
           }
         );
@@ -82,32 +83,32 @@ function ContactPage() {
         {/* clouds */}
         <div>
           <img
-            src="/src/assets/cloud.png"
+            src={cloud}
             alt="cloud"
             className="absolute top-0 left-1 min-w-[10%]"
           />
           <img
-            src="/src/assets/cloud.png"
+            src={cloud}
             alt="cloud"
             className="absolute top-[20%] left-[20%] min-w-[10%]"
           />
           <img
-            src="/src/assets/cloud.png"
+            src={cloud}
             alt="cloud"
             className="absolute top-3 right-2 min-w-[10%]"
           />
           <img
-            src="/src/assets/cloud.png"
+            src={cloud}
             alt="cloud"
             className="absolute bottom-[30%] left-56 min-w-[10%]"
           />
           <img
-            src="/src/assets/cloud.png"
+            src={cloud}
             alt="cloud"
             className="absolute bottom-[30%] right-96 min-w-[10%] "
           />
           <img
-            src="/src/assets/cloud.png"
+            src={cloud}
             alt="cloud"
             className="absolute top-3 right-[25%] min-w-[10%]"
           />
