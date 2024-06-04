@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CCarousel, CCarouselItem } from "@coreui/react";
 import { Footer, Navbar } from "@components";
 import { useNavigate, useParams } from "react-router-dom";
-import { categories } from "@assets";
+import { addToCartGif, addToCartPng, categories, cloud, divider, doodleNeub, flowerNeub, fullBody, halfBody, shouldersUp } from "@assets";
 import { useMutation } from "@tanstack/react-query";
 import { ALL_ITEMS, apiClientFormData } from "@utils";
 import ErrorToast from "../errors/ErrorToast";
@@ -108,23 +108,23 @@ function OrderPage() {
         {/* sample works */}
         <div className="w-full h-screen text-[2.5rem] flex-center relative">
           <img
-            src="/src/assets/flower_neub.png"
+            src={flowerNeub}
             alt="flower"
             className="absolute middle right-[6rem] -rotate-45"
           />
           <img
-            src="/src/assets/flower_neub.png"
+            src={flowerNeub}
             alt="flower"
             className="absolute top-[8rem] left-[0.5rem] -rotate-45"
           />
           <img
-            src="/src/assets/doodle_neub.png"
-            alt="flower"
+            src={doodleNeub}
+            alt="doodle"
             className="absolute top-[25rem] left-[0.5rem] -rotate-45"
           />
           <img
-            src="/src/assets/doodle_neub.png"
-            alt="flower"
+            src={doodleNeub}
+            alt="doodle"
             className="absolute bottom-[8rem] right-[0.5rem] rotate-5"
           />
           <div className="absolute w-full h-[90vh] top-4">
@@ -151,27 +151,27 @@ function OrderPage() {
               Step 1: Select Background
             </h1>
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute top-0 left-1 min-w-[10%] z-10"
             />
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute top-3 right-2 min-w-[10%] z-10"
             />
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute bottom-3 left-56 min-w-[10%] z-0"
             />
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute -bottom-5 right-96 min-w-[10%] z-10"
             />
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute top-3 right-1/3 min-w-[10%] z-0"
             />
@@ -253,7 +253,7 @@ function OrderPage() {
                   }`}
                 >
                   <img
-                    src="/src/assets/full_body.png"
+                    src={fullBody}
                     alt="full_body"
                     className="w-full"
                   />
@@ -268,7 +268,7 @@ function OrderPage() {
                   }`}
                 >
                   <img
-                    src="/src/assets/half_body.png"
+                    src={halfBody}
                     alt="half-body"
                     className="w-full"
                   />
@@ -284,7 +284,7 @@ function OrderPage() {
                    }`}
                 >
                   <img
-                    src="/src/assets/shoulders_up.png"
+                    src={shouldersUp}
                     alt="shoulder_up"
                     className="w-full"
                   />
@@ -292,7 +292,7 @@ function OrderPage() {
               </div>
             </div>
             <img
-              src="/src/assets/divider.png"
+              src={divider}
               alt="divider"
               className="w-full max-h-screen absolute top-0 z-0"
             />
@@ -349,8 +349,8 @@ function OrderPage() {
               <img
                 src={
                   isHovered
-                    ? "/src/assets/addtocart.gif"
-                    : "/src/assets/addtocart.png"
+                    ? addToCartGif
+                    : addToCartPng
                 }
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}

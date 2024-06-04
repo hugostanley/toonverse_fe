@@ -3,6 +3,7 @@ import { ArtistSidebar } from "@pages";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ALL_ARTISTS, apiClient } from "@utils";
+import { artPad } from "@assets";
 
 type Artist = {
   email: string;
@@ -85,8 +86,8 @@ function ArtistLayout() {
               </h1>
             </div>
             <img
-              src="/src/assets/art-pad.png"
-              alt=""
+              src={artPad}
+              alt="artpad"
               className="fixed right-6 bottom-0 opacity-60"
             />
           </aside>

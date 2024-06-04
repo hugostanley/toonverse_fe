@@ -2,6 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { ALL_ARTISTS, apiClient } from "@utils";
 import { ErrorToast } from "@pages";
+import { funBox, tempLogoWhite } from "@assets";
+
 
 type Artist = {
   email?: string;
@@ -67,7 +69,7 @@ function NewArtistForm() {
       )}
 
       <img
-        src="/src/assets/temp-logo-white.png"
+        src={tempLogoWhite}
         alt="logo"
         className="absolute top-16 left-16 w-[25%] z-10"
       />
@@ -76,7 +78,7 @@ function NewArtistForm() {
         Hello, Please complete your details.
       </h1>
       <img
-        src="/src/assets/fun-box.png"
+        src={funBox}
         alt="funbox"
         className="w-[35%] h-[98vh] absolute right-24 border-dashed border-4 rounded-[10rem] bg-green shadow-md shadow-black"
       />

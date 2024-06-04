@@ -2,8 +2,23 @@
 import { Navbar, Footer } from "@components";
 import { HashLink as Link } from "react-router-hash-link";
 import { getLocalStorage } from "@utils";
+import {
+  cloudText01,
+  heroBg,
+  doodleNeub,
+  starNeub,
+  flowerNeub,
+  chooseYourStyle,
+  uploadPhoto,
+  selectBackground,
+  recievePortrait,
+  smileyNeub,
+  rickMorty,
+  bobs,
+  vexel
+} from "@assets";
 
-const InfoCard = ({ imgSrc, title, customClass = "" }) => (
+const InfoCard = ({ imgSrc, title, customClass = "" }: any) => (
   <div
     className={`w-[20rem] text-center font-extrabold bg-light px-6 rounded-2xl py-4 border-2 border-dark ${customClass}`}
   >
@@ -23,7 +38,7 @@ function LandingPage() {
       <div className="relative bg-blue h-screen border-b-2 border-dark ">
         <div className="flex justify-center">
           <img
-            src="/src/assets/cloud-text-01.png"
+            src={cloudText01}
             alt="Logo"
             className="absolute top-12 w-[45%] z-10"
           />
@@ -39,38 +54,34 @@ function LandingPage() {
             </Link>
           )}
         </div>
+        <img src={heroBg} alt="hero" className="absolute bottom-0 w-full" />
         <img
-          src="src/assets/hero-bg.png"
-          alt="hero"
-          className="absolute bottom-0 w-full"
-        />
-        <img
-          src="/src/assets/doodle_neub.png"
+          src={doodleNeub}
           alt="Logo"
           className="absolute bottom-50 left-[5%] rotate-[45deg] w-40"
         />
         <img
-          src="/src/assets/star_neub.png"
+          src={starNeub}
           alt="Logo"
           className="absolute top-16 left-[7%] h-30 rotate-12 aspect-square"
         />
         <img
-          src="/src/assets/star_neub.png"
+          src={starNeub}
           alt="Logo"
           className="absolute bottom-50 right-24 h-42 -rotate-6 aspect-square"
         />
         <img
-          src="/src/assets/flower_neub.png"
+          src={flowerNeub}
           alt="Logo"
           className="absolute top-5 right-[12%] -rotate-12 h-[20%] aspect-square z-20"
         />
         <img
-          src="/src/assets/flower_neub.png"
+          src={flowerNeub}
           alt="Logo"
           className="absolute top-5 right-[8%] rotate-8 h-[10%] aspect-square z-20"
         />
         <img
-          src="/src/assets/doodle_neub.png"
+          src={doodleNeub}
           alt="Logo"
           className="absolute bottom-20 right-[5%] -rotate-[45deg] w-[15%]"
         />
@@ -88,20 +99,11 @@ function LandingPage() {
           <h3>100% online and without extra shipping or import costs</h3>
         </div>
         <div className="w-full flex justify-center gap-4">
+          <InfoCard imgSrc={chooseYourStyle} title="CHOOSE A STYLE" />
+          <InfoCard imgSrc={uploadPhoto} title="UPLOAD YOUR PHOTOS" />
+          <InfoCard imgSrc={selectBackground} title="SELECT A BACKGROUND" />
           <InfoCard
-            imgSrc="/src/assets/chooseYourStyle.png"
-            title="CHOOSE A STYLE"
-          />
-          <InfoCard
-            imgSrc="/src/assets/uploadPhotos.png"
-            title="UPLOAD YOUR PHOTOS"
-          />
-          <InfoCard
-            imgSrc="/src/assets/selectBackground.png"
-            title="SELECT A BACKGROUND"
-          />
-          <InfoCard
-            imgSrc="/src/assets/receivePortrait.png"
+            imgSrc={recievePortrait}
             title="RECEIVE YOUR DIGITAL PORTRAIT"
           />
         </div>
@@ -114,55 +116,55 @@ function LandingPage() {
         <h1 className="text-6xl text-center font-black">STYLES</h1>
         <div className="flex flex-wrap justify-center">
           <img
-            src="/src/assets/doodle_neub.png"
+            src={doodleNeub}
             alt="Logo"
             className="absolute bottom-50 left-[5%] -rotate-[45deg] w-40"
           />
           <img
-            src="/src/assets/star_neub.png"
+            src={starNeub}
             alt="Logo"
             className="absolute top-16 left-[7%] h-30 rotate-12 aspect-square"
           />
           <img
-            src="/src/assets/star_neub.png"
+            src={starNeub}
             alt="Logo"
             className="absolute bottom-50 right-24 h-42 -rotate-6 aspect-square"
           />
           <img
-            src="/src/assets/flower_neub.png"
+            src={flowerNeub}
             alt="Logo"
             className="absolute top-5 right-[12%] -rotate-12 h-[20%] aspect-square z-20"
           />
           <img
-            src="/src/assets/flower_neub.png"
+            src={flowerNeub}
             alt="Logo"
             className="absolute top-5 right-[8%] rotate-8 h-[10%] aspect-square z-20"
           />
           <img
-            src="/src/assets/doodle_neub.png"
+            src={doodleNeub}
             alt="Logo"
             className="absolute bottom-20 left-[5%] rotate-[45deg] w-[15%]"
           />
           <img
-            src="/src/assets/smiley_neub.png"
+            src={smileyNeub}
             alt="Logo"
             className="absolute bottom-24 right-[5%] rotate-12 h-45 aspect-square z-20"
           />
           <Link smooth to="order/rick_and_morty#" className="px-4 py-8">
             <InfoCard
-              imgSrc="/src/assets/rickMorty.png"
+              imgSrc={rickMorty}
               title="Rick and Morty Custom Portrait"
             />
           </Link>
           <Link smooth to="order/bobs_burger#" className="px-4 py-8">
             <InfoCard
-              imgSrc="/src/assets/bobs.png"
+              imgSrc={bobs}
               title="Bob's Burger Custom Portrait"
             />
           </Link>
           <Link smooth to="order/vector#" className="px-4 py-8">
             <InfoCard
-              imgSrc="/src/assets/vexel.png"
+              imgSrc={vexel}
               title="Vexel Art Custom Portrait"
             />
           </Link>
