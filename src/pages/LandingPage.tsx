@@ -3,7 +3,7 @@ import { Navbar, Footer } from "@components";
 import { HashLink as Link } from "react-router-hash-link";
 import { getLocalStorage } from "@utils";
 
-const InfoCard = ({ imgSrc, title, customClass = "" }) => (
+const InfoCard = ({ imgSrc, title, customClass = "" }:any) => (
   <div
     className={`w-[20rem] text-center font-extrabold bg-light px-6 rounded-2xl py-4 border-2 border-dark ${customClass}`}
   >

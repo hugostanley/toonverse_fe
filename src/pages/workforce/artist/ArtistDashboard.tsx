@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ALL_ORDERS, ALL_JOBS, apiClient } from "@utils";
+import { ALL_ORDERS, apiClient } from "@utils";
 import NewArtistForm from "./NewArtistForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

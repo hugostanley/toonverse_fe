@@ -1,4 +1,4 @@
-import { GoogleOAuth, LoginForm } from '@components';
+import { LoginForm } from '@components';
 import { LOGIN_URL } from '@utils';
 import { Link } from 'react-router-dom';
 

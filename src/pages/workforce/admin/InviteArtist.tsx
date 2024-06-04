@@ -1,4 +1,3 @@
-import { CFormInput } from '@coreui/react';
 import { FormEvent, useState } from 'react';
 import { W_INVITATION_PATH, apiClient } from '@utils';
 import { Spinner } from '@components';
