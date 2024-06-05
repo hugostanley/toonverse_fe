@@ -17,7 +17,7 @@ type Artist = {
   total_earnings: string | any;
   created_at: string;
   updated_at: string;
-  workforce_id: number;
+  workforce_id: string;
 };
 
 type ArtistContext = {
