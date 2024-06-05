@@ -70,12 +70,12 @@ npm run dev
 
 - Push to the branch
 
-````bash
+```bash
   git push origin feature/YourFeature
 ```
+
 - Create a new Pull Request
 
 ## Contact
 
 If you have any questions, feel free to reach out to us at toonverse2024@outlook.com. Enjoy creating and commissioning amazing artworks with Toonverse!
-````
