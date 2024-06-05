@@ -23,7 +23,7 @@ function usePostAuth(): UsePostAuthResponse {
 
       const response = await apiClient.post(url, options.body);
       const responseData = response.data;
-      console.log('Response data:', responseData);
+      // console.log('Response data:', responseData);
 
       if (response.status >= 200 && response.status < 300) {
         // Save headers

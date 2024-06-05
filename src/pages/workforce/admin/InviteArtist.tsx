@@ -36,7 +36,7 @@ function InviteArtist({  user, formClassName, btnColor }: InviteFormProps) {
 
       if (response.status >= 200 && response.status < 300) {
         setEmail('');
-        console.log(`Successfully invited artist: ${email}`)
+        // console.log(`Successfully invited artist: ${email}`)
       } else {
         throw new Error('An unexpected error occurred.');
       }
@@ -56,7 +56,7 @@ function InviteArtist({  user, formClassName, btnColor }: InviteFormProps) {
       setLoading(false);
     }
 
-    console.log('Invite Artist Request Body:', requestBody);
+    // console.log('Invite Artist Request Body:', requestBody);
   }
 
   return (

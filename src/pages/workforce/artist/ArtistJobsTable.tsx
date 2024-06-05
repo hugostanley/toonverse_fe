@@ -108,9 +108,9 @@ function ArtistJobsTable() {
                             job_id: job.id,
                             order_id: job.order_id,
                           });
-                          console.log(
-                            `TARGET ID:${target.job_id} ORDER:${target.order_id}`
-                          );
+                          // console.log(
+                          //   `TARGET ID:${target.job_id} ORDER:${target.order_id}`
+                          // );
                         }}
                       >
                         <div className="flex items-center justify-center gap-2">

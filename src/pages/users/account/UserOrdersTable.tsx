@@ -23,6 +23,7 @@ interface Order {
   picture_style: string;
   art_style: string;
   notes?: string | null;
+  remarks?: string |null;
   reference_image: string;
   latest_artwork?: string | null;
   latest_artwork_revision?: string | null;

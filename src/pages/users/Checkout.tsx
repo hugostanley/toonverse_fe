@@ -59,7 +59,7 @@ function Checkout() {
         items?.filter((item) => selectedItems.includes(item.id)) || [];
       setCheckoutItems(selected);
       const response = await createCheckoutSession(selected);
-      console.log("Checkout session response:", response.data);
+      // console.log("Checkout session response:", response.data);
 
       const { id, attributes } = response.data;
       const { payment_intent } = attributes;
