@@ -7,7 +7,7 @@ function ArtistGallery() {
     queryKey: ["allArtworks"],
     queryFn: async () => {
       const response = await apiClient.get(ALL_ARTWORKS);
-      console.log(response.data, "artwork");
+      // console.log(response.data, "artwork");
       return response.data;
     },
   });

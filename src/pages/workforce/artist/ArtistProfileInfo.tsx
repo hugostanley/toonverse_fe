@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditArtist from "../admin/EditArtist";
 import EditBio from "./EditBio";
 import { Link } from "react-router-dom";
+import { profileIcon } from "@assets";
 
 type Artist = {
   email: string;
@@ -104,7 +105,7 @@ function ArtistProfileInfo({
 
           {/* inside green sidebar */}
           <img
-            src="/src/assets/profile-icon.png"
+            src={profileIcon}
             alt="profile-icon"
             className="w-1/2  drop-shadow-2xl bg-transparent flex-center "
           />

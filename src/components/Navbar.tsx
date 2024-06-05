@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
+import { tempLogoWhite } from "@assets";
 
 function Navbar() {
   const { hash, pathname } = useLocation();
@@ -23,7 +24,7 @@ function Navbar() {
           {/* logo */}
           <Link to="/">
             <img
-              src="/src/assets/temp-logo-white.png"
+              src={tempLogoWhite}
               alt="Logo"
               className="h-8 rounded-full"
             />

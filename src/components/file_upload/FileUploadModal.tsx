@@ -34,7 +34,7 @@ function FileUploadModal({ modalFileUpload, handleClose, target }: any ) {
   const mutationUpload = useMutation({
     mutationFn: (file: any) => {
       const formData = convertPayloadToFormData(file);
-      console.log("FORMDATA:", formData);
+      // console.log("FORMDATA:", formData);
       return apiClientFormData.post(ALL_ARTWORKS, formData);
     },
     onSuccess: () => {
@@ -43,7 +43,7 @@ function FileUploadModal({ modalFileUpload, handleClose, target }: any ) {
         exact: true,
         refetchType: "all",
       }),
-        console.log("UPLOADED ARTWORK");
+        // console.log("UPLOADED ARTWORK");
       setVisible(true);
     },
   });
@@ -62,7 +62,7 @@ function FileUploadModal({ modalFileUpload, handleClose, target }: any ) {
         exact: true,
         refetchType: "all",
       }),
-        console.log("UPDATED ORDER");
+        // console.log("UPDATED ORDER");s
       navigate("/w/jobs");
     },
   });

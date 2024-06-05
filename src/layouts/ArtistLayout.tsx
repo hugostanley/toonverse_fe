@@ -2,7 +2,9 @@ import { Outlet, useOutletContext } from "react-router-dom";
 import { ArtistSidebar } from "@pages";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ALL_ARTISTS, apiClient } from "@utils";
+import { ALL_ARTISTS, ALL_ORDERS, apiClient } from "@utils";
+import { artPad } from "@assets";
+import { Link } from "react-router-dom";
 
 type Artist = {
   email: string;
@@ -15,7 +17,7 @@ type Artist = {
   total_earnings: string | any;
   created_at: string;
   updated_at: string;
-  workforce_id: string;
+  workforce_id: number;
 };
 
 type ArtistContext = {
@@ -31,7 +33,7 @@ export function useArtistData() {
 function ArtistLayout() {
   const [currentDateTime, setCurrentDateTime] = useState("");
   const [artistData, setArtistData] = useState<Artist | null>(null);
-  const { data, isLoading, error } = useQuery<Artist[]>({
+  const { data, isLoading, error, refetch } = useQuery<Artist[]>({
     queryKey: ["ArtistProfile"],
     queryFn: async () => {
       const response = await apiClient.get(ALL_ARTISTS);
@@ -39,11 +41,33 @@ function ArtistLayout() {
     },
   });
 
+  const { data: orderData } = useQuery({
+    queryKey: ["OrdersRemark"],
+    queryFn: async () => {
+      const response = await apiClient.get(ALL_ORDERS);
+      const orders = response.data;
+      const artistId = artistData?.workforce_id;
+
+      // Filter orders based on whether workforce_id exists and matches artistId
+      const filteredOrders = orders.filter(
+        (order: any) =>
+          order.workforce_id !== null &&
+        order.workforce_id === artistId &&
+        order.order_status === 'in_progress' &&
+        order.remarks !== null
+      );
+
+      console.log(filteredOrders, "filtered orders");
+      return filteredOrders;
+    },
+  });
+
   useEffect(() => {
     if (data && data.length > 0) {
+      refetch()
       setArtistData(data[0]);
     }
-  }, [data, artistData]);
+  }, [data, artistData, orderData]);
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -78,15 +102,19 @@ function ArtistLayout() {
             <div className="w-full  h-[55vh] text-left px-8 flex flex-col gap-2">
               <h1 className="text-[1.8rem] font-bold">{currentDateTime}</h1>
               <h1 className="text-[1.3rem]">To-do Revision</h1>
-              <h1 className="font-bold">newest</h1>
               <hr className=" border-1 border-black border-dashed" />
-              <h1 className="w-full h-[2vh] truncate">
-                Job# : Order Remark this is a link.....
-              </h1>
+              {orderData?.map((remark: any, id: number) => (
+                <Link to="/w/jobs" className="hover:text-green">
+                 <h1 className="w-full h-[2vh] truncate" key={`${id}`}>
+                  {remark.remarks || "No pending revision"}
+                </h1>
+                </Link>
+               
+              ))}
             </div>
             <img
-              src="/src/assets/art-pad.png"
-              alt=""
+              src={artPad}
+              alt="artpad"
               className="fixed right-6 bottom-0 opacity-60"
             />
           </aside>
