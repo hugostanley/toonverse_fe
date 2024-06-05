@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getLocalStorage } from "@utils";
 
-export const baseURL = "https://toonverse.onrender.com";
+export const baseURL = import.meta.env.VITE_BE_BASE_URL;
 
 // Create apiClient instance for JSON requests
 export const apiClient = axios.create({
