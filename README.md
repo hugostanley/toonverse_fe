@@ -26,45 +26,54 @@ Toonverse is a platform for local artists who want to earn by drawing popular ca
 - Invite artists to register on the app
 - Manage users and job orders
 
-## Tech Stack
-
-- Backend: Ruby on Rails
-- Frontend: React with TypeScript
-- Database: PostgreSQL
-
 ## Getting Started
 
 ### Installation
 
-- Clone the repository
-  'git@github.com:hugostanley/toonverse_fe.git
-  git@github.com:hugostanley/toonverse_be.git'
+1. Clone the repository:
 
-- Install the backend dependencies
-  'bundle install'
+```bash
+git clone git@github.com:hugostanley/toonverse_fe.git
+```
 
-- Install the frontend dependencies
-  'npm install'
+2. Install the frontend dependencies
 
-- Set up the database
-  'rails db:setup'
+```bash
+cd toonverse_fe
+npm install
+```
 
-- Start the Rails server
-  'rails server'
+3. Make sure the Toonverse API server is up and running. Refer to the toonverse_be README for setup instructions.
 
-- Start the React development server
-  Open a new terminal and run:
-  'npm run dev'
+Start the React development server
 
-- Access the application
-  Open your web browser and go to `http://localhost:3000`.
+```bash
+npm run dev
+```
+
+4. Access the application. Open your web browser and go to `http://localhost:3000`.
 
 ## Contributing
 
 - Fork the repository
-- Create a new branch (git checkout -b feature/YourFeature)
-- Commit your changes (git commit -am 'Add some feature')
-- Push to the branch (git push origin feature/YourFeature)
+- Create a new branch
+
+```bash
+  git checkout -b feature/YourFeature
+```
+
+- Commit your changes
+
+```bash
+  git commit -am 'Add some feature'
+```
+
+- Push to the branch
+
+```bash
+  git push origin feature/YourFeature
+```
+
 - Create a new Pull Request
 
 ## Contact
