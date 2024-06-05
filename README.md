@@ -9,22 +9,22 @@ Toonverse is a platform for local artists who want to earn by drawing popular ca
 
 ### Client Side
 
-    - Browse catalog of different art styles
-    - Order custom portraits or popular cartoon characters
-    - Track the status of orders (in progress, completed)
-    - Request revisions
+- Browse catalog of different art styles
+- Order custom portraits or popular cartoon characters
+- Track the status of orders (in progress, completed)
+- Request revisions
 
 ### Artist Side
 
-    - Job pool to claim available orders
-    - Track the status of claimed job orders
-    - Track earnings and payment status
+- Job pool to claim available orders
+- Track the status of claimed job orders
+- Track earnings and payment status
 
 ### Admin Side
 
-    - Track all job orders entering the pool
-    - Invite artists to register on the app
-    - Manage users and job orders
+- Track all job orders entering the pool
+- Invite artists to register on the app
+- Manage users and job orders
 
 ## Getting Started
 
@@ -33,7 +33,7 @@ Toonverse is a platform for local artists who want to earn by drawing popular ca
 1. Clone the repository:
 
 ```bash
-$git clone git@github.com:hugostanley/toonverse_fe.git
+git clone git@github.com:hugostanley/toonverse_fe.git
 ```
 
 2. Install the frontend dependencies
