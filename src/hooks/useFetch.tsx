@@ -40,10 +40,10 @@ function useFetch(): UseFetchDataResponse {
         },
       };
 
-      console.log("Request data:", axiosConfig);
+      // console.log("Request data:", axiosConfig);
 
       const response: AxiosResponse = await apiClient(axiosConfig);
-      console.log("Response data:", response.data);
+      // console.log("Response data:", response.data);
 
       if (response.status === 200) {
         setData(response.data);

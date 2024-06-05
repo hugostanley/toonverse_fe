@@ -43,7 +43,7 @@ function ArtistDashboard() {
     },
   });
   
-  console.log("ARTIST DATA", artistData?.id);
+  // console.log("ARTIST DATA", artistData?.id);
   return (
     <main>
       <div className="full-size flex-row bg-ivory relative">

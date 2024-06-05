@@ -37,7 +37,7 @@ function NewArtistForm() {
         return response.data;
       } catch (error: any) {
         if (error.response && error.response.data) {
-          console.log(error.response.data.error);
+          // console.log(error.response.data.error);
           setError(error.response.data.error);
         }
         throw new Error(error);
