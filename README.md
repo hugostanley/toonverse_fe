@@ -30,6 +30,7 @@ Toonverse is a platform for local artists who want to earn by drawing popular ca
 
 - Backend: Ruby on Rails
 - Frontend: React with TypeScript
+- Database: PostgreSQL
 
 ## Getting Started
 
