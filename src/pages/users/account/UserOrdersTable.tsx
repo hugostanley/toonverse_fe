@@ -158,98 +158,100 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
       {isLoading ? (
         <Spinner />
       ) : (
-        <>
-          <div className="pb-4">
-            <CTable hover>
-              <CTableHead>
-                <CTableRow className="text-sm">
-                  <CTableHeaderCell scope="col">ID</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Status</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Details</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">
-                    Payment Timestamp
-                  </CTableHeaderCell>
-                  <CTableHeaderCell scope="col"></CTableHeaderCell>
-                </CTableRow>
-              </CTableHead>
-              <CTableBody>
-                {paginatedData &&
-                  paginatedData.map((order) => (
-                    <CTableRow key={order.id} className="text-xs">
-                      <CTableHeaderCell
-                        scope="row"
-                        className="tracking-widest pt-3"
-                      >
-                        {order.id}
-                      </CTableHeaderCell>
-                      <CTableDataCell className="pt-3">
-                        <div
-                          className={`btn__primary bg-${
-                            statusColors[
-                              order.order_status as keyof typeof statusColors
-                            ]
-                          }`}
+        <div className="py-3">
+          {paginatedData && paginatedData.length > 0 ?
+            (<>
+              <CTable hover>
+                <CTableHead>
+                  <CTableRow className="text-sm">
+                    <CTableHeaderCell scope="col">ID</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Status</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Details</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">
+                      Payment Timestamp
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col"></CTableHeaderCell>
+                  </CTableRow>
+                </CTableHead>
+
+                <CTableBody>
+                  {paginatedData.map((order) => (
+                      <CTableRow key={order.id} className="text-xs">
+                        <CTableHeaderCell
+                          scope="row"
+                          className="tracking-widest pt-3"
                         >
-                          {order.order_status}
-                        </div>
-                      </CTableDataCell>
-                      <CTableDataCell className="pt-3">
-                        <div className="flex flex-col gap-1">
-                          <span>Art Style: {order.art_style}</span>
-                          <span>Number of Heads: {order.number_of_heads}</span>
-                          <span>Picture Style: {order.picture_style}</span>
-                          <span>
-                            Notes: {order.notes ? order.notes : "N/A"}
-                          </span>
-                          <Link
-                            to={order.background_url}
-                            target="_blank"
-                            className="underline underline-offset-2 text-blue hover:text-green"
+                          {order.id}
+                        </CTableHeaderCell>
+                        <CTableDataCell className="pt-3">
+                          <div
+                            className={`btn__primary bg-${
+                              statusColors[
+                                order.order_status as keyof typeof statusColors
+                              ]
+                            }`}
                           >
-                            Background Url
-                          </Link>
-                          <Link
-                            to={order.reference_image}
-                            target="_blank"
-                            className="underline underline-offset-2 text-blue hover:text-green"
-                          >
-                            <span>Reference Image</span>
-                          </Link>
-                        </div>
-                      </CTableDataCell>
-
-                      <CTableDataCell className="pt-3">
-                        ₱ {parseFloat(order.amount).toFixed(2)}
-                      </CTableDataCell>
-
-                      <CTableDataCell className="pt-3">
-                        {formatCreatedAt(order.created_at)}
-                      </CTableDataCell>
-
-                      <CTableDataCell className="pt-3">
-                        {order.latest_artwork &&
-                          order.order_status === "delivered" && (
-                            <button
-                              className="btn__primary bg-blue text-white"
-                              onClick={() =>
-                                openArtworkModal(
-                                  `${baseURL}${order.latest_artwork}`,
-                                  order.id
-                                )
-                              }
+                            {order.order_status}
+                          </div>
+                        </CTableDataCell>
+                        <CTableDataCell className="pt-3">
+                          <div className="flex flex-col gap-1">
+                            <span>Art Style: {order.art_style}</span>
+                            <span>Number of Heads: {order.number_of_heads}</span>
+                            <span>Picture Style: {order.picture_style}</span>
+                            <span>
+                              Notes: {order.notes ? order.notes : "N/A"}
+                            </span>
+                            <Link
+                              to={order.background_url}
+                              target="_blank"
+                              className="underline underline-offset-2 text-blue hover:text-green"
                             >
-                              Artwork
-                            </button>
-                          )}
-                      </CTableDataCell>
-                    </CTableRow>
-                  ))}
-              </CTableBody>
-            </CTable>
-            <div className="flex justify-end">
+                              Background Url
+                            </Link>
+                            <Link
+                              to={order.reference_image}
+                              target="_blank"
+                              className="underline underline-offset-2 text-blue hover:text-green"
+                            >
+                              <span>Reference Image</span>
+                            </Link>
+                          </div>
+                        </CTableDataCell>
+
+                        <CTableDataCell className="pt-3">
+                          ₱ {parseFloat(order.amount).toFixed(2)}
+                        </CTableDataCell>
+
+                        <CTableDataCell className="pt-3">
+                          {formatCreatedAt(order.created_at)}
+                        </CTableDataCell>
+
+                        <CTableDataCell className="pt-3">
+                          {order.latest_artwork &&
+                            order.order_status === "delivered" && (
+                              <button
+                                className="btn__primary bg-pink"
+                                onClick={() =>
+                                  openArtworkModal(
+                                    `${baseURL}${order.latest_artwork}`,
+                                    order.id
+                                  )
+                                }
+                              >
+                                Artwork
+                              </button>
+                            )}
+                        </CTableDataCell>
+                      </CTableRow>
+                    ))}
+                </CTableBody>
+              </CTable>
+
+              <div className="flex gap-3 justify-end">
               <button
-                className={`btn__blue text-sm bg-blue mx-2 ${
+                className={`btn__blue bg-grey text-xs ${
                   currentPage === 1 ? "cursor-not-allowed" : ""
                 }`}
                 onClick={() => handlePageChange(currentPage - 1)}
@@ -258,7 +260,7 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
                 Previous
               </button>
               <button
-                className={`btn__blue text-sm bg-blue mx-2 ${
+                className={`btn__blue bg-grey text-xs ${
                   currentPage === Math.ceil(data.length / itemsPerPage) ||
                   data.length === 0
                     ? "cursor-not-allowed"
@@ -272,9 +274,13 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
               >
                 Next
               </button>
-            </div>
-          </div>
-        </>
+              </div>
+            </>) :
+            <Link to="/#styles" className="text-center hover:underline underline-offset-4 hover:font-bold w-full grid place-items-center">
+              Create an order!
+            </Link>
+          }      
+        </div>
       )}
 
       <Modal open={modalArtwork} onClose={() => setModalArtwork(false)}>
@@ -283,13 +289,13 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
           <hr className="border-t-solid border-1 border-grey" />
           <div className="flex flex-row justify-center gap-4">
             <button
-              className="btn__primary text-sm bg-blue"
+              className="btn__primary text-sm bg-green text-light"
               onClick={handleClaimOrder}
             >
               Claim Order
             </button>
             <button
-              className="btn__primary text-sm bg-blue"
+              className="btn__primary text-sm bg-orange text-light"
               onClick={handleAskForRevision}
             >
               Ask for Revision
@@ -304,7 +310,7 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
                 placeholder="Enter your revision remarks here"
               ></textarea>
               <button
-                className="btn__primary text-sm bg-blue"
+                className="btn__primary text-sm bg-orange text-light"
                 onClick={submitRevision}
               >
                 Submit Remarks
