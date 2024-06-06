@@ -20,7 +20,7 @@ const CheckoutButton: React.FC<CheckoutButtonProps> = ({
       <button
         onClick={handleCheckout}
         disabled={!isAnyItemSelected}
-        className={`btn__blue ${
+        className={`btn__blue text-light ${
           !isAnyItemSelected && "opacity-50 cursor-not-allowed"
         }`}
       >

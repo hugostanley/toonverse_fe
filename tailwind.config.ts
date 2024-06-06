@@ -19,7 +19,7 @@ export default {
         green: "#47AF3C",
         grey: "#BEBEC4",
         orange: "#ff3d00",
-        // red: "#F8423F",
+        red: "#F8423F",
       },
       fontFamily: {
         'sans': ['"Varela Round"', ...defaultTheme.fontFamily.sans],
