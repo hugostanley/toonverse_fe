@@ -1,5 +1,7 @@
+import { baseURL } from "./apiClient";
+
 // dev env
-export const BASE_URL = "http://127.0.0.1:3000";
+export const BASE_URL = baseURL
 
 // User
 export const REGISTER_URL = `/auth`;
