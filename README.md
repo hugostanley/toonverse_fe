@@ -46,9 +46,11 @@ npm install
 3. Create an .env file to point the base url of the app.
 
 ```bash
-VITE_BE_BASE_URL=http://127.0.0.1:3000/ # development
+VITE_BE_BASE_URL=http://127.0.0.1:3000/ # backend development url
+VITE_FE_BASE_URL=http://localhost:5173/ # frontend development url
 # or
-VITE_BE_BASE_URL=https://toonverse.onrender.com/ # production
+VITE_BE_BASE_URL=BackEndDeploymentLink # backend production url
+VITE_FE_BASE_URL=FrontEndDeploymentLink # frontend production url
 ```
 
 4. Make sure the Toonverse API server is up and running. Refer to the toonverse_be README for setup instructions.
