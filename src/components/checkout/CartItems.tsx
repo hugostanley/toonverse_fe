@@ -21,7 +21,7 @@ const CartItems: React.FC<CartItemsProps> = ({
 }) => {
   return (
     <div className="relative items-center py-4 flex flex-col overflow max-h-[85%]">
-      <h1 className="p-4 text-4xl font-black">Your Cart</h1>
+      <h1 className="p-4 text-4xl font-header">Your Cart</h1>
       {items.length === 0 ? (
         <div className="flex flex-col justify-center items-center">
           <img
@@ -29,7 +29,7 @@ const CartItems: React.FC<CartItemsProps> = ({
             className="w-[20%]"
             alt="Empty Cart"
           />
-          <div className="p-4 text-center font-black text-4xl text-red-700">
+          <div className="p-4 text-center font-black text-4xl text-red">
             Oop! Your cart is empty!
           </div>
           <p className="text-gray-600">
