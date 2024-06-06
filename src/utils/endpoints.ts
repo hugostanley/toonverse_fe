@@ -1,4 +1,4 @@
-import { baseURL } from "./apiClient";
+import { baseURL } from "@utils";
 
 // dev env
 export const BASE_URL = baseURL
