@@ -3,6 +3,8 @@ import { ArtistProfileInfo } from "@pages";
 import { useQuery } from "@tanstack/react-query";
 import { ALL_ARTISTS } from "@utils";
 import {  apiClient } from "@utils";
+import { profileIcon } from "@assets";
+
 
 type Artist = {
   email: string;
@@ -43,28 +45,28 @@ function ArtistSidebar() {
       <div
         className={`absolute top-0 ${
           visible ? "right-0" : "hidden"
-        } w-[40%] max-w-[40%] h-screen z-20`}
+        } w-[40%] max-w-[40%] h-screen z-30`}
       >
-        <div className="absolute right-0 w-[90%] h-screen bg-green rounded-tl-2xl rounded-bl-2xl flex-center z-20">
-          <ArtistProfileInfo artistData={artistData} refetch={refetch} />
+        <div className="absolute right-0 w-[90%] h-screen bg-green rounded-tl-2xl rounded-bl-2xl flex-center z-30">
+          <ArtistProfileInfo setVisible={setVisible} artistData={artistData} refetch={refetch} />
         </div>
         <button
-          className="absolute left-0 top-16 w-[10%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center"
+          className="absolute left-0 top-16  w-[10%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center"
           onClick={() => setVisible(false)}
         >
           <img
-            src="/src/assets/profile-icon.png"
+            src={profileIcon}
             alt="profile-icon"
             className="w-1/2"
           />
         </button>
       </div>
       <button
-        className="z-10 absolute right-0 top-16 w-[3.5%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
+        className="z-20 absolute right-0 top-16 w-[3.5%] h-[20vh] bg-green rounded-tl-xl rounded-bl-xl flex-center shadow-md shadow-black"
         onClick={() => setVisible(true)}
       >
         <img
-          src="/src/assets/profile-icon.png"
+          src={profileIcon}
           alt="profile-icon"
           className="w-1/2"
         />

@@ -2,9 +2,7 @@ import { useState } from "react";
 import { CCarousel, CCarouselItem } from "@coreui/react";
 import { Footer, Navbar } from "@components";
 import { useNavigate, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import { categories } from "@assets";
+import { addToCartGif, addToCartPng, categories, cloud, divider, doodleNeub, flowerNeub, fullBody, halfBody, shouldersUp } from "@assets";
 import { useMutation } from "@tanstack/react-query";
 import { ALL_ITEMS, apiClientFormData } from "@utils";
 import ErrorToast from "../errors/ErrorToast";
@@ -33,6 +31,16 @@ function OrderPage() {
     notes: "",
     image: null,
   });
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   const handleChange = (
     name: string,
@@ -100,23 +108,23 @@ function OrderPage() {
         {/* sample works */}
         <div className="w-full h-screen text-[2.5rem] flex-center relative">
           <img
-            src="/src/assets/flower_neub.png"
+            src={flowerNeub}
             alt="flower"
             className="absolute middle right-[6rem] -rotate-45"
           />
           <img
-            src="/src/assets/flower_neub.png"
+            src={flowerNeub}
             alt="flower"
             className="absolute top-[8rem] left-[0.5rem] -rotate-45"
           />
           <img
-            src="/src/assets/doodle_neub.png"
-            alt="flower"
+            src={doodleNeub}
+            alt="doodle"
             className="absolute top-[25rem] left-[0.5rem] -rotate-45"
           />
           <img
-            src="/src/assets/doodle_neub.png"
-            alt="flower"
+            src={doodleNeub}
+            alt="doodle"
             className="absolute bottom-[8rem] right-[0.5rem] rotate-5"
           />
           <div className="absolute w-full h-[90vh] top-4">
@@ -143,32 +151,33 @@ function OrderPage() {
               Step 1: Select Background
             </h1>
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute top-0 left-1 min-w-[10%] z-10"
             />
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute top-3 right-2 min-w-[10%] z-10"
             />
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute bottom-3 left-56 min-w-[10%] z-0"
             />
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute -bottom-5 right-96 min-w-[10%] z-10"
             />
             <img
-              src="/src/assets/cloud.png"
+              src={cloud}
               alt="cloud"
               className="absolute top-3 right-1/3 min-w-[10%] z-0"
             />
             <div className="absolute top-24 w-[80%] h-[50vh] ">
               <CCarousel
+                dark
                 controls
                 interval={false}
                 onClick={(e) => {
@@ -220,10 +229,10 @@ function OrderPage() {
                     name="number_of_heads"
                     value={num}
                     onClick={() => handleChange("number_of_heads", num)}
-                    className={` w-[7%] h-[7vh] text-white rounded-lg text-[2.5rem] flex-center ${
+                    className={` w-[7%] h-[7vh] font-bold rounded-2xl text-[2.5rem] flex-center ${
                       order.number_of_heads === num
-                        ? "border-double border-8 rounded-lg border-yellow"
-                        : "border border-white"
+                        ? "bg-yellow "
+                        : "border border-white text-white"
                     }`}
                   >
                     {num}
@@ -239,78 +248,67 @@ function OrderPage() {
                   name="picture_style"
                   value="full_body"
                   onClick={() => handleChange("picture_style", "full_body")}
-                  className={`w-[30%] h-[35vh] flex-center flex-row   ${
-                    order.picture_style === "full_body"
-                      ? "border-dashed border-8 rounded-lg border-yellow"
-                      : ""
+                  className={`w-[20%] h-[35vh] flex-center flex-row   ${
+                    order.picture_style === "full_body" ? "scale-125" : ""
                   }`}
                 >
                   <img
-                    src="/src/assets/full-size.png"
-                    alt="full-body"
-                    className="w-[50%] h-[30vh]"
+                    src={fullBody}
+                    alt="full_body"
+                    className="w-full"
                   />
-                  <h1 className="flex flex-wrap text-[2rem] font-bold text-green">
-                    FULL BODY
-                  </h1>
                 </button>
                 <button
                   type="button"
                   name="picture_style"
                   value="half_body"
                   onClick={() => handleChange("picture_style", "half_body")}
-                  className={`w-[30%] h-[35vh] flex-center flex-col relative  ${
-                    order.picture_style === "half_body"
-                      ? "border-dashed border-8 rounded-lg border-yellow"
-                      : ""
+                  className={`w-[20%] h-[35vh] flex-center flex-col relative  ${
+                    order.picture_style === "half_body" ? "scale-125" : ""
                   }`}
                 >
                   <img
-                    src="/src/assets/hero-bg.png"
+                    src={halfBody}
                     alt="half-body"
-                    className="w-full h-[30vh]"
+                    className="w-full"
                   />
-                  <h1 className="flex flex-wrap text-[2rem] font-bold text-green">
-                    HALF BODY
-                  </h1>
                 </button>
                 <button
                   type="button"
                   name="picture_style"
                   value="shoulders_up"
                   onClick={() => handleChange("picture_style", "shoulders_up")}
-                  className={`w-[30%] h-[35vh] flex-center flex-row relative 
+                  className={`w-[20%] h-[35vh] flex-center flex-row relative 
                    ${
-                     order.picture_style === "shoulders_up"
-                       ? "border-dashed border-8 rounded-lg border-yellow"
-                       : ""
+                     order.picture_style === "shoulders_up" ? "scale-125" : ""
                    }`}
                 >
                   <img
-                    src="/src/assets/bob_head.png"
-                    alt="shoulders_up"
-                    className="w-[50%] h-[35vh]"
+                    src={shouldersUp}
+                    alt="shoulder_up"
+                    className="w-full"
                   />
-                  <h1 className="flex flex-wrap text-[2rem] font-bold text-green">
-                    SHOULDERS UP
-                  </h1>
                 </button>
               </div>
             </div>
             <img
-              src="/src/assets/divider.png"
+              src={divider}
               alt="divider"
               className="w-full max-h-screen absolute top-0 z-0"
             />
           </div>
 
           {/* upload photo & notes */}
-          <div className="w-full h-screen flex-center text-[2.5rem] bg-green flex-row flex-wrap">
-            <div className="w-[50%] h-screen text-white px-2 flex-center flex-col gap-[12.5rem]">
+          <div className="w-full h-[60vh] flex-center text-[2.5rem] bg-green flex-row flex-wrap">
+            <div className="w-[50%] h-[60vh] text-white px-2 flex-center flex-col gap-[5rem]">
               <h1 className="font-extrabold">Step 4: Upload Your Photo</h1>
               <div className="w-[50%] h-[20vh] border-[0.3rem] border-white rounded-[5rem] text-[3.5rem] flex-center cursor-pointer px-2 hover:border-dashed relative">
                 <label htmlFor="image">
-                  {order.image !== null ? <h1 className="text-[2rem]">{order.image.name}</h1> : "Choose Image"}
+                  {order.image !== null ? (
+                    <h1 className="text-[2rem]">{order.image.name}</h1>
+                  ) : (
+                    "Choose Image"
+                  )}
                 </label>
                 <input
                   type="file"
@@ -326,14 +324,14 @@ function OrderPage() {
                 />
               </div>
             </div>
-            <div className="w-[50%] h-screen text-white px-2 flex-center flex-col gap-4">
+            <div className="w-[50%] h-[60vh] text-white px-2 flex-center flex-col gap-[3rem]">
               <h1 className="font-extrabold">
                 Step 5: Additional Notes on your Order
               </h1>
               <textarea
                 name="notes"
                 id="notes"
-                className="w-[80%] h-[40vh] rounded-2xl text-black text-[1.5rem] p-[1rem] outline-none border-none focus:outline-yellow"
+                className="w-[80%] h-[25vh] rounded-2xl text-black text-[1.5rem] p-[1rem] outline-none border-none focus:outline-yellow"
                 onChange={(e) => handleChange(e.target.name, e.target.value)}
                 placeholder="Drawing Notes (Describe Clothing, Background, Face, Pose, Names Etc..)"
               ></textarea>
@@ -341,12 +339,24 @@ function OrderPage() {
           </div>
 
           {/* add-to-cart */}
-          <div className="w-full h-[40vh] border-2 border-black flex-center">
+          <div className="w-full h-[50vh] border-2 border-black flex-center flex-col gap-10">
+          <h1 className="font-extrabold text-[2.5rem] text-white drop-shadow-xl">Step 6: Add to your cart to checkout.</h1>
+
             <button
               type="submit"
-              className="w-[30%] h-[30vh] border-2 border-black hover:border-dashed  bg-pink rounded-[7rem] flex-center"
+              className="w-[30%] h-[30vh] border-4 border-black hover:border-dashed  rounded-[7rem] flex-center"
             >
-              <FontAwesomeIcon icon={faCartPlus} className="w-full h-[20vh]" />
+              <img
+                src={
+                  isHovered
+                    ? addToCartGif
+                    : addToCartPng
+                }
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                alt="addtocart"
+                className=" h-[25vh] "
+              />
             </button>
           </div>
         </form>

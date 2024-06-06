@@ -69,7 +69,7 @@ function ArtistJobsTable() {
         <div className="w-full h-fit px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
           <CTable hover>
             <CTableHead>
-              <CTableRow>
+              <CTableRow className="text-sm">
                 <CTableHeaderCell scope="col">ID</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Order ID</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Commission</CTableHeaderCell>
@@ -82,20 +82,20 @@ function ArtistJobsTable() {
             <CTableBody className="text-xs">
               {data &&
                 data.map((job) => (
-                  <CTableRow key={job.id} className="">
+                  <CTableRow key={job.id}>
                     <CTableHeaderCell
                       scope="row"
-                      className="tracking-widest py-3"
+                      className="tracking-widest py-3 max-w-[100px]"
                     >
                       {job.id}
                     </CTableHeaderCell>
-                    <CTableDataCell className="py-3">
+                    <CTableDataCell className="py-3 w-[100px]">
                       {job.order_id}
                     </CTableDataCell>
-                    <CTableDataCell className="py-3">
+                    <CTableDataCell className="py-3 w-[120px]">
                       ₱ {parseFloat(job.commission).toFixed(2)}
                     </CTableDataCell>
-                    <CTableDataCell className="py-3 max-w-[180px]">
+                    <CTableDataCell className="py-3 max-w-[150px] text-pretty">
                       {formatCreatedAt(job.claimed_at)}
                     </CTableDataCell>
                     <CTableDataCell className="py-3 max-w-[120px]">
@@ -108,9 +108,9 @@ function ArtistJobsTable() {
                             job_id: job.id,
                             order_id: job.order_id,
                           });
-                          console.log(
-                            `TARGET ID:${target.job_id} ORDER:${target.order_id}`
-                          );
+                          // console.log(
+                          //   `TARGET ID:${target.job_id} ORDER:${target.order_id}`
+                          // );
                         }}
                       >
                         <div className="flex items-center justify-center gap-2">

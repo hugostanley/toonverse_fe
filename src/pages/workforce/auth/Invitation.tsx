@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { InvitationForm } from '@pages';
+import { noodleWrite, tempLogo } from "@assets";
+
 
 function Invitation() {
   return (
@@ -7,7 +9,7 @@ function Invitation() {
       <div className='absolute -top-[35%] left-0 rotate-12 bg-blue/75 w-1/2 aspect-square'></div>
       <div className='absolute bottom-0 right-0 w-full h-5/6 grid place-items-center'>
         <img
-          src="/src/assets/noodle_write.png"
+          src={noodleWrite}
           alt="Logo"
           className="mx-auto w-[35%] aspect-square -rotate-12"
         />
@@ -20,7 +22,7 @@ function Invitation() {
           <div className='w-full max-w-[420px] flex flex-col gap-3 py-8 pl-12'>
             <Link to='/' className='w-full grid place-items-center mb-4'>
               <img
-                src="/src/assets/temp-logo.png"
+                src={tempLogo}
                 alt="Logo"
                 className="h-12 w-42"
               />

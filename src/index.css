@@ -6,11 +6,6 @@
 @tailwind utilities;
 
 @layer base {
-  /* @font-face {
-    font-family: "VAG Rounded Next";
-    src: url(/src/assets/VAG.ttf) format("truetype");
-  } */
-
   html,
   body {
     font-family: "Varela Round", sans-serif;
@@ -24,7 +19,7 @@
 
 @layer components {
   .br {
-    @apply border-2 border-dotted border-red-500;
+    @apply border-2 border-dotted border-red;
   }
 
   .field__wrapper {
@@ -60,44 +55,67 @@
   }
 
   .btn__blue {
-    @apply font-black border bg-blue shadow-retro__dark border-dark py-2 px-12 rounded-lg;
+    @apply font-black border bg-blue shadow-retro__dark border-dark py-2 px-6 w-fit rounded-lg hover:opacity-70 focus:shadow-retro__circle focus:translate-y-1;
   }
 
   .btn__pink {
     @apply shadow-retro__dark font-black bg-pink rounded-xl py-3 mt-8 text-center border-dark border-2 w-[15rem];
   }
+
+ /* Masonry styles */
+.my-masonry-grid {
+  display: flex;
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 2rem; 
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_item {
+  margin-bottom: 2rem; 
+}
+
+.my-masonry-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
 }
 
 /* scrollbar */
-::-webkit-scrollbar { 
+::-webkit-scrollbar {
   width: 0.9rem;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FDF7E1;
+  background: #fdf7e1;
   border: 2px solid rgb(12, 10, 9);
   box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.6);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FFE04A;
+  background: #ffe04a;
   border: 2px solid rgb(12, 10, 9);
   border-radius: 0.25rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #F196E5;
+  background: #f196e5;
 }
 /* scrollbar - up arrow */
 ::-webkit-scrollbar-button:single-button:vertical:decrement {
   width: 100%;
   aspect-ratio: 1.15;
   border: 2px solid rgb(12, 10, 9);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z'/%3E%3C/svg%3E") center;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z'/%3E%3C/svg%3E")
+    center;
 }
 
 ::-webkit-scrollbar-button:single-button:vertical:decrement:active {
-  color: #FFE04A; 
+  color: #ffe04a;
 }
 
 /* scrollbar - down arrow */
@@ -105,11 +123,12 @@
   width: 100%;
   aspect-ratio: 1.15;
   border: 2px solid rgb(12, 10, 9);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z'/%3E%3C/svg%3E") center;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z'/%3E%3C/svg%3E")
+    center;
 }
 
 ::-webkit-scrollbar-button:single-button:vertical:increment:active {
-  color: #FFE04A; 
+  color: #ffe04a;
 }
 
 /* SPINNER https://cssloaders.github.io/ */

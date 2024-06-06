@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditArtist from "../admin/EditArtist";
 import EditBio from "./EditBio";
 import { Link } from "react-router-dom";
+import { profileIcon } from "@assets";
 
 type Artist = {
   email: string;
@@ -30,7 +31,11 @@ type ArtistProfileProps = {
   setVisible: (visible: boolean) => void;
 };
 
-function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch }: ArtistProfileProps) {
+function ArtistProfileInfo({
+  setVisible: setSideBarVisible,
+  artistData,
+  refetch,
+}: ArtistProfileProps) {
   const [visible, setVisible] = useState(false);
   const [editBioVisible, setEditBioVisible] = useState(false);
 
@@ -45,10 +50,12 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
           >
             <div className="bg-black w-[90%] h-[95vh] rounded-tl-2xl rounded-bl-2xl flex-center flex-col gap-4 absolute right-0 z-10  ">
               <h1 className="text-[2.5rem]">
-                <FontAwesomeIcon icon={faIdBadge} className="rotate-12 text-yellow" />
+                <FontAwesomeIcon
+                  icon={faIdBadge}
+                  className="rotate-12 text-yellow"
+                />
                 Personal Details
               </h1>
-              <img src="" alt="" />
 
               <div className="w-[90%] h-[60vh] flex flex-col text-justify gap-2 ">
                 <div className="text-[1.2rem] h-[8vh] flex justify-between border-b-2 capitalize">
@@ -96,10 +103,11 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
             <FontAwesomeIcon icon={faMarker} className="text-[2rem]" />
           </button>
 
+          {/* inside green sidebar */}
           <img
-            src="/src/assets/profile-icon.png"
+            src={profileIcon}
             alt="profile-icon"
-            className="w-1/2 border-4 border-white rounded-full shadow-md shadow-black bg-transparent flex-center "
+            className="w-1/2  drop-shadow-2xl bg-transparent flex-center "
           />
           <div className=" flex-center flex-col w-full h-[15vh]">
             <h1 className="capitalize text-[2.5rem] ">
@@ -125,9 +133,8 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
               )}
             </h1>
           </div>
+          {/* sidebar buttons */}
           <div className="w-full h-1/2 flex-center flex-col gap-4">
-            {/* change ito link */}
-            {/* <button className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl">Available Job</button> */}
             <Link
               to="/w/dashboard"
               className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl"
@@ -142,7 +149,13 @@ function ArtistProfileInfo({ setVisible: setSideBarVisible, artistData, refetch 
             >
               My Jobs
             </Link>
-            {/* <button className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl">Artwork Gallery</button> */}
+            <Link
+              to="/w/gallery"
+              className=" w-2/3 h-[5vh] flex-center text-black bg-yellow shadow-md shadow-black rounded-xl"
+              onClick={() => setSideBarVisible(false)}
+            >
+              Artwork Gallery
+            </Link>
             <button className=" w-2/3 h-[5vh] flex-center text-black bg-pink shadow-md shadow-black rounded-xl">
               <LogoutBtn apiUrl={W_LOGOUT_URL} redirectPath="/w/login" />
             </button>
