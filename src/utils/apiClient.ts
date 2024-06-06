@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getLocalStorage } from "@utils";
 
-export const baseURL = import.meta.env.VITE_BE_BASE_URL; // add readme instruction for this
+export const baseURL = import.meta.env.VITE_BE_BASE_URL
+// console.log("BASE URL", baseURL);
 
 // Create apiClient instance for JSON requests
 export const apiClient = axios.create({

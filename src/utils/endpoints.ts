@@ -1,6 +1,6 @@
 // dev env
 export const BASE_URL = import.meta.env.VITE_BE_BASE_URL; // add readme instruction for this
-
+// console.log("VITE ENV BASE URL",BASE_URL);
 // User
 export const REGISTER_URL = `/auth`;
 export const LOGIN_URL = `/auth/sign_in`;
