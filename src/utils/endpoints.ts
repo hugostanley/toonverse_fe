@@ -1,7 +1,5 @@
-import { baseURL } from "@utils";
-
 // dev env
-export const BASE_URL = baseURL
+export const BASE_URL = import.meta.env.VITE_BE_BASE_URL; // add readme instruction for this
 
 // User
 export const REGISTER_URL = `/auth`;
