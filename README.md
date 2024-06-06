@@ -1,30 +1,89 @@
-# React + TypeScript + Vite
+# Toonverse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Toonverse is a platform for local artists who want to earn by drawing popular cartoon characters like Rick and Morty, Bob's Burgers, or creating custom portraits for clients. Clients can browse the catalog, select the art style they prefer, check out, and registered artists can claim the job. Clients can also request revisions if they are not satisfied with the artwork.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User authentication and authorization
+- Profile management
 
-## Expanding the ESLint configuration
+### Client Side
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Browse catalog of different art styles
+- Order custom portraits or popular cartoon characters
+- Track the status of orders (in progress, completed)
+- Request revisions
 
-- Configure the top-level `parserOptions` property like this:
+### Artist Side
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+- Job pool to claim available orders
+- Track the status of claimed job orders
+- Track earnings and payment status
+
+### Admin Side
+
+- Track all job orders entering the pool
+- Invite artists to register on the app
+- Manage users and job orders
+
+## Getting Started
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone git@github.com:hugostanley/toonverse_fe.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Install the frontend dependencies
+
+```bash
+cd toonverse_fe
+npm install
+```
+
+3. Create an .env file to point the base url of the app.
+
+```bash
+VITE_BE_BASE_URL=http://127.0.0.1:3000/ # development
+# or
+VITE_BE_BASE_URL=https://toonverse.onrender.com/ # production
+```
+
+4. Make sure the Toonverse API server is up and running. Refer to the toonverse_be README for setup instructions.
+
+Start the React development server
+
+```bash
+npm run dev
+```
+
+4. Access the application. Open your web browser and go to `http://localhost:3000`.
+
+## Contributing
+
+- Fork the repository
+- Create a new branch
+
+```bash
+  git checkout -b feature/YourFeature
+```
+
+- Commit your changes
+
+```bash
+  git commit -am 'Add some feature'
+```
+
+- Push to the branch
+
+```bash
+  git push origin feature/YourFeature
+```
+
+- Create a new Pull Request
+
+## Contact
+
+If you have any questions, feel free to reach out to us at toonverse2024@outlook.com. Enjoy creating and commissioning amazing artworks with Toonverse!
