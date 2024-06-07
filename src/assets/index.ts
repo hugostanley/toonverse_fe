@@ -34,6 +34,7 @@ import tempLogoWhite from './temp-logo-white.png';
 import tempLogo from './temp-logo.png';
 import uploadPhoto from './uploadPhotos.png';
 import vexel from './vexel.png';
+import emptyCart from './empty-cart.png';
 
 // Export images
 export {
@@ -68,4 +69,5 @@ export {
   tempLogo,
   uploadPhoto,
   vexel,
+  emptyCart
 };

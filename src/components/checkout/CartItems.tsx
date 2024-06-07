@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { Item } from "@utils";
 import { Link } from "react-router-dom";
+import { emptyCart } from "@assets";
 
 interface CartItemsProps {
   items: Item[];
@@ -25,12 +26,12 @@ const CartItems: React.FC<CartItemsProps> = ({
       {items.length === 0 ? (
         <div className="flex flex-col justify-center items-center">
           <img
-            src="/src/assets/empty-cart.png"
+            src={emptyCart}
             className="w-[20%]"
             alt="Empty Cart"
           />
           <div className="p-4 text-center font-black text-4xl text-warningRed">
-            Oop! Your cart is empty!
+            Oops! Your cart is empty!
           </div>
           <p className="text-gray-600">
             Looks like you haven't added anything to your cart yet.
