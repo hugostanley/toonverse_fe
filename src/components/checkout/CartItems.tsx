@@ -29,7 +29,7 @@ const CartItems: React.FC<CartItemsProps> = ({
             className="w-[20%]"
             alt="Empty Cart"
           />
-          <div className="p-4 text-center font-black text-4xl text-red">
+          <div className="p-4 text-center font-black text-4xl text-warningRed">
             Oop! Your cart is empty!
           </div>
           <p className="text-gray-600">
@@ -70,7 +70,7 @@ const CartItems: React.FC<CartItemsProps> = ({
               </div>
               <FontAwesomeIcon
                 icon={faTrashCan}
-                className="w-6 ms-3 transform hover:text-red-500 cursor-pointer"
+                className="w-6 ms-3 transform hover:text-warningRed cursor-pointer"
                 onClick={() => handleDeleteItem(item.id)}
               />
             </div>

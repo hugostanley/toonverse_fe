@@ -76,7 +76,7 @@ function LoginForm({ user, apiUrl, formClassName, btnColor }: LoginFormProps) {
 
 
         {error && 
-          <p className="text-red-500">{error}</p>
+          <p className="text-warningRed">{error}</p>
         }
 
         <div className='field__wrapper py-4'>

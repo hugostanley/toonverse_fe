@@ -318,7 +318,7 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
             </div>
           )}
           {errorMessage && (
-            <div className="text-red-500 mt-2">{errorMessage}</div>
+            <div className="text-warningRed mt-2">{errorMessage}</div>
           )}
         </div>
       </Modal>

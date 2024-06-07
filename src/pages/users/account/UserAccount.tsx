@@ -67,7 +67,7 @@ function UserAccount() {
         <LogoutBtn
           apiUrl={LOGOUT_URL}
           redirectPath="/login"
-          className="btn__blue text-xs bg-red text-light"
+          className="btn__blue text-xs bg-warningRed text-light"
         />
       </div>
       <div className="w-3/4 flex flex-col">

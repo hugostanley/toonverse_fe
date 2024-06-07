@@ -23,12 +23,6 @@ function Login() {
 
         <h1 className="text-5xl tracking-widest font-black px-2">Sign in</h1>
 
-        {/* <div className='w-full h-16 p-2 mt-2'>
-          <GoogleOAuth />
-        </div> 
-        
-        <span className='w-full text-center text-sm font-bold'>or</span> */}
-
         <LoginForm apiUrl={LOGIN_URL} btnColor="yellow" />
 
         <Link

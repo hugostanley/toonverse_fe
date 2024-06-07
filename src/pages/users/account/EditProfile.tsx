@@ -63,14 +63,12 @@ function EditProfile() {
 
   return (
     <section className='w-full h-full p-2 px-4 flex flex-col gap-2'>
-      <h1 className='w-full py-2 border-b-2 border-gray-400/60 flex justify-between text-3xl font-bold font-header'>
-        Edit Profile
-        <Link to='/account' className='p-2'>
-          <small className='font-semibold text-sm border-2 rounded-xl p-2 border-dark'>
-            <FontAwesomeIcon icon={faArrowLeft} className='h-1/2' />
-          </small>
+      <div className='w-full py-2 border-b-2 border-gray-400/60 flex items-center justify-start gap-3 text-3xl font-bold font-header'>        
+        <Link to='/account' className='flex'>
+        <FontAwesomeIcon icon={faArrowLeft} className='min-w-[1rem] font-semibold text-sm border-2 rounded-xl p-2 border-dark opacity-45 hover:opacity-100' />
         </Link>
-      </h1>
+        <h1 className="mb-1 pb-px">Edit Profile</h1>
+      </div>
 
       <CForm onSubmit={handleSubmit} className="row g-3 w-5/6 p-8">       
         <CRow className="g-3">
@@ -124,7 +122,7 @@ function EditProfile() {
 
         {mutationError && 
           mutationError.split('. ').map((error, idx) => (
-            <small key={idx} className="text-red-500">{error}.</small>
+            <small key={idx} className="text-warningRed">{error}.</small>
           ))}
         
         <div className='field__wrapper py-4'>
