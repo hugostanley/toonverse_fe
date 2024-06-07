@@ -23,6 +23,7 @@ interface Order {
   picture_style: string;
   art_style: string;
   notes?: string | null;
+  remarks?: string | null;
   reference_image: string;
   latest_artwork?: string | null;
   latest_artwork_revision?: string | null;
@@ -178,24 +179,25 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
       {isLoading ? (
         <Spinner />
       ) : (
-        <>
-          <div className="pb-4">
-            <CTable hover>
-              <CTableHead>
-                <CTableRow className="text-sm">
-                  <CTableHeaderCell scope="col">ID</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Status</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Details</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">
-                    Payment Timestamp
-                  </CTableHeaderCell>
-                  <CTableHeaderCell scope="col"></CTableHeaderCell>
-                </CTableRow>
-              </CTableHead>
-              <CTableBody>
-                {paginatedData &&
-                  paginatedData.map((order) => (
+        <div className="py-3">
+          {paginatedData && paginatedData.length > 0 ? (
+            <>
+              <CTable hover>
+                <CTableHead>
+                  <CTableRow className="text-sm">
+                    <CTableHeaderCell scope="col">ID</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Status</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Details</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Amount</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">
+                      Payment Timestamp
+                    </CTableHeaderCell>
+                    <CTableHeaderCell scope="col"></CTableHeaderCell>
+                  </CTableRow>
+                </CTableHead>
+
+                <CTableBody>
+                  {paginatedData.map((order) => (
                     <CTableRow key={order.id} className="text-xs">
                       <CTableHeaderCell
                         scope="row"
@@ -278,36 +280,44 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
                       </CTableDataCell>
                     </CTableRow>
                   ))}
-              </CTableBody>
-            </CTable>
-            <div className="flex justify-end">
-              <button
-                className={`btn__blue text-sm bg-blue mx-2 ${
-                  currentPage === 1 ? "cursor-not-allowed" : ""
-                }`}
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                Previous
-              </button>
-              <button
-                className={`btn__blue text-sm bg-blue mx-2 ${
-                  currentPage === Math.ceil(data.length / itemsPerPage) ||
-                  data.length === 0
-                    ? "cursor-not-allowed"
-                    : ""
-                }`}
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={
-                  currentPage === Math.ceil(data.length / itemsPerPage) ||
-                  data.length === 0
-                }
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        </>
+                </CTableBody>
+              </CTable>
+              <div className="flex justify-end">
+                <button
+                  className={`btn__blue bg-grey text-xs ${
+                    currentPage === 1 ? "cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+                <button
+                  className={`btn__blue bg-grey text-xs ${
+                    currentPage === Math.ceil(data.length / itemsPerPage) ||
+                    data.length === 0
+                      ? "cursor-not-allowed"
+                      : ""
+                  }`}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={
+                    currentPage === Math.ceil(data.length / itemsPerPage) ||
+                    data.length === 0
+                  }
+                >
+                  Next
+                </button>
+              </div>
+            </>
+          ) : (
+            <Link
+              to="/#styles"
+              className="text-center hover:underline underline-offset-4 hover:font-bold w-full grid place-items-center"
+            >
+              Create an order!
+            </Link>
+          )}
+        </div>
       )}
 
       <Modal open={modalArtwork} onClose={() => setModalArtwork(false)}>
@@ -316,13 +326,13 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
           <hr className="border-t-solid border-1 border-grey" />
           <div className="flex flex-row justify-center gap-4">
             <button
-              className="btn__primary text-sm bg-blue"
+              className="btn__primary text-sm bg-green text-light"
               onClick={handleClaimOrder}
             >
               Claim Order
             </button>
             <button
-              className="btn__primary text-sm bg-blue"
+              className="btn__primary text-sm bg-orange text-light"
               onClick={handleAskForRevision}
             >
               Ask for Revision
@@ -337,7 +347,7 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
                 placeholder="Enter your revision remarks here"
               ></textarea>
               <button
-                className="btn__primary text-sm bg-blue"
+                className="btn__primary text-sm bg-orange text-light"
                 onClick={submitRevision}
               >
                 Submit Remarks
@@ -345,7 +355,7 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
             </div>
           )}
           {errorMessage && (
-            <div className="text-red-500 mt-2">{errorMessage}</div>
+            <div className="text-warningRed mt-2">{errorMessage}</div>
           )}
         </div>
       </Modal>

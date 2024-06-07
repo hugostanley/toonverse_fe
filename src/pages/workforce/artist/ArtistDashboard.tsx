@@ -42,57 +42,74 @@ function ArtistDashboard() {
       return response.data;
     },
   });
-
+  
+  // console.log("ARTIST DATA", artistData?.id);
   return (
     <main>
-      <div className='full-size flex-row bg-ivory relative'>
+      <div className="full-size flex-row bg-ivory relative">
         {isLoading ? (
-          <div className='loader'></div>
+          <div className="loader"></div>
         ) : error ? (
-          <div className='error'>An error occurred while fetching data.</div>
+          <div className="error">An error occurred while fetching data.</div>
         ) : artistData ? (
           <>
             {/* dashboard */}
-            <div className='full-size'>
-              <div className='w-full h-[40vh] flex-center flex-row gap-24 ps-32'>
-                <div className='grid-green w-[22%] h-[20vh] z-10 bg-ivory'>
+            <div className="full-size">
+              <div className="w-full h-[40vh] flex-center flex-row gap-24 ps-32">
+                <div className="grid-green w-[22%] h-[20vh] z-10 bg-ivory">
                   <FontAwesomeIcon
                     icon={faMoneyBillTrendUp}
-                    className='icon--rounded'
+                    className="icon--rounded"
                   />
-                  <div className='flex flex-col gap-2 items-start'>
-                    <h2 className='text-xl tracking-wider'>Total Commission</h2>
-                    <h1 className='text-3xl tracking-wider font-bold flex gap-2'>
+                  <div className="flex flex-col gap-2 items-start">
+                    <h2 className="text-xl tracking-wider">Total Commission</h2>
+                    <h1 className="text-3xl tracking-wider font-bold flex gap-2">
                       <FontAwesomeIcon icon={faPesoSign} />
                       {parseFloat(artistData.total_earnings).toFixed(2)}
                     </h1>
                   </div>
                 </div>
 
-                <div className='grid-green w-[22%] h-[20vh]'>
+                <div className="grid-green w-[22%] h-[20vh]">
                   <FontAwesomeIcon
                     icon={faFileCircleCheck}
-                    className='icon--rounded'
+                    className="icon--rounded"
                   />
-                  <div className='flex flex-col gap-2 items-start'>
-                    <h2 className='text-xl tracking-wider'>Completed Jobs</h2>
-                    <h1 className='text-3xl tracking-wider font-bold'>0</h1>
+                  <div className="flex flex-col gap-2 items-start">
+                    <h2 className="text-xl tracking-wider">Completed Jobs</h2>
+                    <h1 className="text-3xl tracking-wider font-bold">
+                      {
+                        orderData?.filter(
+                          (order) =>
+                            order.order_status === "completed" &&
+                            order.workforce_id === parseInt(artistData.workforce_id)
+                        ).length
+                      }
+                    </h1>
                   </div>
                 </div>
 
-                <div className='grid-green w-[22%] h-[20vh]'>
-                  <FontAwesomeIcon icon={faPenNib} className='icon--rounded' />
-                  <div className='flex flex-col gap-2 items-start'>
-                    <h2 className='text-xl tracking-wider'>In Progress</h2>
-                    <h1 className='text-3xl tracking-wider font-bold'>0</h1>
+                <div className="grid-green w-[22%] h-[20vh]">
+                  <FontAwesomeIcon icon={faPenNib} className="icon--rounded" />
+                  <div className="flex flex-col gap-2 items-start">
+                    <h2 className="text-xl tracking-wider">In Progress</h2>
+                    <h1 className="text-3xl tracking-wider font-bold">
+                      {
+                        orderData?.filter(
+                          (order) =>
+                            order.order_status === "in_progress" &&
+                            order.workforce_id === parseInt(artistData.workforce_id)
+                        ).length
+                      }
+                    </h1>
                   </div>
                 </div>
               </div>
 
-              <div className='w-full h-1/2 flex justify-end pr-40'>
-                <div className='w-3/4 col-span-4 row-span-4 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2 overflow-y-auto z-10'>
-                  <div className='flex flex-col gap-2'>
-                    <div className='w-full py-2 border-b-2 border-gray-400/60 flex gap-3 text-3xl font-semibold font-header'>
+              <div className="w-full h-1/2 flex justify-end pr-40">
+                <div className="w-3/4 col-span-4 row-span-4 col-start-2 rounded-2xl border-4 border-green px-6 py-4 shadow-md flex flex-col gap-2 overflow-y-auto z-10">
+                  <div className="flex flex-col gap-2">
+                    <div className="w-full py-2 border-b-2 border-gray-400/60 flex gap-3 text-3xl font-semibold font-header">
                       <h1
                         className={`cursor-pointer ${
                           showAvailableJobs ? "" : "text-gray-400/70 font-light"
@@ -117,11 +134,11 @@ function ArtistDashboard() {
                         My Jobs
                       </h1>
                     </div>
-                    
-                    <div className='w-full max-h-full pr-2 overflow-y-auto'>
+
+                    <div className="w-full max-h-full pr-2 overflow-y-auto">
                       {/* Available Jobs Table */}
                       {showAvailableJobs && (
-                        <div className='px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl'>
+                        <div className="px-3 py-3 cursor-default bg-white border-green/50 border-2 rounded-2xl">
                           <OrdersTable
                             data={orderData ?? []}
                             isLoading={orderLoading}
@@ -131,9 +148,7 @@ function ArtistDashboard() {
                       )}
 
                       {/* Artist's Jobs */}
-                      {showArtistJobs && (
-                        <ArtistJobsTable />                      
-                      )}
+                      {showArtistJobs && <ArtistJobsTable />}
                     </div>
                   </div>
                 </div>
@@ -148,4 +163,4 @@ function ArtistDashboard() {
   );
 }
 
-export default ArtistDashboard
+export default ArtistDashboard;

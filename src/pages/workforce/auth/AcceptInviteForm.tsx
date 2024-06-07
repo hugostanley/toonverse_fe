@@ -96,7 +96,7 @@ function AcceptInviteForm({ user, formClassName, btnColor }: InviteFormProps) {
           disabled={loading}
         />
 
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-warningRed">{error}</p>}
 
         <div className="field__wrapper py-4">
           <button type="submit" className={`bg-${btnColor} btn__primary`} disabled={loading}>

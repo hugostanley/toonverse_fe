@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { FE_BASE_URL } from "@utils";
 
 interface Item {
   id: number;
@@ -16,12 +17,14 @@ export const createCheckoutSession = async (checkoutItems: Item[]) => {
         send_email_receipt: true,
         show_description: false,
         show_line_items: true,
+        cancel_url: `${FE_BASE_URL}/checkout`,
         line_items: checkoutItems.map((item) => ({
           currency: "PHP",
           amount: item.amount * 100,
           name: `toonverse-${item.art_style}-${item.id}`,
           quantity: 1,
         })),
+        success_url: `${FE_BASE_URL}/checkout`,
         payment_method_types: ["card", "gcash", "paymaya"],
       },
     },
@@ -40,7 +43,7 @@ export const createCheckoutSession = async (checkoutItems: Item[]) => {
         },
       }
     );
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     const axiosError = error as AxiosError;

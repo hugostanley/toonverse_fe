@@ -6,11 +6,6 @@
 @tailwind utilities;
 
 @layer base {
-  /* @font-face {
-    font-family: "VAG Rounded Next";
-    src: url(/src/assets/VAG.ttf) format("truetype");
-  } */
-
   html,
   body {
     font-family: "Varela Round", sans-serif;
@@ -24,7 +19,7 @@
 
 @layer components {
   .br {
-    @apply border-2 border-dotted border-red-500;
+    @apply border-2 border-dotted border-warningRed;
   }
 
   .field__wrapper {
@@ -60,12 +55,34 @@
   }
 
   .btn__blue {
-    @apply font-black border bg-blue shadow-retro__dark border-dark py-2 px-12 rounded-lg;
+    @apply font-black border bg-blue shadow-retro__dark border-dark py-2 px-6 w-fit rounded-lg hover:opacity-70 focus:shadow-retro__circle focus:translate-y-1;
   }
 
   .btn__pink {
     @apply shadow-retro__dark font-black bg-pink rounded-xl py-3 mt-8 text-center border-dark border-2 w-[15rem];
   }
+
+ /* Masonry styles */
+.my-masonry-grid {
+  display: flex;
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 2rem; 
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_item {
+  margin-bottom: 2rem; 
+}
+
+.my-masonry-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
 }
 
 /* scrollbar */

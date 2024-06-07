@@ -1,7 +1,10 @@
 import React from "react";
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 
@@ -11,6 +14,7 @@ import {
   AdminDashboard,
   AllArtistsPage,
   ArtistDashboard,
+  ContactPage,
   EditProfilePage,
   InvitationPage,
   Checkout,
@@ -24,12 +28,11 @@ import {
   AllClientsPage,
   AllOrdersPage,
   ArtistJobsPage,
+  ArtistGallery,
 } from "@pages";
 
 function App() {
   const queryClient = new QueryClient();
-  const googleClient =
-    "134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com"; // WIP: feat/oauth
   const router = createBrowserRouter([
     {
       path: "/",
@@ -38,6 +41,10 @@ function App() {
     {
       path: "no-access",
       element: <UnauthorizedPage />,
+    },
+    {
+      path: "contact-us",
+      element: <ContactPage />,
     },
 
     // User Side
@@ -125,20 +132,20 @@ function App() {
           path: "jobs",
           element: <ArtistJobsPage />,
         },
+        {
+          path: "gallery",
+          element: <ArtistGallery />,
+        },
       ],
     },
-    
-    
   ]);
 
   return (
     <React.StrictMode>
-      <GoogleOAuthProvider clientId={googleClient}>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-      </GoogleOAuthProvider>
     </React.StrictMode>
   );
 }

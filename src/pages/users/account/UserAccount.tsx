@@ -61,20 +61,20 @@ function UserAccount() {
         <div className="flex flex-col gap-1">
           <h2 className="text-xl font-bold">{`${userProfile?.first_name} ${userProfile?.last_name}`}</h2>
           <span className="text-sm">
-            BIlling Address: {userProfile?.billing_address}
+            Billing Address: {userProfile?.billing_address}
           </span>
         </div>
         <LogoutBtn
           apiUrl={LOGOUT_URL}
           redirectPath="/login"
-          className="btn__primary bg-pink"
+          className="btn__blue text-xs bg-warningRed text-light"
         />
       </div>
-      <div className="w-3/4 h-[85%]">
+      <div className="w-3/4 flex flex-col">
         <h1 className="py-2 mb-4 border-b-2 border-gray-400/60 flex text-3xl font-bold font-header">
           My Orders
         </h1>
-        <div className="w-full max-h-full px-2 bg-white border-4 rounded-2xl border-green/50 overflow-y-auto ">
+        <div className="w-full max-h-full px-2 bg-white border-4 rounded-2xl border-green/50 overflow-y-auto">
           <div className="px-3 cursor-default">
             <UserOrdersTable data={data ?? []} isLoading={isLoading} />
           </div>

@@ -1,5 +1,6 @@
 // dev env
-export const BASE_URL = "http://127.0.0.1:3000";
+export const BASE_URL = import.meta.env.VITE_BE_BASE_URL; // add readme instruction for this
+export const FE_BASE_URL = import.meta.env.VITE_FE_BASE_URL; // add readme instruction for this
 
 // User
 export const REGISTER_URL = `/auth`;

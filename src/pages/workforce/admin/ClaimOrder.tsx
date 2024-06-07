@@ -3,11 +3,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ORDER, apiClient, getLocalStorage } from "@utils";
 import { FormEvent } from "react";
 
-type ClaimOrderProps = {
-  order: Order;
-}
 
-function ClaimOrder({ order }: ClaimOrderProps) {
+function ClaimOrder({ order }: any) {
   const { data: currentUserData } = getLocalStorage("AccountData");
   const queryClient = useQueryClient();
   const mutation = useMutation({

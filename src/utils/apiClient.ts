@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getLocalStorage } from "@utils";
 
-export const baseURL = "http://127.0.0.1:3000";
+export const baseURL = import.meta.env.VITE_BE_BASE_URL
 
 // Create apiClient instance for JSON requests
 export const apiClient = axios.create({
@@ -25,7 +25,7 @@ apiClient.interceptors.request.use(
       config.headers["uid"] = headers["uid"];
     }
 
-    console.log("apiClient headers:", headers);
+    // console.log("apiClient headers:", headers);
     return config;
   },
   (error) => {
@@ -36,7 +36,7 @@ apiClient.interceptors.request.use(
 // Response interceptor for apiClient
 apiClient.interceptors.response.use(
   (response) => {
-    console.log("apiClient Response:", response);
+    // console.log("apiClient Response:", response);
     return response;
   },
   (error) => {
@@ -67,7 +67,7 @@ apiClientFormData.interceptors.request.use(
       config.headers["uid"] = headers["uid"];
     }
 
-    console.log("apiClient headers:", headers);
+    // console.log("apiClient headers:", headers);
     return config;
   },
   (error) => {
@@ -78,7 +78,7 @@ apiClientFormData.interceptors.request.use(
 // Response interceptor for apiClientFormData
 apiClientFormData.interceptors.response.use(
   (response) => {
-    console.log("apiClientFormData Response:", response);
+    // console.log("apiClientFormData Response:", response);
     return response;
   },
   (error) => {

@@ -85,7 +85,7 @@ function SignupForm({ user, apiUrl, formClassName, btnColor }: SignupFormProps) 
         />
 
         {error && 
-          <p className="text-red-500">{error}</p>
+          <p className="text-warningRed">{error}</p>
         }
 
         <div className='field__wrapper py-4'>

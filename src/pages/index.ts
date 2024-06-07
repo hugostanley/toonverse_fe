@@ -1,6 +1,7 @@
 // Static Pages
 export { default as LandingPage } from "./LandingPage";
 export { default as UnauthorizedPage } from "./errors/Unauthorized";
+export { default as ContactPage } from "./ContactPage";
 
 //Toast
 export { default as ErrorToast } from "./errors/ErrorToast";
@@ -43,7 +44,8 @@ export { default as ClaimOrder } from "./workforce/admin/ClaimOrder";
 export { default as ArtistDashboard } from "./workforce/artist/ArtistDashboard";
 export { default as EditBio } from "./workforce/artist/EditBio";
 export { default as ArtistProfileInfo } from "./workforce/artist/ArtistProfileInfo";
-export { default as NewArtistForm } from './workforce/artist/NewArtistForm';
-export { default as ArtistJobsTable } from './workforce/artist/ArtistJobsTable';
+export { default as NewArtistForm } from "./workforce/artist/NewArtistForm";
+export { default as ArtistJobsTable } from "./workforce/artist/ArtistJobsTable";
 export { default as ArtistJobsPage } from "./workforce/artist/ArtistJobs";
 export { default as ArtistSidebar } from "./workforce/artist/ArtistSidebar";
+export {default as ArtistGallery} from './workforce/artist/ArtistGallery';
