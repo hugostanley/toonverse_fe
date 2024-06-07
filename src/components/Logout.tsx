@@ -34,7 +34,7 @@ function Logout({ apiUrl, redirectPath, className }: LogoutProps) {
         </button>
 
         {error && 
-          <p className="text-red-500">{error}</p>
+          <p className="text-warningRed">{error}</p>
         }
       </div>
     </form>

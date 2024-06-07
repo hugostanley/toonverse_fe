@@ -19,7 +19,7 @@
 
 @layer components {
   .br {
-    @apply border-2 border-dotted border-red;
+    @apply border-2 border-dotted border-warningRed;
   }
 
   .field__wrapper {

@@ -75,7 +75,7 @@ const CartItems: React.FC<CartItemsProps> = ({
               </div>
               <FontAwesomeIcon
                 icon={faTrashCan}
-                className="w-6 ms-3 transform hover:text-red-500 cursor-pointer"
+                className="w-6 ms-3 transform hover:text-warningRed cursor-pointer"
                 onClick={() => handleDeleteItem(item.id)}
               />
             </div>

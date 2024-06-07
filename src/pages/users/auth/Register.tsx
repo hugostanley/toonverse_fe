@@ -22,11 +22,11 @@ function Register() {
 
         <h1 className="text-5xl tracking-widest font-black px-2">Register</h1>
 
-        <div className="w-full h-16 p-2 mt-2">
+        {/* <div className="w-full h-16 p-2 mt-2">
           <GoogleOAuth />
         </div>
 
-        <span className="w-full text-center text-sm font-bold">or</span>
+        <span className="w-full text-center text-sm font-bold">or</span> */}
 
         <SignupForm apiUrl={REGISTER_URL} btnColor="pink" />
 

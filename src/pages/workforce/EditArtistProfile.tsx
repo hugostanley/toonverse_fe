@@ -123,7 +123,7 @@ function EditArtistProfile({ artist, setVisible }: EditArtistProps) {
 
       {mutationError &&
         mutationError.split(". ").map((error, idx) => (
-          <small key={idx} className="text-red-500">
+          <small key={idx} className="text-warningRed">
             {error}.
           </small>
         ))}
