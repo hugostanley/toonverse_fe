@@ -38,7 +38,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
         <div className="flex flex-row justify-center gap-4">
           <button
-            className="btn__primary text-sm bg-red text-light"
+            className="btn__primary text-sm bg-warningRed text-light"
             onClick={handleClose}
           >
             Close

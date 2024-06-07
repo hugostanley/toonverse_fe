@@ -29,7 +29,7 @@ const CartItems: React.FC<CartItemsProps> = ({
             className="w-[20%]"
             alt="Empty Cart"
           />
-          <div className="p-4 text-center font-black text-4xl text-red">
+          <div className="p-4 text-center font-black text-4xl text-warningRed">
             Oop! Your cart is empty!
           </div>
           <p className="text-gray-600">
