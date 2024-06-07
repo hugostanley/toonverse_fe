@@ -5,7 +5,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 
@@ -34,8 +33,6 @@ import {
 
 function App() {
   const queryClient = new QueryClient();
-  const googleClient =
-    "134846806156-5tqvcr9itkt4hm7erkb0pq2jos6jsbdb.apps.googleusercontent.com"; // WIP: feat/oauth
   const router = createBrowserRouter([
     {
       path: "/",
@@ -145,12 +142,10 @@ function App() {
 
   return (
     <React.StrictMode>
-      <GoogleOAuthProvider clientId={googleClient}>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-      </GoogleOAuthProvider>
     </React.StrictMode>
   );
 }

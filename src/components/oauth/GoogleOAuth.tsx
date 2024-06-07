@@ -7,7 +7,6 @@ function GoogleOAuth() {
   const navigate = useNavigate();
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      // console.log('RESPONSE FROM GOOGLE:', tokenResponse);
 
       try {
         const response = await axios.post(
