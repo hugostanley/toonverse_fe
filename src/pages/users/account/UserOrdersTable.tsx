@@ -107,6 +107,27 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
     }
   };
 
+  const handleDownload = async (artworkUrl: string) => {
+    try {
+      const imageResponse = await fetch(artworkUrl);
+      const imageData = await imageResponse.blob();
+
+      const imageURL = window.URL.createObjectURL(imageData);
+
+      const link = document.createElement("a");
+      link.href = imageURL;
+      link.download = "artwork.jpg";
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+
+      window.URL.revokeObjectURL(imageURL);
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Failed to download artwork:", error);
+    }
+  };
+
   const handleAskForRevision = () => {
     setShowRevisionTextArea((prevState) => !prevState);
   };
@@ -230,7 +251,7 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
                         {order.latest_artwork &&
                           order.order_status === "delivered" && (
                             <button
-                              className="btn__primary bg-blue text-white"
+                              className="btn__primary bg-blue"
                               onClick={() =>
                                 openArtworkModal(
                                   `${baseURL}${order.latest_artwork}`,
@@ -239,6 +260,19 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
                               }
                             >
                               Artwork
+                            </button>
+                          )}
+                        {order.latest_artwork &&
+                          order.order_status === "completed" && (
+                            <button
+                              className="btn__primary bg-green"
+                              onClick={() =>
+                                handleDownload(
+                                  `${baseURL}${order.latest_artwork}`
+                                )
+                              }
+                            >
+                              Download Artwork
                             </button>
                           )}
                       </CTableDataCell>
