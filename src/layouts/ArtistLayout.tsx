@@ -41,7 +41,7 @@ function ArtistLayout() {
     },
   });
 
-  const { data: orderData } = useQuery({
+  const { data: orderData, refetch: refetchOrderdata } = useQuery({
     queryKey: ["OrdersRemark"],
     queryFn: async () => {
       const response = await apiClient.get(ALL_ORDERS);
@@ -65,6 +65,7 @@ function ArtistLayout() {
   useEffect(() => {
     if (data && data.length > 0) {
       refetch()
+      refetchOrderdata()
       setArtistData(data[0]);
     }
   }, [data, artistData, orderData]);
