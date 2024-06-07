@@ -21,7 +21,7 @@ const CartItems: React.FC<CartItemsProps> = ({
 }) => {
   return (
     <div className="relative items-center py-4 flex flex-col overflow max-h-[85%]">
-      <h1 className="p-4 text-4xl font-black">Your Cart</h1>
+      <h1 className="p-4 text-4xl font-header">Your Cart</h1>
       {items.length === 0 ? (
         <div className="flex flex-col justify-center items-center">
           <img
@@ -29,7 +29,7 @@ const CartItems: React.FC<CartItemsProps> = ({
             className="w-[20%]"
             alt="Empty Cart"
           />
-          <div className="p-4 text-center font-black text-4xl text-red-700">
+          <div className="p-4 text-center font-black text-4xl text-red">
             Oop! Your cart is empty!
           </div>
           <p className="text-gray-600">
@@ -57,11 +57,6 @@ const CartItems: React.FC<CartItemsProps> = ({
                   className="h-5 w-5 cursor-pointer"
                   checked={selectedItems.includes(item.id)}
                   onChange={() => handleCheckboxChange(item.id)}
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                  alt="product-image"
-                  className="rounded-lg w-20"
                 />
                 <div className="cursor-default">
                   <p className="font-extrabold">{item.art_style}</p>
