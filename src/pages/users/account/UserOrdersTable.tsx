@@ -282,7 +282,7 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
                   ))}
                 </CTableBody>
               </CTable>
-              <div className="flex justify-end">
+              <div className="flex justify-end gap-2">
                 <button
                   className={`btn__blue bg-grey text-xs ${
                     currentPage === 1 ? "cursor-not-allowed" : ""
