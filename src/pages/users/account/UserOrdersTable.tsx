@@ -23,7 +23,7 @@ interface Order {
   picture_style: string;
   art_style: string;
   notes?: string | null;
-  remarks?: string |null;
+  remarks?: string | null;
   reference_image: string;
   latest_artwork?: string | null;
   latest_artwork_revision?: string | null;
@@ -108,6 +108,27 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
     }
   };
 
+  const handleDownload = async (artworkUrl: string) => {
+    try {
+      const imageResponse = await fetch(artworkUrl);
+      const imageData = await imageResponse.blob();
+
+      const imageURL = window.URL.createObjectURL(imageData);
+
+      const link = document.createElement("a");
+      link.href = imageURL;
+      link.download = "artwork.jpg";
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+
+      window.URL.revokeObjectURL(imageURL);
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Failed to download artwork:", error);
+    }
+  };
+
   const handleAskForRevision = () => {
     setShowRevisionTextArea((prevState) => !prevState);
   };
@@ -159,8 +180,8 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
         <Spinner />
       ) : (
         <div className="py-3">
-          {paginatedData && paginatedData.length > 0 ?
-            (<>
+          {paginatedData && paginatedData.length > 0 ? (
+            <>
               <CTable hover>
                 <CTableHead>
                   <CTableRow className="text-sm">
@@ -177,109 +198,125 @@ function UserOrdersTable({ data: initialData, isLoading }: OrdersTableProps) {
 
                 <CTableBody>
                   {paginatedData.map((order) => (
-                      <CTableRow key={order.id} className="text-xs">
-                        <CTableHeaderCell
-                          scope="row"
-                          className="tracking-widest pt-3"
+                    <CTableRow key={order.id} className="text-xs">
+                      <CTableHeaderCell
+                        scope="row"
+                        className="tracking-widest pt-3"
+                      >
+                        {order.id}
+                      </CTableHeaderCell>
+                      <CTableDataCell className="pt-3">
+                        <div
+                          className={`btn__primary bg-${
+                            statusColors[
+                              order.order_status as keyof typeof statusColors
+                            ]
+                          }`}
                         >
-                          {order.id}
-                        </CTableHeaderCell>
-                        <CTableDataCell className="pt-3">
-                          <div
-                            className={`btn__primary bg-${
-                              statusColors[
-                                order.order_status as keyof typeof statusColors
-                              ]
-                            }`}
+                          {order.order_status}
+                        </div>
+                      </CTableDataCell>
+                      <CTableDataCell className="pt-3">
+                        <div className="flex flex-col gap-1">
+                          <span>Art Style: {order.art_style}</span>
+                          <span>Number of Heads: {order.number_of_heads}</span>
+                          <span>Picture Style: {order.picture_style}</span>
+                          <span>
+                            Notes: {order.notes ? order.notes : "N/A"}
+                          </span>
+                          <Link
+                            to={order.background_url}
+                            target="_blank"
+                            className="underline underline-offset-2 text-blue hover:text-green"
                           >
-                            {order.order_status}
-                          </div>
-                        </CTableDataCell>
-                        <CTableDataCell className="pt-3">
-                          <div className="flex flex-col gap-1">
-                            <span>Art Style: {order.art_style}</span>
-                            <span>Number of Heads: {order.number_of_heads}</span>
-                            <span>Picture Style: {order.picture_style}</span>
-                            <span>
-                              Notes: {order.notes ? order.notes : "N/A"}
-                            </span>
-                            <Link
-                              to={order.background_url}
-                              target="_blank"
-                              className="underline underline-offset-2 text-blue hover:text-green"
+                            Background Url
+                          </Link>
+                          <Link
+                            to={order.reference_image}
+                            target="_blank"
+                            className="underline underline-offset-2 text-blue hover:text-green"
+                          >
+                            <span>Reference Image</span>
+                          </Link>
+                        </div>
+                      </CTableDataCell>
+
+                      <CTableDataCell className="pt-3">
+                        ₱ {parseFloat(order.amount).toFixed(2)}
+                      </CTableDataCell>
+
+                      <CTableDataCell className="pt-3">
+                        {formatCreatedAt(order.created_at)}
+                      </CTableDataCell>
+
+                      <CTableDataCell className="pt-3">
+                        {order.latest_artwork &&
+                          order.order_status === "delivered" && (
+                            <button
+                              className="btn__primary bg-blue"
+                              onClick={() =>
+                                openArtworkModal(
+                                  `${baseURL}${order.latest_artwork}`,
+                                  order.id
+                                )
+                              }
                             >
-                              Background Url
-                            </Link>
-                            <Link
-                              to={order.reference_image}
-                              target="_blank"
-                              className="underline underline-offset-2 text-blue hover:text-green"
+                              Artwork
+                            </button>
+                          )}
+                        {order.latest_artwork &&
+                          order.order_status === "completed" && (
+                            <button
+                              className="btn__primary bg-green"
+                              onClick={() =>
+                                handleDownload(
+                                  `${baseURL}${order.latest_artwork}`
+                                )
+                              }
                             >
-                              <span>Reference Image</span>
-                            </Link>
-                          </div>
-                        </CTableDataCell>
-
-                        <CTableDataCell className="pt-3">
-                          ₱ {parseFloat(order.amount).toFixed(2)}
-                        </CTableDataCell>
-
-                        <CTableDataCell className="pt-3">
-                          {formatCreatedAt(order.created_at)}
-                        </CTableDataCell>
-
-                        <CTableDataCell className="pt-3">
-                          {order.latest_artwork &&
-                            order.order_status === "delivered" && (
-                              <button
-                                className="btn__primary bg-pink"
-                                onClick={() =>
-                                  openArtworkModal(
-                                    `${baseURL}${order.latest_artwork}`,
-                                    order.id
-                                  )
-                                }
-                              >
-                                Artwork
-                              </button>
-                            )}
-                        </CTableDataCell>
-                      </CTableRow>
-                    ))}
+                              Download Artwork
+                            </button>
+                          )}
+                      </CTableDataCell>
+                    </CTableRow>
+                  ))}
                 </CTableBody>
               </CTable>
-
-              <div className="flex gap-3 justify-end">
-              <button
-                className={`btn__blue bg-grey text-xs ${
-                  currentPage === 1 ? "cursor-not-allowed" : ""
-                }`}
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                Previous
-              </button>
-              <button
-                className={`btn__blue bg-grey text-xs ${
-                  currentPage === Math.ceil(data.length / itemsPerPage) ||
-                  data.length === 0
-                    ? "cursor-not-allowed"
-                    : ""
-                }`}
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={
-                  currentPage === Math.ceil(data.length / itemsPerPage) ||
-                  data.length === 0
-                }
-              >
-                Next
-              </button>
+              <div className="flex justify-end gap-2">
+                <button
+                  className={`btn__blue bg-grey text-xs ${
+                    currentPage === 1 ? "cursor-not-allowed" : ""
+                  }`}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+                <button
+                  className={`btn__blue bg-grey text-xs ${
+                    currentPage === Math.ceil(data.length / itemsPerPage) ||
+                    data.length === 0
+                      ? "cursor-not-allowed"
+                      : ""
+                  }`}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={
+                    currentPage === Math.ceil(data.length / itemsPerPage) ||
+                    data.length === 0
+                  }
+                >
+                  Next
+                </button>
               </div>
-            </>) :
-            <Link to="/#styles" className="text-center hover:underline underline-offset-4 hover:font-bold w-full grid place-items-center">
+            </>
+          ) : (
+            <Link
+              to="/#styles"
+              className="text-center hover:underline underline-offset-4 hover:font-bold w-full grid place-items-center"
+            >
               Create an order!
             </Link>
-          }      
+          )}
         </div>
       )}
 
